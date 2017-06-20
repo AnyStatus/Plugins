@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
     <id>AnyStatus.Monitors</id>
-    <version>1.0.0.0</version>
+    <version>$version$</version>
     <authors>Alon Amsalem</authors>
     <owners>anystatus</owners>
     <licenseUrl>https://github.com/AnyStatus/Monitors/blob/master/LICENSE</licenseUrl>
