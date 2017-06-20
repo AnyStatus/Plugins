@@ -54,6 +54,7 @@ namespace AnyStatus.Monitors.Tests
             Assert.AreSame(State.Ok, request.State);
         }
 
+        [Ignore]
         [TestMethod]
         public void GitHubIssueHandler()
         {
