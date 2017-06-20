@@ -102,7 +102,6 @@
     <Compile Include="Network\Speed.cs" />
     <Compile Include="Network\TCP.cs" />
     <Compile Include="Network\UDP.cs" />
-    <Compile Include="Testing\Dummy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
