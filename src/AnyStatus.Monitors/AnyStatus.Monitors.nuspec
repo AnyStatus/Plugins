@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+    <metadata>
+    <id>AnyStatus.Monitors</id>
+    <version>1.0.0.0</version>
+    <authors>Alon Amsalem</authors>
+    <owners>anystatus</owners>
+    <licenseUrl>https://github.com/AnyStatus/Monitors/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/AnyStatus/Monitors</projectUrl>
+    <iconUrl>http://www.anystat.us/assets/images/logo_128px.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <releaseNotes></releaseNotes>
+    <description>A .NET plug-ins library for AnyStatus.</description>
+    <copyright>Copyright © 2017 Alon Amsalem</copyright>
+    <tags>AnyStatus VisualStudio Monitor Monitoring</tags>
+    <dependencies>
+        <dependency id="Extended.Wpf.Toolkit" version="3.0" />
+    </dependencies>
+    </metadata>
+    <files>
+      <file src="bin\Release\AnyStatus.Monitors.dll" target="lib\net452" />
+    </files>
+</package>

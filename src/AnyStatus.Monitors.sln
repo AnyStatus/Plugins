@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyStatus.Monitors", "AnyStatus.Monitors\AnyStatus.Monitors.csproj", "{77E27570-10C3-4605-9FB7-677E493D05EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyStatus.Monitors.Tests", "AnyStatus.Monitors.Tests\AnyStatus.Monitors.Tests.csproj", "{671AB357-4DA9-4741-AB71-DB00ACA6A4C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77E27570-10C3-4605-9FB7-677E493D05EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77E27570-10C3-4605-9FB7-677E493D05EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77E27570-10C3-4605-9FB7-677E493D05EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77E27570-10C3-4605-9FB7-677E493D05EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{671AB357-4DA9-4741-AB71-DB00ACA6A4C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{671AB357-4DA9-4741-AB71-DB00ACA6A4C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{671AB357-4DA9-4741-AB71-DB00ACA6A4C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{671AB357-4DA9-4741-AB71-DB00ACA6A4C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
