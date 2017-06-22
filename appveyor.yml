@@ -1,0 +1,18 @@
+version: 1.0.{build}
+
+image: Visual Studio 2017
+
+configuration: Release
+
+platform: Any CPU
+
+skip_commits:
+  files:
+    - **/*.md
+    
+before_build:
+- cmd: nuget restore src
+
+build:
+  publish_nuget: true
+  verbosity: minimal

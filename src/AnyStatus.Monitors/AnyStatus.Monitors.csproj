@@ -105,7 +105,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="AnyStatus.Monitors.nuspec" />
     <None Include="Key.snk" />
     <None Include="packages.config" />
   </ItemGroup>
