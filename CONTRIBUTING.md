@@ -1,6 +1,6 @@
 # Contribution Guidelines
 
-> This document is a work in progress.
+> This document is a work in progress
 
 First off, thanks for taking the time to contribute!
 
