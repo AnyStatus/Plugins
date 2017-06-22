@@ -2,7 +2,7 @@
 
 A repository of plugins and other extensions for AnyStatus.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/lm4nuxpt6gvv0jsl?svg=true)](https://ci.appveyor.com/project/AnyStatus/monitors)
+[![Build status](https://ci.appveyor.com/api/projects/status/dvn1rwrauwyq5yx6?svg=true)](https://ci.appveyor.com/project/AnyStatus/plugins)
 
 ## Plugins List
 
