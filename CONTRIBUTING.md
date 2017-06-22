@@ -1,3 +1,4 @@
 # Contribution Guidelines
-
-Coming soon...
+ 
+ A work in progress...
+ 
