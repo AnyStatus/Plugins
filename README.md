@@ -46,5 +46,4 @@ A repository of plugins and other extensions for AnyStatus.
 
 - Windows Service - Monitor and control a local or remote Windows Service
 - IIS Application Pool - Monitor a remote or local IIS application pool state
-- 
-- 
+- GitHub Issue
