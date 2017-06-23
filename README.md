@@ -8,7 +8,8 @@ A repository of community-contributed plugins and other extensions for AnyStatus
 
 To learn more about developing plugins for AnyStatus, visit [AnyStatus API](https://github.com/AnyStatus/API) repository.
 
-![AnyStatus](http://www.anystat.us/assets/images/anystatus-visual-studio-extension.png)
+<img align="right" src="http://www.anystat.us/assets/images/anystatus-visual-studio-extension.png"/>
+
 ## Plugins
 
 ### Continuous Integration and Delivery
