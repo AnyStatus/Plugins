@@ -54,4 +54,4 @@ To learn more about developing plugins for AnyStatus, visit [AnyStatus API](http
 
 ## Contribute
 
-Read our [contribution guidelines]() for information about contributing to the plugins library, API or wbesite.
+Read our [contribution guidelines](CONTRIBUTING.md) for information about contributing to the plugins library, API or wbesite.
