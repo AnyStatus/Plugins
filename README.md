@@ -6,21 +6,45 @@ A repository of plugins and other extensions for AnyStatus.
 
 ## Plugin List
 
-### Network
+### Continuous Integration
 
-- Ping
-- TCP
-- UDP
-- Upload Speed
-- Download Speed
+- TFS/VSTO
+- Jenkins
+- TeamCity
+- AppVeyor
+- Coveralls
 
 ### Custom 
 
-- Dynamic Source Code
-- PowerShell
-- Batch File
+- Dynamic Source Code - Compile and run a C#/VB.NET file
+- PowerShell - Test a PowerShell script exit code
+- Batch File - Test a batch file exit code
 
 ### Metrics
 
-- CPU Usage
-- Performance Counter
+- CPU Usage - View the CPU usage on a remote or local computer
+- Performance Counter - View the value of a Performance Counter on a remote or local computer
+- Upload Speed - View network upload speed in Kbps/Mbps
+- Download Speed - View network download speed in Kbps/Mbps
+
+### Database
+ 
+- SQL Server - Test SQL Server database connection
+
+### Network
+
+- HTTP/S - Monitor HTTP server availability and response code
+- Ping - Test network availability of remote servers
+- TCP/UDP - Monitor network connections
+
+### Monitors
+
+- Pingdom
+- UptimeRobot
+
+### Other
+
+- Windows Service - Monitor and control a local or remote Windows Service
+- IIS Application Pool - Monitor a remote or local IIS application pool state
+- 
+- 
