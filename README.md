@@ -1,10 +1,10 @@
 # AnyStatus Plugins
 
-A repository of plugins and other extensions for AnyStatus.
+A repository of community-contributed plugins and other extensions for AnyStatus.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/dvn1rwrauwyq5yx6?svg=true)](https://ci.appveyor.com/project/AnyStatus/plugins)
 
-[AnyStatus](http://www.anystat.us) is a Visual Studio extension for monitoring continuous integration builds and releases, servers and services on the back end of your development workflow - so you can focus on your code.
+[AnyStatus](http://www.anystat.us) is a Visual Studio extension for monitoring continuous integration builds, deployments, servers and services on the back end of your development workflow - so you can focus on your code.
 
 ## Plugin List
 
