@@ -6,6 +6,8 @@ A repository of community-contributed plugins and other extensions for AnyStatus
 
 [AnyStatus](http://www.anystat.us) is a Visual Studio extension for monitoring continuous integration builds, deployments, servers and services on the back end of your development workflow - so you can focus on your code.
 
+To learn more about developing plugins for AnyStatus, visit [AnyStatus API](https://github.com/AnyStatus/API) repository.
+
 ## Plugin List
 
 ### Continuous Integration
