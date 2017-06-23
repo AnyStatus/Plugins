@@ -8,7 +8,7 @@ A repository of community-contributed plugins and other extensions for AnyStatus
 
 To learn more about developing plugins for AnyStatus, visit [AnyStatus API](https://github.com/AnyStatus/API) repository.
 
-## Plugin List
+## Plugins
 
 ### Continuous Integration
 
