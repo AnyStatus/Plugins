@@ -1,5 +1,7 @@
 # AnyStatus Plugins
 
+<img align="right" src="http://www.anystat.us/assets/images/anystatus-visual-studio-extension.png"/>
+
 A repository of community-contributed plugins and other extensions for AnyStatus.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/dvn1rwrauwyq5yx6?svg=true)](https://ci.appveyor.com/project/AnyStatus/plugins)
@@ -7,8 +9,6 @@ A repository of community-contributed plugins and other extensions for AnyStatus
 [AnyStatus](http://www.anystat.us) is a Visual Studio extension for monitoring continuous integration builds, deployments, servers and services on the back end of your development workflow - so you can focus on your code.
 
 To learn more about developing plugins for AnyStatus, visit [AnyStatus API](https://github.com/AnyStatus/API) repository.
-
-<img align="right" src="http://www.anystat.us/assets/images/anystatus-visual-studio-extension.png"/>
 
 ## Plugins
 
