@@ -10,7 +10,7 @@ To learn more about developing plugins for AnyStatus, visit [AnyStatus API](http
 
 ## Plugins
 
-### Continuous Integration
+### Continuous Integration and Delivery
 
 - TFS/VSTO
 - Jenkins
