@@ -7,7 +7,7 @@ namespace AnyStatus
 {
     [DisplayName("CPU Usage")]
     [Description("Shows the percentage of CPU usage")]
-    public class CpuUsage : Metric, ISchedulable
+    public class CpuUsage : Metric, IAmMonitored
     {
         private const string Category = "CPU Usage";
 

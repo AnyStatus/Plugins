@@ -9,7 +9,7 @@ namespace AnyStatus
     [DisplayName("TCP")]
     [DisplayColumn("Network")]
     [Description("Check TCP server connectivity")]
-    public class TcpPort : API.Item, ISchedulable
+    public class TcpPort : Plugin, IAmMonitored
     {
         private const string Category = "TCP";
 

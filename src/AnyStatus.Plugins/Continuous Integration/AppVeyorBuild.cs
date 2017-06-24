@@ -14,7 +14,7 @@ namespace AnyStatus
     [DisplayName("AppVeyor Build")]
     [Description("AppVeyor build status")]
     [DisplayColumn("Continuous Integration")]
-    public class AppVeyorBuild : Build, ISchedulable, ICanOpenInBrowser, ICanTriggerBuild
+    public class AppVeyorBuild : Build, IAmMonitored, ICanOpenInBrowser, ICanTriggerBuild
     {
         [Required]
         [Category("AppVeyor")]

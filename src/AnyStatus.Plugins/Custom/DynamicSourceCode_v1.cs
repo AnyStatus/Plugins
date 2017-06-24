@@ -19,7 +19,7 @@ namespace AnyStatus
     [DisplayColumn("Custom")]
     [DisplayName("Dynamic Source Code")]
     [Description("Experimental. Create your own custom monitor using C# or VB.NET file.")]
-    public class DynamicSourceCode_v1 : API.Item, ISchedulable
+    public class DynamicSourceCode_v1 : Plugin, IAmMonitored
     {
         private const string Category = "Dynamic Source Code";
 

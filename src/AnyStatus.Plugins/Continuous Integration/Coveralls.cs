@@ -12,7 +12,7 @@ namespace AnyStatus
     [DisplayName("Coveralls")]
     [DisplayColumn("Continuous Integration")]
     [Description("Coveralls covered code percentage")]
-    public class CoverallsCoveredPercent : Metric, ISchedulable, ICanOpenInBrowser
+    public class CoverallsCoveredPercent : Metric, IAmMonitored, ICanOpenInBrowser
     {
         private const string Category = "Coveralls";
 

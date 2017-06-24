@@ -12,7 +12,7 @@ namespace AnyStatus
     [DisplayColumn("Custom")]
     [CategoryOrder("Batch", 10)]
     [Description("Monitor the exit code of a batch file")]
-    public class BatchFile : API.Item, ISchedulable
+    public class BatchFile : Plugin, IAmMonitored
     {
         private const string Category = "Batch";
 

@@ -8,7 +8,7 @@ namespace AnyStatus
 {
     [DisplayName("SQL Server Connection")]
     [DisplayColumn("Database")]
-    public class SqlServerConnection : API.Item, ISchedulable
+    public class SqlServerConnection : Plugin, IAmMonitored
     {
         private const string Category = "SQL Server Connection";
 

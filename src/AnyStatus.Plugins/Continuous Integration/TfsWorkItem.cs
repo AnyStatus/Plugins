@@ -6,7 +6,7 @@ namespace AnyStatus
 {
     [Browsable(false)]
     [DisplayName("TFS 15 Work Item")]
-    public class TfsWorkItem : API.Item, ISchedulable
+    public class TfsWorkItem : Plugin, IAmMonitored
     {
     }
 

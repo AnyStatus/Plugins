@@ -15,7 +15,7 @@ namespace AnyStatus
 {
     [DisplayName("Pingdom")]
     [DisplayColumn("Monitoring")]
-    public class Pingdom : API.Item, ISchedulable
+    public class Pingdom : Plugin, IAmMonitored
     {
         private const string Category = "Pingdom";
 

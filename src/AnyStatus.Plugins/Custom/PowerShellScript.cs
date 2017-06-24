@@ -11,7 +11,7 @@ namespace AnyStatus
     [DisplayColumn("Custom")]
     [DisplayName("PowerShell")]
     [Description("Monitor the exit code of a PowerShell script")]
-    public class PowerShellScript : API.Item, ISchedulable
+    public class PowerShellScript : Plugin, IAmMonitored
     {
         private const string Category = "PowerShell";
 

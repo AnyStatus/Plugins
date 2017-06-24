@@ -21,7 +21,7 @@ namespace AnyStatus
     [DisplayName("TeamCity Build")]
     [Description("TeamCity build status")]
     [DisplayColumn("Continuous Integration")]
-    public class TeamCityBuild : Build, ISchedulable, ICanOpenInBrowser, ICanTriggerBuild
+    public class TeamCityBuild : Build, IAmMonitored, ICanOpenInBrowser, ICanTriggerBuild
     {
         [Url]
         [Required]

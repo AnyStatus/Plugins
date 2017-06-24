@@ -7,7 +7,7 @@ namespace AnyStatus
 {
     [DisplayName("Performance Counter")]
     [Description("Experimental. Shows the value of a performance counter")]
-    public class PerformanceCounter : Metric, ISchedulable
+    public class PerformanceCounter : Metric, IAmMonitored
     {
         private const string Category = "Performance Counter";
 
