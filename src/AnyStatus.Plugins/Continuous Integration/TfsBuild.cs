@@ -19,7 +19,7 @@ namespace AnyStatus
     [DisplayName("TFS/VSTS Build")]
     [DisplayColumn("Continuous Integration")]
     [Description("Microsoft Team Foundation Server or Visual Studio Team Services build status")]
-    public class TfsBuild : Build, IAmMonitored, ICanOpenInBrowser, ICanTriggerBuild
+    public class TfsBuild : Build, IMonitored, ICanOpenInBrowser, ICanTriggerBuild
     {
         private const string Category = "Build Definition";
 

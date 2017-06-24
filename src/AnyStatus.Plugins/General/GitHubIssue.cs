@@ -11,7 +11,7 @@ namespace AnyStatus
 {
     [DisplayName("GitHub Issue")]
     [Description("GitHub issue status")]
-    public class GitHubIssue : Plugin, IAmMonitored, ICanOpenInBrowser
+    public class GitHubIssue : Plugin, IMonitored, ICanOpenInBrowser
     {
         [Required]
         [Category("GitHub")]

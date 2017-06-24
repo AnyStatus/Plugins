@@ -15,7 +15,7 @@ namespace AnyStatus
 {
     [DisplayName("Pingdom")]
     [DisplayColumn("Monitoring")]
-    public class Pingdom : Plugin, IAmMonitored
+    public class Pingdom : Plugin, IMonitored
     {
         private const string Category = "Pingdom";
 

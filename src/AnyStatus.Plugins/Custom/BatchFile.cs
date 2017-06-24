@@ -12,7 +12,7 @@ namespace AnyStatus
     [DisplayColumn("Custom")]
     [CategoryOrder("Batch", 10)]
     [Description("Monitor the exit code of a batch file")]
-    public class BatchFile : Plugin, IAmMonitored
+    public class BatchFile : Plugin, IMonitored
     {
         private const string Category = "Batch";
 

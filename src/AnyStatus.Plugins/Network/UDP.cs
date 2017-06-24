@@ -9,7 +9,7 @@ namespace AnyStatus
     [DisplayName("UDP")]
     [DisplayColumn("Network")]
     [Description("Check UDP server connectivity")]
-    public class Udp : Plugin, IAmMonitored
+    public class Udp : Plugin, IMonitored
     {
         private const string Category = "UDP";
 

@@ -6,7 +6,7 @@ namespace AnyStatus
 {
     [Browsable(false)]
     [DisplayName("TFS 15 Work Item")]
-    public class TfsWorkItem : Plugin, IAmMonitored
+    public class TfsWorkItem : Plugin, IMonitored
     {
     }
 

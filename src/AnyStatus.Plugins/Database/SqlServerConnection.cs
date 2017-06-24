@@ -8,7 +8,7 @@ namespace AnyStatus
 {
     [DisplayName("SQL Server Connection")]
     [DisplayColumn("Database")]
-    public class SqlServerConnection : Plugin, IAmMonitored
+    public class SqlServerConnection : Plugin, IMonitored
     {
         private const string Category = "SQL Server Connection";
 

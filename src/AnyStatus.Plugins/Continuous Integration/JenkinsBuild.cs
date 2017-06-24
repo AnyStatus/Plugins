@@ -20,7 +20,7 @@ namespace AnyStatus
     [DisplayName("Jenkins Job")]
     [Description("Jenkins CI job status")]
     [DisplayColumn("Continuous Integration")]
-    public class JenkinsBuild : Build, IAmMonitored, ICanOpenInBrowser, ICanTriggerBuild, IReportProgress
+    public class JenkinsBuild : Build, IMonitored, ICanOpenInBrowser, ICanTriggerBuild, IReportProgress
     {
         private string _url;
         private int _progress;

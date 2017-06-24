@@ -27,7 +27,7 @@ namespace AnyStatus
     {
     }
 
-    public abstract class NetworkSpeed : Metric, IAmMonitored
+    public abstract class NetworkSpeed : Metric, IMonitored
     {
         public NetworkSpeed()
         {

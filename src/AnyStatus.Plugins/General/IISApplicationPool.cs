@@ -8,7 +8,7 @@ namespace AnyStatus
 {
     [DisplayName("IIS Application Pool")]
     [Description("Monitor IIS application pool state")]
-    public class IISApplicationPool : Plugin, IAmMonitored
+    public class IISApplicationPool : Plugin, IMonitored
     {
         private const string Category = "Application Pool";
 

@@ -8,7 +8,7 @@ namespace AnyStatus
     [Browsable(false)]
     [DisplayName("Travis CI Build")]
     [DisplayColumn("Continuous Integration")]
-    public class TravisCIBuild : Build, IAmMonitored
+    public class TravisCIBuild : Build, IMonitored
     {
     }
 
