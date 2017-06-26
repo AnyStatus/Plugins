@@ -11,7 +11,7 @@ namespace AnyStatus
 {
     [DisplayName("Windows Service")]
     [Description("Test whether a windows service is running")]
-    public class WindowsService : Plugin, IMonitored, ICanStartWindowsService, ICanStopWindowsService, ICanRestartWindowsService
+    public class WindowsService : Plugin, IMonitored, ICanStart, ICanStop, ICanRestart
     {
         private const string Category = "Windows Service";
 
@@ -65,7 +65,7 @@ namespace AnyStatus
         }
     }
 
-    public class StartWindowsService : BaseWindowsServiceHandler, IStartWindowsService<WindowsService>
+    public class StartWindowsService : BaseWindowsServiceHandler, IStart<WindowsService>
     {
         private readonly ILogger _logger;
         private readonly IDialogService _dialogService;
@@ -109,7 +109,7 @@ namespace AnyStatus
         }
     }
 
-    public class StopWindowsService : BaseWindowsServiceHandler, IStopWindowsService<WindowsService>
+    public class StopWindowsService : BaseWindowsServiceHandler, IStop<WindowsService>
     {
         private readonly ILogger _logger;
         private readonly IDialogService _dialogService;
@@ -153,7 +153,7 @@ namespace AnyStatus
         }
     }
 
-    public class RestartWindowsService : BaseWindowsServiceHandler, IRestartWindowsService<WindowsService>
+    public class RestartWindowsService : BaseWindowsServiceHandler, IRestart<WindowsService>
     {
         private readonly ILogger _logger;
         private readonly IDialogService _dialogService;
