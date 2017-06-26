@@ -54,6 +54,11 @@ To learn more about developing plugins for AnyStatus, visit [AnyStatus API](http
 - IIS Application Pool - Monitor a remote or local IIS application pool state
 - GitHub Issue
 
+## Whish List
+
+- TFS release status
+- AppVeyor deployment status
+
 ## Contribute
 
 Read our [contribution guidelines](CONTRIBUTING.md) for information about contributing to the plugins library, API or website.
