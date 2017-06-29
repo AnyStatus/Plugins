@@ -57,10 +57,10 @@ To learn more about developing plugins for AnyStatus, visit [AnyStatus API](http
 ## Wish List
 
 - Monitors
-  - TFS release status
-  - AppVeyor deployment status
+  - TFS Release Status
+  - AppVeyor Deployment Status
 - Metrics
-  - SQL query value
+  - SQL Scalar Query
 
 ## Contribute
 
