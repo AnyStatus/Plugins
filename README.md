@@ -56,8 +56,12 @@ To learn more about developing plugins for AnyStatus, visit [AnyStatus API](http
 
 ## Wish List
 
-- TFS release status
-- AppVeyor deployment status
+- Monitos
+  - TFS release status
+  - AppVeyor deployment status
+
+- Metrics
+  - SQL query value
 
 ## Contribute
 
