@@ -8,8 +8,8 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    [DisplayName("Sql Scalar Query")]
     [DisplayColumn("Database")]
+    [DisplayName("Sql Scalar Query")]
     public class SqlScalarQuery : Metric, IMonitored
     {
         private const string Category = "SQL Scalar Query";
@@ -39,22 +39,16 @@ namespace AnyStatus
         }
 
         public void Handle(SqlScalarQuery item)
-        {
-            //string sql =
-            //    "INSERT INTO Production.ProductCategory (Name) VALUES (@Name); "
-            //    + "SELECT CAST(scope_identity() AS int)";
-
+        { 
             using (var connection = new SqlConnection(item.ConnectionString))
             {
                 var cmd = new SqlCommand(item.SqlQuery, connection);
-                //cmd.Parameters.Add("@Name", SqlDbType.VarChar);
-                //cmd.Parameters["@name"].Value = newName;
 
                 try
                 {
                     connection.Open();
 
-                    item.Value = (string)cmd.ExecuteScalar();
+                    item.Value = (Int32)cmd.ExecuteScalar();
 
                     item.State = State.Ok;
                 }
