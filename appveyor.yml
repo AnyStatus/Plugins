@@ -18,3 +18,7 @@ before_build:
 build:
   publish_nuget: true
   verbosity: minimal
+  
+deploy:
+  provider: Environment
+  name: AnyStatus
