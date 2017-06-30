@@ -89,6 +89,7 @@
     <Compile Include="Custom\BatchFile.cs" />
     <Compile Include="Custom\DynamicSourceCode_v1.cs" />
     <Compile Include="Custom\PowerShellScript.cs" />
+    <Compile Include="Database\SqlScalarQuery.cs" />
     <Compile Include="Database\SqlServerConnection.cs" />
     <Compile Include="General\CpuUsage.cs" />
     <Compile Include="General\GitHubIssue.cs" />
