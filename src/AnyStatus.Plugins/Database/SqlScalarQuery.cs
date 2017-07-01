@@ -2,14 +2,14 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Data;
 using System.Data.SqlClient;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
     [DisplayColumn("Database")]
-    [DisplayName("Sql Scalar Query")]
+    [DisplayName("SQL Scalar Query")]
+    [Description("Executes the query, and shows the first column of the first row in the result set returned by the query. Additional columns or rows are ignored.")]
     public class SqlScalarQuery : Metric, IMonitored
     {
         private const string Category = "SQL Scalar Query";
@@ -18,7 +18,7 @@ namespace AnyStatus
         [PropertyOrder(10)]
         [Category(Category)]
         [DisplayName("Connection String")]
-        [Description("")]
+        [Description("Database connection string.")]
         public string ConnectionString { get; set; }
 
         [Required]
@@ -51,12 +51,6 @@ namespace AnyStatus
                     item.Value = (Int32)cmd.ExecuteScalar();
 
                     item.State = State.Ok;
-                }
-                catch (SqlException sex)
-                {
-                    _logger.Error(sex);
-
-                    item.State = State.Failed;
                 }
                 catch (Exception ex)
                 {
