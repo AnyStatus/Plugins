@@ -84,50 +84,47 @@ namespace AnyStatus
     public abstract class BaseTfsBuildHandler
     {
         [DebuggerStepThrough]
-        public virtual void Handle(TfsBuild item)
+        public virtual void Handle(TfsBuild buildDefinition)
         {
-            if (item.BuildDefinitionId <= 0)
-            {
-                item.BuildDefinitionId = GetBuildDefinitionIdAsync(item).Result;
-            }
+            HandleAsync(buildDefinition).Wait();
         }
 
-        public virtual async Task HandleAsync(TfsBuild item)
+        public virtual async Task HandleAsync(TfsBuild buildDefinition)
         {
-            if (item.BuildDefinitionId <= 0)
-            {
-                item.BuildDefinitionId = await GetBuildDefinitionIdAsync(item);
-            }
+            if (buildDefinition.BuildDefinitionId <= 0)
+                buildDefinition.BuildDefinitionId = await GetBuildDefinitionIdAsync(buildDefinition).ConfigureAwait(false);
         }
 
-        protected async Task<int> GetBuildDefinitionIdAsync(TfsBuild item)
+        protected async Task<int> GetBuildDefinitionIdAsync(TfsBuild buidDefinition)
         {
             using (var handler = new WebRequestHandler())
             {
-                handler.UseDefaultCredentials = string.IsNullOrEmpty(item.UserName) || string.IsNullOrEmpty(item.Password); ;
+                handler.UseDefaultCredentials = string.IsNullOrEmpty(buidDefinition.UserName) || string.IsNullOrEmpty(buidDefinition.Password); ;
 
-                using (var client = new HttpClient(handler))
+                var httpClient = new HttpClient(handler);
+
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                if (handler.UseDefaultCredentials == false)
                 {
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                    if (handler.UseDefaultCredentials == false)
-                    {
-                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
-                            Convert.ToBase64String(Encoding.ASCII.GetBytes($"{item.UserName}:{item.Password}")));
-                    }
-
-                    var url = $"{item.Url}/{item.Collection}/{item.TeamProject}/_apis/build/definitions?api-version=2.0&name={item.BuildDefinition}";
-
-                    var response = await client.GetAsync(url);
-
-                    response.EnsureSuccessStatusCode();
-
-                    var content = await response.Content.ReadAsStringAsync();
-
-                    var buildDefinitionResponse = new JavaScriptSerializer().Deserialize<BuildDefinitionResponse>(content);
-
-                    return buildDefinitionResponse.Value.First().Id;
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
+                        Convert.ToBase64String(Encoding.ASCII.GetBytes($"{buidDefinition.UserName}:{buidDefinition.Password}")));
                 }
+
+                var url = $"{buidDefinition.Url}/{buidDefinition.Collection}/{buidDefinition.TeamProject}/_apis/build/definitions?api-version=2.0&name={buidDefinition.BuildDefinition}";
+
+                var response = await httpClient.GetAsync(url).ConfigureAwait(false);
+
+                response.EnsureSuccessStatusCode();
+
+                var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                var buildDefinitionResponse = new JavaScriptSerializer().Deserialize<BuildDefinitionResponse>(content);
+
+                if (buildDefinitionResponse == null || buildDefinitionResponse.Value == null || !buildDefinitionResponse.Value.Any())
+                    throw new Exception("Build definition id was not found.");
+
+                return buildDefinitionResponse.Value.First().Id;
             }
         }
     }
@@ -141,10 +138,16 @@ namespace AnyStatus
 
             var buildDetails = GetBuildDetailsAsync(item).Result;
 
-            if (buildDetails.Status == "notStarted" || buildDetails.Status == "inProgress")
+            switch (buildDetails.Status)
             {
-                item.State = State.Running;
-                return;
+                case "notStarted":
+                    item.State = State.Queued;
+                    return;
+                case "inProgress":
+                    item.State = State.Running;
+                    return;
+                default:
+                    break;
             }
 
             switch (buildDetails.Result)
