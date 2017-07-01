@@ -22,21 +22,21 @@ To learn more about developing plugins for AnyStatus, visit [AnyStatus API](http
 
 ### Custom 
 
-- [x] Dynamic Source Code - Compile and run a C#/VB.NET file
-- [x] PowerShell - Test a PowerShell script exit code
-- [x] Batch File - Test a batch file exit code
+- [x] Dynamic Source Code - Compile and run custom monitors written in C# or VB.NET
+- [x] PowerShell - Test PowerShell script exit code
+- [x] Batch File - Test batch file script exit code
 
 ### Metrics
 
-- [x] CPU Usage - View the CPU usage on a remote or local computer
-- [x] Performance Counter - View the value of a Performance Counter on a remote or local computer
-- [x] Upload Speed - View network upload speed in Kbps/Mbps
-- [x] Download Speed - View network download speed in Kbps/Mbps
+- [x] CPU Usage - Show the local or remote CPU usage
+- [x] Performance Counter - Show the value of a local or remote performance counter
+- [x] Upload Speed - Show network upload speed in Kbps/Mbps
+- [x] Download Speed - Show network download speed in Kbps/Mbps
+- [x] SQL Scalar Query - Show the return value of an SQL query
 
 ### Database
- 
+
 - [x] SQL Server - Test SQL Server database connection
-- [x] SQL Scalar Query - Shows the return value of an SQL query in the dashboard
 
 ### Network
 
