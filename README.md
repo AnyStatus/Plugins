@@ -59,6 +59,7 @@ To learn more about developing plugins for AnyStatus, visit [AnyStatus API](http
 
 - [ ] Monitors
   - [ ] TFS Release Status
+  - [ ] TFS build progress
   - [ ] AppVeyor Deployment Status
 
 ## Contribute
