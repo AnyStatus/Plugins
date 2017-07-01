@@ -36,6 +36,7 @@ To learn more about developing plugins for AnyStatus, visit [AnyStatus API](http
 ### Database
  
 - SQL Server - Test SQL Server database connection
+- SQL Scalar Query - Shows the return value of an SQL query in the dashboard
 
 ### Network
 
