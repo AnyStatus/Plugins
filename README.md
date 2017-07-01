@@ -28,40 +28,38 @@ To learn more about developing plugins for AnyStatus, visit [AnyStatus API](http
 
 ### Metrics
 
-- CPU Usage - View the CPU usage on a remote or local computer
-- Performance Counter - View the value of a Performance Counter on a remote or local computer
-- Upload Speed - View network upload speed in Kbps/Mbps
-- Download Speed - View network download speed in Kbps/Mbps
+- [x] CPU Usage - View the CPU usage on a remote or local computer
+- [x] Performance Counter - View the value of a Performance Counter on a remote or local computer
+- [x] Upload Speed - View network upload speed in Kbps/Mbps
+- [x] Download Speed - View network download speed in Kbps/Mbps
 
 ### Database
  
-- SQL Server - Test SQL Server database connection
-- SQL Scalar Query - Shows the return value of an SQL query in the dashboard
+- [x] SQL Server - Test SQL Server database connection
+- [x] SQL Scalar Query - Shows the return value of an SQL query in the dashboard
 
 ### Network
 
-- HTTP/S - Monitor HTTP server availability and response code
-- Ping - Test network availability of remote servers
-- TCP/UDP - Monitor network connections
+- [x] HTTP/S - Monitor HTTP server availability and response code
+- [x] Ping - Test network availability of remote servers
+- [x] TCP/UDP - Monitor network connections
 
 ### Monitors
 
-- Pingdom
-- UptimeRobot
+- [x] Pingdom
+- [x] UptimeRobot
 
 ### Other
 
-- Windows Service - Monitor and control a local or remote Windows Service
-- IIS Application Pool - Monitor a remote or local IIS application pool state
-- GitHub Issue
+- [x] Windows Service - Monitor and control a local or remote Windows Service
+- [x] IIS Application Pool - Monitor a remote or local IIS application pool state
+- [x] GitHub Issue
 
 ## Wish List
 
-- Monitors
-  - TFS Release Status
-  - AppVeyor Deployment Status
-- Metrics
-  - SQL Scalar Query
+- [ ] Monitors
+  - [ ] TFS Release Status
+  - [ ] AppVeyor Deployment Status
 
 ## Contribute
 
