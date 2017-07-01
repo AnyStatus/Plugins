@@ -14,17 +14,17 @@ To learn more about developing plugins for AnyStatus, visit [AnyStatus API](http
 
 ### Continuous Integration and Delivery
 
-- TFS/VSTO
-- Jenkins
-- TeamCity
-- AppVeyor
-- Coveralls
+- [x] TFS/VSTO
+- [x] Jenkins
+- [x] TeamCity
+- [x] AppVeyor
+- [x] Coveralls
 
 ### Custom 
 
-- Dynamic Source Code - Compile and run a C#/VB.NET file
-- PowerShell - Test a PowerShell script exit code
-- Batch File - Test a batch file exit code
+- [x] Dynamic Source Code - Compile and run a C#/VB.NET file
+- [x] PowerShell - Test a PowerShell script exit code
+- [x] Batch File - Test a batch file exit code
 
 ### Metrics
 
