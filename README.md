@@ -14,53 +14,53 @@ To learn more about developing plugins for AnyStatus, visit [AnyStatus API](http
 
 ### Continuous Integration and Delivery
 
-- TFS/VSTO
-- Jenkins
-- TeamCity
-- AppVeyor
-- Coveralls
+- [x] TFS/VSTO
+- [x] Jenkins
+- [x] TeamCity
+- [x] AppVeyor
+- [x] Coveralls
 
 ### Custom 
 
-- Dynamic Source Code - Compile and run a C#/VB.NET file
-- PowerShell - Test a PowerShell script exit code
-- Batch File - Test a batch file exit code
+- [x] Dynamic Source Code - Compile and run custom monitors written in C# or VB.NET
+- [x] PowerShell - Test PowerShell script exit code
+- [x] Batch File - Test batch file script exit code
 
 ### Metrics
 
-- CPU Usage - View the CPU usage on a remote or local computer
-- Performance Counter - View the value of a Performance Counter on a remote or local computer
-- Upload Speed - View network upload speed in Kbps/Mbps
-- Download Speed - View network download speed in Kbps/Mbps
+- [x] CPU Usage - Show the local or remote CPU usage
+- [x] Performance Counter - Show the value of a local or remote performance counter
+- [x] Upload Speed - Show network upload speed in Kbps/Mbps
+- [x] Download Speed - Show network download speed in Kbps/Mbps
+- [x] SQL Scalar Query - Show the return value of an SQL query
 
 ### Database
- 
-- SQL Server - Test SQL Server database connection
+
+- [x] SQL Server - Test SQL Server database connection
 
 ### Network
 
-- HTTP/S - Monitor HTTP server availability and response code
-- Ping - Test network availability of remote servers
-- TCP/UDP - Monitor network connections
+- [x] HTTP/S - Monitor HTTP server availability and response code
+- [x] Ping - Test network availability of remote servers
+- [x] TCP/UDP - Monitor network connections
 
 ### Monitors
 
-- Pingdom
-- UptimeRobot
+- [x] Pingdom
+- [x] UptimeRobot
 
 ### Other
 
-- Windows Service - Monitor and control a local or remote Windows Service
-- IIS Application Pool - Monitor a remote or local IIS application pool state
-- GitHub Issue
+- [x] Windows Service - Monitor and control a local or remote Windows Service
+- [x] IIS Application Pool - Monitor a remote or local IIS application pool state
+- [x] GitHub Issue
 
 ## Wish List
 
-- Monitors
-  - TFS Release Status
-  - AppVeyor Deployment Status
-- Metrics
-  - SQL Scalar Query
+- [ ] Monitors
+  - [ ] TFS Release Status
+  - [ ] TFS build progress
+  - [ ] AppVeyor Deployment Status
 
 ## Contribute
 
