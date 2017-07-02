@@ -7,7 +7,10 @@ platform: Any CPU
 skip_commits:
   files:
     - '**/*.md'
-    
+
+nuget:
+  account_feed: true
+  
 before_build:
 - cmd: nuget restore src
 - ps: $file = "$env:appveyor_build_folder\src\AnyStatus.Plugins\AnyStatus.Plugins.nuspec"
