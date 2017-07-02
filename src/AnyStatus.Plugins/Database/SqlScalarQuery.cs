@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
+using Xceed.Wpf.Toolkit.PropertyGrid.Editors;
 
 namespace AnyStatus
 {
@@ -26,11 +27,14 @@ namespace AnyStatus
         [Category(Category)]
         [DisplayName("SQL Query")]
         [Description("")]
+        [Editor(typeof(MultilineTextBoxEditor), typeof(ITypeEditor))]
         public string SqlQuery { get; set; }
     }
 
     public class SqlScalarQueryMonitor : IMonitor<SqlScalarQuery>
     {
+        //todo: make async
+
         private readonly ILogger _logger;
 
         public SqlScalarQueryMonitor(ILogger logger)
@@ -38,25 +42,25 @@ namespace AnyStatus
             _logger = Preconditions.CheckNotNull(logger, nameof(logger));
         }
 
-        public void Handle(SqlScalarQuery item)
-        { 
-            using (var connection = new SqlConnection(item.ConnectionString))
+        public void Handle(SqlScalarQuery scalarQuery)
+        {
+            using (var connection = new SqlConnection(scalarQuery.ConnectionString))
             {
-                var cmd = new SqlCommand(item.SqlQuery, connection);
+                var cmd = new SqlCommand(scalarQuery.SqlQuery, connection);
 
                 try
                 {
                     connection.Open();
 
-                    item.Value = (Int32)cmd.ExecuteScalar();
+                    scalarQuery.Value = (Int32)cmd.ExecuteScalar();
 
-                    item.State = State.Ok;
+                    scalarQuery.State = State.Ok;
                 }
                 catch (Exception ex)
                 {
-                    _logger.Error(ex);
+                    scalarQuery.State = State.Error;
 
-                    item.State = State.Error;
+                    _logger.Error(ex);
                 }
             }
         }

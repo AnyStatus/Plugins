@@ -8,7 +8,7 @@ namespace AnyStatus.Plugins.Tests
     public class SqlScalarQueryTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void SqlScalarQueryTest()
         {
             var logger = Substitute.For<ILogger>();
 
