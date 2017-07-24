@@ -82,6 +82,7 @@
     <Compile Include="Continuous Integration\AppVeyorBuild.cs" />
     <Compile Include="Continuous Integration\Coveralls.cs" />
     <Compile Include="Continuous Integration\JenkinsBuild.cs" />
+    <Compile Include="Continuous Integration\JenkinsPipelineBuild.cs" />
     <Compile Include="Continuous Integration\TeamCityBuild.cs" />
     <Compile Include="Continuous Integration\TfsBuild.cs" />
     <Compile Include="Continuous Integration\TfsWorkItem.cs" />
