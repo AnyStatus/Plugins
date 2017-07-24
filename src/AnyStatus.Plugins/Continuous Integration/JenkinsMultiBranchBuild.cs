@@ -14,10 +14,10 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    [DisplayName("Jenkins Pipeline Job")]
-    [Description("Jenkins Pipeline CI job status")]
+    [DisplayName("Jenkins Multibranch Job")]
+    [Description("Jenkins Multibranch CI job status")]
     [DisplayColumn("Continuous Integration")]
-    public class JenkinsPipelineBuild : Build, IMonitored, ICanOpenInBrowser
+    public class JenkinsMultibranchBuild : Build, IMonitored, ICanOpenInBrowser
     {
         private string url;
 
@@ -25,7 +25,7 @@ namespace AnyStatus
         [Required]
         [PropertyOrder(10)]
         [Category("Jenkins")]
-        [Description("Jenkins pipeline job URL address")]
+        [Description("Jenkins multibranch job URL address")]
         public string Url
         {
             get { return this.url; }
@@ -55,55 +55,83 @@ namespace AnyStatus
         }
     }
 
-    public class OpenJenkinsPipelineBuildInBrowser : IOpenInBrowser<JenkinsPipelineBuild>
+    public class OpenJenkinsMultibranchBuildInBrowser : IOpenInBrowser<JenkinsMultibranchBuild>
     {
         private readonly IProcessStarter processStarter;
 
-        public OpenJenkinsPipelineBuildInBrowser(IProcessStarter processStarter)
+        public OpenJenkinsMultibranchBuildInBrowser(IProcessStarter processStarter)
         {
             this.processStarter = Preconditions.CheckNotNull(processStarter, nameof(processStarter));
         }
 
-        public void Handle(JenkinsPipelineBuild item)
+        public void Handle(JenkinsMultibranchBuild item)
         {
             this.processStarter.Start(item.Url);
         }
     }
     
-    public class JenkinsPipelineBuildMonitor : IMonitor<JenkinsPipelineBuild>
+    public class JenkinsMultibranchBuildMonitor : IMonitor<JenkinsMultibranchBuild>
     {
         [DebuggerStepThrough]
-        public void Handle(JenkinsPipelineBuild item)
+        public void Handle(JenkinsMultibranchBuild item)
         {
-            var build = GetPipelineDetailsAsync(item).Result;
+            if (item.Parent == null)
+            {
+                return;
+            }
+
+            var build = GetMultibranchDetailsAsync(item).Result;
             item.State = State.Ok;
 
             // HACK: This adds items, but requires a restart before "schedulers" are created by AnyStatus.
+            var prevJobs = item.Parent.Items.OfType<JenkinsBuild>();
             Application.Current.Dispatcher.Invoke(() =>
             {
-                foreach (var job in build.Jobs.OrderBy(x => x.Name))
+                // Add new jobs
+                var newJobs = build.Jobs.Where(x => prevJobs.All(y => y.Url != x.Url)).OrderBy(x => x.Name);
+                foreach (var job in newJobs)
                 {
                     this.AddJob(item, job);
+                }
+
+                // Update existing jobs
+                foreach (var job in build.Jobs.Except(newJobs))
+                {
+                    this.UpdateJob(prevJobs.Single(x => x.Url == job.Url), job);
+                }
+
+                // Remove any jobs that no longer exist
+                foreach (var job in prevJobs.Where(x => build.Jobs.All(y => y.Url != x.Url)))
+                {
+                    this.RemoveJob(item, job);
                 }
             });
         }
         
-        private void AddJob(JenkinsPipelineBuild item, JenkinsPipelineJob job)
+        private void AddJob(JenkinsMultibranchBuild item, JenkinsJob job)
         {
-            if (item.Parent != null && item.Parent.Items.OfType<JenkinsBuild>().All(x => x.Url != job.Url))
+            item.Parent.Add(new JenkinsBuild
             {
-                item.Parent.Add(new JenkinsBuild
-                {
-                    Name = job.Name.Replace("%2F", "/"),
-                    Url = job.Url,
-                    UserName = item.UserName,
-                    ApiToken = item.ApiToken,
-                    IgnoreSslErrors = item.IgnoreSslErrors
-                });
-            }
+                Name = job.Name.Replace("%2F", "/"),
+                Url = job.Url,
+                Interval = item.Interval,
+                UserName = item.UserName,
+                ApiToken = item.ApiToken,
+                IgnoreSslErrors = item.IgnoreSslErrors
+            });
         }
 
-        private async Task<JenkinsPipelineDetails> GetPipelineDetailsAsync(JenkinsPipelineBuild item)
+        private void UpdateJob(JenkinsBuild item, JenkinsJob job)
+        {
+            // TODO: not sure what to update..
+        }
+
+        private void RemoveJob(JenkinsMultibranchBuild item, JenkinsBuild job)
+        {
+            item.Parent.Items.Remove(job);
+        }
+
+        private async Task<JenkinsMultibranchDetails> GetMultibranchDetailsAsync(JenkinsMultibranchBuild item)
         {
             using (var handler = new WebRequestHandler())
             {
@@ -128,10 +156,10 @@ namespace AnyStatus
 
                     var content = await response.Content.ReadAsStringAsync();
 
-                    var jobsResult = new JavaScriptSerializer().Deserialize<JenkinsPipelineDetails>(content);
+                    var jobsResult = new JavaScriptSerializer().Deserialize<JenkinsMultibranchDetails>(content);
                     if (jobsResult == null)
                     {
-                        throw new Exception("Invalid Jenkins Pipeline response.");
+                        throw new Exception("Invalid Jenkins Multibranch response.");
                     }
 
                     return jobsResult;
@@ -139,7 +167,7 @@ namespace AnyStatus
             }
         }
 
-        private static void ConfigureHttpClientAuthorization(JenkinsPipelineBuild item, HttpClient client)
+        private static void ConfigureHttpClientAuthorization(JenkinsMultibranchBuild item, HttpClient client)
         {
             if (string.IsNullOrEmpty(item.UserName) || string.IsNullOrEmpty(item.ApiToken))
             {
@@ -155,12 +183,12 @@ namespace AnyStatus
 
     #region Contracts
 
-    public class JenkinsPipelineDetails
+    public class JenkinsMultibranchDetails
     {
-        public JenkinsPipelineJob[] Jobs { get; set; }
+        public JenkinsJob[] Jobs { get; set; }
     }
 
-    public class JenkinsPipelineJob
+    public class JenkinsJob
     {
         public string Name { get; set; }
         public string Url { get; set; }
