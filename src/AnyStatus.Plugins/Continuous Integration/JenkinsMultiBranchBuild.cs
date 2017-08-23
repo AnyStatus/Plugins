@@ -85,10 +85,12 @@ namespace AnyStatus
 
             // HACK: This adds items, but requires a restart before "schedulers" are created by AnyStatus.
             var prevJobs = item.Parent.Items.OfType<JenkinsBuild>();
+
             Application.Current.Dispatcher.Invoke(() =>
             {
                 // Add new jobs
                 var newJobs = build.Jobs.Where(x => prevJobs.All(y => y.Url != x.Url)).OrderBy(x => x.Name);
+
                 foreach (var job in newJobs)
                 {
                     this.AddJob(item, job);
@@ -157,6 +159,7 @@ namespace AnyStatus
                     var content = await response.Content.ReadAsStringAsync();
 
                     var jobsResult = new JavaScriptSerializer().Deserialize<JenkinsMultibranchDetails>(content);
+
                     if (jobsResult == null)
                     {
                         throw new Exception("Invalid Jenkins Multibranch response.");
@@ -191,6 +194,7 @@ namespace AnyStatus
     public class JenkinsJob
     {
         public string Name { get; set; }
+
         public string Url { get; set; }
     }
 
