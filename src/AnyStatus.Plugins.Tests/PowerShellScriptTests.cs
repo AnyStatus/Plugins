@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System.IO;
 
-namespace AnyStatus.Monitors.Tests
+namespace AnyStatus.Plugins.Tests
 {
     [TestClass]
     public class PowerShellScriptTests

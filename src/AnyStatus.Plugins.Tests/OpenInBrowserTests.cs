@@ -1,9 +1,8 @@
 ﻿using AnyStatus.API;
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 
-namespace AnyStatus.Integration.Tests
+namespace AnyStatus.Plugins.Tests
 {
     [TestClass]
     public class OpenInBrowserTests

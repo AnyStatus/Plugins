@@ -1,7 +1,6 @@
-﻿using AnyStatus.API;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace AnyStatus.Monitors.Tests
+namespace AnyStatus.Plugins.Tests
 {
     [TestClass]
     public class TfsBuildTests

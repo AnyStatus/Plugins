@@ -1,9 +1,8 @@
 ﻿using AnyStatus.API;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using System;
 
-namespace AnyStatus.Monitors.Tests
+namespace AnyStatus.Plugins.Tests
 {
     [TestClass]
     public class MonitoringTests
