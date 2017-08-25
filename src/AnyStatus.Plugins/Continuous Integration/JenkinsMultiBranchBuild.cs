@@ -14,7 +14,6 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    [Browsable(true)]
     [DisplayName("Jenkins Multibranch Job")]
     [Description("Jenkins Multibranch CI job status")]
     [DisplayColumn("Continuous Integration")]
@@ -82,6 +81,7 @@ namespace AnyStatus
             }
 
             var build = GetMultibranchDetailsAsync(item).Result;
+
             item.State = State.Ok;
 
             // HACK: This adds items, but requires a restart before "schedulers" are created by AnyStatus.
