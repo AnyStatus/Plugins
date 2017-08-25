@@ -112,7 +112,7 @@ namespace AnyStatus
 
         private void AddJob(JenkinsMultibranchBuild item, JenkinsJob job)
         {
-            item.Parent.Add(new JenkinsBuild
+            item.Add(new JenkinsBuild
             {
                 Name = job.Name.Replace("%2F", "/"),
                 Url = job.Url,
@@ -130,7 +130,7 @@ namespace AnyStatus
 
         private void RemoveJob(JenkinsMultibranchBuild item, JenkinsBuild job)
         {
-            item.Parent.Remove(job);
+            item.Remove(job);
         }
 
         private async Task<JenkinsMultibranchDetails> GetMultibranchDetailsAsync(JenkinsMultibranchBuild item)
