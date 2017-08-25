@@ -17,7 +17,7 @@ namespace AnyStatus
     [DisplayName("Jenkins Multibranch Job")]
     [Description("Jenkins Multibranch CI job status")]
     [DisplayColumn("Continuous Integration")]
-    public class JenkinsMultibranchBuild : Build, IMonitored, ICanOpenInBrowser
+    public class JenkinsMultibranchBuild : Folder, IMonitored, ICanOpenInBrowser
     {
         private string url;
 
@@ -57,19 +57,19 @@ namespace AnyStatus
 
     public class OpenJenkinsMultibranchBuildInBrowser : IOpenInBrowser<JenkinsMultibranchBuild>
     {
-        private readonly IProcessStarter processStarter;
+        private readonly IProcessStarter _processStarter;
 
         public OpenJenkinsMultibranchBuildInBrowser(IProcessStarter processStarter)
         {
-            this.processStarter = Preconditions.CheckNotNull(processStarter, nameof(processStarter));
+            _processStarter = Preconditions.CheckNotNull(processStarter, nameof(processStarter));
         }
 
         public void Handle(JenkinsMultibranchBuild item)
         {
-            this.processStarter.Start(item.Url);
+            _processStarter.Start(item.Url);
         }
     }
-    
+
     public class JenkinsMultibranchBuildMonitor : IMonitor<JenkinsMultibranchBuild>
     {
         [DebuggerStepThrough]
@@ -109,7 +109,7 @@ namespace AnyStatus
                 }
             });
         }
-        
+
         private void AddJob(JenkinsMultibranchBuild item, JenkinsJob job)
         {
             item.Parent.Add(new JenkinsBuild
@@ -125,12 +125,12 @@ namespace AnyStatus
 
         private void UpdateJob(JenkinsBuild item, JenkinsJob job)
         {
-            // TODO: not sure what to update..
+            // TODO: not sure what to update... => Update Item.State
         }
 
         private void RemoveJob(JenkinsMultibranchBuild item, JenkinsBuild job)
         {
-            item.Parent.Items.Remove(job);
+            item.Parent.Remove(job);
         }
 
         private async Task<JenkinsMultibranchDetails> GetMultibranchDetailsAsync(JenkinsMultibranchBuild item)
