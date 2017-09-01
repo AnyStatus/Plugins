@@ -29,7 +29,9 @@ namespace AnyStatus
         public JenkinsBuild()
         {
             if (BuildParameters == null)
+            {
                 BuildParameters = new List<NameValuePair>();
+            }
         }
 
         [Url]
@@ -181,8 +183,8 @@ namespace AnyStatus
             {
                 foreach (var parameter in build.BuildParameters)
                 {
-                    if (parameter == null || 
-                        string.IsNullOrWhiteSpace(parameter.Name) || 
+                    if (parameter == null ||
+                        string.IsNullOrWhiteSpace(parameter.Name) ||
                         string.IsNullOrWhiteSpace(parameter.Value))
                         continue;
 
@@ -241,9 +243,8 @@ namespace AnyStatus
                     return State.Failed;
                 case "UNSTABLE":
                     return State.PartiallySucceeded;
-                //todo: complete this:
-                //case "QUEUED":
-                //    return State.Queued;
+                case "QUEUED": //todo: make sure the status is correct 
+                    return State.Queued;
                 default:
                     return State.Unknown;
             }
@@ -255,7 +256,9 @@ namespace AnyStatus
             item.Progress = progress;
 
             if (item.ShowProgress == false)
+            {
                 item.ShowProgress = true;
+            }
         }
 
         private async Task<JenkinsBuildDetails> GetBuildDetailsAsync(JenkinsBuild item)

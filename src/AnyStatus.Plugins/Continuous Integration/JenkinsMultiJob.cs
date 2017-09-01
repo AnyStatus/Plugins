@@ -14,10 +14,10 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    [DisplayName("Jenkins Multibranch Job")]
-    [Description("Jenkins Multibranch CI job status")]
+    [DisplayName("Jenkins MultiJob (Preview)")]
+    [Description("Shows the status of multiple Jenkins jobs.")]
     [DisplayColumn("Continuous Integration")]
-    public class JenkinsMultibranchBuild : Folder, IMonitored, ICanOpenInBrowser
+    public class JenkinsMultiJob : Folder, IMonitored, ICanOpenInBrowser
     {
         private string url;
 
@@ -55,7 +55,7 @@ namespace AnyStatus
         }
     }
 
-    public class OpenJenkinsMultibranchBuildInBrowser : IOpenInBrowser<JenkinsMultibranchBuild>
+    public class OpenJenkinsMultibranchBuildInBrowser : IOpenInBrowser<JenkinsMultiJob>
     {
         private readonly IProcessStarter _processStarter;
 
@@ -64,16 +64,16 @@ namespace AnyStatus
             _processStarter = Preconditions.CheckNotNull(processStarter, nameof(processStarter));
         }
 
-        public void Handle(JenkinsMultibranchBuild item)
+        public void Handle(JenkinsMultiJob item)
         {
             _processStarter.Start(item.Url);
         }
     }
 
-    public class JenkinsMultibranchBuildMonitor : IMonitor<JenkinsMultibranchBuild>
+    public class JenkinsMultibranchBuildMonitor : IMonitor<JenkinsMultiJob>
     {
         [DebuggerStepThrough]
-        public void Handle(JenkinsMultibranchBuild item)
+        public void Handle(JenkinsMultiJob item)
         {
             if (item.Parent == null)
             {
@@ -111,7 +111,7 @@ namespace AnyStatus
             });
         }
 
-        private void AddJob(JenkinsMultibranchBuild item, JenkinsJob job)
+        private void AddJob(JenkinsMultiJob item, JenkinsJob job)
         {
             item.Add(new JenkinsBuild
             {
@@ -129,12 +129,12 @@ namespace AnyStatus
             // TODO: not sure what to update... => Update Item.State
         }
 
-        private void RemoveJob(JenkinsMultibranchBuild item, JenkinsBuild job)
+        private void RemoveJob(JenkinsMultiJob item, JenkinsBuild job)
         {
             item.Remove(job);
         }
 
-        private async Task<JenkinsMultibranchDetails> GetMultibranchDetailsAsync(JenkinsMultibranchBuild item)
+        private async Task<JenkinsMultibranchDetails> GetMultibranchDetailsAsync(JenkinsMultiJob item)
         {
             using (var handler = new WebRequestHandler())
             {
@@ -171,7 +171,7 @@ namespace AnyStatus
             }
         }
 
-        private static void ConfigureHttpClientAuthorization(JenkinsMultibranchBuild item, HttpClient client)
+        private static void ConfigureHttpClientAuthorization(JenkinsMultiJob item, HttpClient client)
         {
             if (string.IsNullOrEmpty(item.UserName) || string.IsNullOrEmpty(item.ApiToken))
             {
