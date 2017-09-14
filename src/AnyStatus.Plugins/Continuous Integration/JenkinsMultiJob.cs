@@ -17,9 +17,11 @@ namespace AnyStatus
     [DisplayName("Jenkins MultiJob (Preview)")]
     [Description("Shows the status of multiple Jenkins jobs.")]
     [DisplayColumn("Continuous Integration")]
-    public class JenkinsMultiJob : Folder, IMonitored, ICanOpenInBrowser
+    public class JenkinsMultiJob : Plugin, IMonitored, ICanOpenInBrowser
     {
         private string url;
+
+        public JenkinsMultiJob() : base(true) { }
 
         [Url]
         [Required]

@@ -14,8 +14,8 @@ namespace AnyStatus.Plugins.Tests
 
             var sqlScalarQuery = new SqlScalarQuery
             {
-                ConnectionString = "Server=tcp:{your-database}.database.windows.net,1433;Initial Catalog=AnyStatus;Persist Security Info=False;User ID={your-user};Password={your-password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
-                SqlQuery = "SELECT Count(1) FROM [dbo].[Table]"
+                SqlQuery = "SELECT Count(1) FROM [dbo].[Table]",
+                ConnectionString = "Server=tcp:{your-database}.database.windows.net,1433;Initial Catalog=AnyStatus;Persist Security Info=False;User ID={your-user};Password={your-password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=1;",
             };
 
             var sqlScalarQueryHandler = new SqlScalarQueryMonitor(logger);
