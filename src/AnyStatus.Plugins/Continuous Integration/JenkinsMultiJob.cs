@@ -21,7 +21,9 @@ namespace AnyStatus
     {
         private string url;
 
-        public JenkinsMultiJob() : base(true) { }
+        public JenkinsMultiJob() : base(aggregate: true)
+        {
+        }
 
         [Url]
         [Required]
