@@ -20,7 +20,7 @@ namespace AnyStatus.Plugins.Tests
             {
                 Name = "Jenkins Core",
                 IgnoreSslErrors = true,
-                URL = @"https://ci.jenkins-ci.org/job/Core/job/jenkins/job/master/",
+                URL = @"https://builds.apache.org/job/logging-log4net/job/master/",
             };
 
             var jenkins = new JenkinsJobMonitor();
