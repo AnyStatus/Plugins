@@ -44,6 +44,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
     <Reference Include="Xceed.Wpf.Toolkit, Version=3.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
@@ -72,6 +73,7 @@
     <Compile Include="SqlScalarQueryTests.cs" />
     <Compile Include="TfsBuildTests.cs" />
     <Compile Include="OpenInBrowserTests.cs" />
+    <Compile Include="JenkinsJobTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AnyStatus.Plugins\AnyStatus.Plugins.csproj">

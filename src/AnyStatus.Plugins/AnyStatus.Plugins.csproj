@@ -64,10 +64,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Continuous Integration\Jenkins\IJenkinsPlugin.cs" />
+    <Compile Include="Continuous Integration\Jenkins\Client\JenkinsClient.cs" />
+    <Compile Include="_deprecated\JenkinsBuild.cs" />
+    <Compile Include="_deprecated\JenkinsMultiJob.cs" />
     <Compile Include="Continuous Integration\AppVeyorBuild.cs" />
     <Compile Include="Continuous Integration\Coveralls.cs" />
-    <Compile Include="Continuous Integration\JenkinsJob.cs" />
-    <Compile Include="Continuous Integration\JenkinsMultiJob.cs" />
+    <Compile Include="Continuous Integration\Jenkins\Client\Contracts\JenkinsJob.cs" />
+    <Compile Include="Continuous Integration\Jenkins\JenkinsJob_v1.cs" />
+    <Compile Include="Continuous Integration\Jenkins\Handlers\JenkinsJobMonitor.cs" />
+    <Compile Include="Continuous Integration\Jenkins\JenkinsView_v1.cs" />
+    <Compile Include="Continuous Integration\Jenkins\Client\Contracts\JenkinsView.cs" />
+    <Compile Include="Continuous Integration\Jenkins\Handlers\JenkinsViewMonitor.cs" />
+    <Compile Include="Continuous Integration\Jenkins\Handlers\OpenJenkinsJobInBrowser.cs" />
+    <Compile Include="Continuous Integration\Jenkins\Handlers\OpenJenkinsViewInBrowser.cs" />
+    <Compile Include="Continuous Integration\Jenkins\Handlers\TriggerJenkinsJob.cs" />
     <Compile Include="Continuous Integration\TeamCityBuild.cs" />
     <Compile Include="Continuous Integration\TfsBuild.cs" />
     <Compile Include="Continuous Integration\TfsWorkItem.cs" />
@@ -97,6 +108,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Continuous Integration\Jenkins\Handlers\todo.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

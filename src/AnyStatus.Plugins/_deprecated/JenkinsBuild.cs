@@ -17,9 +17,10 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    [DisplayName("Jenkins Job")]
+    [Browsable(false)]
     [Description("Jenkins CI job status")]
     [DisplayColumn("Continuous Integration")]
+    [DisplayName("Jenkins Build (Deprecated)")]
     public class JenkinsBuild : Build, IMonitored, ICanOpenInBrowser, ICanTriggerBuild, IReportProgress
     {
         private string _url;
