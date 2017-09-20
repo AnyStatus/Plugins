@@ -64,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Continuous Integration\Jenkins\Client\Contracts\JenkinsCrumb.cs" />
     <Compile Include="Continuous Integration\Jenkins\IJenkinsPlugin.cs" />
     <Compile Include="Continuous Integration\Jenkins\Client\JenkinsClient.cs" />
     <Compile Include="_deprecated\JenkinsBuild.cs" />
