@@ -90,18 +90,19 @@ namespace AnyStatus
 
                     var content = await response.Content.ReadAsStringAsync();
 
-                    var result = new JavaScriptSerializer().Deserialize<T>(content);
+                    if (string.IsNullOrEmpty(content))
+                    {
+                        throw new Exception("Jenkins response is null.");
+                    }
 
-                    if (result == null) throw new Exception("Jenkins response is null.");
-
-                    return result;
+                    return new JavaScriptSerializer().Deserialize<T>(content);
                 }
             }
         }
 
         private async Task PostAsync(IJenkinsPlugin jenkinsPlugin, string api, bool useBaseUri = false)
         {
-            var crumb = await GetCrumb(jenkinsPlugin);
+            var crumb = jenkinsPlugin.CSRF ? await GetCrumb(jenkinsPlugin) : null;
 
             using (var handler = new WebRequestHandler())
             {
@@ -147,17 +148,16 @@ namespace AnyStatus
             }
         }
 
-#warning add error handling and logging + save crumb in plugin
         private async Task<JenkinsCrumb> GetCrumb(IJenkinsPlugin jenkinsPlugin)
         {
-            JenkinsCrumb crumb = null;
-
-            if (jenkinsPlugin.CSRF)
+            try
             {
-                crumb = await QueryAsync<JenkinsCrumb>(jenkinsPlugin, "crumbIssuer/api/json", true);
+                return await QueryAsync<JenkinsCrumb>(jenkinsPlugin, "crumbIssuer/api/json", true);
             }
-
-            return crumb;
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while retrieving crumb from Jenkins server.", ex);
+            }
         }
     }
 }

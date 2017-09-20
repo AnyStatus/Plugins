@@ -1,26 +1,30 @@
 ﻿using AnyStatus.API;
+using System;
 using System.Diagnostics;
+
+//todo: change handler to async
 
 namespace AnyStatus
 {
     public class JenkinsJobMonitor : IMonitor<JenkinsJob_v1>
     {
         [DebuggerStepThrough]
-        public void Handle(JenkinsJob_v1 item)
+        public void Handle(JenkinsJob_v1 jenkinsJobPlugin)
         {
             var jenkinsClient = new JenkinsClient();
 
-            var build = jenkinsClient.GetJobAsync(item).Result;
+            var jenkinsJob = jenkinsClient.GetJobAsync(jenkinsJobPlugin).Result;
 
-            if (build.IsRunning)
+            if (jenkinsJob.IsRunning)
             {
-                OnBuildRunning(item, build.Executor.Progress);
-                return;
+                OnBuildRunning(jenkinsJobPlugin, jenkinsJob.Executor.Progress); return;
             }
 
-            if (item.ShowProgress) item.ResetProgress();
+            if (jenkinsJobPlugin.ShowProgress) jenkinsJobPlugin.ResetProgress();
 
-            item.State = ConvertBuildResultToState(build.Result);
+            if (jenkinsJob.Result == null) throw new Exception("Jenkins job result is null.");
+
+            jenkinsJobPlugin.State = ConvertBuildResultToState(jenkinsJob.Result);
         }
 
         private static State ConvertBuildResultToState(string result)
