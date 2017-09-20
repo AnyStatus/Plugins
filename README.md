@@ -5,6 +5,7 @@
 A repository of community-contributed plugins and other extensions for AnyStatus.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/dvn1rwrauwyq5yx6?svg=true)](https://ci.appveyor.com/project/AnyStatus/plugins)
+[![NuGet](https://img.shields.io/nuget/v/AnyStatus.Plugins.svg)]()
 [![Join the chat at https://gitter.im/AnyStatus](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/AnyStatus?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [AnyStatus](http://www.anystat.us) is a Visual Studio extension for monitoring continuous integration builds, deployments, servers and services on the back end of your development workflow - so you can focus on your code.
