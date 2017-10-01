@@ -41,7 +41,7 @@ namespace AnyStatus
 
         public async Task PostAsync(IJenkinsPlugin jenkinsPlugin, string api, bool useBaseUri = false, JenkinsCrumb crumb = null)
         {
-            if (crumb != null) _client.DefaultRequestHeaders.Add(crumb.CrumbRequestField, crumb.Crumb);
+            AddCrumbHeader(crumb);
 
             var endpoint = GetEndpoint(jenkinsPlugin, api, useBaseUri);
 
@@ -97,6 +97,13 @@ namespace AnyStatus
             {
                 throw new Exception("An error occurred while creating Jenkins request. See inner exception.", ex);
             }
+        }
+
+        private void AddCrumbHeader(JenkinsCrumb crumb)
+        {
+            if (!crumb.IsValid()) return;
+
+            _client.DefaultRequestHeaders.Add(crumb.CrumbRequestField, crumb.Crumb);
         }
 
         private static bool OnServerCertificateValidationCallback(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) => true;

@@ -23,9 +23,7 @@ namespace AnyStatus
 
             using (var jenkinsRequest = new JenkinsRequest(jenkinsPlugin))
             {
-                var result = await jenkinsRequest.GetAsync<JenkinsJob>(jenkinsPlugin, api).ConfigureAwait(false);
-
-                return result;
+                return await jenkinsRequest.GetAsync<JenkinsJob>(jenkinsPlugin, api).ConfigureAwait(false);
             }
         }
 
@@ -41,35 +39,9 @@ namespace AnyStatus
 
         public async Task TriggerJobAsync(JenkinsJob_v1 jenkinsPlugin)
         {
-            var api = string.Empty;
+            var api = jenkinsPlugin.HasBuildParameters ? BuildWithParametersApi(jenkinsPlugin) : "build";
 
-            if (jenkinsPlugin.HasBuildParameters)
-            {
-                var sb = new StringBuilder();
-
-                sb.Append("buildWithParameters?delay=0sec");
-
-                foreach (var parameter in jenkinsPlugin.BuildParameters)
-                {
-                    if (parameter == null ||
-                        string.IsNullOrWhiteSpace(parameter.Name) ||
-                        string.IsNullOrWhiteSpace(parameter.Value))
-                        continue;
-
-                    sb.Append("&");
-                    sb.Append(WebUtility.UrlEncode(parameter.Name));
-                    sb.Append("=");
-                    sb.Append(WebUtility.UrlEncode(parameter.Value));
-                }
-
-                api = sb.ToString();
-            }
-            else
-            {
-                api = "build";
-            }
-
-            var crumb = jenkinsPlugin.CSRF ? await GetCrumbAsync(jenkinsPlugin).ConfigureAwait(false) : null;
+            var crumb = jenkinsPlugin.CSRF ? await IssueCrumbAsync(jenkinsPlugin).ConfigureAwait(false) : null;
 
             using (var jenkinsRequest = new JenkinsRequest(jenkinsPlugin))
             {
@@ -77,7 +49,11 @@ namespace AnyStatus
             }
         }
 
-        public async Task<JenkinsCrumb> GetCrumbAsync(IJenkinsPlugin jenkinsPlugin)
+        #endregion
+
+        #region Helpers
+
+        private async Task<JenkinsCrumb> IssueCrumbAsync(IJenkinsPlugin jenkinsPlugin)
         {
             const string api = "crumbIssuer/api/json";
 
@@ -85,31 +61,39 @@ namespace AnyStatus
             {
                 using (var jenkinsRequest = new JenkinsRequest(jenkinsPlugin))
                 {
-                    return await jenkinsRequest.GetAsync<JenkinsCrumb>(jenkinsPlugin, api, true).ConfigureAwait(false);
+                    var crumb = await jenkinsRequest.GetAsync<JenkinsCrumb>(jenkinsPlugin, api, true).ConfigureAwait(false);
+
+                    if (!crumb.IsValid())
+                    {
+                        _logger.Info("Jenkins server did not return a valid crumb. Make sure your user name and API token are correct.");
+                    }
+
+                    return crumb;
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while requesting Jenkins crumb. See inner exception.", ex);
+                throw new Exception("Jenkins: An error occurred while requesting crumb. See inner exception.", ex);
             }
         }
 
-        #endregion
+        private static string BuildWithParametersApi(JenkinsJob_v1 jenkinsPlugin)
+        {
+            var sb = new StringBuilder("buildWithParameters?delay=0sec");
 
-        //private async Task LogResponse(HttpResponseMessage response)
-        //{
-        //    if (response.IsSuccessStatusCode) return;
-        //    var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-        //    var sb = new StringBuilder();
-        //    sb.Append("Jenkins request has failed. ");
-        //    if (response.StatusCode == HttpStatusCode.Forbidden)
-        //        sb.Append("Try enabling CSRF in the properties window. ");
-        //    sb.Append("Response Code: ");
-        //    sb.Append(response.StatusCode);
-        //    sb.Append(" ");
-        //    sb.Append(Enum.GetName(typeof(HttpStatusCode), response.StatusCode));
-        //    sb.AppendLine(content);
-        //    _logger.Info(sb.ToString());
-        //}
+            foreach (var parameter in jenkinsPlugin.BuildParameters)
+            {
+                if (parameter == null || string.IsNullOrWhiteSpace(parameter.Name) || string.IsNullOrWhiteSpace(parameter.Value)) continue;
+
+                sb.Append("&");
+                sb.Append(WebUtility.UrlEncode(parameter.Name));
+                sb.Append("=");
+                sb.Append(WebUtility.UrlEncode(parameter.Value));
+            }
+
+            return sb.ToString();
+        }
+
+        #endregion
     }
 }

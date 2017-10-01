@@ -38,7 +38,7 @@ namespace AnyStatus.Plugins.Tests
         [TestMethod]
         [TestCategory(Category)]
         [ExpectedException(typeof(HttpRequestException))]
-        public async Task JenkinsJobs_TriggerAsync()
+        public async Task JenkinsJob_TriggerAsync_Should_Fail_When_CrumbIsInvalid()
         {
             var logger = Substitute.For<ILogger>();
             var dialogService = Substitute.For<IDialogService>();
@@ -51,6 +51,7 @@ namespace AnyStatus.Plugins.Tests
             {
                 Name = "Jenkins Core",
                 IgnoreSslErrors = true,
+                CSRF = true,
                 URL = @"https://ci.jenkins-ci.org/job/Core/job/jenkins/job/master/",
             };
 
