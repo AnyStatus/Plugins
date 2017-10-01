@@ -65,6 +65,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Continuous Integration\Jenkins\Client\Contracts\JenkinsCrumb.cs" />
+    <Compile Include="Continuous Integration\Jenkins\Client\JenkinsRequest.cs" />
+    <Compile Include="Continuous Integration\Jenkins\IJenkinsClient.cs" />
     <Compile Include="Continuous Integration\Jenkins\IJenkinsPlugin.cs" />
     <Compile Include="Continuous Integration\Jenkins\Client\JenkinsClient.cs" />
     <Compile Include="_deprecated\JenkinsBuild.cs" />
@@ -72,9 +74,9 @@
     <Compile Include="Continuous Integration\AppVeyorBuild.cs" />
     <Compile Include="Continuous Integration\Coveralls.cs" />
     <Compile Include="Continuous Integration\Jenkins\Client\Contracts\JenkinsJob.cs" />
-    <Compile Include="Continuous Integration\Jenkins\JenkinsJob_v1.cs" />
+    <Compile Include="Continuous Integration\Jenkins\Plugins\JenkinsJob_v1.cs" />
     <Compile Include="Continuous Integration\Jenkins\Handlers\JenkinsJobMonitor.cs" />
-    <Compile Include="Continuous Integration\Jenkins\JenkinsView_v1.cs" />
+    <Compile Include="Continuous Integration\Jenkins\Plugins\JenkinsView_v1.cs" />
     <Compile Include="Continuous Integration\Jenkins\Client\Contracts\JenkinsView.cs" />
     <Compile Include="Continuous Integration\Jenkins\Handlers\JenkinsViewMonitor.cs" />
     <Compile Include="Continuous Integration\Jenkins\Handlers\OpenJenkinsJobInBrowser.cs" />
@@ -111,7 +113,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Continuous Integration\Jenkins\Handlers\todo.txt" />
+    <Content Include="todo.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

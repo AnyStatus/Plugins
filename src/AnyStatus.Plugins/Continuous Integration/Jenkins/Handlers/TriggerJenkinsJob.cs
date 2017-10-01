@@ -8,11 +8,13 @@ namespace AnyStatus
     {
         private readonly ILogger _logger;
         private readonly IDialogService _dialogService;
+        private readonly IJenkinsClient _jenkinsClient;
 
-        public TriggerJenkinsJob(IDialogService dialogService, ILogger logger)
+        public TriggerJenkinsJob(IDialogService dialogService, ILogger logger, IJenkinsClient jenkinsClient)
         {
             _logger = Preconditions.CheckNotNull(logger, nameof(logger));
             _dialogService = Preconditions.CheckNotNull(dialogService, nameof(dialogService));
+            _jenkinsClient = Preconditions.CheckNotNull(jenkinsClient, nameof(jenkinsClient));
         }
 
         public async Task HandleAsync(JenkinsJob_v1 jenkinsJob)
@@ -23,12 +25,9 @@ namespace AnyStatus
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Asterisk);
 
-            if (result != MessageBoxResult.Yes)
-                return;
+            if (result != MessageBoxResult.Yes) return;
 
-            var jenkinsClient = new JenkinsClient();
-
-            await jenkinsClient.TriggerJobAsync(jenkinsJob);
+            await _jenkinsClient.TriggerJobAsync(jenkinsJob).ConfigureAwait(false);
 
             _logger.Info($"Jenkins Job \"{jenkinsJob.Name}\" has been triggered.");
         }

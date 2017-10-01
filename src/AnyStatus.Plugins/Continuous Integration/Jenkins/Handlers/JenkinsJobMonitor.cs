@@ -1,6 +1,5 @@
 ﻿using AnyStatus.API;
 using System;
-using System.Diagnostics;
 
 //todo: change handler to async
 
@@ -8,12 +7,16 @@ namespace AnyStatus
 {
     public class JenkinsJobMonitor : IMonitor<JenkinsJob_v1>
     {
-        [DebuggerStepThrough]
+        private readonly IJenkinsClient _jenkinsClient;
+
+        public JenkinsJobMonitor(IJenkinsClient jenkinsClient)
+        {
+            _jenkinsClient = Preconditions.CheckNotNull(jenkinsClient, nameof(jenkinsClient));
+        }
+
         public void Handle(JenkinsJob_v1 jenkinsJobPlugin)
         {
-            var jenkinsClient = new JenkinsClient();
-
-            var jenkinsJob = jenkinsClient.GetJobAsync(jenkinsJobPlugin).Result;
+            var jenkinsJob = _jenkinsClient.GetJobAsync(jenkinsJobPlugin).Result;
 
             if (jenkinsJob.IsRunning)
             {
@@ -39,7 +42,7 @@ namespace AnyStatus
                     return State.Failed;
                 case "UNSTABLE":
                     return State.PartiallySucceeded;
-#warning verify status string
+#warning verify status string. Note, there is a dedicate property for that.
                 case "QUEUED":
                     return State.Queued;
                 default:
@@ -47,13 +50,13 @@ namespace AnyStatus
             }
         }
 
-        private static void OnBuildRunning(JenkinsJob_v1 item, int progress)
+        private static void OnBuildRunning(JenkinsJob_v1 plugin, int progress)
         {
-            item.Progress = progress;
+            plugin.Progress = progress;
 
-            item.State = State.Running;
+            plugin.State = State.Running;
 
-            if (item.ShowProgress == false) item.ShowProgress = true;
+            if (plugin.ShowProgress == false) plugin.ShowProgress = true;
         }
     }
 }

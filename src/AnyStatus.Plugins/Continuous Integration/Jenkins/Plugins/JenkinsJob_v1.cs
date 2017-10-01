@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Xml.Serialization;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
@@ -72,6 +73,16 @@ namespace AnyStatus
             {
                 _progress = value;
                 OnPropertyChanged();
+            }
+        }
+
+        [XmlIgnore]
+        [Browsable(false)]
+        public bool HasBuildParameters
+        {
+            get
+            {
+                return BuildParameters != null && BuildParameters.Any();
             }
         }
 

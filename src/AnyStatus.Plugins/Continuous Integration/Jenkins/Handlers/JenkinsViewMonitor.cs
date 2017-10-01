@@ -13,14 +13,19 @@ namespace AnyStatus
 {
     public class JenkinsViewMonitor : IMonitor<JenkinsView_v1>
     {
+        private readonly IJenkinsClient _jenkinsClient;
+
+        public JenkinsViewMonitor(IJenkinsClient jenkinsClient)
+        {
+            _jenkinsClient = Preconditions.CheckNotNull(jenkinsClient, nameof(jenkinsClient));
+        }
+
         [DebuggerStepThrough]
         public void Handle(JenkinsView_v1 item)
         {
             if (item.Parent == null) return;
 
-            var jenkinsClient = new JenkinsClient();
-
-            var build = jenkinsClient.GetViewAsync(item).Result;
+            var build = _jenkinsClient.GetViewAsync(item).Result;
 
             item.State = State.Ok;
 
@@ -74,7 +79,7 @@ namespace AnyStatus
             item.Remove(job);
         }
 
-        
+
     }
-    
+
 }

@@ -1,163 +1,115 @@
-﻿using System;
-using System.Linq;
+﻿using AnyStatus.API;
+using System;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 
 namespace AnyStatus
 {
-    public interface IJenkinsClient
-    {
-        Task<JenkinsJob> GetJobAsync(IJenkinsPlugin jenkinsPlugin);
-
-        Task<JenkinsView> GetViewAsync(IJenkinsPlugin jenkinsPlugin);
-
-        Task TriggerJobAsync(JenkinsJob_v1 jenkinsJob);
-    }
-
     public class JenkinsClient : IJenkinsClient
     {
+        private readonly ILogger _logger;
+
+        public JenkinsClient(ILogger logger)
+        {
+            _logger = Preconditions.CheckNotNull(logger, nameof(logger));
+        }
+
+        #region IJenkinsClient 
+
         public async Task<JenkinsJob> GetJobAsync(IJenkinsPlugin jenkinsPlugin)
         {
-            return await QueryAsync<JenkinsJob>(jenkinsPlugin, "lastBuild/api/json?tree=result,building,executor[progress]");
+            const string api = "lastBuild/api/json?tree=result,building,executor[progress]";
+
+            using (var jenkinsRequest = new JenkinsRequest(jenkinsPlugin))
+            {
+                var result = await jenkinsRequest.GetAsync<JenkinsJob>(jenkinsPlugin, api).ConfigureAwait(false);
+
+                return result;
+            }
         }
 
         public async Task<JenkinsView> GetViewAsync(IJenkinsPlugin jenkinsPlugin)
         {
-            return await QueryAsync<JenkinsView>(jenkinsPlugin, "api/json");
+            const string api = "api/json";
+
+            using (var jenkinsRequest = new JenkinsRequest(jenkinsPlugin))
+            {
+                return await jenkinsRequest.GetAsync<JenkinsView>(jenkinsPlugin, api).ConfigureAwait(false);
+            }
         }
 
-        public async Task TriggerJobAsync(JenkinsJob_v1 jenkinsJob)
+        public async Task TriggerJobAsync(JenkinsJob_v1 jenkinsPlugin)
         {
-            var api = new StringBuilder();
+            var api = string.Empty;
 
-            api.Append("buildWithParameters?delay=0sec");
-
-            if (jenkinsJob.BuildParameters != null && jenkinsJob.BuildParameters.Any())
+            if (jenkinsPlugin.HasBuildParameters)
             {
-                foreach (var parameter in jenkinsJob.BuildParameters)
+                var sb = new StringBuilder();
+
+                sb.Append("buildWithParameters?delay=0sec");
+
+                foreach (var parameter in jenkinsPlugin.BuildParameters)
                 {
                     if (parameter == null ||
                         string.IsNullOrWhiteSpace(parameter.Name) ||
                         string.IsNullOrWhiteSpace(parameter.Value))
                         continue;
 
-                    api.Append("&");
-                    api.Append(WebUtility.UrlEncode(parameter.Name));
-                    api.Append("=");
-                    api.Append(WebUtility.UrlEncode(parameter.Value));
+                    sb.Append("&");
+                    sb.Append(WebUtility.UrlEncode(parameter.Name));
+                    sb.Append("=");
+                    sb.Append(WebUtility.UrlEncode(parameter.Value));
                 }
+
+                api = sb.ToString();
             }
-
-            await PostAsync(jenkinsJob, api.ToString());
-        }
-
-        private async Task<T> QueryAsync<T>(IJenkinsPlugin jenkinsPlugin, string api, bool useBaseUri = false)
-        {
-            using (var handler = new WebRequestHandler())
+            else
             {
-                handler.UseDefaultCredentials = true;
-
-                if (jenkinsPlugin.IgnoreSslErrors)
-                {
-                    handler.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
-                }
-
-                using (var client = new HttpClient(handler))
-                {
-                    if (!string.IsNullOrEmpty(jenkinsPlugin.UserName) && !string.IsNullOrEmpty(jenkinsPlugin.ApiToken))
-                    {
-                        var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{jenkinsPlugin.UserName}:{jenkinsPlugin.ApiToken}"));
-
-                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
-                    }
-
-                    var jenkinsUri = new Uri(jenkinsPlugin.URL);
-
-                    if (useBaseUri) jenkinsUri = new Uri(jenkinsUri.GetLeftPart(UriPartial.Authority));
-
-                    var uri = new Uri(jenkinsUri, api);
-
-                    var response = await client.GetAsync(uri);
-
-                    if (response.StatusCode == HttpStatusCode.Unauthorized)
-                        throw new UnauthorizedAccessException("Jenkins request was unauthorized.");
-
-                    response.EnsureSuccessStatusCode();
-
-                    var content = await response.Content.ReadAsStringAsync();
-
-                    if (string.IsNullOrEmpty(content))
-                    {
-                        throw new Exception("Jenkins response is null.");
-                    }
-
-                    return new JavaScriptSerializer().Deserialize<T>(content);
-                }
+                api = "build";
             }
-        }
 
-        private async Task PostAsync(IJenkinsPlugin jenkinsPlugin, string api, bool useBaseUri = false)
-        {
-            var crumb = jenkinsPlugin.CSRF ? await GetCrumb(jenkinsPlugin) : null;
+            var crumb = jenkinsPlugin.CSRF ? await GetCrumbAsync(jenkinsPlugin).ConfigureAwait(false) : null;
 
-            using (var handler = new WebRequestHandler())
+            using (var jenkinsRequest = new JenkinsRequest(jenkinsPlugin))
             {
-                handler.UseDefaultCredentials = true;
-
-                if (jenkinsPlugin.IgnoreSslErrors)
-                {
-                    handler.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
-                }
-
-                using (var client = new HttpClient(handler))
-                {
-                    if (!string.IsNullOrEmpty(jenkinsPlugin.UserName) && !string.IsNullOrEmpty(jenkinsPlugin.ApiToken))
-                    {
-                        var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{jenkinsPlugin.UserName}:{jenkinsPlugin.ApiToken}"));
-
-                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
-                    }
-
-                    if (crumb != null)
-                    {
-                        client.DefaultRequestHeaders.Add(crumb.CrumbRequestField, crumb.Crumb);
-                    }
-
-                    var jenkinsUri = new Uri(jenkinsPlugin.URL);
-
-                    if (useBaseUri) jenkinsUri = new Uri(jenkinsUri.GetLeftPart(UriPartial.Authority));
-
-                    var uri = new Uri(jenkinsUri, api);
-
-                    HttpResponseMessage response = null;
-
-                    response = await client.PostAsync(uri, new StringContent(string.Empty));
-
-                    if (response.StatusCode == HttpStatusCode.Forbidden)
-                        throw new UnauthorizedAccessException("Jenkins request was forbidden. Try enabling CSRF in the properties window.");
-
-                    if (response.StatusCode == HttpStatusCode.Unauthorized)
-                        throw new UnauthorizedAccessException("Jenkins request was unauthorized.");
-
-                    response.EnsureSuccessStatusCode();
-                }
+                await jenkinsRequest.PostAsync(jenkinsPlugin, api, false, crumb).ConfigureAwait(false);
             }
         }
 
-        private async Task<JenkinsCrumb> GetCrumb(IJenkinsPlugin jenkinsPlugin)
+        public async Task<JenkinsCrumb> GetCrumbAsync(IJenkinsPlugin jenkinsPlugin)
         {
+            const string api = "crumbIssuer/api/json";
+
             try
             {
-                return await QueryAsync<JenkinsCrumb>(jenkinsPlugin, "crumbIssuer/api/json", true);
+                using (var jenkinsRequest = new JenkinsRequest(jenkinsPlugin))
+                {
+                    return await jenkinsRequest.GetAsync<JenkinsCrumb>(jenkinsPlugin, api, true).ConfigureAwait(false);
+                }
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while retrieving crumb from Jenkins server.", ex);
+                throw new Exception("An error occurred while requesting Jenkins crumb. See inner exception.", ex);
             }
         }
+
+        #endregion
+
+        //private async Task LogResponse(HttpResponseMessage response)
+        //{
+        //    if (response.IsSuccessStatusCode) return;
+        //    var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+        //    var sb = new StringBuilder();
+        //    sb.Append("Jenkins request has failed. ");
+        //    if (response.StatusCode == HttpStatusCode.Forbidden)
+        //        sb.Append("Try enabling CSRF in the properties window. ");
+        //    sb.Append("Response Code: ");
+        //    sb.Append(response.StatusCode);
+        //    sb.Append(" ");
+        //    sb.Append(Enum.GetName(typeof(HttpStatusCode), response.StatusCode));
+        //    sb.AppendLine(content);
+        //    _logger.Info(sb.ToString());
+        //}
     }
 }

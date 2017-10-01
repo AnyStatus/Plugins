@@ -1,7 +1,6 @@
 ﻿using AnyStatus.API;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,7 +22,11 @@ namespace AnyStatus.Plugins.Tests
                 URL = @"https://builds.apache.org/job/logging-log4net/job/master/",
             };
 
-            var jenkins = new JenkinsJobMonitor();
+            var logger = Substitute.For<ILogger>();
+
+            var jenkinsClient = new JenkinsClient(logger);
+
+            var jenkins = new JenkinsJobMonitor(jenkinsClient);
 
             jenkins.Handle(jenkinsJobPlugin);
 
@@ -34,11 +37,12 @@ namespace AnyStatus.Plugins.Tests
 
         [TestMethod]
         [TestCategory(Category)]
-        [ExpectedException(typeof(UnauthorizedAccessException))]
+        [ExpectedException(typeof(HttpRequestException))]
         public async Task JenkinsJobs_TriggerAsync()
         {
             var logger = Substitute.For<ILogger>();
             var dialogService = Substitute.For<IDialogService>();
+            var jenkinsClient = new JenkinsClient(logger);
 
             dialogService.Show(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<MessageBoxButton>(), Arg.Any<MessageBoxImage>())
                 .Returns(MessageBoxResult.Yes);
@@ -50,7 +54,7 @@ namespace AnyStatus.Plugins.Tests
                 URL = @"https://ci.jenkins-ci.org/job/Core/job/jenkins/job/master/",
             };
 
-            var trigger = new TriggerJenkinsJob(dialogService, logger);
+            var trigger = new TriggerJenkinsJob(dialogService, logger, jenkinsClient);
 
             await trigger.HandleAsync(jenkinsJob);
         }
