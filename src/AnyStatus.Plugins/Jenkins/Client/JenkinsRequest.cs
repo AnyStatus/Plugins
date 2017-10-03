@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Security;
@@ -17,7 +18,8 @@ namespace AnyStatus
 
         public JenkinsRequest(IJenkinsPlugin jenkinsPlugin)
         {
-            if (jenkinsPlugin == null) throw new ArgumentNullException(nameof(jenkinsPlugin));
+            if (jenkinsPlugin == null)
+                throw new ArgumentNullException(nameof(jenkinsPlugin));
 
             Initialize(jenkinsPlugin);
         }
@@ -45,7 +47,9 @@ namespace AnyStatus
 
             var endpoint = GetEndpoint(jenkinsPlugin, api, useBaseUri);
 
-            var response = await _client.PostAsync(endpoint, new StringContent(string.Empty)).ConfigureAwait(false);
+            var test = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("json", "{\"parameter\":[]}") });
+
+            var response = await _client.PostAsync(endpoint, test).ConfigureAwait(false);
 
             response.EnsureSuccessStatusCode();
         }
@@ -89,14 +93,19 @@ namespace AnyStatus
 
                 if (string.IsNullOrEmpty(jenkinsPlugin.UserName) || string.IsNullOrEmpty(jenkinsPlugin.ApiToken)) return;
 
-                var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{jenkinsPlugin.UserName}:{jenkinsPlugin.ApiToken}"));
-
-                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
+                Authorize(jenkinsPlugin);
             }
             catch (Exception ex)
             {
                 throw new Exception("An error occurred while creating Jenkins request. See inner exception.", ex);
             }
+        }
+
+        private void Authorize(IJenkinsPlugin jenkinsPlugin)
+        {
+            var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{jenkinsPlugin.UserName}:{jenkinsPlugin.ApiToken}"));
+
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
         }
 
         private void AddCrumbHeader(JenkinsCrumb crumb)

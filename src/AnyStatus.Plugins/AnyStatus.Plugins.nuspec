@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
-    <metadata>
+  <metadata>
     <id>AnyStatus.Plugins</id>
-    <version>1.0.0</version>
+    <version>1.0.86</version>
     <authors>Alon Amsalem</authors>
     <owners>anystatus</owners>
     <licenseUrl>https://github.com/AnyStatus/Monitors/blob/master/LICENSE</licenseUrl>
@@ -10,11 +10,14 @@
     <iconUrl>http://www.anystat.us/assets/images/logo_128px.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <releaseNotes></releaseNotes>
-    <description>A .NET plug-ins library for AnyStatus.</description>
+    <description>An open-souce plug-ins library for AnyStatus.</description>
     <copyright>Copyright © 2017 Alon Amsalem</copyright>
-    <tags>AnyStatus VisualStudio Monitor Monitoring</tags>
+    <tags>AnyStatus VisualStudio Monitor Monitoring Build TFS VSTS AppVeyor TeamCity TravisCI Jenkins Pingdom UptimeRobot</tags>
     <dependencies>
-        <dependency id="Extended.Wpf.Toolkit" version="3.0" />
+      <dependency id="Extended.Wpf.Toolkit" version="3.0" />
     </dependencies>
-    </metadata>
+  </metadata>
+  <files>
+    <file src="bin\Debug\AnyStatus.Plugins.dll" target="lib\net40\" />
+  </files>
 </package>

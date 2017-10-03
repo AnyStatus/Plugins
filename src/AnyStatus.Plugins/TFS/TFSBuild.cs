@@ -16,6 +16,9 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
+    /// <summary>
+    /// This plugin has been replaced by the new VSTS plugin.
+    /// </summary>
     [DisplayName("TFS/VSTS Build")]
     [DisplayColumn("Continuous Integration")]
     [Description("Microsoft Team Foundation Server or Visual Studio Team Services build status")]

@@ -39,7 +39,7 @@ namespace AnyStatus
 
         public async Task TriggerJobAsync(JenkinsJob_v1 jenkinsPlugin)
         {
-            var api = jenkinsPlugin.HasBuildParameters ? BuildWithParametersApi(jenkinsPlugin) : "build";
+            var api = jenkinsPlugin.IsParameterized ? BuildWithParametersApi(jenkinsPlugin) : "build?token=" + jenkinsPlugin.ApiToken;
 
             var crumb = jenkinsPlugin.CSRF ? await IssueCrumbAsync(jenkinsPlugin).ConfigureAwait(false) : null;
 

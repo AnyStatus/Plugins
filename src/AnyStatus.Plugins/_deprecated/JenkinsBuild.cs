@@ -20,7 +20,7 @@ namespace AnyStatus
     [Browsable(false)]
     [Description("Jenkins CI job status")]
     [DisplayColumn("Continuous Integration")]
-    [DisplayName("Jenkins Build (Deprecated). Please use Jenkins Job instead.")]
+    [DisplayName("Jenkins Build (Deprecated)")]
     public class JenkinsBuild : Build, IMonitored, ICanOpenInBrowser, ICanTriggerBuild, IReportProgress
     {
         private string _url;

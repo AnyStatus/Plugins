@@ -16,6 +16,7 @@ namespace AnyStatus
         private string _url;
         private int _progress;
         private bool _showProgress;
+        private bool _isParameterized;
 
         public JenkinsJob_v1()
         {
@@ -36,30 +37,49 @@ namespace AnyStatus
         [PropertyOrder(20)]
         [Category("Jenkins")]
         [DisplayName("User Name")]
-        [Description("The Jenkins user name (optional)")]
+        [Description("Optional. Enter your Jenkins user name ")]
         public string UserName { get; set; }
 
         [PropertyOrder(30)]
         [Category("Jenkins")]
         [DisplayName("API Token")]
-        [Description("The Jenkins API token (optional). The API token is available in your personal configuration page. Click your name on the top right corner on every page, then click “Configure” to see your API token.")]
+        [Description("Optional. Enter your Jenkins API Token. The API token is available in your personal configuration page. Click your name on the top right corner on every page, then click “Configure” to see your API token.")]
         public string ApiToken { get; set; }
 
         [PropertyOrder(40)]
-        [Category("Jenkins")]
-        [Editor(typeof(DataGridEditor), typeof(DataGridEditor))]
-        [DisplayName("Parameters")]
-        [Description("Optional. Specify the build parameters to use when triggering a new build. Parameters are case-sensitive.")]
-        public List<NameValuePair> BuildParameters { get; set; }
-
-        [PropertyOrder(50)]
-        [DisplayName("Ignore SSL Errors")]
-        public bool IgnoreSslErrors { get; set; }
-
-        [PropertyOrder(60)]
         [Description("Indicates that the Jenkins CSRF protection is enabled.")]
         [Category("Jenkins")]
         public bool CSRF { get; set; }
+
+        [PropertyOrder(50)]
+        [Category("Jenkins")]
+        [DisplayName("Parameterized Build")]
+        //[RefreshProperties(RefreshProperties.All)] <- wpftoolkit bug - description text disapears
+        [Description("Indicates this build is parameterized. You can find this parameter in the configuration page of your Jenkins job.")]
+        public bool IsParameterized
+        {
+            get
+            {
+                return _isParameterized;
+            }
+            set
+            {
+                _isParameterized = value;
+                //SetAttributeFieldValue(nameof(BuildParameters), "browsable", _isParameterized);
+            }
+        }
+
+        //[Browsable(false)]
+        [PropertyOrder(60)]
+        [Category("Jenkins")]
+        [DisplayName("Parameters")]
+        [Description("Optional (case-sensitive).")]
+        [Editor(typeof(DataGridEditor), typeof(DataGridEditor))]
+        public List<NameValuePair> BuildParameters { get; set; }
+
+        [PropertyOrder(70)]
+        [DisplayName("Ignore SSL Errors")]
+        public bool IgnoreSslErrors { get; set; }
 
         [XmlIgnore]
         [Browsable(false)]
