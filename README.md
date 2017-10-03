@@ -16,8 +16,11 @@ To learn more about developing plugins for AnyStatus, visit [AnyStatus API](http
 
 ### Continuous Integration and Delivery
 
-- [x] TFS/VSTO
-- [x] Jenkins
+- [x] TFS Build
+- [x] VSTS Build
+- [x] VSTS Release
+- [x] Jenkins Job
+- [x] Jenkins View
 - [x] TeamCity
 - [x] AppVeyor
 - [x] Coveralls
@@ -60,7 +63,6 @@ To learn more about developing plugins for AnyStatus, visit [AnyStatus API](http
 ## Wish List
 
 - [ ] Monitors
-  - [ ] TFS Release Status
   - [ ] TFS build progress
   - [ ] AppVeyor Deployment Status
 
