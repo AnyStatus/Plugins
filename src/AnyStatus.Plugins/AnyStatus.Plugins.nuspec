@@ -10,7 +10,7 @@
     <iconUrl>http://www.anystat.us/assets/images/logo_128px.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <releaseNotes></releaseNotes>
-    <description>A .NET plug-ins library for AnyStatus.</description>
+    <description>An open-source plugins and extensions library for AnyStatus.</description>
     <copyright>Copyright © 2017 Alon Amsalem</copyright>
     <tags>AnyStatus VisualStudio Monitor Monitoring Build TFS VSTS AppVeyor TeamCity TravisCI Jenkins Pingdom UptimeRobot</tags>
     <dependencies>
