@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 
+//https://api.nuget.org/v3/registration3/anystatus.api/index.json
+
 namespace AnyStatus
 {
     [Browsable(false)]
