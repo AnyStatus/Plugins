@@ -5,7 +5,6 @@ namespace AnyStatus
 {
     public class VSTSBuildMonitor : IMonitor<VSTSBuild_v1>
     {
-        [DebuggerStepThrough]
         public void Handle(VSTSBuild_v1 vstsBuild)
         {
             var vstsClient = new VSTSClient

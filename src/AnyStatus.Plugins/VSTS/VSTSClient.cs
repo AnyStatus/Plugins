@@ -20,7 +20,7 @@ namespace AnyStatus
 
         public async Task<VSTSBuildDefinition> GetBuildDefinitionAsync(string name)
         {
-            var definitions = await Request<Collection<VSTSBuildDefinition>>("build/definitions?$top=1&searchText=" + name);
+            var definitions = await Request<Collection<VSTSBuildDefinition>>("build/definitions?$top=1&name=" + name);
 
             if (definitions == null || definitions.Value == null)
                 throw new Exception("Invalid build definition query response.");
