@@ -8,7 +8,7 @@ namespace AnyStatus
         [DebuggerStepThrough]
         public void Handle(VSTSBuild_v1 vstsBuild)
         {
-            var client = new VSTSClient
+            var vstsClient = new VSTSClient
             {
                 Connection = new VSTSConnection
                 {
@@ -21,12 +21,12 @@ namespace AnyStatus
 
             if (vstsBuild.DefinitionId == null)
             {
-                var definition = client.GetBuildDefinitionAsync(vstsBuild.DefinitionName).Result;
+                var definition = vstsClient.GetBuildDefinitionAsync(vstsBuild.DefinitionName).Result;
 
                 vstsBuild.DefinitionId = definition.Id;
             }
 
-            var latestBuild = client.GetLatestBuildAsync(vstsBuild.DefinitionId.Value).Result;
+            var latestBuild = vstsClient.GetLatestBuildAsync(vstsBuild.DefinitionId.Value).Result;
 
             vstsBuild.State = latestBuild.State;
         }

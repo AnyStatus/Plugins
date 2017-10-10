@@ -19,7 +19,7 @@ namespace AnyStatus
     /// <summary>
     /// This plugin has been replaced by the new VSTS plugin.
     /// </summary>
-    [DisplayName("TFS/VSTS Build")]
+    [DisplayName("TFS Build")]
     [DisplayColumn("Continuous Integration")]
     [Description("Microsoft Team Foundation Server or Visual Studio Team Services build status")]
     public class TfsBuild : Build, IMonitored, ICanOpenInBrowser, ICanTriggerBuild
@@ -70,6 +70,7 @@ namespace AnyStatus
 
         [Category(Category)]
         [PropertyOrder(60)]
+        [DisplayName("Password (Token)")]
         [Description("Optional.")]
         [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
         public string Password { get; set; }

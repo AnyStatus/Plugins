@@ -30,15 +30,14 @@ namespace AnyStatus
         [Category(Category)]
         [DisplayName("User Name")]
         [Description("Optional. Enter the user name of your Visual Studio Team Services account. " +
-                     "Tip: To authenticate using a Personal Access Token, leave this field empty.")]
+                     "To authenticate with a Personal Access Token, leave the User Name empty.")]
         public string UserName { get; set; }
 
-        [Required]
         [PropertyOrder(40)]
         [Category(Category)]
         [DisplayName("Password (Token)")]
-        [Description("Required. Enter the Personal Access Token or password of your Visual Studio Team Services account. " +
-                     "Tip: To authenticate using a Personal Access Token, leave the User Name field empty.")]
+        [Description("Optional. Enter the password or Personal Access Token of your Visual Studio Team Services account. " +
+                     "To authenticate with a Personal Access Token, leave the User Name empty.")]
         [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
         public string Password { get; set; }
     }
