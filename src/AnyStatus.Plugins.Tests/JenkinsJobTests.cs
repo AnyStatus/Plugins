@@ -11,6 +11,9 @@ namespace AnyStatus.Plugins.Tests
     public class JenkinsJobTests
     {
         private const string Category = "Integration";
+#if !DEBUG
+        [Ignore]
+#endif
         [TestMethod]
         [TestCategory(Category)]
         public void JenkinsJobs_Monitor()
