@@ -35,12 +35,9 @@ namespace AnyStatus
 
         public async Task<VSTSBuild> GetLatestBuildAsync(long definitionId)
         {
-            var builds = await Request<Collection<VSTSBuild>>("build/builds?$top=1&definitionId=" + definitionId);
+            var builds = await Request<Collection<VSTSBuild>>($"build/builds?definitions={definitionId}&$top=1&api-version=2.0").ConfigureAwait(false);
 
-            if (builds == null)
-                throw new Exception("VSTS build not found.");
-
-            return builds.Value.FirstOrDefault();
+            return builds?.Value?.FirstOrDefault();
         }
 
         #endregion
@@ -49,7 +46,7 @@ namespace AnyStatus
 
         public async Task<VSTSReleaseDefinition> GetReleaseDefinitionAsync(string name)
         {
-            var definitions = await Request<Collection<VSTSReleaseDefinition>>("release/definitions?searchText=" + name, true);
+            var definitions = await Request<Collection<VSTSReleaseDefinition>>("release/definitions?searchText=" + name, true).ConfigureAwait(false);
 
             if (definitions == null || definitions.Value == null)
                 throw new Exception("Invalid release definition query response.");
@@ -64,7 +61,7 @@ namespace AnyStatus
 
         public async Task<VSTSRelease> GetLatestReleaseAsync(long releaseDefinitionId)
         {
-            var releases = await Request<Collection<VSTSRelease>>("release/releases?$top=1&definitionId=" + releaseDefinitionId, true);
+            var releases = await Request<Collection<VSTSRelease>>("release/releases?$top=1&definitionId=" + releaseDefinitionId, true).ConfigureAwait(false);
 
             if (releases == null || releases.Value == null)
                 throw new Exception("VSTS release not found.");
@@ -74,7 +71,7 @@ namespace AnyStatus
 
         public async Task<VSTSReleaseDetails> GetReleaseDetailsAsync(long releaseId)
         {
-            var details = await Request<VSTSReleaseDetails>("release/releases/" + releaseId, true);
+            var details = await Request<VSTSReleaseDetails>("release/releases/" + releaseId, true).ConfigureAwait(false);
 
             if (details == null)
                 throw new Exception("VSTS Release release details were not found.");

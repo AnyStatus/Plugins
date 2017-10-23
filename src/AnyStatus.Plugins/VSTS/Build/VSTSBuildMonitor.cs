@@ -1,8 +1,9 @@
 ﻿using AnyStatus.API;
-using System.Diagnostics;
 
 namespace AnyStatus
 {
+    //todo: use async monitor (handler)
+
     public class VSTSBuildMonitor : IMonitor<VSTSBuild_v1>
     {
         public void Handle(VSTSBuild_v1 vstsBuild)
@@ -27,7 +28,7 @@ namespace AnyStatus
 
             var latestBuild = vstsClient.GetLatestBuildAsync(vstsBuild.DefinitionId.Value).Result;
 
-            vstsBuild.State = latestBuild.State;
+            vstsBuild.State = latestBuild != null ? latestBuild.State : State.Unknown;
         }
     }
 }
