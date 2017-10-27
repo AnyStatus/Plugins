@@ -275,12 +275,10 @@ namespace AnyStatus
 
     public class OpenTfsBuildInBrowser : BaseTfsBuildHandler, IOpenInBrowser<TfsBuild>
     {
-        private readonly ILogger _logger;
         private readonly IProcessStarter _processStarter;
 
-        public OpenTfsBuildInBrowser(IProcessStarter processStarter, ILogger logger)
+        public OpenTfsBuildInBrowser(IProcessStarter processStarter)
         {
-            _logger = Preconditions.CheckNotNull(logger, nameof(logger));
             _processStarter = Preconditions.CheckNotNull(processStarter, nameof(processStarter));
         }
 

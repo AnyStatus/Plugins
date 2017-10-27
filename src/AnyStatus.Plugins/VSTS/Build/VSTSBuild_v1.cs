@@ -8,14 +8,12 @@ namespace AnyStatus
 {
     [DisplayName("VSTS Build (Preview)")]
     [DisplayColumn("Continuous Integration")]
-    [Description("Visual Studio Team Services - Build Status and Notifications")]
-    public class VSTSBuild_v1 : VSTSPlugin, IMonitored
+    [Description("Visual Studio Team Services - Build status and notifications")]
+    public class VSTSBuild_v1 : VSTSPlugin, IMonitored, ICanOpenInBrowser//, ICanTriggerBuild
     {
         private const string Category = "Build Definition";
 
-        public VSTSBuild_v1() : base(aggregate: false)
-        {
-        }
+        public VSTSBuild_v1() : base(aggregate: false) { }
 
         [Required]
         [Category(Category)]

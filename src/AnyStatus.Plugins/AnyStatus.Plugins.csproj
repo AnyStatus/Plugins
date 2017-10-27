@@ -70,6 +70,7 @@
     <Compile Include="Jenkins\IJenkinsClient.cs" />
     <Compile Include="Jenkins\IJenkinsPlugin.cs" />
     <Compile Include="Jenkins\Client\JenkinsClient.cs" />
+    <Compile Include="VSTS\Build\OpenVstsBuildPage.cs" />
     <Compile Include="VSTS\Build\VSTSBuildMonitor.cs" />
     <Compile Include="VSTS\Build\VSTSBuild_v1.cs" />
     <Compile Include="VSTS\Release\VSTSReleaseEnvironment.cs" />

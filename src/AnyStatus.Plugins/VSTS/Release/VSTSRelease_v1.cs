@@ -12,7 +12,7 @@ namespace AnyStatus
     [DisplayName("VSTS Release (Preview)")]
     [DisplayColumn("Continuous Integration")]
     [Description("Visual Studio Team Services - Release Status and Notifications")]
-    public class VSTSRelease_v1 : VSTSPlugin, IMonitored
+    public class VSTSRelease_v1 : VSTSPlugin, IMonitored, ICanOpenInBrowser//, ICanTriggerBuild
     {
         private const string Category = "Release Definition";
 

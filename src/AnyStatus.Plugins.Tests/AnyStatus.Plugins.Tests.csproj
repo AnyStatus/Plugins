@@ -74,6 +74,8 @@
     <Compile Include="TfsBuildTests.cs" />
     <Compile Include="OpenInBrowserTests.cs" />
     <Compile Include="JenkinsJobTests.cs" />
+    <Compile Include="VSTS\VstsBuildMonitorTests.cs" />
+    <Compile Include="VSTS\OpenVstsBuildPageTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AnyStatus.Plugins\AnyStatus.Plugins.csproj">
