@@ -73,6 +73,7 @@
     <Compile Include="VSTS\Build\OpenVstsBuildPage.cs" />
     <Compile Include="VSTS\Build\VSTSBuildMonitor.cs" />
     <Compile Include="VSTS\Build\VSTSBuild_v1.cs" />
+    <Compile Include="VSTS\Release\OpenVstsReleasePage.cs" />
     <Compile Include="VSTS\Release\VSTSReleaseEnvironment.cs" />
     <Compile Include="VSTS\Release\VSTSReleaseMonitor.cs" />
     <Compile Include="VSTS\Release\VSTSRelease_v1.cs" />

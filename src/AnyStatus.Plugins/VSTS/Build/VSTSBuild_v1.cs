@@ -22,11 +22,12 @@ namespace AnyStatus
         [Description("Required (case-sensitive). Enter your Visual Studio Team Services build definition name.")]
         public string DefinitionName { get; set; }
 
+        //[ReadOnly(true)]
+        //[Category(Category)]
+        //[Description("Read-only.")]
+        //[DisplayName("Build Definition Id")]
         [XmlIgnore]
-        [ReadOnly(true)]
-        [Category(Category)]
-        [Description("Read-only.")]
-        [DisplayName("Build Definition Id")]
+        [Browsable(false)]
         public long? DefinitionId { get; set; }
 
         public override object Clone()
