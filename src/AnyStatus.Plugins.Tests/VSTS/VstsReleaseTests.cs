@@ -5,28 +5,27 @@ using NSubstitute;
 namespace AnyStatus.Plugins.Tests.VSTS
 {
     [TestClass]
-    public class OpenVstsBuildPageTests
+    public class VstsReleaseTests
     {
         [TestMethod]
-        public void ShouldOpenBuildDefinitionWebPage()
+        public void OpenInBrowserTest()
         {
             var processstarter = Substitute.For<IProcessStarter>();
 
-            var vstsBuild = new VSTSBuild_v1
+            var vstsRelease = new VSTSRelease_v1
             {
                 Account = "account",
                 Project = "project",
                 DefinitionId = 1
             };
 
-            var openVstsBuildPage = new OpenVstsBuildPage(processstarter);
+            var openVstsReleasePage = new OpenVstsReleasePage(processstarter);
 
-            openVstsBuildPage.Handle(vstsBuild);
+            openVstsReleasePage.Handle(vstsRelease);
 
-            var expected = "https://account.visualstudio.com/project/_build/index?definitionId=1&_a=completed";
+            var expected = "https://account.visualstudio.com/project/_release/index?definitionId=1&_a=releases";
 
             processstarter.Received().Start(expected);
         }
     }
 }
-
