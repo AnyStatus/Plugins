@@ -31,7 +31,7 @@ namespace AnyStatus
 
         public bool CanOpenInBrowser()
         {
-            return State != State.Error;
+            return State != State.None && State != State.Error;
         }
     }
 

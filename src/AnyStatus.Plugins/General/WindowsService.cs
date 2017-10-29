@@ -37,17 +37,17 @@ namespace AnyStatus
 
         public bool CanRestart()
         {
-            return State != State.Error;
+            return State != State.None && State != State.Error;
         }
 
         public bool CanStart()
         {
-            return State != State.Error;
+            return State != State.None && State != State.Error;
         }
 
         public bool CanStop()
         {
-            return State != State.Error;
+            return State != State.None && State != State.Error;
         }
     }
 
