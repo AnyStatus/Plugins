@@ -17,7 +17,7 @@ namespace AnyStatus
             if (release.DefinitionId == null)
                 throw new InvalidOperationException("Cannot open web page. Unknown definition id.");
 
-            var uri = $"https://{release.Account}.visualstudio.com/{release.Project}/_release/index?definitionId={release.DefinitionId}&_a=releases";
+            var uri = $"https://{release.Account}.visualstudio.com/{release.Project}/_release?definitionId={release.DefinitionId}&_a=releases";
 
             _processStarter.Start(uri);
         }
