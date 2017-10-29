@@ -28,6 +28,11 @@ namespace AnyStatus
         [DisplayName("Issue Number")]
         [Description("The GitHub issue number")]
         public int IssueNumber { get; set; }
+
+        public bool CanOpenInBrowser()
+        {
+            return State != State.Error;
+        }
     }
 
     public class GitHubIssueMonitor : IMonitor<GitHubIssue>

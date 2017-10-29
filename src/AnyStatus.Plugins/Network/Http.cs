@@ -33,6 +33,11 @@ namespace AnyStatus
         [PropertyOrder(30)]
         [DisplayName("Ignore SSL Errors")]
         public bool IgnoreSslErrors { get; set; }
+
+        public bool CanOpenInBrowser()
+        {
+            return State != State.Error;
+        }
     }
 
     public class HttpStatusMonitor : IMonitor<HttpStatus>

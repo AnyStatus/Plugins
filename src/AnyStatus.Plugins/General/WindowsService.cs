@@ -32,6 +32,23 @@ namespace AnyStatus
 
         [Category(Category)]
         public ServiceControllerStatus Status { get; set; }
+
+        //todo: add Started & Stopped states and add logic to following methods:
+
+        public bool CanRestart()
+        {
+            return State != State.Error;
+        }
+
+        public bool CanStart()
+        {
+            return State != State.Error;
+        }
+
+        public bool CanStop()
+        {
+            return State != State.Error;
+        }
     }
 
     public abstract class BaseWindowsServiceHandler

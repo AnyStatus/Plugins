@@ -33,6 +33,11 @@ namespace AnyStatus
         [Category(Category)]
         [Description("Failed threshold.")]
         public int Threshold { get; set; }
+
+        public bool CanOpenInBrowser()
+        {
+            return State != State.Error;
+        }
     }
 
     public class CoverallsCoveredPercentMonitor : IMonitor<CoverallsCoveredPercent>

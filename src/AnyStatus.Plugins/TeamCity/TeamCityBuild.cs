@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -26,13 +25,10 @@ namespace AnyStatus
         [Url]
         [Required]
         [PropertyOrder(10)]
-        [DisplayName("Url")]
+        [DisplayName("URL")]
         [Category("TeamCity")]
         [Description("TeamCity server URL address. For example: http://teamcity:8080")]
         public string Url { get; set; }
-
-        [Browsable(false)] //TODO: Remove property. Use Url instead.
-        public string Host { get { return Url; } set { Url = value; } }
 
         [Required]
         [PropertyOrder(20)]
@@ -63,6 +59,16 @@ namespace AnyStatus
         [PropertyOrder(60)]
         [DisplayName("Ignore SSL Errors")]
         public bool IgnoreSslErrors { get; set; }
+
+        public bool CanOpenInBrowser()
+        {
+            return State != State.Error;
+        }
+
+        public bool CanTriggerBuild()
+        {
+            return State != State.Error;
+        }
     }
 
     public class TeamCityBuildMonitor : IMonitor<TeamCityBuild>
@@ -153,11 +159,6 @@ namespace AnyStatus
                     return buildResponse.Build.First();
                 }
             }
-        }
-
-        private static void RemoveLastChar(TeamCityBuild item)
-        {
-            item.Url = item.Url.Remove(item.Url.Length - 1);
         }
 
         #region Contracts

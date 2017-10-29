@@ -110,6 +110,16 @@ namespace AnyStatus
                     str :
                     str.EndsWith("/") ? str : str + "/";
         }
+
+        public bool CanTriggerBuild()
+        {
+            return State != State.Error;
+        }
+
+        public bool CanOpenInBrowser()
+        {
+            return State != State.Error;
+        }
     }
 
     public class OpenJenkinsBuildInBrowser : IOpenInBrowser<JenkinsBuild>

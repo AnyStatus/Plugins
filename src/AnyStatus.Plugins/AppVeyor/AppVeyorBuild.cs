@@ -33,6 +33,16 @@ namespace AnyStatus
         [DisplayName("API Token")]
         [Description("Required. AppVeyor API token.")]
         public string ApiToken { get; set; }
+
+        public bool CanOpenInBrowser()
+        {
+            return State != State.Error;
+        }
+
+        public bool CanTriggerBuild()
+        {
+            return State != State.Error;
+        }
     }
 
     public class AppVeyorBuildMonitor : IMonitor<AppVeyorBuild>

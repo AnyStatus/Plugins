@@ -34,6 +34,11 @@ namespace AnyStatus
         [DisplayName("Release Definition Id")]
         public long? DefinitionId { get; set; }
 
+        public bool CanOpenInBrowser()
+        {
+            return State != State.Error && DefinitionId != null;
+        }
+
         public override object Clone()
         {
             var clone = (VSTSRelease_v1)base.Clone();

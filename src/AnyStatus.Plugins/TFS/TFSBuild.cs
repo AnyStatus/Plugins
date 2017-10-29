@@ -75,6 +75,16 @@ namespace AnyStatus
         [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
         public string Password { get; set; }
 
+        public bool CanOpenInBrowser()
+        {
+            return State != State.Error && BuildDefinitionId != 0;
+        }
+
+        public bool CanTriggerBuild()
+        {
+            return State != State.Error && BuildDefinitionId != 0;
+        }
+
         public override object Clone()
         {
             var clone = base.Clone() as TfsBuild;

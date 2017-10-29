@@ -2,16 +2,16 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>AnyStatus.Plugins</id>
-    <version>1.0.70</version>
+    <version>1.0.0</version>
     <authors>Alon Amsalem</authors>
     <owners>anystatus</owners>
-    <licenseUrl>https://github.com/AnyStatus/Monitors/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/AnyStatus/Monitors</projectUrl>
+    <licenseUrl>https://github.com/AnyStatus/Plugins/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/AnyStatus/Plugins</projectUrl>
     <iconUrl>http://www.anystat.us/assets/images/logo_128px.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <releaseNotes></releaseNotes>
-    <description>An open-source plugins and extensions library for AnyStatus.</description>
-    <copyright>Copyright © 2017 Alon Amsalem</copyright>
+    <description>An open-source plugins and extensions library for AnyStatus. For more information visit https://www.anystat.us</description>
+    <copyright>Copyright © 2017 Alon Amsalem, AnyStatus</copyright>
     <tags>AnyStatus VisualStudio Monitor Monitoring Build TFS VSTS AppVeyor TeamCity TravisCI Jenkins Pingdom UptimeRobot</tags>
     <dependencies>
       <dependency id="Extended.Wpf.Toolkit" version="3.0" />

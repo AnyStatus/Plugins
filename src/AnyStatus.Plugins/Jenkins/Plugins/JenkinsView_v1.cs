@@ -52,5 +52,10 @@ namespace AnyStatus
                     str :
                     str.EndsWith("/") ? str : str + "/";
         }
+
+        public bool CanOpenInBrowser()
+        {
+            return State != State.Error;
+        }
     }
 }
