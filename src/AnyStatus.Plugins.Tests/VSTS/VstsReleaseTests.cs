@@ -23,7 +23,7 @@ namespace AnyStatus.Plugins.Tests.VSTS
 
             openVstsReleasePage.Handle(vstsRelease);
 
-            var expected = "https://account.visualstudio.com/project/_release/index?definitionId=1&_a=releases";
+            var expected = "https://account.visualstudio.com/project/_release?definitionId=1&_a=releases";
 
             processstarter.Received().Start(expected);
         }
