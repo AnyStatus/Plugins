@@ -240,7 +240,7 @@ namespace AnyStatus
 
             await base.HandleAsync(build);
 
-            await QueueNewBuild(build);
+            await QueueNewBuild(build).ConfigureAwait(false);
 
             _logger.Info($"Build \"{build.Name}\" was triggered.");
         }
@@ -275,7 +275,7 @@ namespace AnyStatus
 
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    var response = await client.PostAsync(url, content);
+                    var response = await client.PostAsync(url, content).ConfigureAwait(false);
 
                     response.EnsureSuccessStatusCode();
                 }
