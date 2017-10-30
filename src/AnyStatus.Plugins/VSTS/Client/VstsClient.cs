@@ -8,13 +8,13 @@ using System.Web.Script.Serialization;
 
 namespace AnyStatus
 {
-    public class VSTSClient
+    public class VstsClient
     {
-        public VSTSClient() { }
+        public VstsClient() { }
 
-        public VSTSClient(VSTSConnection connection) { Connection = connection; }
+        public VstsClient(VstsConnection connection) { Connection = connection; }
 
-        public VSTSConnection Connection { get; set; }
+        public VstsConnection Connection { get; set; }
 
         #region Build
 
@@ -38,6 +38,19 @@ namespace AnyStatus
             var builds = await Request<Collection<VSTSBuild>>($"build/builds?definitions={definitionId}&$top=1&api-version=2.0").ConfigureAwait(false);
 
             return builds?.Value?.FirstOrDefault();
+        }
+
+        public async Task QueueNewBuild(long definitionId)
+        {
+            var request = new
+            {
+                Definition = new
+                {
+                    Id = definitionId
+                }
+            };
+
+            await Send("build/builds?api-version=2.0", request).ConfigureAwait(false);
         }
 
         #endregion
@@ -79,6 +92,8 @@ namespace AnyStatus
             return details;
         }
 
+        #endregion
+
         private async Task<T> Request<T>(string api, bool vsrm = false)
         {
             using (var handler = new WebRequestHandler())
@@ -112,6 +127,36 @@ namespace AnyStatus
             }
         }
 
-        #endregion
+        private async Task Send<T>(string api, T request = default(T), bool vsrm = false)
+        {
+            using (var handler = new WebRequestHandler())
+            {
+                var httpClient = new HttpClient(handler);
+
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                if (!string.IsNullOrEmpty(Connection.Password))
+                {
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{Connection.UserName}:{Connection.Password}")));
+                }
+
+                var sb = new StringBuilder();
+                sb.Append("https://");
+                sb.Append(Connection.Account);
+                if (vsrm) sb.Append(".vsrm");
+                sb.Append(".visualstudio.com/");
+                sb.Append(Connection.Project);
+                sb.Append("/_apis/");
+                sb.Append(api);
+
+                var json = new JavaScriptSerializer().Serialize(request);
+
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await httpClient.PostAsync(sb.ToString(), content).ConfigureAwait(false);
+
+                response.EnsureSuccessStatusCode();
+            }
+        }
     }
 }

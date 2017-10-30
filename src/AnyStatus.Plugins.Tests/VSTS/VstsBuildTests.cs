@@ -28,7 +28,7 @@ namespace AnyStatus.Plugins.Tests
             processstarter.Received().Start(expected);
         }
 
-        [Ignore]
+        //[Ignore]
         [TestMethod]
         public void VstsBuildMonitorTest()
         {
@@ -42,7 +42,7 @@ namespace AnyStatus.Plugins.Tests
                 Password = "personal access token"
             };
 
-            var monitor = new VSTSBuildMonitor();
+            var monitor = new VstsBuildMonitor();
 
             monitor.Handle(build);
 

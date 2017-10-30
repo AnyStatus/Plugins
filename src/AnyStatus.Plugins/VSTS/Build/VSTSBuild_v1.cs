@@ -9,7 +9,7 @@ namespace AnyStatus
     [DisplayName("VSTS Build (Preview)")]
     [DisplayColumn("Continuous Integration")]
     [Description("Visual Studio Team Services - Build status and notifications")]
-    public class VSTSBuild_v1 : VSTSPlugin, IMonitored, ICanOpenInBrowser//, ICanTriggerBuild
+    public class VSTSBuild_v1 : VstsPlugin, IMonitored, ICanOpenInBrowser//, ICanTriggerBuild
     {
         private const string Category = "Build Definition";
 

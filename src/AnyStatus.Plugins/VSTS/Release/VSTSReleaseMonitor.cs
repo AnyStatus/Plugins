@@ -15,9 +15,9 @@ namespace AnyStatus
         [DebuggerStepThrough]
         public void Handle(VSTSRelease_v1 vstsRelease)
         {
-            var client = new VSTSClient
+            var client = new VstsClient
             {
-                Connection = new VSTSConnection
+                Connection = new VstsConnection
                 {
                     Account = vstsRelease.Account,
                     Project = vstsRelease.Project,

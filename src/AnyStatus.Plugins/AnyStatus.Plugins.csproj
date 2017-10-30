@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AnyStatus.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b52fc05e377030a3, processorArchitecture=MSIL">
-      <HintPath>..\packages\AnyStatus.API.1.0.73\lib\net452\AnyStatus.API.dll</HintPath>
+      <HintPath>..\packages\AnyStatus.API.1.0.75\lib\net452\AnyStatus.API.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Administration.7.0.0.0\lib\net20\Microsoft.Web.Administration.dll</HintPath>
@@ -64,22 +64,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppVeyor\AppVeyorBuildMonitor.cs" />
+    <Compile Include="AppVeyor\OpenAppVeyorBuildInBrowser.cs" />
+    <Compile Include="AppVeyor\TriggerAppVeyorBuild.cs" />
     <Compile Include="General\NuGetPackageVersion.cs" />
     <Compile Include="Jenkins\Client\Contracts\JenkinsCrumb.cs" />
     <Compile Include="Jenkins\Client\JenkinsRequest.cs" />
     <Compile Include="Jenkins\IJenkinsClient.cs" />
     <Compile Include="Jenkins\IJenkinsPlugin.cs" />
     <Compile Include="Jenkins\Client\JenkinsClient.cs" />
+    <Compile Include="TeamCity\OpenTeamCityBuildInBrowser.cs" />
+    <Compile Include="TeamCity\TeamCityBuildMonitor.cs" />
+    <Compile Include="TeamCity\TriggerTeamCityBuild.cs" />
+    <Compile Include="TFS\BaseTfsBuildHandler.cs" />
+    <Compile Include="TFS\OpenTfsBuildInBrowser.cs" />
+    <Compile Include="TFS\TfsBuildMonitor.cs" />
+    <Compile Include="TFS\TriggerTfsBuild.cs" />
     <Compile Include="VSTS\Build\OpenVstsBuildPage.cs" />
-    <Compile Include="VSTS\Build\VSTSBuildMonitor.cs" />
-    <Compile Include="VSTS\Build\VSTSBuild_v1.cs" />
+    <Compile Include="VSTS\Build\VstsBuildMonitor.cs" />
+    <Compile Include="VSTS\Build\VstsBuildTrigger.cs" />
+    <Compile Include="VSTS\Build\VstsBuild_v1.cs" />
     <Compile Include="VSTS\Release\OpenVstsReleasePage.cs" />
     <Compile Include="VSTS\Release\VSTSReleaseEnvironment.cs" />
     <Compile Include="VSTS\Release\VSTSReleaseMonitor.cs" />
     <Compile Include="VSTS\Release\VSTSRelease_v1.cs" />
-    <Compile Include="VSTS\VSTSClient.cs" />
-    <Compile Include="VSTS\VSTSContracts.cs" />
-    <Compile Include="VSTS\VSTSPlugin.cs" />
+    <Compile Include="VSTS\Client\VstsClient.cs" />
+    <Compile Include="VSTS\Client\VstsClientException.cs" />
+    <Compile Include="VSTS\Client\VstsContracts.cs" />
+    <Compile Include="VSTS\VstsPlugin.cs" />
     <Compile Include="_deprecated\JenkinsBuild.cs" />
     <Compile Include="_deprecated\JenkinsMultiJob.cs" />
     <Compile Include="AppVeyor\AppVeyorBuild.cs" />

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AnyStatus
 {
-    public class VSTSConnection
+    public class VstsConnection
     {
         public string Account { get; set; }
 

@@ -1,23 +1,17 @@
 ﻿using AnyStatus.API;
+using AnyStatus.API.Utils;
 
 namespace AnyStatus
 {
-    //todo: use async monitor (handler)
+    //todo: convert to async handler
 
-    public class VSTSBuildMonitor : IMonitor<VSTSBuild_v1>
+    public class VstsBuildMonitor : IMonitor<VSTSBuild_v1>
     {
         public void Handle(VSTSBuild_v1 vstsBuild)
         {
-            var vstsClient = new VSTSClient
-            {
-                Connection = new VSTSConnection
-                {
-                    Account = vstsBuild.Account,
-                    Project = vstsBuild.Project,
-                    UserName = vstsBuild.UserName,
-                    Password = vstsBuild.Password,
-                }
-            };
+            var vstsClient = new VstsClient(new VstsConnection());
+
+            vstsBuild.MapTo(vstsClient.Connection);
 
             if (vstsBuild.DefinitionId == null)
             {

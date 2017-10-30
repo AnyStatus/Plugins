@@ -5,11 +5,13 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    public abstract class VSTSPlugin : Plugin
+    public abstract class VstsPlugin : Plugin
     {
         private const string Category = "Visual Studio Team Services";
 
-        public VSTSPlugin(bool aggregate) : base(aggregate) { }
+        protected VstsPlugin(bool aggregate) : base(aggregate)
+        {
+        }
 
         [Url]
         [Required]
