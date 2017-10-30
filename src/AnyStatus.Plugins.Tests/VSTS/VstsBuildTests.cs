@@ -28,7 +28,7 @@ namespace AnyStatus.Plugins.Tests
             processstarter.Received().Start(expected);
         }
 
-        //[Ignore]
+        [Ignore]
         [TestMethod]
         public void VstsBuildMonitorTest()
         {
