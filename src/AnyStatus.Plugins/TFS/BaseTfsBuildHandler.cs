@@ -56,6 +56,4 @@ namespace AnyStatus
             }
         }
     }
-
-    #endregion
 }
