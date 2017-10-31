@@ -29,6 +29,8 @@ namespace AnyStatus
             if (result != MessageBoxResult.Yes)
                 return;
 
+            _logger.Info($"Triggering \"{build.Name}\"...");
+
             await base.HandleAsync(build).ConfigureAwait(false);
 
             await QueueNewBuild(build).ConfigureAwait(false);
