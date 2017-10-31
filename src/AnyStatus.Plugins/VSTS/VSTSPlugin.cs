@@ -5,7 +5,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    public abstract class VstsPlugin : Plugin
+    public abstract class VstsPlugin : Build
     {
         private const string Category = "Visual Studio Team Services";
 
