@@ -18,6 +18,8 @@ namespace AnyStatus
         {
             var build = GetBuildDetailsAsync(item).Result;
 
+            item.StateText = build.StatusText;
+
             if (build.Running)
             {
                 item.State = State.Running;
@@ -92,7 +94,7 @@ namespace AnyStatus
                         branchLocator = ",branch:" + item.SourceControlBranch;
                     }
 
-                    var apiUrl = $"{item.Url}/{authType}/app/rest/builds?locator=running:any,buildType:(id:{item.BuildTypeId}),count:1{branchLocator}&fields=build(status,running)";
+                    var apiUrl = $"{item.Url}/{authType}/app/rest/builds?locator=running:any,buildType:(id:{item.BuildTypeId}),count:1{branchLocator}&fields=build(status,running,statusText)";
 
                     var response = await client.GetAsync(apiUrl);
 
@@ -119,6 +121,8 @@ namespace AnyStatus
             public bool Running { get; set; }
 
             public string Status { get; set; }
+
+            public string StatusText { get; set; }
         }
 
         #endregion
