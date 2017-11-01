@@ -26,6 +26,12 @@ namespace AnyStatus
         [Description("TeamCity build type id (Copy from TeamCity build URL address)")]
         public string BuildTypeId { get; set; }
 
+        [PropertyOrder(25)]
+        [Category("Source Control")]
+        [DisplayName("Branch")]
+        [Description("Optional. Branch to show status for")]
+        public string SourceControlBranch { get; set; }
+
         [PropertyOrder(30)]
         [Category("TeamCity")]
         [DisplayName("Use Guest User")]
