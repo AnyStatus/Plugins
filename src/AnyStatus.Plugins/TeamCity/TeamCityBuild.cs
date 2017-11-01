@@ -29,7 +29,7 @@ namespace AnyStatus
         [PropertyOrder(25)]
         [Category("Source Control")]
         [DisplayName("Branch")]
-        [Description("Branch to show status for")]
+        [Description("Optional. Branch to show status for")]
         public string SourceControlBranch { get; set; }
 
         [PropertyOrder(30)]
