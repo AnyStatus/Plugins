@@ -86,7 +86,13 @@ namespace AnyStatus
                         }
                     }
 
-                    var apiUrl = $"{item.Url}/{authType}/app/rest/builds?locator=running:any,buildType:(id:{item.BuildTypeId}),count:1&fields=build(status,running)";
+                    var branchLocator = string.Empty;
+                    if (!string.IsNullOrWhiteSpace(item.SourceControlBranch))
+                    {
+                        branchLocator = ",branch:" + item.SourceControlBranch;
+                    }
+
+                    var apiUrl = $"{item.Url}/{authType}/app/rest/builds?locator=running:any,buildType:(id:{item.BuildTypeId}),count:1{branchLocator}&fields=build(status,running)";
 
                     var response = await client.GetAsync(apiUrl);
 
