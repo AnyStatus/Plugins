@@ -66,16 +66,18 @@ namespace AnyStatus
             return State != State.None && State != State.Error;
         }
 
-        [Browsable(false)]
         [XmlIgnore]
+        [Browsable(false)]
         internal string StateText { get; set; }
 
         public override Notification CreateNotification()
         {
             if (State == State.Failed)
             {
+                if (PreviousState == State.Error) return Notification.Empty; //bypass when network connection is restored.
                 return new Notification($"{Name} failed. {StateText}", NotificationIcon.Error);
             }
+            
             return base.CreateNotification();
         }
     }
