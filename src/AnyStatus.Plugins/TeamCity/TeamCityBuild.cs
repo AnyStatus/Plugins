@@ -1,6 +1,7 @@
 ﻿using AnyStatus.API;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Xml.Serialization;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
@@ -63,6 +64,21 @@ namespace AnyStatus
         public bool CanTriggerBuild()
         {
             return State != State.None && State != State.Error;
+        }
+
+        [XmlIgnore]
+        [Browsable(false)]
+        internal string StateText { get; set; }
+
+        public override Notification CreateNotification()
+        {
+            if (State == State.Failed)
+            {
+                if (PreviousState == State.Error) return Notification.Empty; //bypass when network connection is restored.
+                return new Notification($"{Name} failed. {StateText}", NotificationIcon.Error);
+            }
+            
+            return base.CreateNotification();
         }
     }
 }
