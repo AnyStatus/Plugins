@@ -1,6 +1,5 @@
 ﻿using AnyStatus.API;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
@@ -14,39 +13,12 @@ namespace AnyStatus
     public class TeamCityBuildMonitor : IMonitor<TeamCityBuild>
     {
         [DebuggerStepThrough]
-        public void Handle(TeamCityBuild item)
+        public void Handle(TeamCityBuild teamCityBuid)
         {
-            var build = GetBuildDetailsAsync(item).Result;
+            var build = GetBuildDetailsAsync(teamCityBuid).Result;
 
-            item.StateText = build.StatusText;
-
-            if (build.Running)
-            {
-                item.State = State.Running;
-                return;
-            }
-
-            //if (build.CancelledInfo)
-            //{
-            //    item.Brush = Brushes.Gray;
-            //    item.State = State.Canceled;
-            //    return;
-            //}
-
-            switch (build.Status)
-            {
-                case "SUCCESS":
-                    item.State = State.Ok;
-                    break;
-                case "FAILURE":
-                case "ERROR":
-                    item.State = State.Failed;
-                    break;
-                case "UNKNOWN":
-                default:
-                    item.State = State.Unknown;
-                    break;
-            }
+            teamCityBuid.State = build.State;
+            teamCityBuid.StateText = build.StatusText;
         }
 
         private async Task<TeamCityBuildDetails> GetBuildDetailsAsync(TeamCityBuild item)
@@ -108,23 +80,5 @@ namespace AnyStatus
                 }
             }
         }
-
-        #region Contracts
-
-        private class TeamCityBuildDetailsResponse
-        {
-            public List<TeamCityBuildDetails> Build { get; set; }
-        }
-
-        private class TeamCityBuildDetails
-        {
-            public bool Running { get; set; }
-
-            public string Status { get; set; }
-
-            public string StatusText { get; set; }
-        }
-
-        #endregion
     }
 }

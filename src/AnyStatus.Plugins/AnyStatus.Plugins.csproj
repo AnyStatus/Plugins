@@ -74,6 +74,7 @@
     <Compile Include="Jenkins\IJenkinsPlugin.cs" />
     <Compile Include="Jenkins\Client\JenkinsClient.cs" />
     <Compile Include="TeamCity\OpenTeamCityBuildInBrowser.cs" />
+    <Compile Include="TeamCity\TeamCity.cs" />
     <Compile Include="TeamCity\TeamCityBuildMonitor.cs" />
     <Compile Include="TeamCity\TriggerTeamCityBuild.cs" />
     <Compile Include="TFS\BaseTfsBuildHandler.cs" />
