@@ -20,6 +20,7 @@ namespace AnyStatus.Plugins.Tests.AppVeyor
             appVeyorBuildMonitor.Handle(appVeyorBuild);
 
             Assert.AreNotEqual(State.None, appVeyorBuild.State, "State is None.");
+            Assert.AreNotEqual(State.Error, appVeyorBuild.State, "State is Error.");
         }
     }
 }
