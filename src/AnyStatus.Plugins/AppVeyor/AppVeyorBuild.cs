@@ -1,6 +1,7 @@
 ﻿using AnyStatus.API;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
@@ -10,21 +11,23 @@ namespace AnyStatus
     public class AppVeyorBuild : Build, IMonitored, ICanOpenInBrowser, ICanTriggerBuild
     {
         [Required]
+        [PropertyOrder(10)]
         [Category("AppVeyor")]
-        [DisplayName("Account Name")]
+        [DisplayName("Account")]
         [Description("Required. AppVeyor account name.")]
         public string AccountName { get; set; }
 
         [Required]
+        [PropertyOrder(20)]
         [Category("AppVeyor")]
         [DisplayName("Project Slug")]
         [Description("Required. Project slug is the last part of the AppVeyor project URL. For example: https://ci.appveyor.com/project/AccountName/Project-Slug")]
         public string ProjectSlug { get; set; }
 
-        [Required]
+        [PropertyOrder(30)]
         [Category("AppVeyor")]
         [DisplayName("API Token")]
-        [Description("Required. AppVeyor API token.")]
+        [Description("Optional. AppVeyor API token.")]
         public string ApiToken { get; set; }
 
         public bool CanOpenInBrowser()
@@ -34,7 +37,9 @@ namespace AnyStatus
 
         public bool CanTriggerBuild()
         {
-            return State != State.None && State != State.Error;
+            return State != State.None && 
+                   State != State.Error && 
+                   !string.IsNullOrWhiteSpace(ApiToken);
         }
     }
 }

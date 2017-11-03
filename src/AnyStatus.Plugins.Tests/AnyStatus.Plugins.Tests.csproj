@@ -66,6 +66,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AppVeyor\AppVeyorTests.cs" />
     <Compile Include="MonitoringTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BatchScriptTests.cs" />
