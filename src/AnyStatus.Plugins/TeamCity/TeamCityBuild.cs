@@ -12,13 +12,23 @@ namespace AnyStatus
     [DisplayColumn("Continuous Integration")]
     public class TeamCityBuild : Build, IMonitored, ICanOpenInBrowser, ICanTriggerBuild
     {
+        private string _url;
+
         [Url]
         [Required]
         [PropertyOrder(10)]
         [DisplayName("URL")]
         [Category("TeamCity")]
         [Description("TeamCity server URL address. For example: http://teamcity:8080")]
-        public string Url { get; set; }
+        public string Url
+        {
+            get { return _url; }
+            set
+            {
+                _url = value;
+                if (_url.EndsWith("/")) { _url = _url.Remove(_url.Length - 1); }
+            }
+        }
 
         [Required]
         [PropertyOrder(20)]
@@ -77,7 +87,7 @@ namespace AnyStatus
                 if (PreviousState == State.Error) return Notification.Empty; //bypass when network connection is restored.
                 return new Notification($"{Name} failed. {StateText}", NotificationIcon.Error);
             }
-            
+
             return base.CreateNotification();
         }
     }

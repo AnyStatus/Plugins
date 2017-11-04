@@ -7,7 +7,8 @@ namespace AnyStatus.Plugins.Tests.TeamCity
     public class TeamCityTests
     {
         [TestMethod]
-        public void TestMethod1()
+        [TestCategory("Integration")]
+        public void TeamCityBuildMonitorTest()
         {
             var teamCityBuild = new TeamCityBuild
             {

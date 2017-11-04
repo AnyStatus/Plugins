@@ -1,39 +1,54 @@
 ﻿using AnyStatus.API;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace AnyStatus
 {
-    public class TeamCityBuildDetailsResponse
+    public class TeamCityContracts
     {
-        public List<TeamCityBuildDetails> Build { get; set; }
-    }
-
-    public class TeamCityBuildDetails
-    {
-        public bool Running { get; set; }
-
-        public string Status { get; set; }
-
-        public string StatusText { get; set; }
-
-        public State State
+        public class BuildDetailsResponse
         {
-            get
-            {
-                if (Running) return State.Running;
+            public List<BuildDetails> Build { get; set; }
+        }
 
-                switch (Status)
+        public class BuildDetails
+        {
+            public bool Running { get; set; }
+
+            public string Status { get; set; }
+
+            public string StatusText { get; set; }
+
+            public State State
+            {
+                get
                 {
-                    case "SUCCESS":
-                        return State.Ok;
-                    case "FAILURE":
-                    case "ERROR":
-                        return State.Failed;
-                    case "UNKNOWN":
-                    default:
-                        return State.Unknown;
+                    if (Running) return State.Running;
+
+                    switch (Status)
+                    {
+                        case "SUCCESS":
+                            return State.Ok;
+                        case "FAILURE":
+                        case "ERROR":
+                            return State.Failed;
+                        case "UNKNOWN":
+                        default:
+                            return State.Unknown;
+                    }
                 }
             }
+        }
+
+        public class Build
+        {
+            public BuildType BuildType { get; set; }
+        }
+
+        public class BuildType
+        {
+            [XmlAttribute]
+            public string Id { get; set; }
         }
     }
 }
