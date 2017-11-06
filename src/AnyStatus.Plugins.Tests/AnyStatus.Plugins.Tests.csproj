@@ -72,6 +72,7 @@
     <Compile Include="BatchScriptTests.cs" />
     <Compile Include="PowerShellScriptTests.cs" />
     <Compile Include="SqlScalarQueryTests.cs" />
+    <Compile Include="TeamCity\TeamCityTests.cs" />
     <Compile Include="TfsBuildTests.cs" />
     <Compile Include="OpenInBrowserTests.cs" />
     <Compile Include="JenkinsJobTests.cs" />

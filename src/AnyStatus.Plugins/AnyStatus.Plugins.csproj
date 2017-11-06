@@ -75,7 +75,11 @@
     <Compile Include="Jenkins\Client\JenkinsClient.cs" />
     <Compile Include="TeamCity\OpenTeamCityBuildInBrowser.cs" />
     <Compile Include="TeamCity\Microsoft.AspNetCore.WebUtilities.cs" />
+    <Compile Include="TeamCity\TeamCity.cs" />
     <Compile Include="TeamCity\TeamCityBuildMonitor.cs" />
+    <Compile Include="TeamCity\TeamCityClient.cs" />
+    <Compile Include="TeamCity\TeamCityConnection.cs" />
+    <Compile Include="TeamCity\TeamCityException.cs" />
     <Compile Include="TeamCity\TriggerTeamCityBuild.cs" />
     <Compile Include="TFS\BaseTfsBuildHandler.cs" />
     <Compile Include="TFS\OpenTfsBuildInBrowser.cs" />
