@@ -32,7 +32,7 @@ namespace AnyStatus
             set
             {
                 var uri = new Uri(value);
-                url = uri.GetComponents(UriComponents.SchemeAndServer, UriFormat.SafeUnescaped);
+                url = uri.GetComponents(UriComponents.SchemeAndServer, UriFormat.SafeUnescaped).TrimEnd('/');
                 var queryString = QueryHelpers.ParseNullableQuery(uri.Query).ToDictionary(kvp => kvp.Key, kvp => kvp.Value.FirstOrDefault());
                 BuildTypeId = queryString.TryGetValue("buildTypeId", out string buildTypeId) ? buildTypeId : null;
                 OnPropertyChanged(nameof(BuildTypeId));
