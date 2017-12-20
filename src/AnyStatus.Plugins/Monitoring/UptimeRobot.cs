@@ -12,7 +12,7 @@ namespace AnyStatus
 {
     [DisplayName("Uptime Robot")]
     [DisplayColumn("Monitoring")]
-    public class UptimeRobot : Plugin, IMonitored
+    public class UptimeRobot : Widget, IMonitored
     {
         private const string Category = "Uptime Robot";
 

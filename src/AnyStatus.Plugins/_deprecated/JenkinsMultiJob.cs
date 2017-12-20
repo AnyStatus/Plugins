@@ -9,7 +9,7 @@ namespace AnyStatus
 {
     [Browsable(false)]
     [Obsolete("Renamed to JenkinsView")]
-    public class JenkinsMultiJob : Plugin
+    public class JenkinsMultiJob : Widget
     {
         private string url;
 

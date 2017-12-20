@@ -11,7 +11,7 @@ namespace AnyStatus
 {
     [DisplayName("Windows Service")]
     [Description("Test whether a windows service is running")]
-    public class WindowsService : Plugin, IMonitored, ICanStart, ICanStop, ICanRestart
+    public class WindowsService : Widget, IMonitored, ICanStart, ICanStop, ICanRestart
     {
         private const string Category = "Windows Service";
 

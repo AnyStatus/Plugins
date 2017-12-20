@@ -11,7 +11,7 @@ namespace AnyStatus
     [DisplayColumn("Custom")]
     [DisplayName("PowerShell")]
     [Description("Monitor the exit code of a PowerShell script")]
-    public class PowerShellScript : Plugin, IMonitored
+    public class PowerShellScript : Widget, IMonitored
     {
         private const string Category = "PowerShell";
 

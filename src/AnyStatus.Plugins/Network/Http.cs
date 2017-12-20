@@ -12,7 +12,7 @@ namespace AnyStatus
     [DisplayName("HTTP(S)")]
     [DisplayColumn("Network")]
     [Description("Check web server HTTP response code")]
-    public class HttpStatus : Plugin, IMonitored, ICanOpenInBrowser
+    public class HttpStatus : Widget, IMonitored, ICanOpenInBrowser
     {
         public HttpStatus()
         {

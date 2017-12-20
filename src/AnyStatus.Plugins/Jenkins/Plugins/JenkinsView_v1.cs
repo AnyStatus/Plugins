@@ -8,7 +8,7 @@ namespace AnyStatus
     [DisplayName("Jenkins View (Preview)")]
     [Description("Shows the status of a Jenkins view or multi-branch (pipeline).")]
     [DisplayColumn("Continuous Integration")]
-    public class JenkinsView_v1 : Plugin, IJenkinsPlugin, IMonitored, ICanOpenInBrowser
+    public class JenkinsView_v1 : Widget, IJenkinsPlugin, IMonitored, ICanOpenInBrowser
     {
         private string _url;
 

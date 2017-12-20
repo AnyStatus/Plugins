@@ -9,7 +9,7 @@ namespace AnyStatus
     [DisplayName("Ping")]
     [DisplayColumn("Network")]
     [Description("Test the reachability of a host")]
-    public class Ping : Plugin, IMonitored
+    public class Ping : Widget, IMonitored
     {
         [Required]
         [Category("Ping")]

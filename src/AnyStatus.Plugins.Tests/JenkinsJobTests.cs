@@ -33,9 +33,9 @@ namespace AnyStatus.Plugins.Tests
 
             jenkins.Handle(jenkinsJobPlugin);
 
-            Assert.AreNotEqual(State.None, jenkinsJobPlugin.State, "Plugin state is None.");
-            Assert.AreNotEqual(State.Unknown, jenkinsJobPlugin.State, "Plugin state is Unknown.");
-            Assert.AreNotEqual(State.Error, jenkinsJobPlugin.State, "Plugin state is Error.");
+            Assert.AreNotEqual(State.None, jenkinsJobPlugin.State, "Widget state is None.");
+            Assert.AreNotEqual(State.Unknown, jenkinsJobPlugin.State, "Widget state is Unknown.");
+            Assert.AreNotEqual(State.Error, jenkinsJobPlugin.State, "Widget state is Error.");
         }
 
         [TestMethod]
