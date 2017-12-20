@@ -12,6 +12,10 @@ A repository of community-contributed plugins and other extensions for AnyStatus
 
 To learn more about developing plugins for AnyStatus, visit [AnyStatus API](https://github.com/AnyStatus/API) repository.
 
+<br/>
+
+![AnyStatus Components](https://github.com/AnyStatus/anystatus.github.io/blob/master/assets/images/AnyStatusComponents.png)
+
 ## Plugins
 
 ### Continuous Integration and Delivery

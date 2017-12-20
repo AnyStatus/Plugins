@@ -142,10 +142,11 @@
     <Content Include="todo.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug (
-    $(SolutionDir)nuget pack $(ProjectDir)$(ProjectName).nuspec
-    copy *.nupkg c:\nuget
-)</PostBuildEvent>
-  </PropertyGroup>
+  <Target Name="BuildNuget" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'" Outputs="$(SolutionDir)*.nupkg">
+    <Exec Command="$(SolutionDir)nuget pack $(ProjectDir)$(ProjectName).nuspec" />
+    <ItemGroup>
+      <NuGetPackages Include="$(SolutionDir)*.nupkg" />
+    </ItemGroup>
+    <Copy SourceFiles="@(NuGetPackages)" DestinationFolder="C:\nuget" />
+  </Target>
 </Project>
