@@ -27,15 +27,16 @@ namespace AnyStatus
         [DebuggerStepThrough]
         public void Handle(CpuUsage item)
         {
-            item.Value = GetCpuUsage(item.MachineName) + "%";
+            var usage = GetCpuUsage(item.MachineName);
+
+            item.Value = usage + "%";
 
             item.State = State.Ok;
         }
 
         public int GetCpuUsage(string machineName)
         {
-            if (string.IsNullOrWhiteSpace(machineName))
-                machineName = "localhost";
+            if (string.IsNullOrWhiteSpace(machineName)) machineName = ".";
 
             var counter = new System.Diagnostics.PerformanceCounter("Processor", "% Processor Time", "_Total", machineName);
 
