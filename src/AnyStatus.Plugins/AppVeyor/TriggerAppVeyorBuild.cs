@@ -38,12 +38,26 @@ namespace AnyStatus
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", item.ApiToken);
 
-                var request = new
-                {
-                    accountName = item.AccountName,
-                    projectSlug = item.ProjectSlug
-                };
+                var request = default(object);
 
+                if (string.IsNullOrWhiteSpace(item.SourceControlBranch))
+                {
+                    request = new
+                    {
+                        accountName = item.AccountName,
+                        projectSlug = item.ProjectSlug
+                    };
+                }
+                else
+                {
+                    request = new
+                    {
+                        accountName = item.AccountName,
+                        projectSlug = item.ProjectSlug,
+                        branch = item.SourceControlBranch
+                    };
+                }
+                
                 var data = new JavaScriptSerializer().Serialize(request);
 
                 var content = new StringContent(data, Encoding.UTF8, "application/json");

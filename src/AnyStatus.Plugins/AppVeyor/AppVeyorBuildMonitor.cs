@@ -46,8 +46,17 @@ namespace AnyStatus
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", item.ApiToken);
 
-                var apiUrl = $"{host}/{item.AccountName}/{item.ProjectSlug}";
+                var apiUrl = default(string);
 
+                if (string.IsNullOrWhiteSpace(item.SourceControlBranch))
+                {
+                    apiUrl = $"{host}/{item.AccountName}/{item.ProjectSlug}";
+                }
+                else
+                {
+                    apiUrl = $"{host}/{item.AccountName}/{item.ProjectSlug}/branch/{item.SourceControlBranch}";
+                }
+                
                 var response = await client.GetAsync(apiUrl);
 
                 response.EnsureSuccessStatusCode();
