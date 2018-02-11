@@ -4,7 +4,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
-using System.Windows;
 
 namespace AnyStatus
 {
@@ -21,14 +20,15 @@ namespace AnyStatus
 
         public async Task HandleAsync(AppVeyorBuild build)
         {
-            var result = _dialogService.Show($"Are you sure you want to trigger {build.Name}?", "Trigger a new build", MessageBoxButton.YesNo, MessageBoxImage.Asterisk);
+            var dialog = new ConfirmationDialog($"Are you sure you want to trigger {build.Name}?", "Trigger a new build");
 
-            if (result != MessageBoxResult.Yes)
-                return;
+            var result = _dialogService.ShowDialog(dialog);
+
+            if (result != DialogResult.Yes) return;
 
             await QueueNewBuild(build).ConfigureAwait(false);
 
-            _logger.Info($"Build \"{build.Name}\" was triggered.");
+            _logger.Info($"Build \"{build.Name}\" has been triggered.");
         }
 
         private async Task QueueNewBuild(AppVeyorBuild item)

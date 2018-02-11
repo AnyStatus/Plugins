@@ -95,17 +95,18 @@ namespace AnyStatus
 
         public async Task HandleAsync(WindowsService windowsService)
         {
-            var result = _dialogService.Show($"Are you sure you want to start {windowsService.Name}?", "Start Windows Service", MessageBoxButton.YesNo, MessageBoxImage.Asterisk);
+            var dialog = new ConfirmationDialog($"Are you sure you want to start {windowsService.Name}?", "Start Windows Service");
 
-            if (result != MessageBoxResult.Yes)
-                return;
+            var result = _dialogService.ShowDialog(dialog);
+
+            if (result != DialogResult.Yes) return;
 
             _logger.Info($"Starting {windowsService.Name}.");
 
-            await Start(windowsService);
+            await StartAsync(windowsService).ConfigureAwait(false);
         }
 
-        private async Task Start(WindowsService windowsService)
+        private async Task StartAsync(WindowsService windowsService)
         {
             await Task.Run(() =>
             {
@@ -139,17 +140,18 @@ namespace AnyStatus
 
         public async Task HandleAsync(WindowsService windowsService)
         {
-            var result = _dialogService.Show($"Are you sure you want to stop {windowsService.Name}?", "Stop Windows Service", MessageBoxButton.YesNo, MessageBoxImage.Asterisk);
+            var dialog = new ConfirmationDialog($"Are you sure you want to stop {windowsService.Name}?", "Stop Windows Service");
 
-            if (result != MessageBoxResult.Yes)
-                return;
+            var result = _dialogService.ShowDialog(dialog);
+
+            if (result != DialogResult.Yes) return;
 
             _logger.Info($"Stopping {windowsService.Name}.");
 
-            await Stop(windowsService);
+            await StopAsync(windowsService).ConfigureAwait(false);
         }
 
-        private async Task Stop(WindowsService windowsService)
+        private async Task StopAsync(WindowsService windowsService)
         {
             await Task.Run(() =>
             {
@@ -183,17 +185,18 @@ namespace AnyStatus
 
         public async Task HandleAsync(WindowsService windowsService)
         {
-            var result = _dialogService.Show($"Are you sure you want to restart {windowsService.Name}?", "Restart Windows Service", MessageBoxButton.YesNo, MessageBoxImage.Asterisk);
+            var dialog = new ConfirmationDialog($"Are you sure you want to restart {windowsService.Name}?", "Restart Windows Service");
 
-            if (result != MessageBoxResult.Yes)
-                return;
+            var result = _dialogService.ShowDialog(dialog);
+
+            if (result != DialogResult.Yes) return;
 
             _logger.Info($"Restarting {windowsService.Name}.");
 
-            await Restart(windowsService);
+            await RestartAsync(windowsService).ConfigureAwait(false);
         }
 
-        private async Task Restart(WindowsService windowsService)
+        private async Task RestartAsync(WindowsService windowsService)
         {
             await Task.Run(() =>
             {

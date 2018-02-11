@@ -40,7 +40,7 @@ namespace AnyStatus
             return builds?.Value?.FirstOrDefault();
         }
 
-        public async Task QueueNewBuild(long definitionId)
+        public async Task QueueNewBuildAsync(long definitionId)
         {
             var request = new
             {

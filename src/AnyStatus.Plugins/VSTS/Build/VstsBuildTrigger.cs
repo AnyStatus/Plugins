@@ -18,9 +18,11 @@ namespace AnyStatus.Plugins.VSTS.Build
 
         public async Task HandleAsync(VSTSBuild_v1 build)
         {
-            var result = _dialogService.Show($"Are you sure you want to trigger {build.Name}?", "Trigger a new build", MessageBoxButton.YesNo, MessageBoxImage.Asterisk);
+            var dialog = new ConfirmationDialog($"Are you sure you want to trigger {build.Name}?", "Trigger a new build");
 
-            if (result != MessageBoxResult.Yes) return;
+            var result = _dialogService.ShowDialog(dialog);
+
+            if (result != DialogResult.Yes) return;
 
             _logger.Info($"Triggering \"{build.Name}\"...");
 
@@ -35,9 +37,9 @@ namespace AnyStatus.Plugins.VSTS.Build
                 build.DefinitionId = definition.Id;
             }
 
-            await client.QueueNewBuild(build.DefinitionId.Value).ConfigureAwait(false);
+            await client.QueueNewBuildAsync(build.DefinitionId.Value).ConfigureAwait(false);
 
-            _logger.Info($"Build \"{build.Name}\" was triggered.");
+            _logger.Info($"Build \"{build.Name}\" has been triggered.");
         }
     }
 }

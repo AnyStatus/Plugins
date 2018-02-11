@@ -11,7 +11,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
-using System.Windows;
 using System.Xml.Serialization;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
@@ -150,17 +149,18 @@ namespace AnyStatus
 
         public async Task HandleAsync(JenkinsBuild build)
         {
-            var result = _dialogService.Show($"Are you sure you want to trigger {build.Name}?", "Trigger a new build", MessageBoxButton.YesNo, MessageBoxImage.Asterisk);
+            var dialog = new ConfirmationDialog($"Are you sure you want to trigger {build.Name}?", "Trigger a new build");
 
-            if (result != MessageBoxResult.Yes)
-                return;
+            var result = _dialogService.ShowDialog(dialog);
 
-            await TriggerBuild(build);
+            if (result != DialogResult.Yes) return;
 
-            _logger.Info($"Build \"{build.Name}\" was triggered.");
+            await TriggerBuildAsync(build).ConfigureAwait(false);
+
+            _logger.Info($"Build \"{build.Name}\" has been triggered.");
         }
 
-        private async Task TriggerBuild(JenkinsBuild build)
+        private async Task TriggerBuildAsync(JenkinsBuild build)
         {
             using (var handler = new WebRequestHandler())
             {
@@ -177,7 +177,7 @@ namespace AnyStatus
 
                     var apiUri = GetApiUri(build);
 
-                    var response = await client.PostAsync(apiUri, new StringContent(string.Empty));
+                    var response = await client.PostAsync(apiUri, new StringContent(string.Empty)).ConfigureAwait(false);
 
                     response.EnsureSuccessStatusCode();
                 }

@@ -18,9 +18,11 @@ namespace AnyStatus
 
         public async Task HandleAsync(TeamCityBuild teamCityBuild)
         {
-            var result = _dialogService.Show($"Are you sure you want to trigger {teamCityBuild.Name}?", "Trigger a new build", MessageBoxButton.YesNo, MessageBoxImage.Asterisk);
+            var dialog = new ConfirmationDialog($"Are you sure you want to trigger {teamCityBuild.Name}?", "Trigger a new build");
 
-            if (result != MessageBoxResult.Yes) return;
+            var result = _dialogService.ShowDialog(dialog);
+
+            if (result != DialogResult.Yes) return;
 
             _logger.Info($"Triggering \"{teamCityBuild.Name}\"...");
 
@@ -30,7 +32,7 @@ namespace AnyStatus
 
             await teamCityClient.QueueNewBuild(teamCityBuild).ConfigureAwait(false);
 
-            _logger.Info($"Build \"{teamCityBuild.Name}\" was triggered.");
+            _logger.Info($"Build \"{teamCityBuild.Name}\" has been triggered.");
         }
     }
 }

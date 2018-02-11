@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace AnyStatus.Plugins.Tests
 {
@@ -11,6 +10,7 @@ namespace AnyStatus.Plugins.Tests
     public class JenkinsJobTests
     {
         private const string Category = "Integration";
+
 #if !DEBUG
         [Ignore]
 #endif
@@ -47,9 +47,8 @@ namespace AnyStatus.Plugins.Tests
             var dialogService = Substitute.For<IDialogService>();
             var jenkinsClient = new JenkinsClient(logger);
 
-            dialogService.Show(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<MessageBoxButton>(), Arg.Any<MessageBoxImage>())
-                .Returns(MessageBoxResult.Yes);
-
+            dialogService.ShowDialog(Arg.Any<ConfirmationDialog>()).Returns(DialogResult.Yes);
+            
             var jenkinsJob = new JenkinsJob_v1
             {
                 Name = "Jenkins Core",

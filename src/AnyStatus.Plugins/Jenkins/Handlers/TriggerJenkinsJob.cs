@@ -19,13 +19,11 @@ namespace AnyStatus
 
         public async Task HandleAsync(JenkinsJob_v1 jenkinsJob)
         {
-            var result = _dialogService.Show(
-                $"Are you sure you want to trigger {jenkinsJob.Name}?",
-                "Trigger a new build",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Asterisk);
+            var dialog = new ConfirmationDialog($"Are you sure you want to trigger {jenkinsJob.Name}?", "Trigger a new build");
 
-            if (result != MessageBoxResult.Yes) return;
+            var result = _dialogService.ShowDialog(dialog);
+
+            if (result != DialogResult.Yes) return;
 
             await _jenkinsClient.TriggerJobAsync(jenkinsJob).ConfigureAwait(false);
 
