@@ -13,7 +13,9 @@ namespace AnyStatus
     {
         private const string Category = "Build Definition";
 
-        public VSTSBuild_v1() : base(aggregate: false) { }
+        public VSTSBuild_v1() : base(aggregate: false)
+        {
+        }
 
         [Required]
         [Category(Category)]

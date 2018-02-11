@@ -126,6 +126,6 @@ namespace AnyStatus
             return new Uri(jenkinsUri, api);
         }
 
-        #endregion
+        #endregion Helpers
     }
 }

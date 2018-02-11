@@ -75,7 +75,7 @@ namespace AnyStatus
 
         #region Contracts
 
-        class CoveredPercentResponse
+        private class CoveredPercentResponse
         {
             public float covered_percent { private get; set; }
 
@@ -88,7 +88,7 @@ namespace AnyStatus
             }
         }
 
-        #endregion
+        #endregion Contracts
     }
 
     public class OpenCoverallsInBrowser : IOpenInBrowser<CoverallsCoveredPercent>

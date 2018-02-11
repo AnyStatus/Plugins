@@ -37,8 +37,8 @@ namespace AnyStatus
 
         public bool CanTriggerBuild()
         {
-            return State != State.None && 
-                   State != State.Error && 
+            return State != State.None &&
+                   State != State.Error &&
                    !string.IsNullOrWhiteSpace(ApiToken);
         }
     }

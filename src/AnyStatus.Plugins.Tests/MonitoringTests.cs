@@ -82,7 +82,7 @@ namespace AnyStatus.Plugins.Tests
 
             Assert.AreNotSame(State.None, request.State);
         }
-        
+
         [TestMethod]
         public void UptimeRobotOverallStatus()
         {

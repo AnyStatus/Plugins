@@ -1,12 +1,6 @@
 ﻿using AnyStatus.API;
-using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 using System.Windows;
 
 namespace AnyStatus
@@ -78,8 +72,5 @@ namespace AnyStatus
         {
             item.Remove(job);
         }
-
-
     }
-
 }

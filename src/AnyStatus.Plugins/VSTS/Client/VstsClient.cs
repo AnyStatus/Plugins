@@ -10,9 +10,14 @@ namespace AnyStatus
 {
     public class VstsClient
     {
-        public VstsClient() { }
+        public VstsClient()
+        {
+        }
 
-        public VstsClient(VstsConnection connection) { Connection = connection; }
+        public VstsClient(VstsConnection connection)
+        {
+            Connection = connection;
+        }
 
         public VstsConnection Connection { get; set; }
 
@@ -53,7 +58,7 @@ namespace AnyStatus
             await Send("build/builds?api-version=2.0", request).ConfigureAwait(false);
         }
 
-        #endregion
+        #endregion Build
 
         #region Release
 
@@ -92,7 +97,7 @@ namespace AnyStatus
             return details;
         }
 
-        #endregion
+        #endregion Release
 
         private async Task<T> Request<T>(string api, bool vsrm = false)
         {

@@ -23,15 +23,20 @@ namespace AnyStatus
             {
                 case "success":
                     return State.Ok;
+
                 case "failed":
                 case "failure":
                     return State.Failed;
+
                 case "cancelled":
                     return State.Canceled;
+
                 case "queued":
                     return State.Queued;
+
                 case "running":
                     return State.Running;
+
                 default:
                     return State.Unknown;
             }
@@ -72,6 +77,6 @@ namespace AnyStatus
             public string Status { get; set; }
         }
 
-        #endregion
+        #endregion Contracts
     }
 }

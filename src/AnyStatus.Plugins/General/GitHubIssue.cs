@@ -47,9 +47,11 @@ namespace AnyStatus
                 case GitHubIssueState.Open:
                     item.State = State.Open;
                     break;
+
                 case GitHubIssueState.Closed:
                     item.State = State.Closed;
                     break;
+
                 default:
                     item.State = State.Unknown;
                     break;

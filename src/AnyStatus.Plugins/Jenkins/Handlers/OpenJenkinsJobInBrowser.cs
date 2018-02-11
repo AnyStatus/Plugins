@@ -2,7 +2,6 @@
 
 namespace AnyStatus
 {
-
 #warning Duplicate
 
     public class OpenJenkinsJobInBrowser : IOpenInBrowser<JenkinsJob_v1>

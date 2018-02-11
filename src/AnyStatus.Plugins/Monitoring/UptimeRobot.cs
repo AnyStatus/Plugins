@@ -68,13 +68,17 @@ namespace AnyStatus
             {
                 case UptimeRobotMonitorStatus.Pause:
                     return State.Disabled;
+
                 case UptimeRobotMonitorStatus.NotChecked:
                     return State.None;
+
                 case UptimeRobotMonitorStatus.Up:
                     return State.Ok;
+
                 case UptimeRobotMonitorStatus.SeemsDown:
                 case UptimeRobotMonitorStatus.Down:
                     return State.Failed;
+
                 default:
                     return State.Unknown;
             }
@@ -175,6 +179,6 @@ namespace AnyStatus
             Down = 9
         }
 
-        #endregion
+        #endregion Contracts
     }
 }

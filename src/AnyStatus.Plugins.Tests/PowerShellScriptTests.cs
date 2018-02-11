@@ -10,7 +10,7 @@ namespace AnyStatus.Plugins.Tests
     {
         private static TestContext _testContext;
 
-        IProcessStarter _processStarter = Substitute.For<IProcessStarter>();
+        private IProcessStarter _processStarter = Substitute.For<IProcessStarter>();
 
         [ClassInitialize]
         public static void SetupTests(TestContext testContext)
@@ -22,7 +22,6 @@ namespace AnyStatus.Plugins.Tests
         [DeploymentItem(@"Scripts\PowerShell.ps1")]
         public void Should_Execute_PowerShellScript()
         {
-
             var request = new PowerShellScript
             {
                 FileName = Path.Combine(_testContext.TestRunDirectory, "Out", "PowerShell.ps1")

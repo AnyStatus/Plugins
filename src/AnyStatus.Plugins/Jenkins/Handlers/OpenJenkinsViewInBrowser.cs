@@ -16,5 +16,4 @@ namespace AnyStatus
             _processStarter.Start(jenkinsView.URL);
         }
     }
-    
 }

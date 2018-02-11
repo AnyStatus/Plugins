@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.ServiceProcess;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace AnyStatus
 {

@@ -120,5 +120,5 @@ namespace AnyStatus
         public string Status { get; set; }
     }
 
-    #endregion
+    #endregion Contracts
 }

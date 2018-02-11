@@ -14,6 +14,7 @@ namespace AnyStatus.Plugins.Tests
 #if !DEBUG
         [Ignore]
 #endif
+
         [TestMethod]
         [TestCategory(Category)]
         public void JenkinsJobs_Monitor()
@@ -48,7 +49,7 @@ namespace AnyStatus.Plugins.Tests
             var jenkinsClient = new JenkinsClient(logger);
 
             dialogService.ShowDialog(Arg.Any<ConfirmationDialog>()).Returns(DialogResult.Yes);
-            
+
             var jenkinsJob = new JenkinsJob_v1
             {
                 Name = "Jenkins Core",

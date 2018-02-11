@@ -15,7 +15,7 @@ namespace AnyStatus
             _logger = Preconditions.CheckNotNull(logger, nameof(logger));
         }
 
-        #region IJenkinsClient 
+        #region IJenkinsClient
 
         public async Task<JenkinsJob> GetJobAsync(IJenkinsPlugin jenkinsPlugin)
         {
@@ -49,7 +49,7 @@ namespace AnyStatus
             }
         }
 
-        #endregion
+        #endregion IJenkinsClient
 
         #region Helpers
 
@@ -94,6 +94,6 @@ namespace AnyStatus
             return sb.ToString();
         }
 
-        #endregion
+        #endregion Helpers
     }
 }

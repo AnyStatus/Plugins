@@ -56,14 +56,14 @@ namespace AnyStatus
         public void Handle(Pingdom pingdom)
         {
             PingdomCheckStatus status;
-            
+
             if (string.IsNullOrWhiteSpace(pingdom.CheckId))
             {
                 //todo: support paging. pingdom api limits the number of results.
 
-                var checkList = GetChecks<CheckList>(ServerAddress,pingdom.UserName, pingdom.Password, pingdom.ApiKey);
+                var checkList = GetChecks<CheckList>(ServerAddress, pingdom.UserName, pingdom.Password, pingdom.ApiKey);
 
-                status = checkList.Checks.Max(k=>k.Status);
+                status = checkList.Checks.Max(k => k.Status);
             }
             else
             {
@@ -81,14 +81,18 @@ namespace AnyStatus
             {
                 case PingdomCheckStatus.Up:
                     return State.Ok;
+
                 case PingdomCheckStatus.Paused:
                     //todo: add Paused state
                     return State.Canceled;
+
                 case PingdomCheckStatus.Unknown:
                     return State.Unknown;
+
                 case PingdomCheckStatus.Unconfirmed_down:
                 case PingdomCheckStatus.Down:
                     return State.Failed;
+
                 default:
                     return State.Unknown;
             }
@@ -135,6 +139,6 @@ namespace AnyStatus
             public PingdomCheckStatus Status { get; set; }
         }
 
-        #endregion
+        #endregion Contracts
     }
 }

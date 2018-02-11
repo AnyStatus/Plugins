@@ -4,6 +4,5 @@ namespace AnyStatus
 {
     public class VstsClientException : Exception
     {
-
     }
 }

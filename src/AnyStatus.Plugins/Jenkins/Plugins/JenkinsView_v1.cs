@@ -12,7 +12,9 @@ namespace AnyStatus
     {
         private string _url;
 
-        public JenkinsView_v1() : base(aggregate: true) { }
+        public JenkinsView_v1() : base(aggregate: true)
+        {
+        }
 
         [Url]
         [Required]

@@ -10,7 +10,7 @@ namespace AnyStatus.Plugins.Tests
     {
         private static TestContext _testContext;
 
-        IProcessStarter _processStarter = Substitute.For<IProcessStarter>();
+        private IProcessStarter _processStarter = Substitute.For<IProcessStarter>();
 
         [ClassInitialize]
         public static void SetupTests(TestContext testContext)

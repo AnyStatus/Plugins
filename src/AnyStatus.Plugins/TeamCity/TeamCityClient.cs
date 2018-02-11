@@ -115,7 +115,7 @@ namespace AnyStatus
                 }
             }
         }
-        
-        #endregion
+
+        #endregion Helpers
     }
 }

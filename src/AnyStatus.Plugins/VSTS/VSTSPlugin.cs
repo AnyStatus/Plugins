@@ -27,7 +27,6 @@ namespace AnyStatus
         [Description("Required (case-sensitive). Enter your Visual Studio Team Services project name.")]
         public string Project { get; set; }
 
-
         [PropertyOrder(30)]
         [Category(Category)]
         [DisplayName("User Name")]

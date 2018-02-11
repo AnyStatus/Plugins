@@ -24,9 +24,11 @@ namespace AnyStatus
                 case "notStarted":
                     item.State = State.Queued;
                     return;
+
                 case "inProgress":
                     item.State = State.Running;
                     return;
+
                 default:
                     break;
             }
@@ -36,18 +38,23 @@ namespace AnyStatus
                 case "notStarted":
                     item.State = State.Running;
                     break;
+
                 case "succeeded":
                     item.State = State.Ok;
                     break;
+
                 case "failed":
                     item.State = State.Failed;
                     break;
+
                 case "partiallySucceeded":
                     item.State = State.PartiallySucceeded;
                     break;
+
                 case "canceled":
                     item.State = State.Canceled;
                     break;
+
                 default:
                     item.State = State.Unknown;
                     break;

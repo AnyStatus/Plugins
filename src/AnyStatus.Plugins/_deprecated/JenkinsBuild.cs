@@ -248,14 +248,19 @@ namespace AnyStatus
             {
                 case "SUCCESS":
                     return State.Ok;
+
                 case "ABORTED":
                     return State.Canceled;
+
                 case "FAILURE":
                     return State.Failed;
+
                 case "UNSTABLE":
                     return State.PartiallySucceeded;
-                case "QUEUED": //todo: make sure the status is correct 
+
+                case "QUEUED": //todo: make sure the status is correct
                     return State.Queued;
+
                 default:
                     return State.Unknown;
             }
@@ -337,5 +342,5 @@ namespace AnyStatus
         }
     }
 
-    #endregion
+    #endregion Contracts
 }

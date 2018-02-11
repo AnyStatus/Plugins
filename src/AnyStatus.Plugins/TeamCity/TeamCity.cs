@@ -29,9 +29,11 @@ namespace AnyStatus
                     {
                         case "SUCCESS":
                             return State.Ok;
+
                         case "FAILURE":
                         case "ERROR":
                             return State.Failed;
+
                         case "UNKNOWN":
                         default:
                             return State.Unknown;

@@ -36,6 +36,7 @@ namespace AnyStatus
                 {
                     case "notStarted":
                         return State.Queued;
+
                     case "inProgress":
                         return State.Running;
                 }
@@ -44,14 +45,19 @@ namespace AnyStatus
                 {
                     case "notStarted":
                         return State.Running;
+
                     case "succeeded":
                         return State.Ok;
+
                     case "failed":
                         return State.Failed;
+
                     case "partiallySucceeded":
                         return State.PartiallySucceeded;
+
                     case "canceled":
                         return State.Canceled;
+
                     default:
                         return State.Unknown;
                 }
@@ -94,20 +100,28 @@ namespace AnyStatus
                 {
                     case "notStarted":
                         return State.None;
+
                     case "inProgress":
                         return PreDeployApprovals.Any(k => k.Status != "approved") ? State.Unknown : State.Running;
+
                     case "succeeded":
                         return State.Ok;
+
                     case "canceled":
                         return State.Canceled;
+
                     case "rejected":
                         return State.Failed;
+
                     case "queued":
                         return State.Queued;
+
                     case "scheduled":
                         return State.None;
+
                     case "partiallySucceeded":
                         return State.PartiallySucceeded;
+
                     default:
                         return State.Unknown;
                 }

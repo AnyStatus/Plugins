@@ -36,15 +36,19 @@ namespace AnyStatus
             {
                 case "SUCCESS":
                     return State.Ok;
+
                 case "ABORTED":
                     return State.Canceled;
+
                 case "FAILURE":
                     return State.Failed;
+
                 case "UNSTABLE":
                     return State.PartiallySucceeded;
 #warning verify status string. Note, there is a dedicate property for that.
                 case "QUEUED":
                     return State.Queued;
+
                 default:
                     return State.Unknown;
             }
