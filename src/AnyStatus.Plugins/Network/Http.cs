@@ -33,6 +33,10 @@ namespace AnyStatus
         [PropertyOrder(30)]
         [DisplayName("Ignore SSL Errors")]
         public bool IgnoreSslErrors { get; set; }
+        
+        [PropertyOrder(40)]
+        [DisplayName("Use Default Credentials")]
+        public bool UseDefaultCredentials { get; set; }
 
         public bool CanOpenInBrowser()
         {
@@ -49,6 +53,9 @@ namespace AnyStatus
             {
                 if (item.IgnoreSslErrors)
                     handler.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+
+                if (item.UseDefaultCredentials)
+                    handler.UseDefaultCredentials = true;
 
                 try
                 {

@@ -22,5 +22,23 @@ namespace AnyStatus.Plugins.Tests.AppVeyor
             Assert.AreNotEqual(State.None, appVeyorBuild.State, "State is None.");
             Assert.AreNotEqual(State.Error, appVeyorBuild.State, "State is Error.");
         }
+
+        [TestMethod]
+        public void TestMethod2()
+        {
+            var appVeyorBuild = new AppVeyorBuild
+            {
+                AccountName = "AnyStatus",
+                ProjectSlug = "api",
+                SourceControlBranch = "master"
+            };
+
+            var appVeyorBuildMonitor = new AppVeyorBuildMonitor();
+
+            appVeyorBuildMonitor.Handle(appVeyorBuild);
+
+            Assert.AreNotEqual(State.None, appVeyorBuild.State, "State is None.");
+            Assert.AreNotEqual(State.Error, appVeyorBuild.State, "State is Error.");
+        }
     }
 }

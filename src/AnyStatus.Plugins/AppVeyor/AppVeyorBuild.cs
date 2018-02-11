@@ -30,6 +30,12 @@ namespace AnyStatus
         [Description("Optional. AppVeyor API token.")]
         public string ApiToken { get; set; }
 
+        [PropertyOrder(40)]
+        [Category("Source Control")]
+        [DisplayName("Branch")]
+        [Description("Optional. Branch to trigger")]
+        public string SourceControlBranch { get; set; }
+
         public bool CanOpenInBrowser()
         {
             return State != State.None && State != State.Error;
