@@ -17,9 +17,9 @@ namespace AnyStatus.Plugins.Tests
 
         [TestMethod]
         [TestCategory(Category)]
-        public void JenkinsJobs_Monitor()
+        public void JenkinsJobMonitor()
         {
-            var jenkinsJobPlugin = new JenkinsJob_v1
+            var jenkinsJob = new JenkinsJob_v1
             {
                 Name = "Jenkins Core",
                 IgnoreSslErrors = true,
@@ -27,16 +27,17 @@ namespace AnyStatus.Plugins.Tests
             };
 
             var logger = Substitute.For<ILogger>();
-
             var jenkinsClient = new JenkinsClient(logger);
+            var monitor = new JenkinsJobMonitor(jenkinsClient);
 
-            var jenkins = new JenkinsJobMonitor(jenkinsClient);
+            monitor.Handle(jenkinsJob);
 
-            jenkins.Handle(jenkinsJobPlugin);
-
-            Assert.AreNotEqual(State.None, jenkinsJobPlugin.State, "Widget state is None.");
-            Assert.AreNotEqual(State.Unknown, jenkinsJobPlugin.State, "Widget state is Unknown.");
-            Assert.AreNotEqual(State.Error, jenkinsJobPlugin.State, "Widget state is Error.");
+            if (jenkinsJob.State == State.None ||
+                jenkinsJob.State == State.Error ||
+                jenkinsJob.State == State.Unknown)
+            {
+                Assert.Fail("Invalid widget state");
+            }
         }
 
         [TestMethod]

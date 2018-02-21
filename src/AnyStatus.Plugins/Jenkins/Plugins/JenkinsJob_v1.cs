@@ -65,11 +65,9 @@ namespace AnyStatus
             set
             {
                 _isParameterized = value;
-                //SetAttributeFieldValue(nameof(BuildParameters), "browsable", _isParameterized);
             }
         }
 
-        //[Browsable(false)]
         [PropertyOrder(60)]
         [Category("Jenkins")]
         [DisplayName("Parameters")]
