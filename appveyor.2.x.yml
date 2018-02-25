@@ -28,4 +28,4 @@ build:
   
 deploy:
   provider: Environment
-name: AnyStatus
+  name: AnyStatus
