@@ -1,8 +1,11 @@
 ﻿using AnyStatus.API;
+using System.Linq;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace AnyStatus
 {
@@ -12,7 +15,7 @@ namespace AnyStatus
     [DisplayColumn("Continuous Integration")]
     public class TeamCityBuild : Build, IMonitored, ICanOpenInBrowser, ICanTriggerBuild
     {
-        private string _url;
+        private string url;
 
         [Url]
         [Required]
@@ -22,11 +25,19 @@ namespace AnyStatus
         [Description("TeamCity server URL address. For example: http://teamcity:8080")]
         public string Url
         {
-            get { return _url; }
+            get
+            {
+                return url;
+            }
             set
             {
-                _url = value;
-                if (_url.EndsWith("/")) { _url = _url.Remove(_url.Length - 1); }
+                var uri = new Uri(value);
+                url = uri.GetComponents(UriComponents.SchemeAndServer, UriFormat.SafeUnescaped).TrimEnd('/');
+                var queryString = QueryHelpers.ParseNullableQuery(uri.Query).ToDictionary(kvp => kvp.Key, kvp => kvp.Value.FirstOrDefault());
+                BuildTypeId = queryString.TryGetValue("buildTypeId", out string buildTypeId) ? buildTypeId : null;
+                OnPropertyChanged(nameof(BuildTypeId));
+                SourceControlBranch = queryString.Where(kvp => kvp.Key.StartsWith("branch_", StringComparison.Ordinal)).Select(kvp => kvp.Value).FirstOrDefault();
+                OnPropertyChanged(nameof(SourceControlBranch));
             }
         }
 
