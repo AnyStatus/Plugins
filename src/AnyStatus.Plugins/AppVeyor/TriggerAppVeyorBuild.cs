@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API;
+using AnyStatus.API.Legacy;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;

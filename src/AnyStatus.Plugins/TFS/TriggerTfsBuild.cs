@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API;
+using AnyStatus.API.Legacy;
 using System;
 using System.Diagnostics;
 using System.Net.Http;

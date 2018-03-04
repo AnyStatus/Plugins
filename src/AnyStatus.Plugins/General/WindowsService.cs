@@ -10,7 +10,7 @@ namespace AnyStatus
 {
     [DisplayName("Windows Service")]
     [Description("Test whether a windows service is running")]
-    public class WindowsService : Widget, IMonitored, ICanStart, ICanStop, ICanRestart
+    public class WindowsService : Widget, IHealthCheck, IStartable, IStoppable, IRestartable
     {
         private const string Category = "Windows Service";
 
@@ -68,157 +68,158 @@ namespace AnyStatus
         }
     }
 
-    public class WindowsServiceMonitor : BaseWindowsServiceHandler, IMonitor<WindowsService>
-    {
-        [DebuggerStepThrough]
-        public void Handle(WindowsService windowsService)
-        {
-            var sc = GetServiceController(windowsService);
+    //public class WindowsServiceMonitor : BaseWindowsServiceHandler, IMonitor<WindowsService>
+    //{
+    //    [DebuggerStepThrough]
+    //    public void Handle(WindowsService windowsService)
+    //    {
+    //        var sc = GetServiceController(windowsService);
 
-            SetState(windowsService, sc);
+    //        SetState(windowsService, sc);
 
-            sc.Close();
-        }
-    }
+    //        sc.Close();
+    //    }
+    //}
 
-    public class StartWindowsService : BaseWindowsServiceHandler, IStart<WindowsService>
-    {
-        private readonly ILogger _logger;
-        private readonly IDialogService _dialogService;
+    //public class StartWindowsService : BaseWindowsServiceHandler, IStart<WindowsService>
+    //{
+    //    private readonly ILogger _logger;
+    //    private readonly IDialogService _dialogService;
 
-        public StartWindowsService(IDialogService dialogService, ILogger logger)
-        {
-            _logger = Preconditions.CheckNotNull(logger, nameof(logger));
-            _dialogService = Preconditions.CheckNotNull(dialogService, nameof(dialogService));
-        }
+    //    public StartWindowsService(IDialogService dialogService, ILogger logger)
+    //    {
+    //        _logger = Preconditions.CheckNotNull(logger, nameof(logger));
+    //        _dialogService = Preconditions.CheckNotNull(dialogService, nameof(dialogService));
+    //    }
 
-        public async Task HandleAsync(WindowsService windowsService)
-        {
-            var dialog = new ConfirmationDialog($"Are you sure you want to start {windowsService.Name}?", "Start Windows Service");
+    //    public async Task HandleAsync(WindowsService windowsService)
+    //    {
+    //        var dialog = new ConfirmationDialog($"Are you sure you want to start {windowsService.Name}?", "Start Windows Service");
 
-            var result = _dialogService.ShowDialog(dialog);
+    //        var result = _dialogService.ShowDialog(dialog);
 
-            if (result != DialogResult.Yes) return;
+    //        if (result != DialogResult.Yes) return;
 
-            _logger.Info($"Starting {windowsService.Name}.");
+    //        _logger.Info($"Starting {windowsService.Name}.");
 
-            await StartAsync(windowsService).ConfigureAwait(false);
-        }
+    //        await StartAsync(windowsService).ConfigureAwait(false);
+    //    }
 
-        private async Task StartAsync(WindowsService windowsService)
-        {
-            await Task.Run(() =>
-            {
-                using (var sc = GetServiceController(windowsService))
-                {
-                    if (sc.Status != ServiceControllerStatus.Running && sc.Status != ServiceControllerStatus.StartPending)
-                    {
-                        sc.Start();
+    //    private async Task StartAsync(WindowsService windowsService)
+    //    {
+    //        await Task.Run(() =>
+    //        {
+    //            using (var sc = GetServiceController(windowsService))
+    //            {
+    //                if (sc.Status != ServiceControllerStatus.Running && sc.Status != ServiceControllerStatus.StartPending)
+    //                {
+    //                    sc.Start();
 
-                        sc.WaitForStatus(ServiceControllerStatus.Running, Timeout);
-                    }
+    //                    sc.WaitForStatus(ServiceControllerStatus.Running, Timeout);
+    //                }
 
-                    SetState(windowsService, sc);
+    //                SetState(windowsService, sc);
 
-                    sc.Close();
-                }
-            });
-        }
-    }
+    //                sc.Close();
+    //            }
+    //        });
+    //    }
+    //}
 
-    public class StopWindowsService : BaseWindowsServiceHandler, IStop<WindowsService>
-    {
-        private readonly ILogger _logger;
-        private readonly IDialogService _dialogService;
+    //public class StopWindowsService : BaseWindowsServiceHandler, IStop<WindowsService>
+    //{
+    //    private readonly ILogger _logger;
+    //    private readonly IDialogService _dialogService;
 
-        public StopWindowsService(IDialogService dialogService, ILogger logger)
-        {
-            _logger = Preconditions.CheckNotNull(logger, nameof(logger));
-            _dialogService = Preconditions.CheckNotNull(dialogService, nameof(dialogService));
-        }
+    //    public StopWindowsService(IDialogService dialogService, ILogger logger)
+    //    {
+    //        _logger = Preconditions.CheckNotNull(logger, nameof(logger));
+    //        _dialogService = Preconditions.CheckNotNull(dialogService, nameof(dialogService));
+    //    }
 
-        public async Task HandleAsync(WindowsService windowsService)
-        {
-            var dialog = new ConfirmationDialog($"Are you sure you want to stop {windowsService.Name}?", "Stop Windows Service");
+    //    public async Task HandleAsync(WindowsService windowsService)
+    //    {
+    //        var dialog = new ConfirmationDialog($"Are you sure you want to stop {windowsService.Name}?", "Stop Windows Service");
 
-            var result = _dialogService.ShowDialog(dialog);
+    //        var result = _dialogService.ShowDialog(dialog);
 
-            if (result != DialogResult.Yes) return;
+    //        if (result != DialogResult.Yes) return;
 
-            _logger.Info($"Stopping {windowsService.Name}.");
+    //        _logger.Info($"Stopping {windowsService.Name}.");
 
-            await StopAsync(windowsService).ConfigureAwait(false);
-        }
+    //        await StopAsync(windowsService).ConfigureAwait(false);
+    //    }
 
-        private async Task StopAsync(WindowsService windowsService)
-        {
-            await Task.Run(() =>
-            {
-                using (var sc = GetServiceController(windowsService))
-                {
-                    if (sc.Status == ServiceControllerStatus.Running || sc.Status == ServiceControllerStatus.StartPending)
-                    {
-                        sc.Stop();
+    //    private async Task StopAsync(WindowsService windowsService)
+    //    {
+    //        await Task.Run(() =>
+    //        {
+    //            using (var sc = GetServiceController(windowsService))
+    //            {
+    //                if (sc.Status == ServiceControllerStatus.Running || sc.Status == ServiceControllerStatus.StartPending)
+    //                {
+    //                    sc.Stop();
 
-                        sc.WaitForStatus(ServiceControllerStatus.Stopped, Timeout);
-                    }
+    //                    sc.WaitForStatus(ServiceControllerStatus.Stopped, Timeout);
+    //                }
 
-                    SetState(windowsService, sc);
+    //                SetState(windowsService, sc);
 
-                    sc.Close();
-                }
-            });
-        }
-    }
+    //                sc.Close();
+    //            }
+    //        });
+    //    }
+    //}
 
-    public class RestartWindowsService : BaseWindowsServiceHandler, IRestart<WindowsService>
-    {
-        private readonly ILogger _logger;
-        private readonly IDialogService _dialogService;
+    //public class RestartWindowsService : BaseWindowsServiceHandler, IRestart<WindowsService>
+    //{
+    //    private readonly ILogger _logger;
+    //    private readonly IDialogService _dialogService;
 
-        public RestartWindowsService(IDialogService dialogService, ILogger logger)
-        {
-            _logger = Preconditions.CheckNotNull(logger, nameof(logger));
-            _dialogService = Preconditions.CheckNotNull(dialogService, nameof(dialogService));
-        }
+    //    public RestartWindowsService(IDialogService dialogService, ILogger logger)
+    //    {
+    //        _logger = Preconditions.CheckNotNull(logger, nameof(logger));
+    //        _dialogService = Preconditions.CheckNotNull(dialogService, nameof(dialogService));
+    //    }
 
-        public async Task HandleAsync(WindowsService windowsService)
-        {
-            var dialog = new ConfirmationDialog($"Are you sure you want to restart {windowsService.Name}?", "Restart Windows Service");
+    //    public async Task HandleAsync(WindowsService windowsService)
+    //    {
+    //        var dialog = new ConfirmationDialog($"Are you sure you want to restart {windowsService.Name}?", "Restart Windows Service");
 
-            var result = _dialogService.ShowDialog(dialog);
+    //        var result = _dialogService.ShowDialog(dialog);
 
-            if (result != DialogResult.Yes) return;
+    //        if (result != DialogResult.Yes) return;
 
-            _logger.Info($"Restarting {windowsService.Name}.");
+    //        _logger.Info($"Restarting {windowsService.Name}.");
 
-            await RestartAsync(windowsService).ConfigureAwait(false);
-        }
+    //        await RestartAsync(windowsService).ConfigureAwait(false);
+    //    }
 
-        private async Task RestartAsync(WindowsService windowsService)
-        {
-            await Task.Run(() =>
-            {
-                using (var sc = GetServiceController(windowsService))
-                {
-                    if (sc.Status == ServiceControllerStatus.Running || sc.Status == ServiceControllerStatus.StartPending)
-                    {
-                        sc.Stop();
+    //    private async Task RestartAsync(WindowsService windowsService)
+    //    {
+    //        await Task.Run(() =>
+    //        {
+    //            using (var sc = GetServiceController(windowsService))
+    //            {
+    //                if (sc.Status == ServiceControllerStatus.Running || sc.Status == ServiceControllerStatus.StartPending)
+    //                {
+    //                    sc.Stop();
 
-                        sc.WaitForStatus(ServiceControllerStatus.Stopped, Timeout);
-                    }
+    //                    sc.WaitForStatus(ServiceControllerStatus.Stopped, Timeout);
+    //                }
 
-                    SetState(windowsService, sc);
+    //                SetState(windowsService, sc);
 
-                    sc.Start();
+    //                sc.Start();
 
-                    sc.WaitForStatus(ServiceControllerStatus.Running, Timeout);
+    //                sc.WaitForStatus(ServiceControllerStatus.Running, Timeout);
 
-                    SetState(windowsService, sc);
+    //                SetState(windowsService, sc);
 
-                    sc.Close();
-                }
-            });
-        }
-    }
+    //                sc.Close();
+    //            }
+    //        });
+    //    }
+    //}
+
 }

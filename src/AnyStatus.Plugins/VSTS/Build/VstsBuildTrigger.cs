@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API;
+using AnyStatus.API.Legacy;
 using AnyStatus.API.Utils;
 using System.Threading.Tasks;
 

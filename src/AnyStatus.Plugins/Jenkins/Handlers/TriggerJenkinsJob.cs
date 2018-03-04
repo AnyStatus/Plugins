@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API;
+using AnyStatus.API.Legacy;
 using System.Threading.Tasks;
 
 namespace AnyStatus

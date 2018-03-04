@@ -41,17 +41,18 @@ namespace AnyStatus.Plugins.Tests
             Assert.AreSame(State.Ok, request.State);
         }
 
+        [Ignore]
         [TestMethod]
         public void WindowsServiceHandler()
         {
-            var request = new WindowsService
-            {
-                ServiceName = "Dhcp"
-            };
+            //var request = new WindowsService
+            //{
+            //    ServiceName = "Dhcp"
+            //};
 
-            new WindowsServiceMonitor().Handle(request);
+            //new WindowsServiceMonitor().Handle(request);
 
-            Assert.AreSame(State.Ok, request.State);
+            //Assert.AreSame(State.Ok, request.State);
         }
 
         [Ignore]
