@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace AnyStatus
 {
@@ -15,62 +16,46 @@ namespace AnyStatus
         }
 
         [DebuggerStepThrough]
-        public void Handle(JenkinsView_v1 item)
+        public void Handle(JenkinsView_v1 jenkinsView)
         {
-            if (item.Parent == null) return;
+            var jenkinsViewResponse = _jenkinsClient.GetViewAsync(jenkinsView).GetAwaiter().GetResult();
 
-            var build = _jenkinsClient.GetViewAsync(item).Result;
+            var prevJobs = jenkinsView.Items.OfType<JenkinsJob_v1>();
 
-            item.State = State.Ok;
+            var dispatcher = Application.Current != null ? Application.Current.Dispatcher : Dispatcher.CurrentDispatcher;
 
-            // HACK: This adds items, but requires a restart before "schedulers" are created by AnyStatus.
-            var prevJobs = item.Parent.Items.OfType<JenkinsJob_v1>();
-
-            Application.Current.Dispatcher.Invoke(() =>
+            dispatcher.Invoke(() =>
             {
-                // Add new jobs
-                var newJobs = build.Jobs.Where(x => prevJobs.All(y => y.URL != x.URL)).OrderBy(x => x.Name);
+                // Add Jobs
+                var newJobs = jenkinsViewResponse.Jobs.Where(x => prevJobs.All(y => y.URL != x.URL)).OrderBy(x => x.Name);
 
                 foreach (var job in newJobs)
                 {
-                    this.AddJob(item, job);
+                    AddJob(jenkinsView, job);
                 }
 
-                // Update existing jobs
-                foreach (var job in build.Jobs.Except(newJobs))
+                // Remove Jobs
+                foreach (var job in prevJobs.Where(x => jenkinsViewResponse.Jobs.All(y => y.URL != x.URL)))
                 {
-                    this.UpdateJob(prevJobs.Single(x => x.URL == job.URL), job);
-                }
-
-                // Remove any jobs that no longer exist
-                foreach (var job in prevJobs.Where(x => build.Jobs.All(y => y.URL != x.URL)))
-                {
-                    this.RemoveJob(item, job);
+                    jenkinsView.Remove(job);
                 }
             });
         }
 
-        private void AddJob(JenkinsView_v1 item, JenkinsJob job)
+        private void AddJob(JenkinsView_v1 view, JenkinsJob job)
         {
-            item.Add(new JenkinsJob_v1
+            view.Add(new JenkinsJob_v1
             {
                 Name = job.Name.Replace("%2F", "/"),
                 URL = job.URL,
-                Interval = item.Interval,
-                UserName = item.UserName,
-                ApiToken = item.ApiToken,
-                IgnoreSslErrors = item.IgnoreSslErrors
+                Interval = view.Interval,
+                UserName = view.UserName,
+                ApiToken = view.ApiToken,
+                CSRF = view.CSRF,
+                IgnoreSslErrors = view.IgnoreSslErrors
+                
+                #warning IsParameterized is not set
             });
-        }
-
-        private void UpdateJob(JenkinsJob_v1 item, JenkinsJob job)
-        {
-            // TODO: not sure what to update... => Update Item.State
-        }
-
-        private void RemoveJob(JenkinsView_v1 item, JenkinsJob_v1 job)
-        {
-            item.Remove(job);
         }
     }
 }

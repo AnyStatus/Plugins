@@ -14,7 +14,6 @@ namespace AnyStatus.Plugins.Tests
 #if !DEBUG
         [Ignore]
 #endif
-
         [TestMethod]
         [TestCategory(Category)]
         public void JenkinsJobMonitor()
