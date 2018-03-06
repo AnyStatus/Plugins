@@ -7,7 +7,7 @@ namespace AnyStatus.Plugins.Tests.AppVeyor
     public class AppVeyorTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void AppVeyor_DefaultBranch()
         {
             var appVeyorBuild = new AppVeyorBuild
             {
@@ -24,7 +24,7 @@ namespace AnyStatus.Plugins.Tests.AppVeyor
         }
 
         [TestMethod]
-        public void TestMethod2()
+        public void AppVeyor_SpecifiedBranch()
         {
             var appVeyorBuild = new AppVeyorBuild
             {
