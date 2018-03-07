@@ -1,6 +1,8 @@
 ﻿using AnyStatus.API;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Tests
 {
@@ -72,16 +74,18 @@ namespace AnyStatus.Plugins.Tests
         }
 
         [TestMethod]
-        public void CoverallsHandler()
+        public async Task CoverallsHandler()
         {
-            var request = new CoverallsCoveredPercent
+            var widget = new CoverallsCoveredPercent
             {
-                Url = "https://coveralls.io/github/xing/hardcover?branch=demo"
+                URL = "https://coveralls.io/github/xing/hardcover?branch=demo"
             };
 
-            new CoverallsCoveredPercentMonitor().Handle(request);
+            var handler = new CoverallsCoveredPercentQuery();
 
-            Assert.AreNotSame(State.None, request.State);
+            var request = MetricQueryRequest.Create(widget);
+
+            await handler.Handle(request, CancellationToken.None);
         }
 
         [TestMethod]

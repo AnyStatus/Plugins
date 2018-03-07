@@ -8,12 +8,12 @@ using System.Web.Script.Serialization;
 
 namespace AnyStatus
 {
-    public class TriggerAppVeyorBuild : IStart<AppVeyorBuild>
+    public class StartAppVeyorBuild : IStart<AppVeyorBuild>
     {
         private readonly ILogger _logger;
         private readonly IDialogService _dialogService;
 
-        public TriggerAppVeyorBuild(IDialogService dialogService, ILogger logger)
+        public StartAppVeyorBuild(IDialogService dialogService, ILogger logger)
         {
             _logger = Preconditions.CheckNotNull(logger, nameof(logger));
             _dialogService = Preconditions.CheckNotNull(dialogService, nameof(dialogService));

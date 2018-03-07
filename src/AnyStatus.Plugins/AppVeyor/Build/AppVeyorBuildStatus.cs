@@ -8,7 +8,7 @@ using System.Web.Script.Serialization;
 
 namespace AnyStatus
 {
-    public class AppVeyorBuildMonitor : ICheckHealth<AppVeyorBuild>
+    public class AppVeyorBuildStatus : ICheckHealth<AppVeyorBuild>
     {
         private State GetState(string status)
         {

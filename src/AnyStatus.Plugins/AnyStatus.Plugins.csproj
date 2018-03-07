@@ -65,10 +65,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppVeyor\Build\AppVeyorBuildMonitor.cs" />
-    <Compile Include="AppVeyor\Build\OpenAppVeyorBuildWebPage.cs" />
+    <Compile Include="AppVeyor\Build\AppVeyorBuildStatus.cs" />
+    <Compile Include="AppVeyor\Build\OpenWebPage.cs" />
+    <Compile Include="Coveralls\CoverallsCoveredPercentQuery.cs" />
+    <Compile Include="Coveralls\OpenWebPage.cs" />
     <Compile Include="OpenWebPage.cs" />
-    <Compile Include="AppVeyor\Build\TriggerAppVeyorBuild.cs" />
+    <Compile Include="AppVeyor\Build\StartAppVeyorBuild.cs" />
     <Compile Include="General\NuGetPackageVersion.cs" />
     <Compile Include="Jenkins\Client\Contracts\JenkinsCrumb.cs" />
     <Compile Include="Jenkins\Client\JenkinsRequest.cs" />

@@ -17,7 +17,7 @@ namespace AnyStatus.Plugins.Tests.AppVeyor
                 ProjectSlug = "api"
             };
 
-            var appVeyorBuildMonitor = new AppVeyorBuildMonitor();
+            var appVeyorBuildMonitor = new AppVeyorBuildStatus();
 
             var request = HealthCheckRequest.Create(appVeyorBuild);
 
@@ -37,7 +37,7 @@ namespace AnyStatus.Plugins.Tests.AppVeyor
                 SourceControlBranch = "master"
             };
 
-            var appVeyorBuildMonitor = new AppVeyorBuildMonitor();
+            var appVeyorBuildMonitor = new AppVeyorBuildStatus();
 
             var request = HealthCheckRequest.Create(appVeyorBuild);
 
