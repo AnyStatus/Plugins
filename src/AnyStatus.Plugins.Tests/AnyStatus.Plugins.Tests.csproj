@@ -76,6 +76,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AppVeyor\AppVeyorTests.cs" />
+    <Compile Include="Jenkins\JenkinsJobTests.cs" />
+    <Compile Include="Jenkins\JenkinsViewTests.cs" />
     <Compile Include="MonitoringTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BatchScriptTests.cs" />
@@ -84,7 +86,6 @@
     <Compile Include="TeamCity\TeamCityTests.cs" />
     <Compile Include="TfsBuildTests.cs" />
     <Compile Include="OpenInBrowserTests.cs" />
-    <Compile Include="JenkinsJobTests.cs" />
     <Compile Include="VSTS\VstsReleaseTests.cs" />
     <Compile Include="VSTS\VstsBuildTests.cs" />
   </ItemGroup>
