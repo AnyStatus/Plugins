@@ -17,12 +17,17 @@ namespace AnyStatus
             Threshold = 80;
         }
 
+        //backward compatibility
         [Url]
         [Required]
+        [DisplayName("URL")]
         [PropertyOrder(10)]
         [Category(Category)]
         [Description("Coveralls repository URL address. For example: https://coveralls.io/github/AlonAm/AnyStatus")]
-        public string URL { get; set; }
+        public string Url { get; set; }
+
+        [Browsable(false)]
+        public string URL => Url;
 
         [Required]
         [PropertyOrder(20)]
