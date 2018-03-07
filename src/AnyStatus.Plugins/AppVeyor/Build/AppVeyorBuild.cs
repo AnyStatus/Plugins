@@ -8,7 +8,7 @@ namespace AnyStatus
     [DisplayName("AppVeyor Build")]
     [Description("AppVeyor build status")]
     [DisplayColumn("Continuous Integration")]
-    public class AppVeyorBuild : Build, IMonitored, ICanOpenInBrowser, ICanTriggerBuild
+    public class AppVeyorBuild : Build, ISchedulable, IWebPage, IStartable, IHealthCheck
     {
         [Required]
         [PropertyOrder(10)]
@@ -30,22 +30,25 @@ namespace AnyStatus
         [Description("Optional. AppVeyor API token.")]
         public string ApiToken { get; set; }
 
+        [Browsable(false)]
+        public string URL => $"https://ci.appveyor.com/project/{AccountName}/{ProjectSlug}";
+
         [PropertyOrder(40)]
         [Category("Source Control")]
         [DisplayName("Branch")]
-        [Description("Optional. Branch to trigger")]
+        [Description("Optional. Branch to trigger.")]
         public string SourceControlBranch { get; set; }
 
-        public bool CanOpenInBrowser()
-        {
-            return State != State.None && State != State.Error;
-        }
+        //public bool CanOpenInBrowser()
+        //{
+        //    return State != State.None && State != State.Error;
+        //}
 
-        public bool CanTriggerBuild()
-        {
-            return State != State.None &&
-                   State != State.Error &&
-                   !string.IsNullOrWhiteSpace(ApiToken);
-        }
+        //public bool CanTriggerBuild()
+        //{
+        //    return State != State.None &&
+        //           State != State.Error &&
+        //           !string.IsNullOrWhiteSpace(ApiToken);
+        //}
     }
 }

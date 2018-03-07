@@ -2,21 +2,14 @@
 using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
 namespace AnyStatus
 {
-    public class AppVeyorBuildMonitor : IMonitor<AppVeyorBuild>
+    public class AppVeyorBuildMonitor : ICheckHealth<AppVeyorBuild>
     {
-        [DebuggerStepThrough]
-        public void Handle(AppVeyorBuild item)
-        {
-            var build = GetBuildDetailsAsync(item).Result;
-
-            item.State = GetState(build.Status);
-        }
-
         private State GetState(string status)
         {
             switch (status)
@@ -61,7 +54,7 @@ namespace AnyStatus
                 {
                     apiUrl = $"{host}/{item.AccountName}/{item.ProjectSlug}/branch/{item.SourceControlBranch}";
                 }
-                
+
                 var response = await client.GetAsync(apiUrl);
 
                 response.EnsureSuccessStatusCode();
@@ -72,6 +65,14 @@ namespace AnyStatus
 
                 return buildResponse.Build;
             }
+        }
+
+        [DebuggerStepThrough]
+        public async Task Handle(HealthCheckRequest<AppVeyorBuild> request, CancellationToken cancellationToken)
+        {
+            var build = await GetBuildDetailsAsync(request.DataContext).ConfigureAwait(false);
+
+            request.DataContext.State = GetState(build.Status);
         }
 
         #region Contracts

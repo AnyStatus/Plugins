@@ -1,5 +1,7 @@
 ﻿using AnyStatus.API;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Tests.AppVeyor
 {
@@ -7,7 +9,7 @@ namespace AnyStatus.Plugins.Tests.AppVeyor
     public class AppVeyorTests
     {
         [TestMethod]
-        public void AppVeyor_DefaultBranch()
+        public async Task AppVeyor_DefaultBranch()
         {
             var appVeyorBuild = new AppVeyorBuild
             {
@@ -17,14 +19,16 @@ namespace AnyStatus.Plugins.Tests.AppVeyor
 
             var appVeyorBuildMonitor = new AppVeyorBuildMonitor();
 
-            appVeyorBuildMonitor.Handle(appVeyorBuild);
+            var request = HealthCheckRequest.Create(appVeyorBuild);
+
+            await appVeyorBuildMonitor.Handle(request, CancellationToken.None);
 
             Assert.AreNotEqual(State.None, appVeyorBuild.State, "State is None.");
             Assert.AreNotEqual(State.Error, appVeyorBuild.State, "State is Error.");
         }
 
         [TestMethod]
-        public void AppVeyor_SpecifiedBranch()
+        public async Task AppVeyor_SpecifiedBranch()
         {
             var appVeyorBuild = new AppVeyorBuild
             {
@@ -35,7 +39,9 @@ namespace AnyStatus.Plugins.Tests.AppVeyor
 
             var appVeyorBuildMonitor = new AppVeyorBuildMonitor();
 
-            appVeyorBuildMonitor.Handle(appVeyorBuild);
+            var request = HealthCheckRequest.Create(appVeyorBuild);
+
+            await appVeyorBuildMonitor.Handle(request, CancellationToken.None);
 
             Assert.AreNotEqual(State.None, appVeyorBuild.State, "State is None.");
             Assert.AreNotEqual(State.Error, appVeyorBuild.State, "State is Error.");

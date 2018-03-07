@@ -38,7 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AnyStatus.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b52fc05e377030a3, processorArchitecture=MSIL">
-      <HintPath>..\packages\AnyStatus.API.2.0.10-alpha\lib\net46\AnyStatus.API.dll</HintPath>
+      <HintPath>..\packages\AnyStatus.API.2.0.16-alpha\lib\net46\AnyStatus.API.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Administration.7.0.0.0\lib\net20\Microsoft.Web.Administration.dll</HintPath>
@@ -65,9 +65,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppVeyor\AppVeyorBuildMonitor.cs" />
-    <Compile Include="AppVeyor\OpenAppVeyorBuildInBrowser.cs" />
-    <Compile Include="AppVeyor\TriggerAppVeyorBuild.cs" />
+    <Compile Include="AppVeyor\Build\AppVeyorBuildMonitor.cs" />
+    <Compile Include="AppVeyor\Build\OpenAppVeyorBuildWebPage.cs" />
+    <Compile Include="OpenWebPage.cs" />
+    <Compile Include="AppVeyor\Build\TriggerAppVeyorBuild.cs" />
     <Compile Include="General\NuGetPackageVersion.cs" />
     <Compile Include="Jenkins\Client\Contracts\JenkinsCrumb.cs" />
     <Compile Include="Jenkins\Client\JenkinsRequest.cs" />
@@ -99,7 +100,7 @@
     <Compile Include="VSTS\VstsPlugin.cs" />
     <Compile Include="_deprecated\JenkinsBuild.cs" />
     <Compile Include="_deprecated\JenkinsMultiJob.cs" />
-    <Compile Include="AppVeyor\AppVeyorBuild.cs" />
+    <Compile Include="AppVeyor\Build\AppVeyorBuild.cs" />
     <Compile Include="Coveralls\CoverallsCoveredPercent.cs" />
     <Compile Include="Jenkins\Client\Contracts\JenkinsJob.cs" />
     <Compile Include="Jenkins\Plugins\JenkinsJob_v1.cs" />

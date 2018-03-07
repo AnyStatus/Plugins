@@ -1,14 +1,14 @@
 ﻿using AnyStatus.API;
-using AnyStatus.API.Legacy;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
 namespace AnyStatus
 {
-    public class TriggerAppVeyorBuild : ITriggerBuild<AppVeyorBuild>
+    public class TriggerAppVeyorBuild : IStart<AppVeyorBuild>
     {
         private readonly ILogger _logger;
         private readonly IDialogService _dialogService;
@@ -19,17 +19,17 @@ namespace AnyStatus
             _dialogService = Preconditions.CheckNotNull(dialogService, nameof(dialogService));
         }
 
-        public async Task HandleAsync(AppVeyorBuild build)
+        public async Task Handle(StartRequest<AppVeyorBuild> request, CancellationToken cancellationToken)
         {
-            var dialog = new ConfirmationDialog($"Are you sure you want to trigger {build.Name}?", "Trigger a new build");
+            var dialog = new ConfirmationDialog($"Are you sure you want to trigger {request.DataContext.Name}?", "Trigger a new build");
 
             var result = _dialogService.ShowDialog(dialog);
 
             if (result != DialogResult.Yes) return;
 
-            await QueueNewBuild(build).ConfigureAwait(false);
+            await QueueNewBuild(request.DataContext).ConfigureAwait(false);
 
-            _logger.Info($"Build \"{build.Name}\" has been triggered.");
+            _logger.Info($"Build \"{request.DataContext.Name}\" has been triggered.");
         }
 
         private async Task QueueNewBuild(AppVeyorBuild item)
