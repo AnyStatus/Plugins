@@ -147,7 +147,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="todo.txt" />
+    <None Include="todo.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
