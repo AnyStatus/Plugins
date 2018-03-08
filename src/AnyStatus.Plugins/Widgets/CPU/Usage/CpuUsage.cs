@@ -22,19 +22,20 @@ namespace AnyStatus
         public string MachineName { get; set; }
     }
 
-    public class CpuUsageMonitor : IMonitor<CpuUsage>
+    public class CpuUsageQuery : RequestHandler<MetricQueryRequest<CpuUsage>>,
+        IMetricQuery<CpuUsage>
     {
         [DebuggerStepThrough]
-        public void Handle(CpuUsage item)
+        protected override void HandleCore(MetricQueryRequest<CpuUsage> request)
         {
-            var usage = GetCpuUsage(item.MachineName);
+            var usage = GetCpuUsage(request.DataContext.MachineName);
 
-            item.Value = usage + "%";
+            request.DataContext.Value = usage + "%";
 
-            item.State = State.Ok;
+            request.DataContext.State = State.Ok;
         }
 
-        public int GetCpuUsage(string machineName)
+        public static int GetCpuUsage(string machineName)
         {
             if (string.IsNullOrWhiteSpace(machineName)) machineName = ".";
 

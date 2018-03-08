@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System.IO;
+using System.Threading;
 
 namespace AnyStatus.Plugins.Tests
 {
@@ -22,30 +23,34 @@ namespace AnyStatus.Plugins.Tests
         [DeploymentItem(@"Scripts\PowerShell.ps1")]
         public void Should_Execute_PowerShellScript()
         {
-            var request = new PowerShellScript
+            var powershell = new PowerShellScript
             {
                 FileName = Path.Combine(_testContext.TestRunDirectory, "Out", "PowerShell.ps1")
             };
 
-            var handler = new PowerShellScriptMonitor(_processStarter);
+            var handler = new PowerShellRunner(_processStarter);
 
-            handler.Handle(request);
+            var request = HealthCheckRequest.Create(powershell);
 
-            Assert.AreSame(State.Ok, request.State);
+            handler.Handle(request, CancellationToken.None);
+
+            Assert.AreSame(State.Ok, request.DataContext.State);
         }
 
         [TestMethod]
         [ExpectedException(typeof(FileNotFoundException))]
         public void Should_Throw_When_FileNotFound()
         {
-            var request = new PowerShellScript
+            var powershell = new PowerShellScript
             {
                 FileName = string.Empty
             };
 
-            var handler = new PowerShellScriptMonitor(_processStarter);
+            var handler = new PowerShellRunner(_processStarter);
 
-            handler.Handle(request);
+            var request = HealthCheckRequest.Create(powershell);
+
+            handler.Handle(request, CancellationToken.None);
         }
     }
 }

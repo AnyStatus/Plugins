@@ -78,14 +78,17 @@ namespace AnyStatus.Plugins.Tests
         {
             var widget = new CoverallsCoveredPercent
             {
-                URL = "https://coveralls.io/github/xing/hardcover?branch=demo"
+                Url = "https://coveralls.io/github/xing/hardcover?branch=demo"
             };
-
-            var handler = new CoverallsCoveredPercentQuery();
 
             var request = MetricQueryRequest.Create(widget);
 
+            var handler = new CoverallsCoveredPercentQuery();
+
             await handler.Handle(request, CancellationToken.None);
+
+            Assert.AreNotSame(State.None, request.DataContext.State);
+            Assert.AreNotSame(State.Error, request.DataContext.State);
         }
 
         [TestMethod]

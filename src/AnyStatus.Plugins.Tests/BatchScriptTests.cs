@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System.IO;
+using System.Threading;
 
 namespace AnyStatus.Plugins.Tests
 {
@@ -22,30 +23,34 @@ namespace AnyStatus.Plugins.Tests
         [DeploymentItem(@"Scripts\BatchScript.cmd")]
         public void Should_Execute_BatchScript()
         {
-            var request = new BatchFile
+            var batchFile = new BatchFile
             {
                 FileName = Path.Combine(_testContext.TestRunDirectory, "Out", "BatchScript.cmd")
             };
 
-            var handler = new BatchFileMonitor(_processStarter);
+            var handler = new BatchFileRunner(_processStarter);
 
-            handler.Handle(request);
+            var request = HealthCheckRequest.Create(batchFile);
 
-            Assert.AreSame(State.Ok, request.State);
+            handler.Handle(request, CancellationToken.None);
+
+            Assert.AreSame(State.Ok, request.DataContext.State);
         }
 
         [TestMethod]
         [ExpectedException(typeof(FileNotFoundException))]
         public void Should_Throw_When_FileNotFound()
         {
-            var request = new BatchFile
+            var batchFile = new BatchFile
             {
                 FileName = string.Empty
             };
 
-            var handler = new BatchFileMonitor(_processStarter);
+            var handler = new BatchFileRunner(_processStarter);
 
-            handler.Handle(request);
+            var request = HealthCheckRequest.Create(batchFile);
+
+            handler.Handle(request, CancellationToken.None);
         }
     }
 }

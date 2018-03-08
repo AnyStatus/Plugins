@@ -41,8 +41,6 @@ namespace AnyStatus
             return uri.GetLeftPart(UriPartial.Path) + json + uri.Query;
         }
 
-        
-
         #region Contracts
 
         private class CoveredPercentResponse
