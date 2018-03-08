@@ -73,9 +73,9 @@
     <Compile Include="Widgets\Custom\Batch\BatchFileRunner.cs" />
     <Compile Include="Widgets\Custom\Code\CodeRunner.cs" />
     <Compile Include="Widgets\Custom\PowerShell\PowerShellRunner.cs" />
-    <Compile Include="Widgets\Database\Connection\SqlServerConnectionCheck.cs" />
-    <Compile Include="Widgets\Database\Scalar\SqlScalarQueryHandler.cs" />
-    <Compile Include="Widgets\General\NuGetPackageVersion.cs" />
+    <Compile Include="Widgets\Database\SqlServer\Connection\SqlServerHealthCheck.cs" />
+    <Compile Include="Widgets\Database\SqlServer\ScalarQuery\SqlScalarQueryHandler.cs" />
+    <Compile Include="Widgets\NuGet\PackageVersion.cs" />
     <Compile Include="Widgets\Jenkins\Client\Contracts\JenkinsCrumb.cs" />
     <Compile Include="Widgets\Jenkins\Client\JenkinsRequest.cs" />
     <Compile Include="Widgets\Jenkins\IJenkinsClient.cs" />
@@ -123,13 +123,13 @@
     <Compile Include="Widgets\Custom\Batch\BatchFile.cs" />
     <Compile Include="Widgets\Custom\Code\Code_v1.cs" />
     <Compile Include="Widgets\Custom\PowerShell\PowerShell.cs" />
-    <Compile Include="Widgets\Database\Scalar\SqlScalarQuery.cs" />
-    <Compile Include="Widgets\Database\Connection\SqlServerConnection.cs" />
+    <Compile Include="Widgets\Database\SqlServer\ScalarQuery\SqlScalarQuery.cs" />
+    <Compile Include="Widgets\Database\SqlServer\Connection\SqlServerConnection.cs" />
     <Compile Include="Widgets\CPU\Usage\CpuUsage.cs" />
-    <Compile Include="Widgets\General\GitHubIssue.cs" />
-    <Compile Include="Widgets\General\IISApplicationPool.cs" />
-    <Compile Include="Widgets\General\PerformanceCounter.cs" />
-    <Compile Include="Widgets\General\WindowsService.cs" />
+    <Compile Include="Widgets\GitHub\GitHubIssue.cs" />
+    <Compile Include="Widgets\IIS\ApplicationPool\IISApplicationPool.cs" />
+    <Compile Include="Widgets\PerformanceCounter\PerformanceCounter.cs" />
+    <Compile Include="Widgets\WindowsService\WindowsService.cs" />
     <Compile Include="Widgets\Monitoring\Pingdom.cs" />
     <Compile Include="Widgets\Monitoring\UptimeRobot.cs" />
     <Compile Include="Widgets\Network\Http.cs" />
@@ -149,6 +149,7 @@
   <ItemGroup>
     <Content Include="todo.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="BuildNuget" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'" Outputs="$(SolutionDir)*.nupkg">
     <Exec Command="$(SolutionDir)nuget pack $(ProjectDir)$(ProjectName).nuspec" />

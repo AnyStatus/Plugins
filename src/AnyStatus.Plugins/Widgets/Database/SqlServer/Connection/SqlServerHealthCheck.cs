@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AnyStatus
 {
-    public class SqlServerConnectionCheck : ICheckHealth<SqlServerConnection>
+    public class SqlServerHealthCheck : ICheckHealth<SqlServerConnection>
     {
         public async Task Handle(HealthCheckRequest<SqlServerConnection> request, CancellationToken cancellationToken)
         {
