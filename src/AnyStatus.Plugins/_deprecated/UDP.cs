@@ -6,6 +6,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
+    [Browsable(false)]
     [DisplayName("UDP")]
     [DisplayColumn("Network")]
     [Description("Check UDP server connectivity")]
@@ -26,23 +27,23 @@ namespace AnyStatus
         public int Port { get; set; }
     }
 
-    public class UdpMonitor : IMonitor<Udp>
-    {
-        public void Handle(Udp udp)
-        {
-            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Udp))
-            {
-                try
-                {
-                    socket.Connect(udp.Host, udp.Port);
+    //public class UdpMonitor : IMonitor<Udp>
+    //{
+    //    public void Handle(Udp udp)
+    //    {
+    //        using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Udp))
+    //        {
+    //            try
+    //            {
+    //                socket.Connect(udp.Host, udp.Port);
 
-                    udp.State = State.Ok;
-                }
-                catch (SocketException)
-                {
-                    udp.State = State.Failed;
-                }
-            }
-        }
-    }
+    //                udp.State = State.Ok;
+    //            }
+    //            catch (SocketException)
+    //            {
+    //                udp.State = State.Failed;
+    //            }
+    //        }
+    //    }
+    //}
 }

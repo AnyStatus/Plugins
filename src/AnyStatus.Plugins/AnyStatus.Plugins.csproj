@@ -79,6 +79,16 @@
     <Compile Include="Widgets\GitHub\Issue\GitHubIssueStateCheck.cs" />
     <Compile Include="Widgets\GitHub\Issue\OpenWebPage.cs" />
     <Compile Include="Widgets\IIS\ApplicationPool\ApplicationHealthCheck.cs" />
+    <Compile Include="Widgets\Network\HTTP\HTTPHealthCheck.cs" />
+    <Compile Include="Widgets\Network\HTTP\OpenWebPage.cs" />
+    <Compile Include="Widgets\Network\Ping\PingHealthCheck.cs" />
+    <Compile Include="Widgets\Network\Port\NetworkProtocol.cs" />
+    <Compile Include="Widgets\Network\Port\Port.cs" />
+    <Compile Include="Widgets\Network\Port\PortHealthCheck.cs" />
+    <Compile Include="Widgets\Network\Speed\DownloadSpeed.cs" />
+    <Compile Include="Widgets\Network\Speed\NetworkInterfaceItemsSource.cs" />
+    <Compile Include="Widgets\Network\Speed\NetworkSpeedQuery.cs" />
+    <Compile Include="Widgets\Network\Speed\UploadSpeed.cs" />
     <Compile Include="Widgets\NuGet\PackageVersion.cs" />
     <Compile Include="Widgets\Jenkins\Client\Contracts\JenkinsCrumb.cs" />
     <Compile Include="Widgets\Jenkins\Client\JenkinsRequest.cs" />
@@ -134,13 +144,13 @@
     <Compile Include="Widgets\IIS\ApplicationPool\ApplicationPool.cs" />
     <Compile Include="Widgets\PerformanceCounter\PerformanceCounter.cs" />
     <Compile Include="Widgets\WindowsService\WindowsService.cs" />
-    <Compile Include="Widgets\Monitoring\Pingdom.cs" />
-    <Compile Include="Widgets\Monitoring\UptimeRobot.cs" />
-    <Compile Include="Widgets\Network\Http.cs" />
-    <Compile Include="Widgets\Network\Ping.cs" />
-    <Compile Include="Widgets\Network\Speed.cs" />
-    <Compile Include="Widgets\Network\TCP.cs" />
-    <Compile Include="Widgets\Network\UDP.cs" />
+    <Compile Include="Widgets\Pingdom\Pingdom.cs" />
+    <Compile Include="Widgets\UptimeRobot\UptimeRobot.cs" />
+    <Compile Include="Widgets\Network\HTTP\HTTP.cs" />
+    <Compile Include="Widgets\Network\Ping\Ping.cs" />
+    <Compile Include="Widgets\Network\Speed\NetworkSpeed.cs" />
+    <Compile Include="_deprecated\TCP.cs" />
+    <Compile Include="_deprecated\UDP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

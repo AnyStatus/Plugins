@@ -6,10 +6,11 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
+    [Browsable(false)]
     [DisplayName("TCP")]
     [DisplayColumn("Network")]
     [Description("Check TCP server connectivity")]
-    public class TcpPort : Widget, IMonitored
+    public class TcpPort : Widget, IHealthCheck, ISchedulable
     {
         private const string Category = "TCP";
 
@@ -26,23 +27,23 @@ namespace AnyStatus
         public int Port { get; set; }
     }
 
-    public class TcpMonitor : IMonitor<TcpPort>
-    {
-        public void Handle(TcpPort tcp)
-        {
-            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
-                try
-                {
-                    socket.Connect(tcp.Host, tcp.Port);
+    //public class TcpMonitor : IMonitor<TcpPort>
+    //{
+    //    public void Handle(TcpPort tcp)
+    //    {
+    //        using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+    //        {
+    //            try
+    //            {
+    //                socket.Connect(tcp.Host, tcp.Port);
 
-                    tcp.State = State.Ok;
-                }
-                catch (SocketException)
-                {
-                    tcp.State = State.Failed;
-                }
-            }
-        }
-    }
+    //                tcp.State = State.Ok;
+    //            }
+    //            catch (SocketException)
+    //            {
+    //                tcp.State = State.Failed;
+    //            }
+    //        }
+    //    }
+    //}
 }

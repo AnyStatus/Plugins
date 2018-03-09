@@ -10,51 +10,59 @@ namespace AnyStatus.Plugins.Tests
     public class MonitoringTests
     {
         [TestMethod]
-        public void HttpMonitor()
+        public async Task HttpMonitor()
         {
-            var request = new HttpStatus { Url = "http://www.microsoft.com" };
+            var http = new HttpStatus { Url = "http://www.microsoft.com" };
+            var request = HealthCheckRequest.Create(http);
+            var handler = new HTTPHealthCheck();
 
-            new HttpStatusMonitor().Handle(request);
+            await handler.Handle(request, CancellationToken.None);
 
-            Assert.AreSame(State.Ok, request.State);
+            Assert.AreSame(State.Ok, request.DataContext.State);
         }
 
         [TestMethod]
-        public void PingHandler()
+        public async Task PingHandler()
         {
-            var request = new Ping { Host = "localhost" };
+            var ping = new Ping { Host = "localhost" };
+            var request = HealthCheckRequest.Create(ping);
+            var handler = new PingHealthCheck();
 
-            new PingMonitor().Handle(request);
+            await handler.Handle(request, CancellationToken.None);
 
-            Assert.AreSame(State.Ok, request.State);
+            Assert.AreSame(State.Ok, request.DataContext.State);
         }
 
         [TestMethod]
-        public void TcpHandler()
+        public void TCPHealthCheck()
         {
-            var request = new TcpPort
+            var port = new Port
             {
+                Protocol = NetworkProtocol.TCP,
                 Host = "www.microsoft.com",
-                Port = 80
+                PortNumber = 80
             };
 
-            new TcpMonitor().Handle(request);
+            var request = HealthCheckRequest.Create(port);
+            var handler = new PortHealthCheck();
 
-            Assert.AreSame(State.Ok, request.State);
+            handler.Handle(request, CancellationToken.None);
+
+            Assert.AreSame(State.Ok, request.DataContext.State);
         }
 
         [Ignore]
         [TestMethod]
         public void WindowsServiceHandler()
         {
-            //var request = new WindowsService
-            //{
-            //    ServiceName = "Dhcp"
-            //};
+            var request = new WindowsService
+            {
+                ServiceName = "Dhcp"
+            };
 
             //new WindowsServiceMonitor().Handle(request);
 
-            //Assert.AreSame(State.Ok, request.State);
+            Assert.AreSame(State.Ok, request.State);
         }
 
         [Ignore]
