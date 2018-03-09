@@ -122,6 +122,11 @@
     <Compile Include="Widgets\VSTS\Client\VstsClientException.cs" />
     <Compile Include="Widgets\VSTS\Client\VstsContracts.cs" />
     <Compile Include="Widgets\VSTS\VstsPlugin.cs" />
+    <Compile Include="Widgets\WindowsService\WindowsServiceHandler.cs" />
+    <Compile Include="Widgets\WindowsService\RestartWindowsService.cs" />
+    <Compile Include="Widgets\WindowsService\StartWindowsService.cs" />
+    <Compile Include="Widgets\WindowsService\StopWindowsService.cs" />
+    <Compile Include="Widgets\WindowsService\WindowsServiceHealthCheck.cs" />
     <Compile Include="_deprecated\JenkinsBuild.cs" />
     <Compile Include="_deprecated\JenkinsMultiJob.cs" />
     <Compile Include="Widgets\AppVeyor\Build\AppVeyorBuild.cs" />
