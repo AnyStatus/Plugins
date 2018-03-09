@@ -11,7 +11,7 @@ namespace AnyStatus
     [DisplayName("Jenkins Job")]
     [Description("Monitor the status of a Jenkins Jobs.")]
     [DisplayColumn("Continuous Integration")]
-    public class JenkinsJob_v1 : Build, IJenkinsPlugin, IMonitored, ICanOpenInBrowser, ICanTriggerBuild, IReportProgress
+    public class JenkinsJob_v1 : Build, IJenkins, IHealthCheck, ISchedulable, IWebPage, IStartable, IReportProgress
     {
         private string _url;
         private int _progress;
@@ -130,14 +130,14 @@ namespace AnyStatus
             return string.IsNullOrEmpty(str) ? str : str.EndsWith("/") ? str : str + "/";
         }
 
-        public bool CanOpenInBrowser()
-        {
-            return State != State.None && State != State.Error;
-        }
+        //public bool CanOpenInBrowser()
+        //{
+        //    return State != State.None && State != State.Error;
+        //}
 
-        public bool CanTriggerBuild()
-        {
-            return State != State.None && State != State.Error;
-        }
+        //public bool CanTriggerBuild()
+        //{
+        //    return State != State.None && State != State.Error;
+        //}
     }
 }

@@ -8,7 +8,7 @@ namespace AnyStatus
     [DisplayName("Jenkins View (Preview)")]
     [Description("Shows the status of a Jenkins view or multi-branch (pipeline).")]
     [DisplayColumn("Continuous Integration")]
-    public class JenkinsView_v1 : Widget, IJenkinsPlugin, IMonitored, ICanOpenInBrowser
+    public class JenkinsView_v1 : Widget, IJenkins, IHealthCheck, ISchedulable, IWebPage
     {
         private string _url;
 
@@ -55,9 +55,9 @@ namespace AnyStatus
                     str.EndsWith("/") ? str : str + "/";
         }
 
-        public bool CanOpenInBrowser()
-        {
-            return State != State.None && State != State.Error;
-        }
+        //public bool CanOpenInBrowser()
+        //{
+        //    return State != State.None && State != State.Error;
+        //}
     }
 }

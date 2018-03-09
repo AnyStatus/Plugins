@@ -59,18 +59,22 @@ namespace AnyStatus.Plugins.Tests
 
         [Ignore]
         [TestMethod]
-        public void GitHubIssueHandler()
+        public async Task GitHubIssueHandler()
         {
-            var request = new GitHubIssue
+            var issue = new GitHubIssue
             {
                 IssueNumber = 1,
                 Repository = "AnyStatus",
                 Owner = "AnyStatus"
             };
 
-            new GitHubIssueMonitor().Handle(request);
+            var request = HealthCheckRequest.Create(issue);
 
-            Assert.AreNotSame(State.None, request.State);
+            var handler = new GitHubIssueStateCheck();
+
+            await handler.Handle(request, CancellationToken.None);
+
+            Assert.AreNotSame(State.None, request.DataContext.State);
         }
 
         [TestMethod]

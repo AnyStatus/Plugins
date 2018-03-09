@@ -16,7 +16,7 @@ namespace AnyStatus
         private HttpClient _client;
         private WebRequestHandler _handler;
 
-        public JenkinsRequest(IJenkinsPlugin jenkinsPlugin)
+        public JenkinsRequest(IJenkins jenkinsPlugin)
         {
             if (jenkinsPlugin == null)
                 throw new ArgumentNullException(nameof(jenkinsPlugin));
@@ -24,7 +24,7 @@ namespace AnyStatus
             Initialize(jenkinsPlugin);
         }
 
-        public async Task<T> GetAsync<T>(IJenkinsPlugin jenkinsPlugin, string api, bool useBaseUri = false)
+        public async Task<T> GetAsync<T>(IJenkins jenkinsPlugin, string api, bool useBaseUri = false)
         {
             var endpoint = GetEndpoint(jenkinsPlugin, api, useBaseUri);
 
@@ -41,7 +41,7 @@ namespace AnyStatus
             return result;
         }
 
-        public async Task PostAsync(IJenkinsPlugin jenkinsPlugin, string api, bool useBaseUri = false, JenkinsCrumb crumb = null)
+        public async Task PostAsync(IJenkins jenkinsPlugin, string api, bool useBaseUri = false, JenkinsCrumb crumb = null)
         {
             AddCrumbHeader(crumb);
 
@@ -75,7 +75,7 @@ namespace AnyStatus
 
         #region Helpers
 
-        private void Initialize(IJenkinsPlugin jenkinsPlugin)
+        private void Initialize(IJenkins jenkinsPlugin)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace AnyStatus
             }
         }
 
-        private void Authorize(IJenkinsPlugin jenkinsPlugin)
+        private void Authorize(IJenkins jenkinsPlugin)
         {
             var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{jenkinsPlugin.UserName}:{jenkinsPlugin.ApiToken}"));
 
@@ -117,7 +117,7 @@ namespace AnyStatus
 
         private static bool OnServerCertificateValidationCallback(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) => true;
 
-        private static Uri GetEndpoint(IJenkinsPlugin jenkinsPlugin, string api, bool useBaseUri)
+        private static Uri GetEndpoint(IJenkins jenkinsPlugin, string api, bool useBaseUri)
         {
             var jenkinsUri = new Uri(jenkinsPlugin.URL);
 

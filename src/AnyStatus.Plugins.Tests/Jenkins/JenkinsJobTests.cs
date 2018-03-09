@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Tests
@@ -16,7 +17,7 @@ namespace AnyStatus.Plugins.Tests
 #endif
         [TestMethod]
         [TestCategory(Category)]
-        public void JenkinsJobMonitor()
+        public async Task JenkinsJobMonitor()
         {
             var jenkinsJob = new JenkinsJob_v1
             {
@@ -26,10 +27,10 @@ namespace AnyStatus.Plugins.Tests
             };
 
             var logger = Substitute.For<ILogger>();
-            var jenkinsClient = new JenkinsClient(logger);
-            var monitor = new JenkinsJobMonitor(jenkinsClient);
+            var handler = new JenkinsJobMonitor(logger);
+            var request = HealthCheckRequest.Create(jenkinsJob);
 
-            monitor.Handle(jenkinsJob);
+            await handler.Handle(request, CancellationToken.None);
 
             if (jenkinsJob.State == State.None ||
                 jenkinsJob.State == State.Error ||

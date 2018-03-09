@@ -15,8 +15,8 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 namespace AnyStatus
 {
     [DisplayColumn("Custom")]
-    [DisplayName("Dynamic Source Code")]
-    [Description("Experimental. Create your own custom monitor using C# or VB.NET file.")]
+    [DisplayName("Code")]
+    [Description("Experimental. Compile and run C# or VB.NET source code.")]
     public class DynamicSourceCode_v1 : Widget, ISchedulable, IHealthCheck
     {
         private const string Category = "Dynamic Source Code";

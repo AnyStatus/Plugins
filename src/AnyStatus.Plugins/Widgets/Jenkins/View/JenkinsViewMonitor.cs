@@ -1,26 +1,31 @@
 ﻿using AnyStatus.API;
+using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
 namespace AnyStatus
 {
-    public class JenkinsViewMonitor : IMonitor<JenkinsView_v1>
+    public class JenkinsViewMonitor : ICheckHealth<JenkinsView_v1>
     {
-        private readonly IJenkinsClient _jenkinsClient;
+        private readonly ILogger _logger;
 
-        public JenkinsViewMonitor(IJenkinsClient jenkinsClient)
+        public JenkinsViewMonitor(ILogger logger)
         {
-            _jenkinsClient = Preconditions.CheckNotNull(jenkinsClient, nameof(jenkinsClient));
+            _logger = logger ?? throw new ArgumentNullException();
         }
 
         [DebuggerStepThrough]
-        public void Handle(JenkinsView_v1 jenkinsView)
+        public async Task Handle(HealthCheckRequest<JenkinsView_v1> request, CancellationToken cancellationToken)
         {
-            var jenkinsViewResponse = _jenkinsClient.GetViewAsync(jenkinsView).GetAwaiter().GetResult();
+            var jenkinsClient = new JenkinsClient(_logger);
 
-            var prevJobs = jenkinsView.Items.OfType<JenkinsJob_v1>();
+            var jenkinsViewResponse = await jenkinsClient.GetViewAsync(request.DataContext).ConfigureAwait(false);
+
+            var prevJobs = request.DataContext.Items.OfType<JenkinsJob_v1>();
 
             var dispatcher = Application.Current != null ? Application.Current.Dispatcher : Dispatcher.CurrentDispatcher;
 
@@ -31,19 +36,20 @@ namespace AnyStatus
 
                 foreach (var job in newJobs)
                 {
-                    AddJob(jenkinsView, job);
+                    AddJob(request.DataContext, job);
                 }
 
                 // Remove Jobs
                 foreach (var job in prevJobs.Where(x => jenkinsViewResponse.Jobs.All(y => y.URL != x.URL)))
                 {
-                    jenkinsView.Remove(job);
+                    request.DataContext.Remove(job);
                 }
             });
         }
 
         private void AddJob(JenkinsView_v1 view, JenkinsJob job)
         {
+#warning IsParameterized not set
             view.Add(new JenkinsJob_v1
             {
                 Name = job.Name.Replace("%2F", "/"),
@@ -53,8 +59,6 @@ namespace AnyStatus
                 ApiToken = view.ApiToken,
                 CSRF = view.CSRF,
                 IgnoreSslErrors = view.IgnoreSslErrors
-                
-                #warning IsParameterized is not set
             });
         }
     }

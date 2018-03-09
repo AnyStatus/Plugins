@@ -1,5 +1,4 @@
 ﻿using AnyStatus.API;
-using Microsoft.Web.Administration;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
@@ -8,7 +7,7 @@ namespace AnyStatus
 {
     [DisplayName("IIS Application Pool")]
     [Description("Monitor IIS application pool state")]
-    public class IISApplicationPool : Widget, IMonitored
+    public class IISApplicationPool : Widget, IHealthCheck, ISchedulable
     {
         private const string Category = "Application Pool";
 
@@ -25,18 +24,5 @@ namespace AnyStatus
         [DisplayName("Application Pool Name")]
         [Description("")]
         public string ApplicationPoolName { get; set; }
-    }
-
-    public class ApplicationPoolMonitor : IMonitor<IISApplicationPool>
-    {
-        public void Handle(IISApplicationPool item)
-        {
-            using (var iis = ServerManager.OpenRemote(item.Host))
-            {
-                var appPool = iis.ApplicationPools[item.ApplicationPoolName];
-
-                item.State = appPool.State == ObjectState.Started ? State.Ok : State.Failed;
-            }
-        }
     }
 }

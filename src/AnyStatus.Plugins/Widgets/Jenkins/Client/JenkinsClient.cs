@@ -17,7 +17,7 @@ namespace AnyStatus
 
         #region IJenkinsClient
 
-        public async Task<JenkinsJob> GetJobAsync(IJenkinsPlugin jenkinsPlugin)
+        public async Task<JenkinsJob> GetJobAsync(IJenkins jenkinsPlugin)
         {
             const string api = "lastBuild/api/json?tree=result,building,executor[progress]";
 
@@ -27,7 +27,7 @@ namespace AnyStatus
             }
         }
 
-        public async Task<JenkinsView> GetViewAsync(IJenkinsPlugin jenkinsPlugin)
+        public async Task<JenkinsView> GetViewAsync(IJenkins jenkinsPlugin)
         {
             const string api = "api/json";
 
@@ -53,7 +53,7 @@ namespace AnyStatus
 
         #region Helpers
 
-        private async Task<JenkinsCrumb> IssueCrumbAsync(IJenkinsPlugin jenkinsPlugin)
+        private async Task<JenkinsCrumb> IssueCrumbAsync(IJenkins jenkinsPlugin)
         {
             const string api = "crumbIssuer/api/json";
 

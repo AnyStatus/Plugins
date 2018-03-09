@@ -1,6 +1,6 @@
 ﻿namespace AnyStatus
 {
-    public interface IJenkinsPlugin
+    public interface IJenkins
     {
         string URL { get; set; }
 
