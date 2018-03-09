@@ -104,34 +104,40 @@ namespace AnyStatus.Plugins.Tests
         }
 
         [TestMethod]
-        public void UptimeRobotOverallStatus()
+        public async Task UptimeRobotOverallStatus()
         {
             var logger = Substitute.For<ILogger>();
 
-            var request = new UptimeRobot
+            var uptime = new UptimeRobot
             {
                 ApiKey = "u131608-259ebe191e11db9a9e47aa51"
             };
 
-            new UptimeRobotMonitor(logger).Handle(request);
+            var request = HealthCheckRequest.Create(uptime);
+            var handler = new UptimeRobotCheck(logger);
 
-            Assert.AreNotSame(State.None, request.State);
+            await handler.Handle(request, CancellationToken.None);
+
+            Assert.AreNotSame(State.None, request.DataContext.State);
         }
 
         [TestMethod]
-        public void UptimeRobotMonitorStatus()
+        public async Task UptimeRobotMonitorStatus()
         {
             var logger = Substitute.For<ILogger>();
 
-            var request = new UptimeRobot
+            var uptime = new UptimeRobot
             {
                 ApiKey = "u131608-259ebe191e11db9a9e47aa51",
                 MonitorName = "Blog"
             };
 
-            new UptimeRobotMonitor(logger).Handle(request);
+            var request = HealthCheckRequest.Create(uptime);
+            var handler = new UptimeRobotCheck(logger);
 
-            Assert.AreNotSame(State.None, request.State);
+            await handler.Handle(request, CancellationToken.None);
+
+            Assert.AreNotSame(State.None, request.DataContext.State);
         }
     }
 }

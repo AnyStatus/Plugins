@@ -1,16 +1,13 @@
 ﻿using AnyStatus.API;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-
-//https://api.nuget.org/v3/registration3/anystatus.api/index.json
 
 namespace AnyStatus
 {
     [Browsable(false)]
     [DisplayName("NuGet Package Version (Preview)")]
     [Description("")]
-    public class NuGetPackageVersion : Metric, IMonitored
+    public class NuGetPackageVersion : Metric, ISchedulable
     {
         private const string Category = "NuGet Package";
 
@@ -24,18 +21,5 @@ namespace AnyStatus
         [Category(Category)]
         [Description("Required. Enter the NuGet package name.")]
         public string PackageName { get; set; }
-    }
-
-    public class NuGetPackageVersionMonitor : IMonitor<NuGetPackageVersion>
-    {
-        [DebuggerStepThrough]
-        public void Handle(NuGetPackageVersion item)
-        {
-            //https://api.nuget.org/v3/registration3/anystatus.api/index.json
-
-            item.Value = "1.0.0.0";
-
-            item.State = State.Ok;
-        }
     }
 }

@@ -38,7 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AnyStatus.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b52fc05e377030a3, processorArchitecture=MSIL">
-      <HintPath>..\packages\AnyStatus.API.2.0.17-alpha\lib\net46\AnyStatus.API.dll</HintPath>
+      <HintPath>..\packages\AnyStatus.API.2.0.18-alpha\lib\net46\AnyStatus.API.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Administration.7.0.0.0\lib\net20\Microsoft.Web.Administration.dll</HintPath>
@@ -89,12 +89,15 @@
     <Compile Include="Widgets\Network\Speed\NetworkInterfaceItemsSource.cs" />
     <Compile Include="Widgets\Network\Speed\NetworkSpeedQuery.cs" />
     <Compile Include="Widgets\Network\Speed\UploadSpeed.cs" />
+    <Compile Include="Widgets\NuGet\NuGetPackageVersionQuery.cs" />
     <Compile Include="Widgets\NuGet\PackageVersion.cs" />
     <Compile Include="Widgets\Jenkins\Client\Contracts\JenkinsCrumb.cs" />
     <Compile Include="Widgets\Jenkins\Client\JenkinsRequest.cs" />
     <Compile Include="Widgets\Jenkins\Client\IJenkinsClient.cs" />
     <Compile Include="Widgets\Jenkins\Client\IJenkinsPlugin.cs" />
     <Compile Include="Widgets\Jenkins\Client\JenkinsClient.cs" />
+    <Compile Include="Widgets\PerformanceCounter\PerformanceCounterQuery.cs" />
+    <Compile Include="Widgets\Pingdom\PingdomHealthCheck.cs" />
     <Compile Include="Widgets\TeamCity\OpenTeamCityBuildInBrowser.cs" />
     <Compile Include="Widgets\TeamCity\TeamCity.cs" />
     <Compile Include="Widgets\TeamCity\TeamCityBuildMonitor.cs" />
@@ -106,6 +109,7 @@
     <Compile Include="Widgets\TFS\OpenTfsBuildInBrowser.cs" />
     <Compile Include="Widgets\TFS\TfsBuildMonitor.cs" />
     <Compile Include="Widgets\TFS\TriggerTfsBuild.cs" />
+    <Compile Include="Widgets\UptimeRobot\UptimeRobotCheck.cs" />
     <Compile Include="Widgets\VSTS\Build\OpenVstsBuildPage.cs" />
     <Compile Include="Widgets\VSTS\Build\VstsBuildMonitor.cs" />
     <Compile Include="Widgets\VSTS\Build\VstsBuildTrigger.cs" />
@@ -133,7 +137,6 @@
     <Compile Include="Widgets\Jenkins\Job\TriggerJenkinsJob.cs" />
     <Compile Include="Widgets\TeamCity\TeamCityBuild.cs" />
     <Compile Include="Widgets\TFS\TFSBuild.cs" />
-    <Compile Include="Widgets\TravisCI\TravisCIBuild.cs" />
     <Compile Include="Widgets\Custom\Batch\BatchFile.cs" />
     <Compile Include="Widgets\Custom\Code\Code_v1.cs" />
     <Compile Include="Widgets\Custom\PowerShell\PowerShell.cs" />
