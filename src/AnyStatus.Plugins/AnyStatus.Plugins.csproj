@@ -99,13 +99,13 @@
     <Compile Include="Widgets\Jenkins\Client\JenkinsClient.cs" />
     <Compile Include="Widgets\PerfCounter\PerformanceCounterQuery.cs" />
     <Compile Include="Widgets\Pingdom\PingdomHealthCheck.cs" />
-    <Compile Include="Widgets\TeamCity\Build\OpenTeamCityBuildInBrowser.cs" />
+    <Compile Include="Widgets\TeamCity\Build\OpenWebPage.cs" />
     <Compile Include="Widgets\TeamCity\Client\TeamCityContracts.cs" />
-    <Compile Include="Widgets\TeamCity\Build\TeamCityBuildMonitor.cs" />
+    <Compile Include="Widgets\TeamCity\Build\TeamCityBuildStatus.cs" />
     <Compile Include="Widgets\TeamCity\Client\TeamCityClient.cs" />
     <Compile Include="Widgets\TeamCity\Client\TeamCityConnection.cs" />
     <Compile Include="Widgets\TeamCity\Client\TeamCityException.cs" />
-    <Compile Include="Widgets\TeamCity\Build\TriggerTeamCityBuild.cs" />
+    <Compile Include="Widgets\TeamCity\Build\StartTeamCityBuild.cs" />
     <Compile Include="Widgets\TFS\BaseTfsBuildHandler.cs" />
     <Compile Include="Widgets\TFS\OpenTfsBuildInBrowser.cs" />
     <Compile Include="Widgets\TFS\TfsBuildMonitor.cs" />

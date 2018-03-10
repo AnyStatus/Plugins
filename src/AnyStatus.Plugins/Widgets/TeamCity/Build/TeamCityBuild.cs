@@ -4,16 +4,22 @@ using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
+//todo:
+// Use TeamCity build URL instead of Server URL + Build Type Id.
+
 namespace AnyStatus
 {
     [CategoryOrder("TeamCity", 10)]
     [DisplayName("TeamCity Build")]
     [Description("TeamCity build status")]
     [DisplayColumn("Continuous Integration")]
-    public class TeamCityBuild : Build, IMonitored, ICanOpenInBrowser, ICanTriggerBuild
+    public class TeamCityBuild : Build, IHealthCheck, ISchedulable, IStartable, IWebPage
     {
         private string _url;
 
+        /// <summary>
+        /// TeamCity Server URL.
+        /// </summary>
         [Url]
         [Required]
         [PropertyOrder(10)]
@@ -26,15 +32,25 @@ namespace AnyStatus
             set
             {
                 _url = value;
-                if (_url.EndsWith("/")) { _url = _url.Remove(_url.Length - 1); }
+
+                if (_url.EndsWith("/"))
+                {
+                    _url = _url.Remove(_url.Length - 1);
+                }
             }
         }
+
+        /// <summary>
+        /// Web Page URL.
+        /// </summary>
+        [Browsable(false)]
+        public string URL => $"{Url}/viewType.html?buildTypeId={BuildTypeId}";
 
         [Required]
         [PropertyOrder(20)]
         [Category("TeamCity")]
         [DisplayName("Build Type Id")]
-        [Description("TeamCity build type id (Copy from TeamCity build URL address)")]
+        [Description("TeamCity build type id. Copy from TeamCity build URL address.")]
         public string BuildTypeId { get; set; }
 
         [PropertyOrder(25)]
@@ -66,16 +82,6 @@ namespace AnyStatus
         [DisplayName("Ignore SSL Errors")]
         public bool IgnoreSslErrors { get; set; }
 
-        public bool CanOpenInBrowser()
-        {
-            return State != State.None && State != State.Error;
-        }
-
-        public bool CanTriggerBuild()
-        {
-            return State != State.None && State != State.Error;
-        }
-
         [XmlIgnore]
         [Browsable(false)]
         internal string StateText { get; set; }
@@ -89,5 +95,15 @@ namespace AnyStatus
 
             return base.CreateNotification();
         }
+
+        //public bool CanOpenInBrowser()
+        //{
+        //    return State != State.None && State != State.Error;
+        //}
+
+        //public bool CanTriggerBuild()
+        //{
+        //    return State != State.None && State != State.Error;
+        //}
     }
 }
