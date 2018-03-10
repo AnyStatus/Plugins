@@ -1,6 +1,8 @@
 ﻿using AnyStatus.API;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Tests.VSTS
 {
@@ -8,24 +10,26 @@ namespace AnyStatus.Plugins.Tests.VSTS
     public class VstsReleaseTests
     {
         [TestMethod]
-        public void OpenInBrowserTest()
+        public async Task OpenVstsReleaseWebPage()
         {
-            var processstarter = Substitute.For<IProcessStarter>();
+            var ps = Substitute.For<IProcessStarter>();
 
-            var vstsRelease = new VSTSRelease_v1
+            var release = new VSTSRelease_v1
             {
                 Account = "account",
                 Project = "project",
                 DefinitionId = 1
             };
 
-            var openVstsReleasePage = new OpenVstsReleasePage(processstarter);
+            var request = OpenWebPageRequest.Create(release);
 
-            openVstsReleasePage.Handle(vstsRelease);
+            var handler = new OpenVstsReleasePage(ps);
+
+            await handler.Handle(request, CancellationToken.None);
 
             var expected = "https://account.visualstudio.com/project/_release?definitionId=1&_a=releases";
 
-            processstarter.Received().Start(expected);
+            ps.Received().Start(expected);
         }
     }
 }
