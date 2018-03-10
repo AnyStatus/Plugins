@@ -10,10 +10,6 @@ namespace AnyStatus
 {
     public class VstsClient
     {
-        public VstsClient()
-        {
-        }
-
         public VstsClient(VstsConnection connection)
         {
             Connection = connection;
@@ -21,7 +17,7 @@ namespace AnyStatus
 
         public VstsConnection Connection { get; set; }
 
-        #region Build
+        #region Builds
 
         public async Task<VSTSBuildDefinition> GetBuildDefinitionAsync(string name)
         {
@@ -60,7 +56,7 @@ namespace AnyStatus
 
         #endregion Build
 
-        #region Release
+        #region Releases
 
         public async Task<VSTSReleaseDefinition> GetReleaseDefinitionAsync(string name)
         {
@@ -98,6 +94,8 @@ namespace AnyStatus
         }
 
         #endregion Release
+
+        #region Helpers
 
         private async Task<T> Request<T>(string api, bool vsrm = false)
         {
@@ -163,5 +161,7 @@ namespace AnyStatus
                 response.EnsureSuccessStatusCode();
             }
         }
+        
+        #endregion
     }
 }

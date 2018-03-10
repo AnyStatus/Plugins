@@ -9,7 +9,7 @@ using System.Web.Script.Serialization;
 
 namespace AnyStatus
 {
-    public abstract class BaseTfsBuildHandler
+    public abstract class TFSBuildHandler
     {
         [DebuggerStepThrough]
         public virtual void Handle(TfsBuild buildDefinition)

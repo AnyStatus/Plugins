@@ -1,42 +1,41 @@
 ﻿using AnyStatus.API;
-using AnyStatus.API.Legacy;
 using System;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
 namespace AnyStatus
 {
-    public class TriggerTfsBuild : BaseTfsBuildHandler, ITriggerBuild<TfsBuild>
+    public class StartTFSBuild : TFSBuildHandler, IStart<TfsBuild>
     {
         private readonly ILogger _logger;
         private readonly IDialogService _dialogService;
 
-        public TriggerTfsBuild(IDialogService dialogService, ILogger logger)
+        public StartTFSBuild(IDialogService dialogService, ILogger logger)
         {
             _logger = Preconditions.CheckNotNull(logger, nameof(logger));
             _dialogService = Preconditions.CheckNotNull(dialogService, nameof(dialogService));
         }
 
-        [DebuggerStepThrough]
-        public override async Task HandleAsync(TfsBuild build)
+        public async Task Handle(StartRequest<TfsBuild> request, CancellationToken cancellationToken)
         {
-            var dialog = new ConfirmationDialog($"Are you sure you want to trigger {build.Name}?", "Trigger a new build");
+            var dialog = new ConfirmationDialog($"Are you sure you want to start {request.DataContext.Name}?", "Trigger a new request.DataContext");
 
             var result = _dialogService.ShowDialog(dialog);
 
-            if (result != DialogResult.Yes) return;
+            if (result != DialogResult.Yes)
+                return;
 
-            _logger.Info($"Triggering \"{build.Name}\"...");
+            _logger.Info($"Starting \"{request.DataContext.Name}\"...");
 
-            await base.HandleAsync(build).ConfigureAwait(false);
+            await base.HandleAsync(request.DataContext).ConfigureAwait(false);
 
-            await QueueNewBuildAsync(build).ConfigureAwait(false);
+            await QueueNewBuildAsync(request.DataContext).ConfigureAwait(false);
 
-            _logger.Info($"Build \"{build.Name}\" has been triggered.");
+            _logger.Info($"request.DataContext \"{request.DataContext.Name}\" has been triggered.");
         }
 
         private async Task QueueNewBuildAsync(TfsBuild item)

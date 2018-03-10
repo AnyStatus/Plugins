@@ -13,7 +13,7 @@ namespace AnyStatus
     [DisplayName("TFS Build")]
     [DisplayColumn("Continuous Integration")]
     [Description("Microsoft Team Foundation Server or Visual Studio Team Services build status")]
-    public class TfsBuild : Build, IMonitored, ICanOpenInBrowser, ICanTriggerBuild
+    public class TfsBuild : Build, IHealthCheck, ISchedulable, IStartable, IWebPage
     {
         private const string Category = "Build Definition";
 
@@ -22,12 +22,21 @@ namespace AnyStatus
             Collection = "DefaultCollection";
         }
 
+        /// <summary>
+        /// Server URL.
+        /// </summary>
         [Url]
         [Required]
         [Category(Category)]
         [PropertyOrder(10)]
-        [Description("Required. Visual Studio Team Services account (https://{account}.visualstudio.com) or TFS server (http://{server:port}/tfs)")]
+        [Description("Required. Visual Studio Team Services account (https://{account}.visualstudio.com) or TFS server (http://{server:port}/tfs) URL address.")]
         public string Url { get; set; }
+
+        /// <summary>
+        /// Build Web Page URL.
+        /// </summary>
+        [Browsable(false)]
+        public string URL => $"{Url}/{Collection}/{TeamProject}/_build?_a=completed&definitionId={BuildDefinitionId}";
 
         [Required]
         [Category(Category)]
@@ -66,15 +75,15 @@ namespace AnyStatus
         [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
         public string Password { get; set; }
 
-        public bool CanOpenInBrowser()
-        {
-            return State != State.Error && BuildDefinitionId != 0;
-        }
+        //public bool CanOpenInBrowser()
+        //{
+        //    return State != State.Error && BuildDefinitionId != 0;
+        //}
 
-        public bool CanTriggerBuild()
-        {
-            return State != State.Error && BuildDefinitionId != 0;
-        }
+        //public bool CanTriggerBuild()
+        //{
+        //    return State != State.Error && BuildDefinitionId != 0;
+        //}
 
         public override object Clone()
         {

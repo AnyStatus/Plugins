@@ -8,6 +8,8 @@ using System.Windows;
 
 //https://www.visualstudio.com/en-us/docs/integrate/api/rm/contracts#ReleaseStatus
 
+using AnyStatus.API.Utils;
+
 namespace AnyStatus
 {
     public class VSTSReleaseMonitor : IMonitor<VSTSRelease_v1>
@@ -15,16 +17,9 @@ namespace AnyStatus
         [DebuggerStepThrough]
         public void Handle(VSTSRelease_v1 vstsRelease)
         {
-            var client = new VstsClient
-            {
-                Connection = new VstsConnection
-                {
-                    Account = vstsRelease.Account,
-                    Project = vstsRelease.Project,
-                    UserName = vstsRelease.UserName,
-                    Password = vstsRelease.Password,
-                }
-            };
+            var client = new VstsClient(new VstsConnection());
+
+            vstsRelease.MapTo(client.Connection);
 
             if (vstsRelease.DefinitionId == null)
             {

@@ -1,32 +1,32 @@
 ﻿using AnyStatus.API;
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
 namespace AnyStatus
 {
-    public class TfsBuildMonitor : BaseTfsBuildHandler, IMonitor<TfsBuild>
+    public class TFSBuildStatus : TFSBuildHandler, ICheckHealth<TfsBuild>
     {
-        [DebuggerStepThrough]
-        public override void Handle(TfsBuild item)
+        public async Task Handle(HealthCheckRequest<TfsBuild> request, CancellationToken cancellationToken)
         {
-            base.Handle(item);
+            base.Handle(request.DataContext);
 
-            var buildDetails = GetBuildDetailsAsync(item).Result;
+            var buildDetails = await GetBuildDetailsAsync(request.DataContext)
+                .ConfigureAwait(false);
 
             switch (buildDetails.Status)
             {
                 case "notStarted":
-                    item.State = State.Queued;
+                    request.DataContext.State = State.Queued;
                     return;
 
                 case "inProgress":
-                    item.State = State.Running;
+                    request.DataContext.State = State.Running;
                     return;
 
                 default:
@@ -36,27 +36,27 @@ namespace AnyStatus
             switch (buildDetails.Result)
             {
                 case "notStarted":
-                    item.State = State.Running;
+                    request.DataContext.State = State.Running;
                     break;
 
                 case "succeeded":
-                    item.State = State.Ok;
+                    request.DataContext.State = State.Ok;
                     break;
 
                 case "failed":
-                    item.State = State.Failed;
+                    request.DataContext.State = State.Failed;
                     break;
 
                 case "partiallySucceeded":
-                    item.State = State.PartiallySucceeded;
+                    request.DataContext.State = State.PartiallySucceeded;
                     break;
 
                 case "canceled":
-                    item.State = State.Canceled;
+                    request.DataContext.State = State.Canceled;
                     break;
 
                 default:
-                    item.State = State.Unknown;
+                    request.DataContext.State = State.Unknown;
                     break;
             }
         }
@@ -79,11 +79,11 @@ namespace AnyStatus
 
                     var url = $"{item.Url}/{item.Collection}/{item.TeamProject}/_apis/build/builds?definitions={item.BuildDefinitionId}&$top=1&api-version=2.0";
 
-                    var response = await client.GetAsync(url);
+                    var response = await client.GetAsync(url).ConfigureAwait(false);
 
                     response.EnsureSuccessStatusCode();
 
-                    var content = await response.Content.ReadAsStringAsync();
+                    var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                     var buildDetailsResponse = new JavaScriptSerializer().Deserialize<TfsBuildDetailsResponse>(content);
 
