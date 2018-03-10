@@ -19,7 +19,7 @@ namespace AnyStatus
 
         public async Task Handle(StartRequest<WindowsService> request, CancellationToken cancellationToken)
         {
-            var dialog = new ConfirmationDialog($"Are you sure you want to start {request.DataContext.Name}?", "AnyStatus");
+            var dialog = new ConfirmationDialog($"Are you sure you want to start {request.DataContext.Name}?");
 
             var result = _dialogService.ShowDialog(dialog);
 
