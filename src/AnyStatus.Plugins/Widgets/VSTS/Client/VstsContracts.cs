@@ -4,7 +4,6 @@ using System.Linq;
 
 namespace AnyStatus
 {
-
     public class VSTSBuildDefinition
     {
         public long Id { get; set; }

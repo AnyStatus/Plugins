@@ -54,7 +54,7 @@ namespace AnyStatus
             await Send("build/builds?api-version=2.0", request).ConfigureAwait(false);
         }
 
-        #endregion Build
+        #endregion Builds
 
         #region Releases
 
@@ -93,7 +93,7 @@ namespace AnyStatus
             return details;
         }
 
-        #endregion Release
+        #endregion Releases
 
         #region Helpers
 
@@ -161,7 +161,7 @@ namespace AnyStatus
                 response.EnsureSuccessStatusCode();
             }
         }
-        
-        #endregion
+
+        #endregion Helpers
     }
 }

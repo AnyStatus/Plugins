@@ -3,7 +3,7 @@ using Microsoft.Web.Administration;
 
 namespace AnyStatus
 {
-    public class ApplicationHealthCheck : RequestHandler<HealthCheckRequest<IISApplicationPool>>, 
+    public class ApplicationHealthCheck : RequestHandler<HealthCheckRequest<IISApplicationPool>>,
         ICheckHealth<IISApplicationPool>
     {
         protected override void HandleCore(HealthCheckRequest<IISApplicationPool> request)

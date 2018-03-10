@@ -58,7 +58,7 @@ namespace AnyStatus
                         branch = item.SourceControlBranch
                     };
                 }
-                
+
                 var data = new JavaScriptSerializer().Serialize(request);
 
                 var content = new StringContent(data, Encoding.UTF8, "application/json");

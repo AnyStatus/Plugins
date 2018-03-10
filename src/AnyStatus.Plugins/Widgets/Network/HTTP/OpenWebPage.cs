@@ -4,6 +4,8 @@ namespace AnyStatus
 {
     public class OpenHttpWebPage : OpenWebPage<HttpStatus>
     {
-        public OpenHttpWebPage(IProcessStarter ps) : base(ps) { }
+        public OpenHttpWebPage(IProcessStarter ps) : base(ps)
+        {
+        }
     }
 }

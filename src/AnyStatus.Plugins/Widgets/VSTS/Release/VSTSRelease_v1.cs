@@ -16,7 +16,9 @@ namespace AnyStatus
     {
         private const string Category = "Release Definition";
 
-        public VSTSRelease_v1() : base(aggregate: true) { }
+        public VSTSRelease_v1() : base(aggregate: true)
+        {
+        }
 
         [Required]
         [Category(Category)]
