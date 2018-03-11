@@ -49,7 +49,6 @@ namespace AnyStatus.Plugins.Tests
         {
             var logger = Substitute.For<ILogger>();
             var dialogService = Substitute.For<IDialogService>();
-            var jenkinsClient = new JenkinsClient(logger);
 
             dialogService.ShowDialog(Arg.Any<ConfirmationDialog>()).Returns(DialogResult.Yes);
 
@@ -61,7 +60,7 @@ namespace AnyStatus.Plugins.Tests
                 URL = @"https://ci.jenkins-ci.org/job/Core/job/jenkins/job/master/",
             };
 
-            var trigger = new StartJenkinsJob(dialogService, logger, jenkinsClient);
+            var trigger = new StartJenkinsJob(dialogService, logger);
 
             //await trigger.Handle(jenkinsJob);
         }
