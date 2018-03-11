@@ -8,13 +8,11 @@ namespace AnyStatus
     {
         private readonly ILogger _logger;
         private readonly IDialogService _dialogService;
-        private readonly IJenkinsClient _jenkinsClient;
 
         public StartJenkinsJob(IDialogService dialogService, ILogger logger, IJenkinsClient jenkinsClient)
         {
             _logger = Preconditions.CheckNotNull(logger, nameof(logger));
             _dialogService = Preconditions.CheckNotNull(dialogService, nameof(dialogService));
-            _jenkinsClient = Preconditions.CheckNotNull(jenkinsClient, nameof(jenkinsClient));
         }
 
         public async Task Handle(StartRequest<JenkinsJob_v1> request, CancellationToken cancellationToken)
@@ -26,9 +24,11 @@ namespace AnyStatus
             if (result != DialogResult.Yes)
                 return;
 
-            await _jenkinsClient.TriggerJobAsync(request.DataContext).ConfigureAwait(false);
+            var jenkinsClient = new JenkinsClient(_logger);
 
-            _logger.Info($"Jenkins Job \"{request.DataContext.Name}\" has been triggered.");
+            await jenkinsClient.TriggerJobAsync(request.DataContext).ConfigureAwait(false);
+
+            _logger.Info($"\"{request.DataContext.Name}\" has been triggered.");
         }
     }
 }
