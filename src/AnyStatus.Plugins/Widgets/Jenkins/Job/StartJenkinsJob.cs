@@ -9,7 +9,7 @@ namespace AnyStatus
         private readonly ILogger _logger;
         private readonly IDialogService _dialogService;
 
-        public StartJenkinsJob(IDialogService dialogService, ILogger logger, IJenkinsClient jenkinsClient)
+        public StartJenkinsJob(IDialogService dialogService, ILogger logger)
         {
             _logger = Preconditions.CheckNotNull(logger, nameof(logger));
             _dialogService = Preconditions.CheckNotNull(dialogService, nameof(dialogService));
