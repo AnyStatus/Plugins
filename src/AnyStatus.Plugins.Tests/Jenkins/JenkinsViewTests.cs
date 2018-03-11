@@ -27,7 +27,7 @@ namespace AnyStatus.Plugins.Tests.Jenkins
 
             folder.Add(jenkinsView);
 
-            var handler = new JenkinsViewMonitor(logger);
+            var handler = new JenkinsViewStatus(logger);
             var request = HealthCheckRequest.Create(jenkinsView);
 
             await handler.Handle(request, CancellationToken.None);

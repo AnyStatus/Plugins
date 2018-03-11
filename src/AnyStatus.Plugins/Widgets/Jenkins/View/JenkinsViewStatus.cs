@@ -9,11 +9,11 @@ using System.Windows.Threading;
 
 namespace AnyStatus
 {
-    public class JenkinsViewMonitor : ICheckHealth<JenkinsView_v1>
+    public class JenkinsViewStatus : ICheckHealth<JenkinsView_v1>
     {
         private readonly ILogger _logger;
 
-        public JenkinsViewMonitor(ILogger logger)
+        public JenkinsViewStatus(ILogger logger)
         {
             _logger = logger ?? throw new ArgumentNullException();
         }

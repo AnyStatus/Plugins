@@ -1,15 +1,20 @@
 ﻿using AnyStatus.API;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Sockets;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
+    /// <summary>
+    /// Obsolete. Use Port health check instead.
+    /// </summary>
     [Browsable(false)]
     [DisplayName("UDP")]
     [DisplayColumn("Network")]
     [Description("Check UDP server connectivity")]
-    public class Udp : Widget, IMonitored
+    public class Udp : Widget, IHealthCheck, ISchedulable
     {
         private const string Category = "UDP";
 
@@ -26,23 +31,26 @@ namespace AnyStatus
         public int Port { get; set; }
     }
 
-    //public class UdpMonitor : IMonitor<Udp>
-    //{
-    //    public void Handle(Udp udp)
-    //    {
-    //        using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Udp))
-    //        {
-    //            try
-    //            {
-    //                socket.Connect(udp.Host, udp.Port);
+    [Obsolete("Use Port health check instead.")]
+    public class UdpMonitor : RequestHandler<HealthCheckRequest<Udp>>, ICheckHealth<Udp>
+    {
+        protected override void HandleCore(HealthCheckRequest<Udp> request)
+        {
+            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Udp))
+            {
+                try
+                {
+                    socket.Connect(request.DataContext.Host, request.DataContext.Port);
 
-    //                udp.State = State.Ok;
-    //            }
-    //            catch (SocketException)
-    //            {
-    //                udp.State = State.Failed;
-    //            }
-    //        }
-    //    }
-    //}
+                    socket.Disconnect(true);
+
+                    request.DataContext.State = State.Ok;
+                }
+                catch (SocketException)
+                {
+                    request.DataContext.State = State.Failed;
+                }
+            }
+        }
+    }
 }
