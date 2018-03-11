@@ -17,7 +17,7 @@ namespace AnyStatus
 
         public async Task Handle(StartRequest<JenkinsJob_v1> request, CancellationToken cancellationToken)
         {
-            var dialog = new ConfirmationDialog($"Are you sure you want to trigger {request.DataContext.Name}?");
+            var dialog = new ConfirmationDialog($"Are you sure you want to start {request.DataContext.Name}?");
 
             var result = _dialogService.ShowDialog(dialog);
 
