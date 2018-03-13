@@ -19,7 +19,8 @@ namespace AnyStatus
 
         public static int GetCpuUsage(string machineName)
         {
-            if (string.IsNullOrWhiteSpace(machineName)) machineName = ".";
+            if (string.IsNullOrWhiteSpace(machineName))
+                machineName = ".";
 
             var counter = new System.Diagnostics.PerformanceCounter("Processor", "% Processor Time", "_Total", machineName);
 
