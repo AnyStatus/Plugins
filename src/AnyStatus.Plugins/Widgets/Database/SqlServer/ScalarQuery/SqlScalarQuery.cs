@@ -9,7 +9,7 @@ namespace AnyStatus
     [DisplayColumn("Database")]
     [DisplayName("SQL Scalar Query")]
     [Description("Executes the query, and shows the first column of the first row in the result set returned by the query. Additional columns or rows are ignored.")]
-    public class SqlScalarQuery : Metric, ISchedulable
+    public class SqlScalarQuery : MetricValue, ISchedulable
     {
         private const string Category = "SQL Scalar Query";
 

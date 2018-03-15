@@ -7,7 +7,7 @@ namespace AnyStatus
     [Browsable(false)]
     [DisplayName("NuGet Package Version (Preview)")]
     [Description("")]
-    public class NuGetPackageVersion : Metric, ISchedulable
+    public class NuGetPackageVersion : MetricValue, ISchedulable
     {
         private const string Category = "NuGet Package";
 
