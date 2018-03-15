@@ -1,23 +1,23 @@
 ﻿using AnyStatus.API;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace AnyStatus
 {
-    public class CpuUsageQuery : RequestHandler<MetricQueryRequest<CpuUsage>>,
-        IMetricQuery<CpuUsage>
+    public class CpuUsageQuery : IMetricQuery<CpuUsage>
     {
         [DebuggerStepThrough]
-        protected override void HandleCore(MetricQueryRequest<CpuUsage> request)
+        public async Task Handle(MetricQueryRequest<CpuUsage> request, CancellationToken cancellationToken)
         {
-            var usage = GetCpuUsage(request.DataContext.MachineName);
+            var usage = await GetCpuUsageAsync(request.DataContext.MachineName).ConfigureAwait(false);
 
             request.DataContext.Value = usage + "%";
 
             request.DataContext.State = State.Ok;
         }
 
-        public static int GetCpuUsage(string machineName)
+        public async Task<int> GetCpuUsageAsync(string machineName)
         {
             if (string.IsNullOrWhiteSpace(machineName))
                 machineName = ".";
@@ -26,7 +26,7 @@ namespace AnyStatus
 
             counter.NextValue();
 
-            Thread.Sleep(1000);
+            await Task.Delay(1000).ConfigureAwait(false);
 
             return (int)counter.NextValue();
         }
