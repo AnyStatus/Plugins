@@ -9,6 +9,7 @@ namespace AnyStatus.Plugins.Tests
     [TestClass]
     public class SqlScalarQueryTests
     {
+        [Ignore]
         [TestMethod]
         public async Task SqlScalarQueryTest()
         {
