@@ -12,8 +12,6 @@ namespace AnyStatus.Plugins.Tests
         [TestMethod]
         public async Task SqlScalarQueryTest()
         {
-            var logger = Substitute.For<ILogger>();
-
             var sqlScalarQuery = new SqlScalarQuery
             {
                 SqlQuery = "SELECT Count(1) FROM [dbo].[Table]",
@@ -22,7 +20,7 @@ namespace AnyStatus.Plugins.Tests
 
             var request = MetricQueryRequest.Create(sqlScalarQuery);
 
-            var handler = new SqlScalarQueryHandler(logger);
+            var handler = new SqlScalarQueryHandler();
 
             await handler.Handle(request, CancellationToken.None);
 
