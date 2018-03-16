@@ -47,7 +47,7 @@ namespace AnyStatus
         public string ApiToken { get; set; }
 
         [PropertyOrder(40)]
-        [Description("Indicates that the Jenkins CSRF protection is enabled.")]
+        [Description("Check if your Jenkins uses the \"Prevent Cross Site Request Forgery exploits\" security option.")]
         [Category("Jenkins")]
         public bool CSRF { get; set; }
 
@@ -55,7 +55,7 @@ namespace AnyStatus
         [Category("Jenkins")]
         [DisplayName("Parameterized Build")]
         //[RefreshProperties(RefreshProperties.All)] <- wpftoolkit bug - description text disapears
-        [Description("Indicates this build is parameterized. You can find this parameter in the configuration page of your Jenkins job.")]
+        [Description("Check if your build is parameterized. You can find out in the configuration page of your Jenkins job.")]
         public bool IsParameterized
         {
             get

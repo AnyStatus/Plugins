@@ -73,7 +73,7 @@ namespace AnyStatus
             }
             catch (Exception ex)
             {
-                throw new Exception("Jenkins: An error occurred while requesting crumb. See inner exception.", ex);
+                throw new Exception("Jenkins: An error occurred while requesting crumb. Try to enable or disable CSRF in the properties window.", ex);
             }
         }
 

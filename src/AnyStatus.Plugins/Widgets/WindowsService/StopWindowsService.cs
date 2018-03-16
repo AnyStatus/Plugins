@@ -47,9 +47,9 @@ namespace AnyStatus
 
                     SetState(windowsService, sc.Status);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    _logger.Error(ex, $"An error occurred while stopping {windowsService.Name}.");
+                    throw;
                 }
                 finally
                 {

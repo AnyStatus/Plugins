@@ -75,30 +75,23 @@ namespace AnyStatus
 
         #region Helpers
 
-        private void Initialize(IJenkins jenkinsPlugin)
+        private void Initialize(IJenkins jenkins)
         {
-            try
+            _handler = new WebRequestHandler
             {
-                _handler = new WebRequestHandler
-                {
-                    UseDefaultCredentials = true
-                };
+                UseDefaultCredentials = true
+            };
 
-                if (jenkinsPlugin.IgnoreSslErrors)
-                {
-                    _handler.ServerCertificateValidationCallback += OnServerCertificateValidationCallback;
-                }
-
-                _client = new HttpClient(_handler);
-
-                if (string.IsNullOrEmpty(jenkinsPlugin.UserName) || string.IsNullOrEmpty(jenkinsPlugin.ApiToken)) return;
-
-                Authorize(jenkinsPlugin);
-            }
-            catch (Exception ex)
+            if (jenkins.IgnoreSslErrors)
             {
-                throw new Exception("An error occurred while creating Jenkins request. See inner exception.", ex);
+                _handler.ServerCertificateValidationCallback += OnServerCertificateValidationCallback;
             }
+
+            _client = new HttpClient(_handler);
+
+            if (string.IsNullOrEmpty(jenkins.UserName) || string.IsNullOrEmpty(jenkins.ApiToken)) return;
+
+            Authorize(jenkins);
         }
 
         private void Authorize(IJenkins jenkinsPlugin)

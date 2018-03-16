@@ -49,7 +49,7 @@ namespace AnyStatus
 
             item.LastWriteTime = sourceFile.LastWriteTime;
 
-            _logger.Info($"Source {sourceFile.FullName} built successfully.");
+            _logger.Info($"{sourceFile.FullName} compiled successfully.");
         }
 
         /// <summary>
@@ -59,27 +59,20 @@ namespace AnyStatus
         /// <returns>Null or state id</returns>
         private static object Run(Assembly assembly, IEnumerable<string> args)
         {
-            try
+            var method = assembly.EntryPoint;
+
+            var parameters = method.GetParameters();
+
+            if (parameters.Any())
             {
-                var method = assembly.EntryPoint;
+                if (parameters.First().ParameterType != typeof(string[]))
+                    throw new Exception("The assembly entry point method first parameter must be of type string[].");
 
-                var parameters = method.GetParameters();
-
-                if (parameters.Any())
-                {
-                    if (parameters.First().ParameterType != typeof(string[]))
-                        throw new Exception("The assembly entry point method first parameter must be of type string[].");
-
-                    return method.Invoke(null, new object[] { args != null ? args.ToArray() : new string[0] });
-                }
-                else
-                {
-                    return method.Invoke(null, new object[] { });
-                }
+                return method.Invoke(null, new object[] { args != null ? args.ToArray() : new string[0] });
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception("An error occurred while executing CSharp code.", ex);
+                return method.Invoke(null, new object[] { });
             }
         }
     }
