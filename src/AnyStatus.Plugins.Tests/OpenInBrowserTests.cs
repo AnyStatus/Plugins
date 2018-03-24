@@ -1,6 +1,8 @@
 ﻿using AnyStatus.API;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Tests
 {
@@ -8,7 +10,7 @@ namespace AnyStatus.Plugins.Tests
     public class OpenInBrowserTests
     {
         [TestMethod]
-        public void OpenGitHubIssueInBrowser()
+        public async Task OpenGitHubIssueInBrowser()
         {
             var gitHubIssue = new GitHubIssue
             {
@@ -20,9 +22,11 @@ namespace AnyStatus.Plugins.Tests
 
             var processStarter = Substitute.For<IProcessStarter>();
 
-            var handler = new OpenGitHubIssueInBrowser(processStarter);
+            var handler = new OpenGitHubIssueWebPage(processStarter);
 
-            handler.Handle(gitHubIssue);
+            var request = OpenWebPageRequest.Create(gitHubIssue);
+
+            await handler.Handle(request, CancellationToken.None);
 
             processStarter.Received().Start(Arg.Any<string>());
         }

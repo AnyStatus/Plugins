@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Tests.Jenkins
 {
@@ -9,7 +11,7 @@ namespace AnyStatus.Plugins.Tests.Jenkins
     public class JenkinsViewTests
     {
         [TestMethod]
-        public void JenkinsView_Should_NOT_DuplicateJobs_When_Refreshing()
+        public async Task JenkinsView_Should_NOT_DuplicateJobs_When_Refreshing()
         {
             var logger = Substitute.For<ILogger>();
 
@@ -25,16 +27,17 @@ namespace AnyStatus.Plugins.Tests.Jenkins
 
             folder.Add(jenkinsView);
 
-            var jenkinsHandler = new JenkinsViewMonitor(new JenkinsClient(logger));
+            var handler = new JenkinsViewStatus(logger);
+            var request = HealthCheckRequest.Create(jenkinsView);
 
-            jenkinsHandler.Handle(jenkinsView);
+            await handler.Handle(request, CancellationToken.None);
 
             Assert.IsNotNull(jenkinsView.Items);
             Assert.IsTrue(jenkinsView.Items.Any());
 
             var count = jenkinsView.Items.Count;
 
-            jenkinsHandler.Handle(jenkinsView);
+            await handler.Handle(request, CancellationToken.None);
 
             Assert.AreEqual(count, jenkinsView.Items.Count);
         }

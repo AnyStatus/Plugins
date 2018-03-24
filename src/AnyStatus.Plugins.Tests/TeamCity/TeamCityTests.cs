@@ -1,5 +1,7 @@
 ﻿using AnyStatus.API;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Tests.TeamCity
 {
@@ -8,21 +10,22 @@ namespace AnyStatus.Plugins.Tests.TeamCity
     {
         [TestMethod]
         [TestCategory("Integration")]
-        public void TeamCityBuildMonitorTest()
+        public async Task TeamCityBuildMonitorTest()
         {
-            var teamCityBuild = new TeamCityBuild
+            var build = new TeamCityBuild
             {
                 GuestUser = true,
                 Url = "https://teamcity.jetbrains.com",
                 BuildTypeId = "OpenSourceProjects_Kaxb_Build",
             };
 
-            var monitor = new TeamCityBuildMonitor();
+            var request = HealthCheckRequest.Create(build);
+            var handler = new TeamCityBuildStatus();
 
-            monitor.Handle(teamCityBuild);
+            await handler.Handle(request, CancellationToken.None);
 
-            Assert.AreNotEqual(State.None, teamCityBuild.State);
-            Assert.AreNotEqual(State.Error, teamCityBuild.State);
+            Assert.AreNotEqual(State.None, request.DataContext.State);
+            Assert.AreNotEqual(State.Error, request.DataContext.State);
         }
     }
 }

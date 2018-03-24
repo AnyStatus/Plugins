@@ -1,6 +1,8 @@
 ﻿using AnyStatus.API;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Tests
 {
@@ -8,24 +10,26 @@ namespace AnyStatus.Plugins.Tests
     public class VstsBuildTests
     {
         [TestMethod]
-        public void OpenInBrowserTest()
+        public async Task OpenVstsBuildWebPage()
         {
-            var processstarter = Substitute.For<IProcessStarter>();
+            var ps = Substitute.For<IProcessStarter>();
 
-            var vstsBuild = new VSTSBuild_v1
+            var build = new VSTSBuild_v1
             {
                 Account = "account",
                 Project = "project",
                 DefinitionId = 1
             };
 
-            var openVstsBuildPage = new OpenVstsBuildPage(processstarter);
+            var request = OpenWebPageRequest.Create(build);
 
-            openVstsBuildPage.Handle(vstsBuild);
+            var handler = new OpenVstsBuildPage(ps);
+
+            await handler.Handle(request, CancellationToken.None);
 
             var expected = "https://account.visualstudio.com/project/_build/index?definitionId=1&_a=completed";
 
-            processstarter.Received().Start(expected);
+            ps.Received().Start(expected);
         }
 
         [Ignore]

@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Tests
@@ -14,9 +15,10 @@ namespace AnyStatus.Plugins.Tests
 #if !DEBUG
         [Ignore]
 #endif
+
         [TestMethod]
         [TestCategory(Category)]
-        public void JenkinsJobMonitor()
+        public async Task JenkinsJobMonitor()
         {
             var jenkinsJob = new JenkinsJob_v1
             {
@@ -26,10 +28,10 @@ namespace AnyStatus.Plugins.Tests
             };
 
             var logger = Substitute.For<ILogger>();
-            var jenkinsClient = new JenkinsClient(logger);
-            var monitor = new JenkinsJobMonitor(jenkinsClient);
+            var handler = new JenkinsJobMonitor(logger);
+            var request = HealthCheckRequest.Create(jenkinsJob);
 
-            monitor.Handle(jenkinsJob);
+            await handler.Handle(request, CancellationToken.None);
 
             if (jenkinsJob.State == State.None ||
                 jenkinsJob.State == State.Error ||
@@ -39,6 +41,7 @@ namespace AnyStatus.Plugins.Tests
             }
         }
 
+        [Ignore]
         [TestMethod]
         [TestCategory(Category)]
         [ExpectedException(typeof(HttpRequestException))]
@@ -46,7 +49,6 @@ namespace AnyStatus.Plugins.Tests
         {
             var logger = Substitute.For<ILogger>();
             var dialogService = Substitute.For<IDialogService>();
-            var jenkinsClient = new JenkinsClient(logger);
 
             dialogService.ShowDialog(Arg.Any<ConfirmationDialog>()).Returns(DialogResult.Yes);
 
@@ -58,9 +60,9 @@ namespace AnyStatus.Plugins.Tests
                 URL = @"https://ci.jenkins-ci.org/job/Core/job/jenkins/job/master/",
             };
 
-            var trigger = new TriggerJenkinsJob(dialogService, logger, jenkinsClient);
+            var trigger = new StartJenkinsJob(dialogService, logger);
 
-            await trigger.HandleAsync(jenkinsJob);
+            //await trigger.Handle(jenkinsJob);
         }
     }
 }

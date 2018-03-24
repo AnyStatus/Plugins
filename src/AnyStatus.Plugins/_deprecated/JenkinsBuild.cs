@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API;
+using AnyStatus.API.Legacy;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -149,7 +150,7 @@ namespace AnyStatus
 
         public async Task HandleAsync(JenkinsBuild build)
         {
-            var dialog = new ConfirmationDialog($"Are you sure you want to trigger {build.Name}?", "Trigger a new build");
+            var dialog = new ConfirmationDialog($"Are you sure you want to start {build.Name}?");
 
             var result = _dialogService.ShowDialog(dialog);
 

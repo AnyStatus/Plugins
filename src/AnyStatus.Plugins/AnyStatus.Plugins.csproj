@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AnyStatus.Plugins</RootNamespace>
     <AssemblyName>AnyStatus.Plugins</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,7 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AnyStatus.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b52fc05e377030a3, processorArchitecture=MSIL">
-      <HintPath>..\packages\AnyStatus.API.1.0.110\lib\net452\AnyStatus.API.dll</HintPath>
+      <HintPath>..\packages\AnyStatus.API.2.0.30-alpha\lib\net46\AnyStatus.API.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Administration.7.0.0.0\lib\net20\Microsoft.Web.Administration.dll</HintPath>
@@ -59,88 +60,136 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="Xceed.Wpf.Toolkit, Version=3.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.3.1\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppVeyor\AppVeyorBuildMonitor.cs" />
-    <Compile Include="AppVeyor\OpenAppVeyorBuildInBrowser.cs" />
-    <Compile Include="AppVeyor\TriggerAppVeyorBuild.cs" />
-    <Compile Include="General\NuGetPackageVersion.cs" />
-    <Compile Include="Jenkins\Client\Contracts\JenkinsCrumb.cs" />
-    <Compile Include="Jenkins\Client\JenkinsRequest.cs" />
-    <Compile Include="Jenkins\IJenkinsClient.cs" />
-    <Compile Include="Jenkins\IJenkinsPlugin.cs" />
-    <Compile Include="Jenkins\Client\JenkinsClient.cs" />
-    <Compile Include="TeamCity\OpenTeamCityBuildInBrowser.cs" />
-    <Compile Include="TeamCity\TeamCity.cs" />
-    <Compile Include="TeamCity\TeamCityBuildMonitor.cs" />
-    <Compile Include="TeamCity\TeamCityClient.cs" />
-    <Compile Include="TeamCity\TeamCityConnection.cs" />
-    <Compile Include="TeamCity\TeamCityException.cs" />
-    <Compile Include="TeamCity\TriggerTeamCityBuild.cs" />
-    <Compile Include="TFS\BaseTfsBuildHandler.cs" />
-    <Compile Include="TFS\OpenTfsBuildInBrowser.cs" />
-    <Compile Include="TFS\TfsBuildMonitor.cs" />
-    <Compile Include="TFS\TriggerTfsBuild.cs" />
-    <Compile Include="VSTS\Build\OpenVstsBuildPage.cs" />
-    <Compile Include="VSTS\Build\VstsBuildMonitor.cs" />
-    <Compile Include="VSTS\Build\VstsBuildTrigger.cs" />
-    <Compile Include="VSTS\Build\VstsBuild_v1.cs" />
-    <Compile Include="VSTS\Release\OpenVstsReleasePage.cs" />
-    <Compile Include="VSTS\Release\VSTSReleaseEnvironment.cs" />
-    <Compile Include="VSTS\Release\VSTSReleaseMonitor.cs" />
-    <Compile Include="VSTS\Release\VSTSRelease_v1.cs" />
-    <Compile Include="VSTS\Client\VstsClient.cs" />
-    <Compile Include="VSTS\Client\VstsClientException.cs" />
-    <Compile Include="VSTS\Client\VstsContracts.cs" />
-    <Compile Include="VSTS\VstsPlugin.cs" />
+    <Compile Include="Widgets\AppVeyor\Build\AppVeyorBuildStatus.cs" />
+    <Compile Include="Widgets\AppVeyor\Build\OpenWebPage.cs" />
+    <Compile Include="Widgets\Coveralls\CoveredPercentQuery.cs" />
+    <Compile Include="Widgets\Coveralls\OpenWebPage.cs" />
+    <Compile Include="Widgets\AppVeyor\Build\StartAppVeyorBuild.cs" />
+    <Compile Include="Widgets\CPU\Usage\CpuUsageQuery.cs" />
+    <Compile Include="Widgets\Custom\Batch\BatchFileRunner.cs" />
+    <Compile Include="Widgets\Custom\Code\CodeRunner.cs" />
+    <Compile Include="Widgets\Custom\PowerShell\PowerShellRunner.cs" />
+    <Compile Include="Widgets\Database\SqlServer\Connection\SqlServerHealthCheck.cs" />
+    <Compile Include="Widgets\Database\SqlServer\ScalarQuery\SqlScalarQueryHandler.cs" />
+    <Compile Include="Widgets\GitHub\Issue\GitHubIssueState.cs" />
+    <Compile Include="Widgets\GitHub\Issue\GitHubIssueStateCheck.cs" />
+    <Compile Include="Widgets\GitHub\Issue\OpenWebPage.cs" />
+    <Compile Include="Widgets\IIS\ApplicationPool\ApplicationHealthCheck.cs" />
+    <Compile Include="Widgets\Network\HTTP\HTTPHealthCheck.cs" />
+    <Compile Include="Widgets\Network\HTTP\OpenWebPage.cs" />
+    <Compile Include="Widgets\Network\Ping\PingHealthCheck.cs" />
+    <Compile Include="Widgets\Network\Port\NetworkProtocol.cs" />
+    <Compile Include="Widgets\Network\Port\Port.cs" />
+    <Compile Include="Widgets\Network\Port\PortHealthCheck.cs" />
+    <Compile Include="Widgets\Network\Speed\DownloadSpeed.cs" />
+    <Compile Include="Widgets\Network\Speed\NetworkInterfaceItemsSource.cs" />
+    <Compile Include="Widgets\Network\Speed\NetworkSpeedQuery.cs" />
+    <Compile Include="Widgets\Network\Speed\UploadSpeed.cs" />
+    <Compile Include="Widgets\NuGet\NuGetPackageVersionQuery.cs" />
+    <Compile Include="Widgets\NuGet\PackageVersion.cs" />
+    <Compile Include="Widgets\Jenkins\Client\Contracts\JenkinsCrumb.cs" />
+    <Compile Include="Widgets\Jenkins\Client\JenkinsRequest.cs" />
+    <Compile Include="Widgets\Jenkins\Client\IJenkinsClient.cs" />
+    <Compile Include="Widgets\Jenkins\Client\IJenkinsPlugin.cs" />
+    <Compile Include="Widgets\Jenkins\Client\JenkinsClient.cs" />
+    <Compile Include="Widgets\PerfCounter\PerformanceCounterQuery.cs" />
+    <Compile Include="Widgets\Pingdom\PingdomHealthCheck.cs" />
+    <Compile Include="Widgets\TeamCity\Build\OpenWebPage.cs" />
+    <Compile Include="Widgets\TeamCity\Client\TeamCityContracts.cs" />
+    <Compile Include="Widgets\TeamCity\Build\TeamCityBuildStatus.cs" />
+    <Compile Include="Widgets\TeamCity\Client\TeamCityClient.cs" />
+    <Compile Include="Widgets\TeamCity\Client\TeamCityConnection.cs" />
+    <Compile Include="Widgets\TeamCity\Client\TeamCityException.cs" />
+    <Compile Include="Widgets\TeamCity\Build\StartTeamCityBuild.cs" />
+    <Compile Include="Widgets\TFS\Build\TFSBuildHandler.cs" />
+    <Compile Include="Widgets\TFS\Build\OpenWebPage.cs" />
+    <Compile Include="Widgets\TFS\Build\TFSBuildStatus.cs" />
+    <Compile Include="Widgets\TFS\Build\StartTFSBuild.cs" />
+    <Compile Include="Widgets\UptimeRobot\UptimeRobotCheck.cs" />
+    <Compile Include="Widgets\VSTS\Build\OpenWebPage.cs" />
+    <Compile Include="Widgets\VSTS\Build\VSTSBuildStatus.cs" />
+    <Compile Include="Widgets\VSTS\Build\StartVSTSBuild.cs" />
+    <Compile Include="Widgets\VSTS\Build\VSTSBuild_v1.cs" />
+    <Compile Include="Widgets\VSTS\Client\VstsConnection.cs" />
+    <Compile Include="Widgets\VSTS\Release\OpenWebPage.cs" />
+    <Compile Include="Widgets\VSTS\Release\VSTSReleaseEnvironment.cs" />
+    <Compile Include="Widgets\VSTS\Release\VSTSReleaseStatus.cs" />
+    <Compile Include="Widgets\VSTS\Release\VSTSRelease_v1.cs" />
+    <Compile Include="Widgets\VSTS\Client\VstsClient.cs" />
+    <Compile Include="Widgets\VSTS\Client\VstsClientException.cs" />
+    <Compile Include="Widgets\VSTS\Client\VstsContracts.cs" />
+    <Compile Include="Widgets\VSTS\VstsPlugin.cs" />
+    <Compile Include="Widgets\WindowsService\WindowsServiceHandler.cs" />
+    <Compile Include="Widgets\WindowsService\RestartWindowsService.cs" />
+    <Compile Include="Widgets\WindowsService\StartWindowsService.cs" />
+    <Compile Include="Widgets\WindowsService\StopWindowsService.cs" />
+    <Compile Include="Widgets\WindowsService\WindowsServiceHealthCheck.cs" />
     <Compile Include="_deprecated\JenkinsBuild.cs" />
     <Compile Include="_deprecated\JenkinsMultiJob.cs" />
-    <Compile Include="AppVeyor\AppVeyorBuild.cs" />
-    <Compile Include="Coveralls\CoverallsCoveredPercent.cs" />
-    <Compile Include="Jenkins\Client\Contracts\JenkinsJob.cs" />
-    <Compile Include="Jenkins\Plugins\JenkinsJob_v1.cs" />
-    <Compile Include="Jenkins\Handlers\JenkinsJobMonitor.cs" />
-    <Compile Include="Jenkins\Plugins\JenkinsView_v1.cs" />
-    <Compile Include="Jenkins\Client\Contracts\JenkinsView.cs" />
-    <Compile Include="Jenkins\Handlers\JenkinsViewMonitor.cs" />
-    <Compile Include="Jenkins\Handlers\OpenJenkinsJobInBrowser.cs" />
-    <Compile Include="Jenkins\Handlers\OpenJenkinsViewInBrowser.cs" />
-    <Compile Include="Jenkins\Handlers\TriggerJenkinsJob.cs" />
-    <Compile Include="TeamCity\TeamCityBuild.cs" />
-    <Compile Include="TFS\TFSBuild.cs" />
-    <Compile Include="TravisCI\TravisCIBuild.cs" />
-    <Compile Include="Custom\BatchFile.cs" />
-    <Compile Include="Custom\DynamicSourceCode_v1.cs" />
-    <Compile Include="Custom\PowerShellScript.cs" />
-    <Compile Include="Database\SqlScalarQuery.cs" />
-    <Compile Include="Database\SqlServerConnection.cs" />
-    <Compile Include="General\CpuUsage.cs" />
-    <Compile Include="General\GitHubIssue.cs" />
-    <Compile Include="General\IISApplicationPool.cs" />
-    <Compile Include="General\PerformanceCounter.cs" />
-    <Compile Include="General\WindowsService.cs" />
-    <Compile Include="Monitoring\Pingdom.cs" />
-    <Compile Include="Monitoring\UptimeRobot.cs" />
-    <Compile Include="Network\Http.cs" />
-    <Compile Include="Network\Ping.cs" />
-    <Compile Include="Network\Speed.cs" />
-    <Compile Include="Network\TCP.cs" />
-    <Compile Include="Network\UDP.cs" />
+    <Compile Include="Widgets\AppVeyor\Build\AppVeyorBuild.cs" />
+    <Compile Include="Widgets\Coveralls\CoverallsCoveredPercent.cs" />
+    <Compile Include="Widgets\Jenkins\Client\Contracts\JenkinsJob.cs" />
+    <Compile Include="Widgets\Jenkins\Job\JenkinsJob_v1.cs" />
+    <Compile Include="Widgets\Jenkins\Job\JenkinsJobStatus.cs" />
+    <Compile Include="Widgets\Jenkins\View\JenkinsView_v1.cs" />
+    <Compile Include="Widgets\Jenkins\Client\Contracts\JenkinsView.cs" />
+    <Compile Include="Widgets\Jenkins\View\JenkinsViewStatus.cs" />
+    <Compile Include="Widgets\Jenkins\Job\OpenWebPage.cs" />
+    <Compile Include="Widgets\Jenkins\View\OpenWebPage.cs" />
+    <Compile Include="Widgets\Jenkins\Job\StartJenkinsJob.cs" />
+    <Compile Include="Widgets\TeamCity\Build\TeamCityBuild.cs" />
+    <Compile Include="Widgets\TFS\Build\TFSBuild.cs" />
+    <Compile Include="Widgets\Custom\Batch\BatchFile.cs" />
+    <Compile Include="Widgets\Custom\Code\Code_v1.cs" />
+    <Compile Include="Widgets\Custom\PowerShell\PowerShell.cs" />
+    <Compile Include="Widgets\Database\SqlServer\ScalarQuery\SqlScalarQuery.cs" />
+    <Compile Include="Widgets\Database\SqlServer\Connection\SqlServerConnection.cs" />
+    <Compile Include="Widgets\CPU\Usage\CpuUsage.cs" />
+    <Compile Include="Widgets\GitHub\Issue\GitHubIssue.cs" />
+    <Compile Include="Widgets\IIS\ApplicationPool\ApplicationPool.cs" />
+    <Compile Include="Widgets\PerfCounter\PerformanceCounter.cs" />
+    <Compile Include="Widgets\WindowsService\WindowsService.cs" />
+    <Compile Include="Widgets\Pingdom\Pingdom.cs" />
+    <Compile Include="Widgets\UptimeRobot\UptimeRobot.cs" />
+    <Compile Include="Widgets\Network\HTTP\HTTP.cs" />
+    <Compile Include="Widgets\Network\Ping\Ping.cs" />
+    <Compile Include="Widgets\Network\Speed\NetworkSpeed.cs" />
+    <Compile Include="_deprecated\TCP.cs" />
+    <Compile Include="_deprecated\UDP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AnyStatus.Plugins.nuspec" />
+    <None Include="app.config" />
     <None Include="Key.snk" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="todo.txt" />
+    <None Include="todo.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="BuildNuget" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'" Outputs="$(SolutionDir)*.nupkg">
     <Exec Command="$(SolutionDir)nuget pack $(ProjectDir)$(ProjectName).nuspec" />
