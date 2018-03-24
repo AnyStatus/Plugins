@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <releaseNotes></releaseNotes>
     <description>An open-source plugins and extensions library for AnyStatus. For more information visit https://www.anystat.us</description>
-    <copyright>Copyright © 2017 Alon Amsalem, AnyStatus</copyright>
+    <copyright>Copyright © 2016-2018 AnyStatus, Alon Amsalem.</copyright>
     <tags>AnyStatus VisualStudio Monitor Monitoring Build TFS VSTS AppVeyor TeamCity TravisCI Jenkins Pingdom UptimeRobot</tags>
     <dependencies>
       <dependency id="Extended.Wpf.Toolkit" version="3.0" />
