@@ -10,21 +10,20 @@ namespace AnyStatus
     /// </summary>
     public class VstsBuildHealthCheck : ICheckHealth<VSTSBuild_v1>
     {
-        VstsClient _client = new VstsClient();
-
         public async Task Handle(HealthCheckRequest<VSTSBuild_v1> request, CancellationToken cancellationToken)
         {
-            request.DataContext.MapTo(_client.Connection);
+            var client = new VstsClient();
+
+            request.DataContext.MapTo(client.Connection);
 
             if (request.DataContext.DefinitionId == null)
             {
-                var definition = await _client.GetBuildDefinitionAsync(request.DataContext.DefinitionName)
-                                              .ConfigureAwait(false);
+                var definition = await client.GetBuildDefinitionAsync(request.DataContext.DefinitionName).ConfigureAwait(false);
 
                 request.DataContext.DefinitionId = definition.Id;
             }
 
-            var build = await _client.GetLatestBuildAsync(request.DataContext.DefinitionId.Value)
+            var build = await client.GetLatestBuildAsync(request.DataContext.DefinitionId.Value)
                                      .ConfigureAwait(false);
 
             request.DataContext.State = build != null ? build.State : State.Unknown;
