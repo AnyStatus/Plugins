@@ -13,9 +13,7 @@ namespace AnyStatus
     {
         private const string Category = "Build Definition";
 
-        public VSTSBuild_v1() : base(aggregate: false)
-        {
-        }
+        public VSTSBuild_v1() : base(aggregate: false) { }
 
         [Required]
         [Category(Category)]
@@ -38,15 +36,5 @@ namespace AnyStatus
 
             return clone;
         }
-
-        //public bool CanOpenInBrowser()
-        //{
-        //    return State != State.Error && DefinitionId != null;
-        //}
-
-        //public bool CanTriggerBuild()
-        //{
-        //    return State != State.Error && DefinitionId != null;
-        //}
     }
 }

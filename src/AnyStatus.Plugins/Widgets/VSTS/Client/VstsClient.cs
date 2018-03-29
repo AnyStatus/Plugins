@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -10,6 +11,11 @@ namespace AnyStatus
 {
     public class VstsClient
     {
+        public VstsClient()
+        {
+            Connection = new VstsConnection();
+        }
+
         public VstsClient(VstsConnection connection)
         {
             Connection = connection;
@@ -122,12 +128,18 @@ namespace AnyStatus
 
                 var response = await httpClient.GetAsync(sb.ToString()).ConfigureAwait(false);
 
-                response.EnsureSuccessStatusCode();
+                EnsureSuccessStatusCode(response.StatusCode);
 
                 var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                 return new JavaScriptSerializer().Deserialize<T>(content);
             }
+        }
+
+        private static void EnsureSuccessStatusCode(HttpStatusCode statusCode)
+        {
+            if (statusCode != HttpStatusCode.OK)
+                throw new VstsClientException($"Invalid HTTP response status code: {(int)statusCode} ({statusCode}). Please verify your User Name and Password or Personal Acceess Token.");
         }
 
         private async Task Send<T>(string api, T request = default(T), bool vsrm = false)

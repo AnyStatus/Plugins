@@ -32,9 +32,9 @@ namespace AnyStatus.Plugins.Tests
             ps.Received().Start(expected);
         }
 
-        [Ignore]
         [TestMethod]
-        public void VstsBuildMonitorTest()
+        [ExpectedException(typeof(VstsClientException))]
+        public async Task VstsBuildHealthCheckTest()
         {
             var build = new VSTSBuild_v1
             {
@@ -46,11 +46,11 @@ namespace AnyStatus.Plugins.Tests
                 Password = "personal access token"
             };
 
-            var monitor = new VstsBuildMonitor();
+            var handler = new VstsBuildHealthCheck();
 
-            monitor.Handle(build);
+            var request = HealthCheckRequest.Create(build);
 
-            Assert.AreEqual(State.Ok, build.State);
+            await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
         }
     }
 }

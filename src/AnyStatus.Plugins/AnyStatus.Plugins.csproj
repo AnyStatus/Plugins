@@ -127,7 +127,7 @@
     <Compile Include="Widgets\TFS\Build\StartTFSBuild.cs" />
     <Compile Include="Widgets\UptimeRobot\UptimeRobotCheck.cs" />
     <Compile Include="Widgets\VSTS\Build\OpenWebPage.cs" />
-    <Compile Include="Widgets\VSTS\Build\VSTSBuildStatus.cs" />
+    <Compile Include="Widgets\VSTS\Build\VstsBuildHealthCheck.cs" />
     <Compile Include="Widgets\VSTS\Build\StartVSTSBuild.cs" />
     <Compile Include="Widgets\VSTS\Build\VSTSBuild_v1.cs" />
     <Compile Include="Widgets\VSTS\Client\VstsConnection.cs" />
