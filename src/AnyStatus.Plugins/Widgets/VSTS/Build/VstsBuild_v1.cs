@@ -1,6 +1,8 @@
-﻿using AnyStatus.API;
+﻿using System;
+using AnyStatus.API;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
 using System.Xml.Serialization;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
@@ -26,7 +28,7 @@ namespace AnyStatus
         [Browsable(false)]
         public long? DefinitionId { get; set; }
 
-        public string URL => $"https://{Account}.visualstudio.com/{Project}/_build/index?definitionId={DefinitionId}&_a=completed";
+        public string URL => $"https://{Account}.visualstudio.com/{Uri.EscapeDataString(Project)}/_build/index?definitionId={DefinitionId}&_a=completed";
 
         public override object Clone()
         {

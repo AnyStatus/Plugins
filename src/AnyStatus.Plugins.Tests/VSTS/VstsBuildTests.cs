@@ -33,6 +33,29 @@ namespace AnyStatus.Plugins.Tests
         }
 
         [TestMethod]
+        public async Task OpenVstsBuildWebPageWithSpacesInProjectName()
+        {
+            var ps = Substitute.For<IProcessStarter>();
+
+            var build = new VSTSBuild_v1
+            {
+                Account = "account",
+                Project = "project with spaces",
+                DefinitionId = 1
+            };
+
+            var request = OpenWebPageRequest.Create(build);
+
+            var handler = new OpenVstsBuildPage(ps);
+
+            await handler.Handle(request, CancellationToken.None);
+
+            var expected = "https://account.visualstudio.com/project%20with%20spaces/_build/index?definitionId=1&_a=completed";
+
+            ps.Received().Start(expected);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(VstsClientException))]
         public async Task VstsBuildHealthCheckTest()
         {
