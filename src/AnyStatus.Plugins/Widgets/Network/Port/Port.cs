@@ -5,6 +5,8 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
+    [DisplayColumn("Network")]
+    [Description("Layer 4 TCP and UDP health check.")]
     public class Port : Widget, IHealthCheck, ISchedulable
     {
         private const string Category = "Port";
@@ -24,7 +26,7 @@ namespace AnyStatus
         [Category(Category)]
         [PropertyOrder(30)]
         [DisplayName("Port Number")]
-        [Range(0, ushort.MaxValue, ErrorMessage = "Port number must be between 0 and 65535")]
+        [Range(0, ushort.MaxValue, ErrorMessage = "Port Number must be between 0 and 65535.")]
         public int PortNumber { get; set; }
     }
 }
