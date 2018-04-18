@@ -24,7 +24,7 @@ namespace AnyStatus
             }
 
             var build = await client.GetLatestBuildAsync(request.DataContext.DefinitionId.Value)
-                                     .ConfigureAwait(false);
+                                    .ConfigureAwait(false);
 
             request.DataContext.State = build != null ? build.State : State.Unknown;
         }

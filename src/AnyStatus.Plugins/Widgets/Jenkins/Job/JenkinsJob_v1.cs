@@ -129,15 +129,5 @@ namespace AnyStatus
         {
             return string.IsNullOrEmpty(str) ? str : str.EndsWith("/") ? str : str + "/";
         }
-
-        //public bool CanOpenInBrowser()
-        //{
-        //    return State != State.None && State != State.Error;
-        //}
-
-        //public bool CanTriggerBuild()
-        //{
-        //    return State != State.None && State != State.Error;
-        //}
     }
 }

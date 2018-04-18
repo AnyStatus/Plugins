@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -36,7 +37,7 @@ namespace AnyStatus
         /// Build Web Page URL.
         /// </summary>
         [Browsable(false)]
-        public string URL => $"{Url}/{Collection}/{TeamProject}/_build?_a=completed&definitionId={BuildDefinitionId}";
+        public string URL => $"{Url}/{Uri.EscapeDataString(Collection)}/{Uri.EscapeDataString(TeamProject)}/_build?_a=completed&definitionId={BuildDefinitionId}";
 
         [Required]
         [Category(Category)]
@@ -74,16 +75,6 @@ namespace AnyStatus
         [Description("Optional.")]
         [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
         public string Password { get; set; }
-
-        //public bool CanOpenInBrowser()
-        //{
-        //    return State != State.Error && BuildDefinitionId != 0;
-        //}
-
-        //public bool CanTriggerBuild()
-        //{
-        //    return State != State.Error && BuildDefinitionId != 0;
-        //}
 
         public override object Clone()
         {

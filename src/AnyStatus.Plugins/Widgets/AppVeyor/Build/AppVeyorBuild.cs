@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
@@ -31,24 +32,12 @@ namespace AnyStatus
         public string ApiToken { get; set; }
 
         [Browsable(false)]
-        public string URL => $"https://ci.appveyor.com/project/{AccountName}/{ProjectSlug}";
+        public string URL => $"https://ci.appveyor.com/project/{Uri.EscapeDataString(AccountName)}/{ProjectSlug}";
 
         [PropertyOrder(40)]
         [Category("Source Control")]
         [DisplayName("Branch")]
         [Description("Optional. Branch to trigger.")]
         public string SourceControlBranch { get; set; }
-
-        //public bool CanOpenInBrowser()
-        //{
-        //    return State != State.None && State != State.Error;
-        //}
-
-        //public bool CanTriggerBuild()
-        //{
-        //    return State != State.None &&
-        //           State != State.Error &&
-        //           !string.IsNullOrWhiteSpace(ApiToken);
-        //}
     }
 }

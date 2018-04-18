@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
@@ -16,9 +17,7 @@ namespace AnyStatus
     {
         private const string Category = "Release Definition";
 
-        public VSTSRelease_v1() : base(aggregate: true)
-        {
-        }
+        public VSTSRelease_v1() : base(aggregate: true) { }
 
         [Required]
         [Category(Category)]
@@ -38,7 +37,7 @@ namespace AnyStatus
         /// Build Web Page.
         /// </summary>
         [Browsable(false)]
-        public string URL => $"https://{Account}.visualstudio.com/{Project}/_release?definitionId={DefinitionId}&_a=releases";
+        public string URL => $"https://{Account}.visualstudio.com/{Uri.EscapeDataString(Project)}/_release?definitionId={DefinitionId}&_a=releases";
 
         public override object Clone()
         {
@@ -48,10 +47,5 @@ namespace AnyStatus
 
             return clone;
         }
-
-        //public bool CanOpenInBrowser()
-        //{
-        //    return State != State.Error && DefinitionId != null;
-        //}
     }
 }

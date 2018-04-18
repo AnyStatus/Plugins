@@ -1,8 +1,7 @@
-﻿using System;
-using AnyStatus.API;
+﻿using AnyStatus.API;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Net;
 using System.Xml.Serialization;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 

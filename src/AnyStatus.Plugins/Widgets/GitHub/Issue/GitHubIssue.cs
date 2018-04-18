@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -24,11 +25,6 @@ namespace AnyStatus
         [Description("GitHub issue number.")]
         public int IssueNumber { get; set; }
 
-        public string URL => $"https://api.github.com/repos/{Owner}/{Repository}/issues/{IssueNumber}";
-
-        //public bool CanOpenInBrowser()
-        //{
-        //    return State != State.None && State != State.Error;
-        //}
+        public string URL => $"https://api.github.com/repos/{Uri.EscapeDataString(Owner)}/{Uri.EscapeDataString(Repository)}/issues/{IssueNumber}";
     }
 }
