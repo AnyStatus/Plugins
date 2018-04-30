@@ -15,6 +15,9 @@ namespace AnyStatus
     {
         public async Task Handle(HealthCheckRequest<VSTSRelease_v1> request, CancellationToken cancellationToken)
         {
+            if (request.DataContext == null)
+                throw new InvalidOperationException();
+
             var widget = request.DataContext;
 
             var client = new VstsClient(new VstsConnection());
@@ -30,12 +33,12 @@ namespace AnyStatus
                 widget.DefinitionId = definition.Id;
             }
 
-            var latestRelease = await client
+            var lastRelease = await client
                 .GetLastReleaseAsync(widget.DefinitionId.Value)
                     .ConfigureAwait(false);
 
             var releaseDetails = await client
-                .GetReleaseDetailsAsync(latestRelease.Id)
+                .GetReleaseDetailsAsync(lastRelease.Id)
                     .ConfigureAwait(false);
 
             RemoveEnvironments(widget, releaseDetails);
@@ -43,49 +46,42 @@ namespace AnyStatus
             AddEnvironments(widget, releaseDetails);
         }
 
-        /// <summary>
-        /// Find and remove environments that has been removed on VSTS.
-        /// </summary>
-        /// <param name="widget">VSTS Release widget</param>
-        /// <param name="releaseDetails">VSTS release details, including environments.</param>
-        private static void RemoveEnvironments(VSTSRelease_v1 widget, VSTSReleaseDetails releaseDetails)
+        private static void RemoveEnvironments(VSTSRelease_v1 widget, VSTSReleaseDetails release)
+        {
+            var removedEnvironments = widget.Items.Where(k => !release.Environments.Any(e => e.Name == k.Name)).ToList();
+
+            removedEnvironments.ForEach(env => Application.Current.Dispatcher.Invoke(() => widget.Remove(env)));
+        }
+
+        private static void AddEnvironments(VSTSRelease_v1 widget, VSTSReleaseDetails release)
         {
             if (widget == null || widget.Items == null)
                 throw new InvalidOperationException();
 
-            var environments = widget.Items
-                .Where(k => !releaseDetails.Environments.Any(e => e.Name == k.Name))
-                .ToList();
-
-            foreach (var environment in environments)
+            foreach (var environment in release.Environments)
             {
-                Application.Current.Dispatcher.Invoke(() => widget.Remove(environment));
+                var newEnvironment = widget.Items.FirstOrDefault(i => i.Name == environment.Name);
+
+                if (newEnvironment == null)
+                {
+                    newEnvironment = AddEnvironment(widget, environment);
+                }
+
+                newEnvironment.State = environment.State;
             }
         }
 
-        //Add environments to the list.
-        private static void AddEnvironments(VSTSRelease_v1 vstsRelease, VSTSReleaseDetails releaseDetails)
+        private static VSTSReleaseEnvironment AddEnvironment(VSTSRelease_v1 widget, ReleaseEnvironment environment)
         {
-            if (vstsRelease == null || vstsRelease.Items == null)
-                throw new InvalidOperationException();
-
-            foreach (var environment in releaseDetails.Environments)
+            var newEnvironment = new VSTSReleaseEnvironment
             {
-                var node = vstsRelease.Items.FirstOrDefault(i => i.Name == environment.Name);
+                Name = environment.Name,
+                EnvironmentId = environment.Id
+            };
 
-                if (node == null)
-                {
-                    node = new VSTSReleaseEnvironment
-                    {
-                        Name = environment.Name,
-                        EnvironmentId = environment.Id
-                    };
+            Application.Current.Dispatcher.Invoke(() => widget.Add(newEnvironment));
 
-                    Application.Current.Dispatcher.Invoke(() => vstsRelease.Add(node));
-                }
-
-                node.State = environment.State;
-            }
+            return newEnvironment;
         }
     }
 }
