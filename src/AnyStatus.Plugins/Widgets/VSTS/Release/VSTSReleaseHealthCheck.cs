@@ -15,10 +15,7 @@ namespace AnyStatus
     {
         public async Task Handle(HealthCheckRequest<VSTSRelease_v1> request, CancellationToken cancellationToken)
         {
-            if (request.DataContext == null)
-                throw new InvalidOperationException();
-
-            var widget = request.DataContext;
+            var widget = request.DataContext; // note, Data Context is auto-validated by the framework.
 
             var client = new VstsClient(new VstsConnection());
 
