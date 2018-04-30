@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API Demo\MyWidget.cs" />
     <Compile Include="Widgets\AppVeyor\Build\AppVeyorBuildStatus.cs" />
     <Compile Include="Widgets\AppVeyor\Build\OpenWebPage.cs" />
     <Compile Include="Widgets\Coveralls\CoveredPercentQuery.cs" />
