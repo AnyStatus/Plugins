@@ -79,7 +79,7 @@ namespace AnyStatus
             return definition;
         }
 
-        public async Task<VSTSRelease> GetLatestReleaseAsync(long releaseDefinitionId)
+        public async Task<VSTSRelease> GetLastReleaseAsync(long releaseDefinitionId)
         {
             var releases = await Request<Collection<VSTSRelease>>("release/releases?$top=1&definitionId=" + releaseDefinitionId, true).ConfigureAwait(false);
 

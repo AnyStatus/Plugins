@@ -30,11 +30,13 @@ namespace AnyStatus
                 widget.DefinitionId = definition.Id;
             }
 
-            var latestRelease = await client.GetLatestReleaseAsync(widget.DefinitionId.Value)
-                .ConfigureAwait(false);
+            var latestRelease = await client
+                .GetLastReleaseAsync(widget.DefinitionId.Value)
+                    .ConfigureAwait(false);
 
-            var releaseDetails = await client.GetReleaseDetailsAsync(latestRelease.Id)
-                .ConfigureAwait(false);
+            var releaseDetails = await client
+                .GetReleaseDetailsAsync(latestRelease.Id)
+                    .ConfigureAwait(false);
 
             RemoveEnvironments(widget, releaseDetails);
 
