@@ -133,7 +133,7 @@
     <Compile Include="Widgets\VSTS\Client\VstsConnection.cs" />
     <Compile Include="Widgets\VSTS\Release\OpenWebPage.cs" />
     <Compile Include="Widgets\VSTS\Release\VSTSReleaseEnvironment.cs" />
-    <Compile Include="Widgets\VSTS\Release\VSTSReleaseStatus.cs" />
+    <Compile Include="Widgets\VSTS\Release\VSTSReleaseHealthCheck.cs" />
     <Compile Include="Widgets\VSTS\Release\VSTSRelease_v1.cs" />
     <Compile Include="Widgets\VSTS\Client\VstsClient.cs" />
     <Compile Include="Widgets\VSTS\Client\VstsClientException.cs" />

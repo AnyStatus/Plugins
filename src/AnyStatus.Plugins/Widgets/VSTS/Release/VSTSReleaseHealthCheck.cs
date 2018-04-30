@@ -11,48 +11,57 @@ using System.Windows;
 
 namespace AnyStatus
 {
-    public class VSTSReleaseStatus : ICheckHealth<VSTSRelease_v1>
+    public class VSTSReleaseHealthCheck : ICheckHealth<VSTSRelease_v1>
     {
         public async Task Handle(HealthCheckRequest<VSTSRelease_v1> request, CancellationToken cancellationToken)
         {
+            var widget = request.DataContext;
+
             var client = new VstsClient(new VstsConnection());
 
-            request.DataContext.MapTo(client.Connection);
+            widget.MapTo(client.Connection);
 
-            if (request.DataContext.DefinitionId == null)
+            if (widget.DefinitionId == null)
             {
-                var definition = await client.GetReleaseDefinitionAsync(request.DataContext.ReleaseDefinitionName)
-                    .ConfigureAwait(false);
+                var definition = await client
+                    .GetReleaseDefinitionAsync(widget.ReleaseDefinitionName)
+                        .ConfigureAwait(false);
 
-                request.DataContext.DefinitionId = definition.Id;
+                widget.DefinitionId = definition.Id;
             }
 
-            var latestRelease = await client.GetLatestReleaseAsync(request.DataContext.DefinitionId.Value)
+            var latestRelease = await client.GetLatestReleaseAsync(widget.DefinitionId.Value)
                 .ConfigureAwait(false);
 
             var releaseDetails = await client.GetReleaseDetailsAsync(latestRelease.Id)
                 .ConfigureAwait(false);
 
-            RemoveEnvironments(request.DataContext, releaseDetails);
+            RemoveEnvironments(widget, releaseDetails);
 
-            AddEnvironments(request.DataContext, releaseDetails);
+            AddEnvironments(widget, releaseDetails);
         }
 
-        private static void RemoveEnvironments(VSTSRelease_v1 node, VSTSReleaseDetails releaseDetails)
+        /// <summary>
+        /// Find and remove environments that has been removed on VSTS.
+        /// </summary>
+        /// <param name="widget">VSTS Release widget</param>
+        /// <param name="releaseDetails">VSTS release details, including environments.</param>
+        private static void RemoveEnvironments(VSTSRelease_v1 widget, VSTSReleaseDetails releaseDetails)
         {
-            if (node == null || node.Items == null)
+            if (widget == null || widget.Items == null)
                 throw new InvalidOperationException();
 
-            var environments = node.Items
+            var environments = widget.Items
                 .Where(k => !releaseDetails.Environments.Any(e => e.Name == k.Name))
                 .ToList();
 
             foreach (var environment in environments)
             {
-                Application.Current.Dispatcher.Invoke(() => node.Remove(environment));
+                Application.Current.Dispatcher.Invoke(() => widget.Remove(environment));
             }
         }
 
+        //Add environments to the list.
         private static void AddEnvironments(VSTSRelease_v1 vstsRelease, VSTSReleaseDetails releaseDetails)
         {
             if (vstsRelease == null || vstsRelease.Items == null)

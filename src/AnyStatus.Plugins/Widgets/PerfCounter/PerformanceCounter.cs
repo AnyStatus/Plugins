@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace AnyStatus
 {
     [DisplayName("Performance Counter")]
-    [Description("Experimental. Shows the value of a performance counter")]
+    [Description("Shows the value of a performance counter.")]
     public class PerformanceCounter : MetricValue, ISchedulable
     {
         private const string Category = "Performance Counter";
