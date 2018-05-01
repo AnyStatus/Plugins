@@ -91,7 +91,7 @@ namespace AnyStatus
                         return State.None;
 
                     case "inProgress":
-                        return PreDeployApprovals.Any(k => k.Status != "approved") ? State.Unknown : State.Running;
+                        return PreDeployApprovals.Any(k => k.Status != "approved") ? State.None : State.Running;
 
                     case "succeeded":
                         return State.Ok;
@@ -112,7 +112,7 @@ namespace AnyStatus
                         return State.PartiallySucceeded;
 
                     default:
-                        return State.Unknown;
+                        return State.None;
                 }
             }
         }
