@@ -3,10 +3,10 @@
   <metadata>
     <id>AnyStatus.Plugins</id>
     <version>1.0.0</version>
-    <authors>Alon Amsalem</authors>
+    <authors>AnyStatus</authors>
     <owners>anystatus</owners>
     <licenseUrl>https://github.com/AnyStatus/Plugins/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/AnyStatus/Plugins</projectUrl>
+    <projectUrl>https://www.anystat.us</projectUrl>
     <iconUrl>http://www.anystat.us/assets/images/logo_128px.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <releaseNotes></releaseNotes>
