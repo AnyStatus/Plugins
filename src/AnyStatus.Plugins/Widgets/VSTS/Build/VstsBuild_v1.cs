@@ -7,7 +7,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    [DisplayName("VSTS Build (Preview)")]
+    [DisplayName("VSTS Build")]
     [DisplayColumn("Continuous Integration")]
     [Description("Visual Studio Team Services - Build status and notifications")]
     public class VSTSBuild_v1 : VstsPlugin, IHealthCheck, ISchedulable, IStartable, IWebPage
