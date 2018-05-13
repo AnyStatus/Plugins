@@ -65,6 +65,7 @@ namespace AnyStatus
             set
             {
                 _isParameterized = value;
+                OnPropertyChanged();
             }
         }
 
