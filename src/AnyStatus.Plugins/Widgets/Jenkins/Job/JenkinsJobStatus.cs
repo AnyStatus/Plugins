@@ -26,8 +26,11 @@ namespace AnyStatus
                 return;
             }
 
-            if (request.DataContext.ShowProgress)
-                request.DataContext.ResetProgress();
+            if (request.DataContext.ProgressEnabled)
+            {
+                request.DataContext.ProgressEnabled = false;
+                request.DataContext.Progress = 0;
+            }
 
             if (jenkinsJob.Result == null)
                 throw new Exception("Jenkins job result is null.");
@@ -41,19 +44,14 @@ namespace AnyStatus
             {
                 case "SUCCESS":
                     return State.Ok;
-
                 case "ABORTED":
                     return State.Canceled;
-
                 case "FAILURE":
                     return State.Failed;
-
                 case "UNSTABLE":
                     return State.PartiallySucceeded;
-#warning verify status string or replace with a different response property.
-                case "QUEUED":
+                case "QUEUED": //todo: verify status string or replace with a different response property.
                     return State.Queued;
-
                 default:
                     return State.Unknown;
             }
@@ -65,7 +63,10 @@ namespace AnyStatus
 
             plugin.State = State.Running;
 
-            if (plugin.ShowProgress == false) plugin.ShowProgress = true;
+            if (plugin.ProgressEnabled == false)
+            {
+                plugin.ProgressEnabled = true;
+            }
         }
     }
 }

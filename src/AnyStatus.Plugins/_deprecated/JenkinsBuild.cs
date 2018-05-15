@@ -85,7 +85,7 @@ namespace AnyStatus
 
         [XmlIgnore]
         [Browsable(false)]
-        public bool ShowProgress
+        public bool ProgressEnabled
         {
             get
             {
@@ -96,12 +96,6 @@ namespace AnyStatus
                 _showProgress = value;
                 OnPropertyChanged();
             }
-        }
-
-        public void ResetProgress()
-        {
-            ShowProgress = false;
-            Progress = 0;
         }
 
         private static string EnsureEndsWithSlash(string str)
@@ -237,8 +231,11 @@ namespace AnyStatus
                 return;
             }
 
-            if (item.ShowProgress)
-                item.ResetProgress();
+            if (item.ProgressEnabled)
+            {
+                item.ProgressEnabled = false;
+                item.Progress = 0;
+            }
 
             item.State = ConvertBuildResultToState(build.Result);
         }
@@ -272,9 +269,9 @@ namespace AnyStatus
             item.State = State.Running;
             item.Progress = progress;
 
-            if (item.ShowProgress == false)
+            if (item.ProgressEnabled == false)
             {
-                item.ShowProgress = true;
+                item.ProgressEnabled = true;
             }
         }
 
