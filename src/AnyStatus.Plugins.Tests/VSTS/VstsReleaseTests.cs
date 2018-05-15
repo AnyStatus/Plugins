@@ -31,5 +31,26 @@ namespace AnyStatus.Plugins.Tests.VSTS
 
             ps.Received().Start(expected);
         }
+
+        [Ignore]
+        [TestMethod]
+        public async Task VSTSReleaseHealthCheck()
+        {
+            var release = new VSTSRelease_v1
+            {
+                Account = "account",
+                Project = "project",
+                ReleaseDefinitionName = "release",
+                Password = "token"
+            };
+
+            var request = HealthCheckRequest.Create(release);
+
+            var handler = new VSTSReleaseHealthCheck();
+
+            await handler.Handle(request, CancellationToken.None);
+
+            Assert.AreNotEqual(State.None, release.State);
+        }
     }
 }

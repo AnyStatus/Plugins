@@ -27,6 +27,8 @@ namespace AnyStatus
         [Browsable(false)]
         public long? DefinitionId { get; set; }
 
+        [XmlIgnore]
+        [Browsable(false)]
         public string URL => $"https://{Account}.visualstudio.com/{Uri.EscapeDataString(Project)}/_build/index?definitionId={DefinitionId}&_a=completed";
 
         public override object Clone()

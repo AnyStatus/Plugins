@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 //todo: unautherized state when 401
 //https://www.visualstudio.com/en-us/docs/integrate/api/rm/contracts#ReleaseStatus
@@ -76,7 +77,9 @@ namespace AnyStatus
                 EnvironmentId = environment.Id
             };
 
-            Application.Current.Dispatcher.Invoke(() => widget.Add(newEnvironment));
+            var dispatcher = Application.Current != null ? Application.Current.Dispatcher : Dispatcher.CurrentDispatcher;
+
+            dispatcher.Invoke(() => widget.Add(newEnvironment));
 
             return newEnvironment;
         }

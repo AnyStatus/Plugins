@@ -22,20 +22,15 @@ namespace AnyStatus
         [Required]
         [Category(Category)]
         [PropertyOrder(40)]
-        [DisplayName("Relese Definition")]
+        [DisplayName("Relese Definition Name")]
         [Description("Required (case-sensitive). Enter your Visual Studio Team Services release definition name.")]
         public string ReleaseDefinitionName { get; set; }
 
         [XmlIgnore]
-        [ReadOnly(true)]
-        [Category(Category)]
-        [Description("Read-only.")]
-        [DisplayName("Release Definition Id")]
+        [Browsable(false)]
         public long? DefinitionId { get; set; }
 
-        /// <summary>
-        /// Build Web Page.
-        /// </summary>
+        [XmlIgnore]
         [Browsable(false)]
         public string URL => $"https://{Account}.visualstudio.com/{Uri.EscapeDataString(Project)}/_release?definitionId={DefinitionId}&_a=releases";
 
