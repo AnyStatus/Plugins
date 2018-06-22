@@ -10,6 +10,16 @@ namespace AnyStatus
 {
     public class AppVeyorBuildStatus : ICheckHealth<AppVeyorBuild>
     {
+        [DebuggerStepThrough]
+        public async Task Handle(HealthCheckRequest<AppVeyorBuild> request, CancellationToken cancellationToken)
+        {
+            var build = await GetBuildDetailsAsync(request.DataContext).ConfigureAwait(false);
+
+            request.DataContext.State = GetState(build.Status);
+
+            request.DataContext.StateText = "Version: " + build.Version;
+        }
+
         private State GetState(string status)
         {
             switch (status)
@@ -66,27 +76,5 @@ namespace AnyStatus
                 return buildResponse.Build;
             }
         }
-
-        [DebuggerStepThrough]
-        public async Task Handle(HealthCheckRequest<AppVeyorBuild> request, CancellationToken cancellationToken)
-        {
-            var build = await GetBuildDetailsAsync(request.DataContext).ConfigureAwait(false);
-
-            request.DataContext.State = GetState(build.Status);
-        }
-
-        #region Contracts
-
-        public class AppVeyorBuildResponse
-        {
-            public AppVeyorBuildDetails Build { get; set; }
-        }
-
-        public class AppVeyorBuildDetails
-        {
-            public string Status { get; set; }
-        }
-
-        #endregion Contracts
     }
 }

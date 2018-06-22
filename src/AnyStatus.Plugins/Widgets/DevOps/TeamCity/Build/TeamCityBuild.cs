@@ -1,7 +1,6 @@
 ﻿using AnyStatus.API;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Xml.Serialization;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 //todo:
@@ -82,10 +81,6 @@ namespace AnyStatus
         [DisplayName("Ignore SSL Errors")]
         public bool IgnoreSslErrors { get; set; }
 
-        [XmlIgnore]
-        [Browsable(false)]
-        internal string StateText { get; set; }
-
         public override Notification CreateNotification()
         {
             if (State == State.Failed)
@@ -95,15 +90,5 @@ namespace AnyStatus
 
             return base.CreateNotification();
         }
-
-        //public bool CanOpenInBrowser()
-        //{
-        //    return State != State.None && State != State.Error;
-        //}
-
-        //public bool CanTriggerBuild()
-        //{
-        //    return State != State.None && State != State.Error;
-        //}
     }
 }
