@@ -86,6 +86,9 @@
     <Compile Include="Widgets\DevOps\Coveralls\CoveredPercentQuery.cs" />
     <Compile Include="Widgets\DevOps\Coveralls\OpenWebPage.cs" />
     <Compile Include="Widgets\DevOps\AppVeyor\Build\StartAppVeyorBuild.cs" />
+    <Compile Include="Widgets\HealthChecks\IIS\AppPool\RestartAppPool.cs" />
+    <Compile Include="Widgets\HealthChecks\IIS\AppPool\StartAppPool.cs" />
+    <Compile Include="Widgets\HealthChecks\IIS\AppPool\StopAppPool.cs" />
     <Compile Include="Widgets\Metrics\CPU\Usage\CpuUsageQuery.cs" />
     <Compile Include="Widgets\Custom\BatchFile\BatchFileRunner.cs" />
     <Compile Include="Widgets\Custom\Code\CodeRunner.cs" />

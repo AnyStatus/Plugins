@@ -7,8 +7,8 @@ namespace AnyStatus
 {
     [DisplayColumn("Health Checks")]
     [DisplayName("IIS Application Pool")]
-    [Description("IIS application pool health check.")]
-    public class IISApplicationPool : Widget, IHealthCheck, ISchedulable
+    [Description("Control and view the status of a local or remote IIS application pool (requires administrative privileges).")]
+    public class IISApplicationPool : Widget, IHealthCheck, ISchedulable, IStartable, IStoppable, IRestartable
     {
         private const string Category = "Application Pool";
 
@@ -16,14 +16,14 @@ namespace AnyStatus
         [PropertyOrder(10)]
         [Category(Category)]
         [DisplayName("Host")]
-        [Description("The IIS server host name or IP address. Note: you must be an administrator on the target machine.")]
+        [Description("Required. IIS server host name or IP address. Requires administrative privileges on the target machine.")]
         public string Host { get; set; }
 
         [Required]
         [PropertyOrder(20)]
         [Category(Category)]
-        [DisplayName("Application Pool Name")]
-        [Description("")]
+        [DisplayName("Name")]
+        [Description("Required.")]
         public string ApplicationPoolName { get; set; }
     }
 }
