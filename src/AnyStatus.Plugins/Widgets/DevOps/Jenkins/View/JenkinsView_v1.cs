@@ -6,7 +6,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 namespace AnyStatus
 {
     [DisplayName("Jenkins View")]
-    [Description("Shows the status of a Jenkins view or multi-branch (pipeline).")]
+    [Description("Jenkins view and multi-branch (pipeline) status.")]
     [DisplayColumn("DevOps")]
     public class JenkinsView_v1 : Widget, IJenkins, IHealthCheck, ISchedulable, IWebPage
     {

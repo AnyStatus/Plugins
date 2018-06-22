@@ -14,8 +14,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    [DisplayColumn("Custom")]
-    [DisplayName("Code")]
+    [DisplayName("C#/VB.NET File")]
     [Description("Experimental. Compile and run C# or VB.NET source code.")]
     public class DynamicSourceCode_v1 : Widget, ISchedulable, IHealthCheck
     {

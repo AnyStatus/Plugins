@@ -5,30 +5,29 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    [DisplayName("Batch")]
-    [DisplayColumn("Custom")]
-    [CategoryOrder("Batch", 10)]
-    [Description("Monitor the exit code of a batch file")]
-    public class BatchFile : Widget, IHealthCheck, ISchedulable
+    [DisplayName("PowerShell")]
+    [Description("PowerShell script health check.")]
+    public class PowerShellScript : Widget, ISchedulable, IHealthCheck
     {
-        private const string Category = "Batch";
+        private const string Category = "PowerShell";
 
-        public BatchFile()
+        public PowerShellScript()
         {
             Timeout = 1;
+            BypassExecutionPolicy = true;
         }
 
         [Required]
         [PropertyOrder(10)]
         [Category(Category)]
         [DisplayName("File Name")]
-        [Description("The batch file path")]
+        [Description("The script file path")]
         [Editor(typeof(FileEditor), typeof(FileEditor))]
         public string FileName { get; set; }
 
         [PropertyOrder(20)]
         [Category(Category)]
-        [Description("The batch file arguments")]
+        [Description("The script arguments")]
         public string Arguments { get; set; }
 
         [PropertyOrder(30)]
@@ -41,5 +40,12 @@ namespace AnyStatus
         [DisplayName("Exit Code")]
         [Description("Expected exit code.")]
         public int ExitCode { get; set; }
+
+        [ReadOnly(true)]
+        [PropertyOrder(50)]
+        [Category(Category)]
+        [DisplayName("Bypass Execution Policy")]
+        [Description("Bypass PowerShell execution policy")]
+        public bool BypassExecutionPolicy { get; set; }
     }
 }

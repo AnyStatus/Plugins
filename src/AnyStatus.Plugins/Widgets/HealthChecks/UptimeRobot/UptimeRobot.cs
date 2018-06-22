@@ -6,6 +6,7 @@ namespace AnyStatus
 {
     [DisplayName("Uptime Robot")]
     [DisplayColumn("Health Checks")]
+    [Description("Single or multiple Uptime Robot health checks.")]
     public class UptimeRobot : Widget, IHealthCheck, ISchedulable
     {
         private const string Category = "Uptime Robot";

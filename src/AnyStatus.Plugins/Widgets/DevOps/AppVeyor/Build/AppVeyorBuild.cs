@@ -7,7 +7,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 namespace AnyStatus
 {
     [DisplayName("AppVeyor Build")]
-    [Description("AppVeyor build status")]
+    [Description("AppVeyor build status.")]
     [DisplayColumn("DevOps")]
     public class AppVeyorBuild : Build, ISchedulable, IWebPage, IStartable, IHealthCheck
     {

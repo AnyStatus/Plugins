@@ -9,7 +9,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 namespace AnyStatus
 {
     [DisplayName("Jenkins Job")]
-    [Description("Monitor the status of a Jenkins Jobs.")]
+    [Description("Jenkins job status.")]
     [DisplayColumn("DevOps")]
     public class JenkinsJob_v1 : Build, IJenkins, IHealthCheck, ISchedulable, IWebPage, IStartable, IReportProgress
     {

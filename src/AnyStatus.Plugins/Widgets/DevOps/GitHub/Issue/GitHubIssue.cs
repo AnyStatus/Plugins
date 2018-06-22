@@ -7,7 +7,7 @@ namespace AnyStatus
 {
     [DisplayColumn("DevOps")]
     [DisplayName("GitHub Issue")]
-    [Description("GitHub issue status")]
+    [Description("GitHub issue status.")]
     public class GitHubIssue : Widget, IHealthCheck, ISchedulable, IWebPage
     {
         [Required]

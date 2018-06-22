@@ -91,9 +91,9 @@
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\StartAppPool.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\StopAppPool.cs" />
     <Compile Include="Widgets\Metrics\CPU\Usage\CpuUsageQuery.cs" />
-    <Compile Include="Widgets\Custom\BatchFile\BatchFileRunner.cs" />
-    <Compile Include="Widgets\Custom\Code\CodeRunner.cs" />
-    <Compile Include="Widgets\Custom\PowerShell\PowerShellRunner.cs" />
+    <Compile Include="Widgets\Other\BatchFile\BatchFileRunner.cs" />
+    <Compile Include="Widgets\Other\NET\CodeRunner.cs" />
+    <Compile Include="Widgets\Other\PowerShell\PowerShellRunner.cs" />
     <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerHealthCheck.cs" />
     <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQueryHandler.cs" />
     <Compile Include="Widgets\DevOps\GitHub\Issue\GitHubIssueState.cs" />
@@ -164,9 +164,9 @@
     <Compile Include="Widgets\DevOps\Jenkins\Job\StartJenkinsJob.cs" />
     <Compile Include="Widgets\DevOps\TeamCity\Build\TeamCityBuild.cs" />
     <Compile Include="Widgets\DevOps\TFS\Build\TFSBuild.cs" />
-    <Compile Include="Widgets\Custom\BatchFile\BatchFile.cs" />
-    <Compile Include="Widgets\Custom\Code\Code_v1.cs" />
-    <Compile Include="Widgets\Custom\PowerShell\PowerShell.cs" />
+    <Compile Include="Widgets\Other\BatchFile\BatchFile.cs" />
+    <Compile Include="Widgets\Other\NET\Code_v1.cs" />
+    <Compile Include="Widgets\Other\PowerShell\PowerShell.cs" />
     <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQuery.cs" />
     <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerConnection.cs" />
     <Compile Include="Widgets\Metrics\CPU\Usage\CpuUsage.cs" />
