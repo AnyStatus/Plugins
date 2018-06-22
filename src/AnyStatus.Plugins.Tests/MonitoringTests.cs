@@ -44,7 +44,7 @@ namespace AnyStatus.Plugins.Tests
             };
 
             var request = HealthCheckRequest.Create(port);
-            var handler = new PortHealthCheck();
+            var handler = new SocketConnectionHealthCheck();
 
             handler.Handle(request, CancellationToken.None);
 
