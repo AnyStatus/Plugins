@@ -31,7 +31,7 @@ namespace AnyStatus.Plugins.Tests
             var handler = new JenkinsJobMonitor(logger);
             var request = HealthCheckRequest.Create(jenkinsJob);
 
-            await handler.Handle(request, CancellationToken.None);
+            await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
 
             if (jenkinsJob.State == State.None ||
                 jenkinsJob.State == State.Error ||
