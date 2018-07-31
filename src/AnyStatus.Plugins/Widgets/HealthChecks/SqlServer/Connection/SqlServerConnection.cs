@@ -7,6 +7,7 @@ namespace AnyStatus
 {
     [DisplayColumn("Health Checks")]
     [DisplayName("SQL Server Connection")]
+    [Description("SQL Server database connection health check.")]
     public class SqlServerConnection : Widget, IHealthCheck, ISchedulable
     {
         private const string Category = "SQL Server Connection";
