@@ -72,6 +72,7 @@
     <Compile Include="Widgets\DevOps\Coveralls\CoveredPercentQuery.cs" />
     <Compile Include="Widgets\DevOps\Coveralls\OpenWebPage.cs" />
     <Compile Include="Widgets\DevOps\AppVeyor\Build\StartAppVeyorBuild.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\Issue\v2\GitHubIssue_v2.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\RestartAppPool.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\StartAppPool.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\StopAppPool.cs" />
@@ -81,9 +82,9 @@
     <Compile Include="Widgets\Other\PowerShell\PowerShellRunner.cs" />
     <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerHealthCheck.cs" />
     <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQueryHandler.cs" />
-    <Compile Include="Widgets\DevOps\GitHub\Issue\GitHubIssueState.cs" />
-    <Compile Include="Widgets\DevOps\GitHub\Issue\GitHubIssueStateCheck.cs" />
-    <Compile Include="Widgets\DevOps\GitHub\Issue\OpenWebPage.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssueState.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssueStateCheck.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\Issue\v1\OpenWebPage.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\AppPoolHealthCheck.cs" />
     <Compile Include="Widgets\HealthChecks\HTTP\HTTPHealthCheck.cs" />
     <Compile Include="Widgets\HealthChecks\HTTP\OpenWebPage.cs" />
@@ -155,7 +156,7 @@
     <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQuery.cs" />
     <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerConnection.cs" />
     <Compile Include="Widgets\Metrics\CPU\Usage\CpuUsage.cs" />
-    <Compile Include="Widgets\DevOps\GitHub\Issue\GitHubIssue.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssue.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\AppPool.cs" />
     <Compile Include="Widgets\Metrics\PerformanceCounter\PerformanceCounter.cs" />
     <Compile Include="Widgets\HealthChecks\WindowsService\WindowsService.cs" />

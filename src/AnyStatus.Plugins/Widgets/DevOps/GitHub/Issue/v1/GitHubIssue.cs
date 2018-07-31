@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Xml.Serialization;
 
 namespace AnyStatus
 {
@@ -26,6 +27,8 @@ namespace AnyStatus
         [Description("GitHub issue number.")]
         public int IssueNumber { get; set; }
 
+        [XmlIgnore]
+        [Browsable(false)]
         public string URL => $"https://api.github.com/repos/{Uri.EscapeDataString(Owner)}/{Uri.EscapeDataString(Repository)}/issues/{IssueNumber}";
     }
 }

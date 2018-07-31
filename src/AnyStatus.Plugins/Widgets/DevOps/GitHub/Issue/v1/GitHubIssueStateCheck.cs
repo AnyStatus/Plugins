@@ -36,6 +36,7 @@ namespace AnyStatus
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("ANYSTATUS", "1.0"));
+
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 var response = await client.GetAsync(issue.URL).ConfigureAwait(false);
@@ -53,6 +54,14 @@ namespace AnyStatus
         private class GitHubIssueDetails
         {
             public GitHubIssueState State { get; set; }
+        }
+
+        public enum GitHubIssueState
+        {
+            None,
+            Open,
+            Closed,
+            All
         }
     }
 }
