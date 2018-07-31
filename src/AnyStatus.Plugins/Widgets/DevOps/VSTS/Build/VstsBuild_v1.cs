@@ -9,17 +9,15 @@ namespace AnyStatus
 {
     [DisplayName("VSTS Build")]
     [DisplayColumn("DevOps")]
-    [Description("Visual Studio Team Services - Build status and notifications")]
+    [Description("Visual Studio Team Services build status and notifications.")]
     public class VSTSBuild_v1 : VstsPlugin, IHealthCheck, ISchedulable, IStartable, IWebPage
     {
-        private const string Category = "Build Definition";
-
         public VSTSBuild_v1() : base(aggregate: false) { }
 
         [Required]
         [Category(Category)]
         [PropertyOrder(40)]
-        [DisplayName("Build Definition")]
+        [DisplayName("Build Definition Name")]
         [Description("Required (case-sensitive). Enter your Visual Studio Team Services build definition name.")]
         public string DefinitionName { get; set; }
 

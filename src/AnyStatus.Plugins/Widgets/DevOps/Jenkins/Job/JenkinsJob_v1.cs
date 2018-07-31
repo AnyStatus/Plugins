@@ -13,6 +13,7 @@ namespace AnyStatus
     [DisplayColumn("DevOps")]
     public class JenkinsJob_v1 : Build, IJenkins, IHealthCheck, ISchedulable, IWebPage, IStartable, IReportProgress
     {
+        private const string Category = "Jenkins";
         private string _url;
         private int _progress;
         private bool _showProgress;
@@ -26,7 +27,7 @@ namespace AnyStatus
         [Url]
         [Required]
         [PropertyOrder(10)]
-        [Category("Jenkins")]
+        [Category(Category)]
         [Description("Jenkins job URL address")]
         public string URL
         {
@@ -35,26 +36,31 @@ namespace AnyStatus
         }
 
         [PropertyOrder(20)]
-        [Category("Jenkins")]
+        [Category(Category)]
+        [DisplayName("Ignore SSL Errors")]
+        public bool IgnoreSslErrors { get; set; }
+
+        [PropertyOrder(30)]
+        [Category(Category)]
         [DisplayName("User Name")]
         [Description("Optional. Enter your Jenkins user name ")]
         public string UserName { get; set; }
 
-        [PropertyOrder(30)]
-        [Category("Jenkins")]
+        [PropertyOrder(40)]
+        [Category(Category)]
         [DisplayName("API Token")]
         [Description("Optional. Enter your Jenkins API Token. The API token is available in your personal configuration page. Click your name on the top right corner on every page, then click “Configure” to see your API token.")]
         public string ApiToken { get; set; }
 
-        [PropertyOrder(40)]
+        [PropertyOrder(50)]
+        [Category(Category)]
         [Description("Check if your Jenkins uses the \"Prevent Cross Site Request Forgery exploits\" security option.")]
-        [Category("Jenkins")]
         public bool CSRF { get; set; }
 
-        [PropertyOrder(50)]
-        [Category("Jenkins")]
+        [PropertyOrder(60)]
+        [Category(Category)]
         [DisplayName("Parameterized Build")]
-        //[RefreshProperties(RefreshProperties.All)] <- wpftoolkit bug - description text disapears
+        [RefreshProperties(RefreshProperties.All)]
         [Description("Check if your build is parameterized. You can find out in the configuration page of your Jenkins job.")]
         public bool IsParameterized
         {
@@ -65,20 +71,19 @@ namespace AnyStatus
             set
             {
                 _isParameterized = value;
+
                 OnPropertyChanged();
+
+                SetPropertyVisibility(nameof(BuildParameters), _isParameterized);
             }
         }
 
-        [PropertyOrder(60)]
-        [Category("Jenkins")]
+        [PropertyOrder(70)]
+        [Category(Category)]
         [DisplayName("Parameters")]
         [Description("Optional (case-sensitive).")]
         [Editor(typeof(DataGridEditor), typeof(DataGridEditor))]
         public List<NameValuePair> BuildParameters { get; set; }
-
-        [PropertyOrder(70)]
-        [DisplayName("Ignore SSL Errors")]
-        public bool IgnoreSslErrors { get; set; }
 
         [XmlIgnore]
         [Browsable(false)]

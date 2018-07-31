@@ -11,22 +11,24 @@ namespace AnyStatus
     [DisplayColumn("DevOps")]
     public class AppVeyorBuild : Build, ISchedulable, IWebPage, IStartable, IHealthCheck
     {
+        private const string Category = "AppVeyor";
+
         [Required]
         [PropertyOrder(10)]
-        [Category("AppVeyor")]
+        [Category(Category)]
         [DisplayName("Account")]
         [Description("Required. AppVeyor account name.")]
         public string AccountName { get; set; }
 
         [Required]
         [PropertyOrder(20)]
-        [Category("AppVeyor")]
+        [Category(Category)]
         [DisplayName("Project Slug")]
         [Description("Required. Project slug is the last part of the AppVeyor project URL. For example: https://ci.appveyor.com/project/AccountName/Project-Slug")]
         public string ProjectSlug { get; set; }
 
         [PropertyOrder(30)]
-        [Category("AppVeyor")]
+        [Category(Category)]
         [DisplayName("API Token")]
         [Description("Optional. AppVeyor API token.")]
         public string ApiToken { get; set; }
@@ -35,7 +37,7 @@ namespace AnyStatus
         public string URL => $"https://ci.appveyor.com/project/{Uri.EscapeDataString(AccountName)}/{ProjectSlug}";
 
         [PropertyOrder(40)]
-        [Category("Source Control")]
+        [Category(Category)]
         [DisplayName("Branch")]
         [Description("Optional. Branch to trigger.")]
         public string SourceControlBranch { get; set; }

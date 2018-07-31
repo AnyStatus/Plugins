@@ -15,8 +15,6 @@ namespace AnyStatus
     [Description("Visual Studio Team Services - Release Status and Notifications")]
     public class VSTSRelease_v1 : VstsPlugin, IHealthCheck, ISchedulable, IWebPage
     {
-        private const string Category = "Release Definition";
-
         public VSTSRelease_v1() : base(aggregate: true) { }
 
         [Required]

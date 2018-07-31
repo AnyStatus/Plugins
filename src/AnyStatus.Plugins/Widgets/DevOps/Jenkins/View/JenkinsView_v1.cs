@@ -10,6 +10,8 @@ namespace AnyStatus
     [DisplayColumn("DevOps")]
     public class JenkinsView_v1 : Widget, IJenkins, IHealthCheck, ISchedulable, IWebPage
     {
+        private const string Category = "Jenkins";
+
         private string _url;
 
         public JenkinsView_v1() : base(aggregate: true)
@@ -19,45 +21,39 @@ namespace AnyStatus
         [Url]
         [Required]
         [PropertyOrder(10)]
-        [Category("Jenkins")]
+        [Category(Category)]
         [Description("Jenkins view job URL address")]
         public string URL
         {
-            get { return _url; }
-            set { _url = EnsureEndsWithSlash(value); }
+            get => _url;
+            set => _url = EnsureEndsWithSlash(value);
         }
 
         [PropertyOrder(20)]
-        [Category("Jenkins")]
+        [Category(Category)]
+        [DisplayName("Ignore SSL Errors")]
+        public bool IgnoreSslErrors { get; set; }
+
+        [PropertyOrder(30)]
+        [Category(Category)]
         [DisplayName("User Name")]
         [Description("The Jenkins user name (optional)")]
         public string UserName { get; set; }
 
-        [PropertyOrder(30)]
-        [Category("Jenkins")]
+        [PropertyOrder(40)]
+        [Category(Category)]
         [DisplayName("API Token")]
         [Description("The Jenkins API token (optional). The API token is available in your personal configuration page. Click your name on the top right corner on every page, then click “Configure” to see your API token.")]
         public string ApiToken { get; set; }
 
-        [PropertyOrder(40)]
-        [DisplayName("Ignore SSL Errors")]
-        public bool IgnoreSslErrors { get; set; }
-
         [PropertyOrder(50)]
-        [Description("Indicates that the Jenkins CSRF protection is enabled.")]
-        [Category("Jenkins")]
+        [Category(Category)]
+        [Description("Check if Jenkins CSRF protection is enabled.")]
         public bool CSRF { get; set; }
 
         private static string EnsureEndsWithSlash(string str)
         {
-            return string.IsNullOrEmpty(str) ?
-                    str :
-                    str.EndsWith("/") ? str : str + "/";
+            return string.IsNullOrEmpty(str) ? string.Empty : str.EndsWith("/") ? str : str + "/";
         }
-
-        //public bool CanOpenInBrowser()
-        //{
-        //    return State != State.None && State != State.Error;
-        //}
     }
 }

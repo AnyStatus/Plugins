@@ -27,6 +27,7 @@ namespace AnyStatus
         [Required]
         [Category(Category)]
         [PropertyOrder(10)]
+        [DisplayName("URL")]
         [Description("Required. Visual Studio Team Services account (https://{account}.visualstudio.com) or TFS server (http://{server:port}/tfs) URL address.")]
         public string Url { get; set; }
 
@@ -39,21 +40,21 @@ namespace AnyStatus
         [Required]
         [Category(Category)]
         [PropertyOrder(20)]
-        [Description("Required. The collection name. Default: DefaultCollection")]
+        [Description("Required. The collection name. Default is DefaultCollection")]
         public string Collection { get; set; }
 
         [Required]
         [Category(Category)]
         [PropertyOrder(30)]
-        [DisplayName("Team Project")]
-        [Description("Required. The team project name.")]
+        [DisplayName("Team Project Name")]
+        [Description("Required.")]
         public string TeamProject { get; set; }
 
         [Required]
         [Category(Category)]
         [PropertyOrder(40)]
-        [DisplayName("Build Definition")]
-        [Description("Required. The build definition name.")]
+        [DisplayName("Build Definition Name")]
+        [Description("Required.")]
         public string BuildDefinition { get; set; }
 
         [XmlIgnore]
@@ -75,7 +76,7 @@ namespace AnyStatus
 
         public override object Clone()
         {
-            var clone = base.Clone() as TfsBuild;
+            var clone = (TfsBuild)base.Clone();
 
             clone.BuildDefinitionId = 0;
 

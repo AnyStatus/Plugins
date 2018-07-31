@@ -7,7 +7,7 @@ namespace AnyStatus
 {
     public abstract class VstsPlugin : Build
     {
-        private const string Category = "Visual Studio Team Services";
+        protected const string Category = "VSTS";
 
         protected VstsPlugin(bool aggregate) : base(aggregate)
         {
@@ -23,7 +23,7 @@ namespace AnyStatus
         [Required]
         [Category(Category)]
         [PropertyOrder(20)]
-        [DisplayName("Project")]
+        [DisplayName("Team Project Name")]
         [Description("Required (case-sensitive). Enter your Visual Studio Team Services project name.")]
         public string Project { get; set; }
 
