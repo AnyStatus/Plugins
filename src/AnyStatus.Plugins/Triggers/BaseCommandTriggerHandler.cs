@@ -3,21 +3,20 @@ using AnyStatus.API.Triggers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace AnyStatus
 {
-    public abstract class StartProcessHandler<T> : RequestHandler<T> where T : CommandTrigger
+    public abstract class BaseCommandTriggerHandler
     {
         private readonly IProcessStarter _processStarter;
 
-        protected StartProcessHandler(IProcessStarter processStarter)
+        protected BaseCommandTriggerHandler(IProcessStarter processStarter)
         {
             _processStarter = processStarter ?? throw new ArgumentNullException();
         }
 
-        protected override void HandleCore(T request) => throw new NotImplementedException();
-
-        protected string GetArgs(T request)
+        protected static string GetArgs(CommandTrigger request)
         {
             var args = request.Arguments;
 
@@ -32,7 +31,7 @@ namespace AnyStatus
             return args;
         }
 
-        protected void StartProcess(string fileName, string args, string workingDirectory)
+        protected Task StartProcess(string fileName, string args, string workingDirectory)
         {
             var info = new ProcessStartInfo
             {
@@ -46,6 +45,8 @@ namespace AnyStatus
             };
 
             _processStarter.Start(info, TimeSpan.FromMinutes(10));
+
+            return Task.CompletedTask;
         }
     }
 }

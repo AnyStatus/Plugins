@@ -1,18 +1,19 @@
 ﻿using AnyStatus.API;
 using AnyStatus.API.Triggers;
-using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AnyStatus
 {
-    public class CommandTriggerHandler : StartProcessHandler<CommandTrigger>
+    public class CommandTriggerHandler : BaseCommandTriggerHandler, IRequestHandler<CommandTrigger>
     {
         public CommandTriggerHandler(IProcessStarter processStarter) : base(processStarter) { }
 
-        protected override void HandleCore(CommandTrigger request)
+        public Task Handle(CommandTrigger request, CancellationToken cancellationToken)
         {
             var args = GetArgs(request);
 
-            StartProcess(request.FileName, args, request.WorkingDirectory);
+            return StartProcess(request.FileName, args, request.WorkingDirectory);
         }
     }
 }
