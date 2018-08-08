@@ -1,19 +1,34 @@
-﻿using AnyStatus.API;
+﻿using System;
+using System.Collections.Generic;
+using AnyStatus.API;
 using AnyStatus.API.Triggers;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace AnyStatus
 {
-    public class CommandTriggerHandler : BaseCommandTriggerHandler, IRequestHandler<CommandTrigger>
+    public class CommandTriggerHandler : StartProcessHandler, IRequestHandler<CommandTrigger>
     {
         public CommandTriggerHandler(IProcessStarter processStarter) : base(processStarter) { }
 
         public Task Handle(CommandTrigger request, CancellationToken cancellationToken)
         {
-            var args = GetArgs(request);
+            if (request == null)
+                throw new ArgumentNullException();
 
-            return StartProcess(request.FileName, args, request.WorkingDirectory);
+            var args = request.Arguments;
+
+            if (string.IsNullOrEmpty(args)) goto StartProcess;
+
+            var tokens = new Dictionary<string, string> {
+                    { "{transitionFrom}", request.OldState.ToString() },
+                    { "{transitionTo}", request.NewState.ToString() },
+                };
+
+            foreach (var kv in tokens)
+                args = args.Replace(kv.Key, kv.Value);
+
+            StartProcess: return StartProcess(request.FileName, args, request.WorkingDirectory);
         }
     }
 }

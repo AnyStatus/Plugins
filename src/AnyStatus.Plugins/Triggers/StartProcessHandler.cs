@@ -1,34 +1,17 @@
 ﻿using AnyStatus.API;
-using AnyStatus.API.Triggers;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace AnyStatus
 {
-    public abstract class BaseCommandTriggerHandler
+    public abstract class StartProcessHandler
     {
         private readonly IProcessStarter _processStarter;
 
-        protected BaseCommandTriggerHandler(IProcessStarter processStarter)
+        protected StartProcessHandler(IProcessStarter processStarter)
         {
             _processStarter = processStarter ?? throw new ArgumentNullException();
-        }
-
-        protected static string GetArgs(CommandTrigger request)
-        {
-            var args = request.Arguments;
-
-            var values = new Dictionary<string, string> {
-                { "{transitionFrom}", request.OldState.ToString() },
-                { "{transitionTo}", request.NewState.ToString() },
-            };
-
-            foreach (var key in values.Keys)
-                args = args.Replace(key, values[key]);
-
-            return args;
         }
 
         protected Task StartProcess(string fileName, string args, string workingDirectory)

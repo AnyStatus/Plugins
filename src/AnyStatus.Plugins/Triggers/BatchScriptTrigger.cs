@@ -1,19 +1,34 @@
-﻿using AnyStatus.API;
+﻿using System;
+using System.Collections.Generic;
+using AnyStatus.API;
 using AnyStatus.API.Triggers;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace AnyStatus
 {
-    public class BatchScriptTriggerHandler : BaseCommandTriggerHandler, IRequestHandler<BatchScriptTrigger>
+    public class BatchScriptTriggerHandler : StartProcessHandler, IRequestHandler<BatchScriptTrigger>
     {
         public BatchScriptTriggerHandler(IProcessStarter processStarter) : base(processStarter) { }
 
         public Task Handle(BatchScriptTrigger request, CancellationToken cancellationToken)
         {
-            var args = GetArgs(request);
+            if (request == null)
+                throw new ArgumentNullException();
 
-            return StartProcess("cmd.exe", $"/c \"{request.FileName}\" {args}", request.WorkingDirectory);
+            var args = request.Arguments;
+
+            if (string.IsNullOrEmpty(args)) goto StartProcess;
+
+            var tokens = new Dictionary<string, string> {
+                { "{transitionFrom}", request.OldState.ToString() },
+                { "{transitionTo}", request.NewState.ToString() },
+            };
+
+            foreach (var kv in tokens)
+                args = args.Replace(kv.Key, kv.Value);
+
+            StartProcess: return StartProcess("cmd.exe", $"/c \"{request.FileName}\" {args}", request.WorkingDirectory);
         }
     }
 }
