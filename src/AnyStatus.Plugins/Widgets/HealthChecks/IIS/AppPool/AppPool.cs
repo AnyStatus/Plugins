@@ -7,23 +7,23 @@ namespace AnyStatus
 {
     [DisplayColumn("Health Checks")]
     [DisplayName("IIS Application Pool")]
-    [Description("Control and view the status of a local or remote IIS application pool (requires administrative privileges).")]
+    [Description("Monitor the status of a local or remote IIS application pool. Enables starting, stopping and restarting the application pool. Note: your user must be an administrator on the remote server.")]
     public class IISApplicationPool : Widget, IHealthCheck, ISchedulable, IStartable, IStoppable, IRestartable
     {
-        private const string Category = "Application Pool";
+        private const string Category = "IIS Application Pool";
 
         [Required]
         [PropertyOrder(10)]
         [Category(Category)]
-        [DisplayName("Host")]
-        [Description("Required. IIS server host name or IP address. Requires administrative privileges on the target machine.")]
+        [DisplayName("Server Name")]
+        [Description("Required. The name of the server to connect to. Use \"localhost\" for your local computer.")]
         public string Host { get; set; }
 
         [Required]
         [PropertyOrder(20)]
         [Category(Category)]
         [DisplayName("Name")]
-        [Description("Required.")]
+        [Description("Required. The name of the application pool.")]
         public string ApplicationPoolName { get; set; }
     }
 }

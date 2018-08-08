@@ -43,6 +43,7 @@ namespace AnyStatus
         }
 
         [PropertyOrder(20)]
+        [Category(Category)]
         [DisplayName("Ignore SSL Errors")]
         public bool IgnoreSslErrors { get; set; }
 

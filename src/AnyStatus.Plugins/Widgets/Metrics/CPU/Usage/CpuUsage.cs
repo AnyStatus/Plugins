@@ -14,6 +14,7 @@ namespace AnyStatus
             Interval = 1;
         }
 
+        [Category("CPU Usage")]
         [DisplayName("Machine Name")]
         [Description("Optional. Leave blank for local computer.")]
         public string MachineName { get; set; }

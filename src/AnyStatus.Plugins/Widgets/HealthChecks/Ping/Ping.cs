@@ -11,7 +11,7 @@ namespace AnyStatus
     {
         [Required]
         [Category("Ping")]
-        [Description("Host Name or IP Address")]
+        [Description("The host name or IP address.")]
         public string Host { get; set; }
     }
 }

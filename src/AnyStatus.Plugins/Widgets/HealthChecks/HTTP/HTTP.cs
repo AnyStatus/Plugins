@@ -6,12 +6,12 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    [DisplayName("HTTP/S")]
+    [DisplayName("HTTP")]
     [DisplayColumn("Health Checks")]
-    [Description("Check web server HTTP response code")]
+    [Description("HTTP monitoring enables you to test the availability of a web page.")]
     public class HttpStatus : Widget, IHealthCheck, ISchedulable, IWebPage
     {
-        private const string Category = "HTTP/S";
+        private const string Category = "HTTP";
 
         public HttpStatus()
         {
@@ -19,13 +19,13 @@ namespace AnyStatus
         }
 
         [Required]
-        [Category(Category)]
         [PropertyOrder(10)]
         [DisplayName("URL")]
+        [Category(Category)]
         public string Url { get; set; }
 
         [Browsable(false)]
-        public string URL => Url;
+        string IWebPage.URL => Url; //backward compatibility
 
         [PropertyOrder(20)]
         [Category(Category)]
@@ -33,11 +33,12 @@ namespace AnyStatus
         public HttpStatusCode HttpStatusCode { get; set; }
 
         [PropertyOrder(30)]
+        [Category(Category)]
         [DisplayName("Ignore SSL Errors")]
         public bool IgnoreSslErrors { get; set; }
 
-        [Category(Category)]
         [PropertyOrder(40)]
+        [Category(Category)]
         [DisplayName("Use Default Credentials")]
         public bool UseDefaultCredentials { get; set; }
     }

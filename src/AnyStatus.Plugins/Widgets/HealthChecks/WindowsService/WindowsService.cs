@@ -21,6 +21,7 @@ namespace AnyStatus
         [Required]
         [Category(Category)]
         [DisplayName("Service Name")]
+        [Description("Required. The windows service name.")]
         public string ServiceName { get; set; }
 
         [Category(Category)]
@@ -29,23 +30,7 @@ namespace AnyStatus
         public string MachineName { get; set; }
 
         [Category(Category)]
+        [Description("Required. The windows service expected status.")]
         public ServiceControllerStatus Status { get; set; }
-
-        //todo: add Started & Stopped states and add logic to following methods:
-
-        //public bool CanRestart()
-        //{
-        //    return State != State.None && State != State.Error;
-        //}
-
-        //public bool CanStart()
-        //{
-        //    return State != State.None && State != State.Error;
-        //}
-
-        //public bool CanStop()
-        //{
-        //    return State != State.None && State != State.Error;
-        //}
     }
 }
