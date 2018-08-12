@@ -78,6 +78,7 @@ namespace AnyStatus
             }
         }
 
+        [Browsable(false)]
         [PropertyOrder(70)]
         [Category(Category)]
         [DisplayName("Parameters")]

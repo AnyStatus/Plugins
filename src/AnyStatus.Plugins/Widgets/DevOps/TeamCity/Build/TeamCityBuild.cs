@@ -69,6 +69,7 @@ namespace AnyStatus
         [PropertyOrder(50)]
         [Category(Category)]
         [DisplayName("Use Guest User")]
+        [RefreshProperties(RefreshProperties.All)]
         [Description("Log in with TeamCity guest user. If checked, the User Name and Password are ignored")]
         public bool GuestUser
         {
@@ -82,12 +83,14 @@ namespace AnyStatus
             }
         }
 
+        [Browsable(false)]
         [PropertyOrder(60)]
         [Category(Category)]
         [DisplayName("User Name")]
         [Description("Optional.")]
         public string UserName { get; set; }
 
+        [Browsable(false)]
         [PropertyOrder(70)]
         [Category(Category)]
         [PasswordPropertyText(true)]
