@@ -25,7 +25,7 @@ namespace AnyStatus
         [Url]
         [Required]
         [PropertyOrder(10)]
-        [DisplayName("URL")]
+        [DisplayName("TeamCity URL")]
         [Category(Category)]
         [Description("TeamCity server URL address. For example: http://teamcity:8080")]
         public string Url
@@ -44,7 +44,7 @@ namespace AnyStatus
 
         [PropertyOrder(20)]
         [Category(Category)]
-        [DisplayName("Ignore SSL Errors")]
+        [DisplayName("Ignore SSL errors")]
         public bool IgnoreSslErrors { get; set; }
 
         /// <summary>
@@ -63,12 +63,12 @@ namespace AnyStatus
         [PropertyOrder(40)]
         [Category(Category)]
         [DisplayName("Branch")]
-        [Description("Optional. Branch to show status for")]
+        [Description("Optional. Branch to show status for.")]
         public string SourceControlBranch { get; set; }
 
         [PropertyOrder(50)]
         [Category(Category)]
-        [DisplayName("Use Guest User")]
+        [DisplayName("Use guest user")]
         [RefreshProperties(RefreshProperties.All)]
         [Description("Log in with TeamCity guest user. If checked, the User Name and Password are ignored")]
         public bool GuestUser
@@ -83,14 +83,14 @@ namespace AnyStatus
             }
         }
 
-        [Browsable(false)]
+        [Browsable(true)]
         [PropertyOrder(60)]
         [Category(Category)]
-        [DisplayName("User Name")]
+        [DisplayName("User name")]
         [Description("Optional.")]
         public string UserName { get; set; }
 
-        [Browsable(false)]
+        [Browsable(true)]
         [PropertyOrder(70)]
         [Category(Category)]
         [PasswordPropertyText(true)]

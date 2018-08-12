@@ -65,7 +65,7 @@ namespace AnyStatus
         [Description("Optional. Specify the build parameters to use when triggering a new build. Parameters are case-sensitive.")]
         public List<NameValuePair> BuildParameters { get; set; }
 
-        [DisplayName("Ignore SSL Errors")]
+        [DisplayName("Ignore SSL errors")]
         public bool IgnoreSslErrors { get; set; }
 
         [XmlIgnore]

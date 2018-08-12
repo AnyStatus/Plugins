@@ -41,7 +41,7 @@ namespace AnyStatus
         [Description("The Jenkins API token (optional). The API token is available in your personal configuration page. Click your name on the top right corner on every page, then click “Configure” to see your API token.")]
         public string ApiToken { get; set; }
 
-        [DisplayName("Ignore SSL Errors")]
+        [DisplayName("Ignore SSL errors")]
         public bool IgnoreSslErrors { get; set; }
 
         private static string EnsureEndsWithSlash(string str)
