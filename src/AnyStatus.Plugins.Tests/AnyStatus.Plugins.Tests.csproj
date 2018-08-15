@@ -86,6 +86,7 @@
     <Compile Include="TeamCity\TeamCityTests.cs" />
     <Compile Include="TfsBuildTests.cs" />
     <Compile Include="OpenInBrowserTests.cs" />
+    <Compile Include="PerformanceCounterTests.cs" />
     <Compile Include="VSTS\VstsReleaseTests.cs" />
     <Compile Include="VSTS\VstsBuildTests.cs" />
   </ItemGroup>
