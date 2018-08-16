@@ -6,11 +6,11 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 namespace AnyStatus
 {
     [DisplayColumn("Health Checks")]
-    [DisplayName("TCP/UDP Check")]
-    [Description("Monitor TCP/UDP connectivity for any host and port.")]
+    [DisplayName("Port Check")]
+    [Description("Tests if TCP or UDP port is opened on specified IP.")]
     public class Port : Widget, IHealthCheck, ISchedulable
     {
-        private const string Category = "TCP/UDP Check";
+        private const string Category = "Port Check";
 
         [Required]
         [Category(Category)]

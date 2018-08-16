@@ -14,26 +14,34 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    [DisplayName("C#/VB.NET File")]
-    [Description("Experimental. Compile and run C# or VB.NET source code.")]
+    [DisplayColumn("Code")]
+    [DisplayName(".NET Source Code")]
+    [Description("Compile and execute C# or VB.NET source code at runtime. The status can be set in the source code. AnyStatus will change the status to Failed if the source code throws an exception.")]
     public class DynamicSourceCode_v1 : Widget, ISchedulable, IHealthCheck
     {
-        private const string Category = "Dynamic Source Code";
+        private const string Category = "Source Code";
 
         public DynamicSourceCode_v1()
         {
-            References = new List<string>() { "mscorlib.dll", "System.dll", "System.Configuration.dll", "System.Core.dll", "System.Xml.dll" };
             Arguments = new List<string>();
+            References = new List<string>
+            {
+                "mscorlib.dll",
+                "System.dll",
+                "System.Configuration.dll",
+                "System.Core.dll",
+                "System.Xml.dll"
+            };
         }
 
         [Required]
         [PropertyOrder(10)]
         [Category(Category)]
         [DisplayName("File Name")]
-        [Description("C# or VB.NET file path.\n" +
-            "Note, the file must have a static Main() method inside a class or a struct (similar to console applications). " +
-            "Main can either have a void or int return type to control the status of the monitor. " +
-            "The Main method can be declared with or without a string[] parameter that contains the arguments.")]
+        [Description("C# or VB.NET source code path.\n" +
+            "The file must have a static Main() method inside a class or a struct (similar to a console application). " +
+            "Main() method should return either void or int to change the status of the widget. " +
+            "Main() method can accept a string[] array in the function parameters to pass the arguments to the source code. For example: Main(string[] args).")]
         [Editor(typeof(FileEditor), typeof(FileEditor))]
         public string FileName { get; set; }
 
@@ -47,8 +55,8 @@ namespace AnyStatus
         [Browsable(false)]
         public string[] ReferencesArray
         {
-            get { return References.ToArray(); }
-            set { References = value.ToList(); }
+            get => References.ToArray();
+            set => References = value.ToList();
         }
 
         [XmlIgnore]
@@ -60,8 +68,8 @@ namespace AnyStatus
         [Browsable(false)]
         public string[] ArgumentsArray
         {
-            get { return Arguments.ToArray(); }
-            set { Arguments = value.ToList(); }
+            get => Arguments.ToArray();
+            set => Arguments = value.ToList();
         }
 
         [PropertyOrder(40)]

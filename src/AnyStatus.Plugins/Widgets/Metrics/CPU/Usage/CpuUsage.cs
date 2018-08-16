@@ -12,6 +12,7 @@ namespace AnyStatus
         public CpuUsage()
         {
             Interval = 1;
+            Name = "CPU Usage";
         }
 
         [Category("CPU Usage")]

@@ -38,7 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AnyStatus.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b52fc05e377030a3, processorArchitecture=MSIL">
-      <HintPath>..\packages\AnyStatus.API.2.0.82\lib\net46\AnyStatus.API.dll</HintPath>
+      <HintPath>..\packages\AnyStatus.API.2.0.84\lib\net46\AnyStatus.API.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Administration.7.0.0.0\lib\net20\Microsoft.Web.Administration.dll</HintPath>
@@ -81,9 +81,9 @@
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\StartAppPool.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\StopAppPool.cs" />
     <Compile Include="Widgets\Metrics\CPU\Usage\CpuUsageQuery.cs" />
-    <Compile Include="Widgets\Other\BatchFile\BatchFileRunner.cs" />
-    <Compile Include="Widgets\Other\NET\CodeRunner.cs" />
-    <Compile Include="Widgets\Other\PowerShell\PowerShellRunner.cs" />
+    <Compile Include="Widgets\Code\BatchFile\BatchFileRunner.cs" />
+    <Compile Include="Widgets\Code\NET\CodeRunner.cs" />
+    <Compile Include="Widgets\Code\PowerShell\PowerShellRunner.cs" />
     <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerHealthCheck.cs" />
     <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQueryHandler.cs" />
     <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssueState.cs" />
@@ -93,9 +93,9 @@
     <Compile Include="Widgets\HealthChecks\HTTP\HTTPHealthCheck.cs" />
     <Compile Include="Widgets\HealthChecks\HTTP\OpenWebPage.cs" />
     <Compile Include="Widgets\HealthChecks\Ping\PingHealthCheck.cs" />
-    <Compile Include="Widgets\HealthChecks\SocketConnection\NetworkProtocol.cs" />
-    <Compile Include="Widgets\HealthChecks\SocketConnection\SocketConnection.cs" />
-    <Compile Include="Widgets\HealthChecks\SocketConnection\SocketConnectionHealthCheck.cs" />
+    <Compile Include="Widgets\HealthChecks\PortCheck\NetworkProtocol.cs" />
+    <Compile Include="Widgets\HealthChecks\PortCheck\SocketConnection.cs" />
+    <Compile Include="Widgets\HealthChecks\PortCheck\SocketConnectionHealthCheck.cs" />
     <Compile Include="Widgets\Metrics\NetworkSpeed\DownloadSpeed.cs" />
     <Compile Include="Widgets\Metrics\NetworkSpeed\NetworkInterfaceItemsSource.cs" />
     <Compile Include="Widgets\Metrics\NetworkSpeed\NetworkSpeedQuery.cs" />
@@ -154,9 +154,9 @@
     <Compile Include="Widgets\DevOps\Jenkins\Job\StartJenkinsJob.cs" />
     <Compile Include="Widgets\DevOps\TeamCity\Build\TeamCityBuild.cs" />
     <Compile Include="Widgets\DevOps\TFS\Build\TFSBuild.cs" />
-    <Compile Include="Widgets\Other\BatchFile\BatchFile.cs" />
-    <Compile Include="Widgets\Other\NET\Code_v1.cs" />
-    <Compile Include="Widgets\Other\PowerShell\PowerShell.cs" />
+    <Compile Include="Widgets\Code\BatchFile\BatchFile.cs" />
+    <Compile Include="Widgets\Code\NET\Code_v1.cs" />
+    <Compile Include="Widgets\Code\PowerShell\PowerShell.cs" />
     <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQuery.cs" />
     <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerConnection.cs" />
     <Compile Include="Widgets\Metrics\CPU\Usage\CpuUsage.cs" />
