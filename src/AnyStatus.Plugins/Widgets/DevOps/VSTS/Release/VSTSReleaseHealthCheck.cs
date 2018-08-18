@@ -22,17 +22,17 @@ namespace AnyStatus
 
             widget.MapTo(client.Connection);
 
-            if (widget.DefinitionId == null)
+            if (widget.ReleaseId == null)
             {
                 var definition = await client
                     .GetReleaseDefinitionAsync(widget.ReleaseDefinitionName)
                         .ConfigureAwait(false);
 
-                widget.DefinitionId = definition.Id;
+                widget.ReleaseId = definition.Id;
             }
 
             var lastRelease = await client
-                .GetLastReleaseAsync(widget.DefinitionId.Value)
+                .GetLastReleaseAsync(widget.ReleaseId.Value)
                     .ConfigureAwait(false);
 
             var releaseDetails = await client
@@ -74,7 +74,8 @@ namespace AnyStatus
             var newEnvironment = new VSTSReleaseEnvironment
             {
                 Name = environment.Name,
-                EnvironmentId = environment.Id
+                EnvironmentId = environment.Id,
+                ReleaseId = widget.ReleaseId ?? 0,
             };
 
             var dispatcher = Application.Current != null ? Application.Current.Dispatcher : Dispatcher.CurrentDispatcher;

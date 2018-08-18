@@ -18,7 +18,7 @@ namespace AnyStatus.Plugins.Tests.VSTS
             {
                 Account = "account",
                 Project = "project",
-                DefinitionId = 1
+                ReleaseId = 1
             };
 
             var request = OpenWebPageRequest.Create(release);

@@ -26,17 +26,17 @@ namespace AnyStatus
 
         [XmlIgnore]
         [Browsable(false)]
-        public long? DefinitionId { get; set; }
+        public long? ReleaseId { get; set; }
 
         [XmlIgnore]
         [Browsable(false)]
-        public string URL => $"https://{Account}.visualstudio.com/{Uri.EscapeDataString(Project)}/_release?definitionId={DefinitionId}&_a=releases";
+        public string URL => $"https://{Account}.visualstudio.com/{Uri.EscapeDataString(Project)}/_release?definitionId={ReleaseId}&_a=releases";
 
         public override object Clone()
         {
             var clone = (VSTSRelease_v1)base.Clone();
 
-            clone.DefinitionId = null;
+            clone.ReleaseId = null;
 
             return clone;
         }

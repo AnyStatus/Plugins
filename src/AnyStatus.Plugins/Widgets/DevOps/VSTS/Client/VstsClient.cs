@@ -68,7 +68,7 @@ namespace AnyStatus
         {
             var definitions = await Request<Collection<VSTSReleaseDefinition>>("release/definitions?searchText=" + name, true).ConfigureAwait(false);
 
-            if (definitions == null || definitions.Value == null)
+            if (definitions?.Value == null)
                 throw new Exception("Invalid release definition query response.");
 
             var definition = definitions.Value.FirstOrDefault(k => k.Name.Equals(name));
@@ -83,7 +83,7 @@ namespace AnyStatus
         {
             var releases = await Request<Collection<VSTSRelease>>("release/releases?$top=1&definitionId=" + releaseDefinitionId, true).ConfigureAwait(false);
 
-            if (releases == null || releases.Value == null)
+            if (releases?.Value == null)
                 throw new Exception("VSTS release not found.");
 
             return releases.Value.FirstOrDefault();
@@ -97,6 +97,16 @@ namespace AnyStatus
                 throw new Exception("VSTS Release release details were not found.");
 
             return details;
+        }
+
+        public async Task DeployReleaseAsync(long releaseId, long environmentId)
+        {
+            var request = new
+            {
+                status = "inprogress"
+            };
+
+            await Send($"release/releases/{releaseId}/environments/{environmentId}?api-version=3.2-preview", request).ConfigureAwait(false);
         }
 
         #endregion Releases
