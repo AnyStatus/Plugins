@@ -18,9 +18,9 @@ namespace AnyStatus
         {
             var widget = request.DataContext; // note, Data Context is auto-validated by the framework.
 
-            var client = new VstsClient(new VstsConnection());
+            var client = new VstsClient();
 
-            widget.MapTo(client.Connection);
+            widget.MapTo(client);
 
             if (widget.ReleaseId == null)
             {
@@ -46,41 +46,36 @@ namespace AnyStatus
 
         private static void RemoveEnvironments(VSTSRelease_v1 widget, VSTSReleaseDetails release)
         {
-            var removedEnvironments = widget.Items.Where(k => !release.Environments.Any(e => e.Name == k.Name)).ToList();
+            var removedEnvironments = widget.Items.Where(k => release.Environments.All(e => e.Name != k.Name)).ToList();
 
             removedEnvironments.ForEach(env => Application.Current.Dispatcher.Invoke(() => widget.Remove(env)));
         }
 
         private static void AddEnvironments(VSTSRelease_v1 widget, VSTSReleaseDetails release)
         {
-            if (widget == null || widget.Items == null)
+            if (widget?.Items == null)
                 throw new InvalidOperationException();
 
-            foreach (var environment in release.Environments)
+            foreach (var env in release.Environments)
             {
-                var newEnvironment = widget.Items.FirstOrDefault(i => i.Name == environment.Name);
+                var environment = widget.Items.FirstOrDefault(i => i.Name == env.Name) ?? AddEnvironment(widget, env);
 
-                if (newEnvironment == null)
-                {
-                    newEnvironment = AddEnvironment(widget, environment);
-                }
-
-                newEnvironment.State = environment.State;
+                environment.State = env.State;
             }
         }
 
-        private static VSTSReleaseEnvironment AddEnvironment(VSTSRelease_v1 widget, ReleaseEnvironment environment)
+        private static VSTSReleaseEnvironment AddEnvironment(VSTSRelease_v1 release, ReleaseEnvironment environment)
         {
             var newEnvironment = new VSTSReleaseEnvironment
             {
                 Name = environment.Name,
                 EnvironmentId = environment.Id,
-                ReleaseId = widget.ReleaseId ?? 0,
+                ReleaseId = release.ReleaseId ?? 0,
             };
 
             var dispatcher = Application.Current != null ? Application.Current.Dispatcher : Dispatcher.CurrentDispatcher;
 
-            dispatcher.Invoke(() => widget.Add(newEnvironment));
+            dispatcher.Invoke(() => release.Add(newEnvironment));
 
             return newEnvironment;
         }

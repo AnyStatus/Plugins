@@ -26,9 +26,9 @@ namespace AnyStatus.Plugins.VSTS.Build
 
             _logger.Info($"Starting \"{request.DataContext.Name}\"...");
 
-            var client = new VstsClient(new VstsConnection());
+            var client = new VstsClient();
 
-            request.DataContext.MapTo(client.Connection);
+            request.DataContext.MapTo(client);
 
             if (request.DataContext.DefinitionId == null)
             {
@@ -37,7 +37,17 @@ namespace AnyStatus.Plugins.VSTS.Build
                 request.DataContext.DefinitionId = definition.Id;
             }
 
-            await client.QueueNewBuildAsync(request.DataContext.DefinitionId.Value).ConfigureAwait(false);
+            var body = new
+            {
+                Definition = new
+                {
+                    Id = request.DataContext.DefinitionId
+                }
+            };
+
+            await client.Send("build/builds?api-version=2.0", body).ConfigureAwait(false);
+
+            request.DataContext.State = State.Queued;
 
             _logger.Info($"Build \"{request.DataContext.Name}\" has been triggered.");
         }

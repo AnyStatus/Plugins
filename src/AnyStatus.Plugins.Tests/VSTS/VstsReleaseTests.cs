@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API;
+using AnyStatus.Plugins.Widgets.DevOps.VSTS.Release;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System.Threading;
@@ -6,9 +7,15 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Tests.VSTS
 {
+    [Ignore]
     [TestClass]
     public class VstsReleaseTests
     {
+        private const string Account = "account"; //account.visualstudio.com
+        private const string Project = "project";
+        private const string Token = "vsts token";
+        private const string ReleaseDefinition = "release name";
+
         [TestMethod]
         public async Task OpenVstsReleaseWebPage()
         {
@@ -32,25 +39,56 @@ namespace AnyStatus.Plugins.Tests.VSTS
             ps.Received().Start(expected);
         }
 
-        [Ignore]
         [TestMethod]
-        public async Task VSTSReleaseHealthCheck()
+        public async Task VstsReleaseHealthCheck()
         {
             var release = new VSTSRelease_v1
             {
-                Account = "account",
-                Project = "project",
-                ReleaseDefinitionName = "release",
-                Password = "token"
+                Password = Token,
+                Account = Account,
+                Project = Project,
+                ReleaseDefinitionName = ReleaseDefinition,
             };
 
             var request = HealthCheckRequest.Create(release);
 
             var handler = new VSTSReleaseHealthCheck();
 
-            await handler.Handle(request, CancellationToken.None);
+            await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
 
             Assert.AreNotEqual(State.None, release.State);
+        }
+
+        [TestMethod]
+        public async Task DeployVstsRelease()
+        {
+            var release = new VSTSRelease_v1
+            {
+                Account = Account,
+                Project = Project,
+                Password = Token,
+                ReleaseDefinitionName = ReleaseDefinition,
+            };
+
+            var env = new VSTSReleaseEnvironment
+            {
+                ReleaseId = 470,
+                EnvironmentId = 1149
+            };
+
+            release.Add(env);
+
+            var request = StartRequest.Create(env);
+
+            var dlg = Substitute.For<IDialogService>();
+
+            dlg.ShowDialog(Arg.Any<ConfirmationDialog>()).Returns(_ => DialogResult.Yes);
+
+            var handler = new DeployVstsRelease(dlg, Substitute.For<ILogger>());
+
+            await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
+
+            Assert.AreEqual(State.Queued, release.State);
         }
     }
 }
