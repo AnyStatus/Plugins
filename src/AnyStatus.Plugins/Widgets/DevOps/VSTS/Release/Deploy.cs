@@ -1,4 +1,5 @@
-﻿using AnyStatus.API;
+﻿using System;
+using AnyStatus.API;
 using System.Threading;
 using System.Threading.Tasks;
 using AnyStatus.API.Utils;
@@ -32,6 +33,26 @@ namespace AnyStatus.Plugins.Widgets.DevOps.VSTS.Release
             {
                 release.MapTo(client);
             }
+            else
+            {
+                throw new InvalidOperationException("Release environment is not associated with a release.");
+            }
+
+            if (!release.ReleaseId.HasValue)
+                throw new InvalidOperationException("Release id was not set.");
+
+            var lastRelease = await client
+                .GetLastReleaseAsync(release.ReleaseId.Value)
+                .ConfigureAwait(false);
+
+            if (lastRelease == null)
+            {
+                request.DataContext.State = State.Failed;
+
+                _logger.Error("VSTS release definition was not released.");
+
+                return;
+            }
 
             var body = new
             {
@@ -39,7 +60,7 @@ namespace AnyStatus.Plugins.Widgets.DevOps.VSTS.Release
             };
 
             var url =
-                $"Release/releases/{request.DataContext.ReleaseId}/environments/{request.DataContext.EnvironmentId}?api-version=4.1-preview.5";
+                $"Release/releases/{lastRelease.Id}/environments/{request.DataContext.EnvironmentId}?api-version=4.1-preview.5";
 
             await client.Send(url, body, true, true).ConfigureAwait(false);
 

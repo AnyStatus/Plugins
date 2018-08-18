@@ -44,7 +44,7 @@ namespace AnyStatus
             AddEnvironments(widget, releaseDetails);
         }
 
-        private static void RemoveEnvironments(VSTSRelease_v1 widget, VSTSReleaseDetails release)
+        private static void RemoveEnvironments(Widget widget, VSTSReleaseDetails release)
         {
             var removedEnvironments = widget.Items.Where(k => release.Environments.All(e => e.Name != k.Name)).ToList();
 
@@ -66,14 +66,16 @@ namespace AnyStatus
 
         private static VSTSReleaseEnvironment AddEnvironment(VSTSRelease_v1 release, ReleaseEnvironment environment)
         {
+            if (!release.ReleaseId.HasValue)
+                throw new InvalidOperationException("Release id was not set.");
+
             var newEnvironment = new VSTSReleaseEnvironment
             {
                 Name = environment.Name,
                 EnvironmentId = environment.Id,
-                ReleaseId = release.ReleaseId ?? 0,
             };
 
-            var dispatcher = Application.Current != null ? Application.Current.Dispatcher : Dispatcher.CurrentDispatcher;
+            var dispatcher = Application.Current?.Dispatcher ?? Dispatcher.CurrentDispatcher;
 
             dispatcher.Invoke(() => release.Add(newEnvironment));
 

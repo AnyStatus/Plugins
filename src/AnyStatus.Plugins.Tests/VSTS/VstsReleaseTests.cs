@@ -11,10 +11,10 @@ namespace AnyStatus.Plugins.Tests.VSTS
     [TestClass]
     public class VstsReleaseTests
     {
-        private const string Account = "account"; //account.visualstudio.com
-        private const string Project = "project";
-        private const string Token = "vsts token";
-        private const string ReleaseDefinition = "release name";
+        private const string Account = "account name";
+        private const string Project = "project name";
+        private const string Token = "toekn";
+        private const string ReleaseDefinition = "release definition name";
 
         [TestMethod]
         public async Task OpenVstsReleaseWebPage()
@@ -67,12 +67,11 @@ namespace AnyStatus.Plugins.Tests.VSTS
                 Account = Account,
                 Project = Project,
                 Password = Token,
-                ReleaseDefinitionName = ReleaseDefinition,
+                ReleaseId = 11
             };
 
             var env = new VSTSReleaseEnvironment
             {
-                ReleaseId = 470,
                 EnvironmentId = 1149
             };
 
