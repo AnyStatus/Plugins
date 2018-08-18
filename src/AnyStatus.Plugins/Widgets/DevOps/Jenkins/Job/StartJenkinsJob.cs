@@ -28,7 +28,9 @@ namespace AnyStatus
 
             await jenkinsClient.TriggerJobAsync(request.DataContext).ConfigureAwait(false);
 
-            _logger.Info($"\"{request.DataContext.Name}\" has been triggered.");
+            request.DataContext.State = State.Queued;
+
+            _logger.Info($"\"Jenkins job {request.DataContext.Name}\" has been queued.");
         }
     }
 }

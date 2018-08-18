@@ -31,10 +31,11 @@ namespace AnyStatus
 
             request.DataContext.MapTo(client.Connection);
 
-            await client.QueueNewBuild(request.DataContext)
-                .ConfigureAwait(false);
+            await client.QueueNewBuild(request.DataContext).ConfigureAwait(false);
 
-            _logger.Info($"Build \"{request.DataContext.Name}\" has been triggered.");
+            request.DataContext.State = State.Queued;
+
+            _logger.Info($"Build \"{request.DataContext.Name}\" has been queued.");
         }
     }
 }

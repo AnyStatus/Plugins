@@ -35,7 +35,9 @@ namespace AnyStatus
 
             await QueueNewBuildAsync(request.DataContext).ConfigureAwait(false);
 
-            _logger.Info($"Build \"{request.DataContext.Name}\" has been triggered.");
+            request.DataContext.State = State.Queued;
+
+            _logger.Info($"Build \"{request.DataContext.Name}\" has been queued.");
         }
 
         private async Task QueueNewBuildAsync(TfsBuild item)
