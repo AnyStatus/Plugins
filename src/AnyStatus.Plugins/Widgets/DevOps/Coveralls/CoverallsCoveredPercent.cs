@@ -8,7 +8,7 @@ namespace AnyStatus
     [DisplayName("Coveralls")]
     [DisplayColumn("DevOps")]
     [Description("Coveralls code coverage (covered percentage).")]
-    public class CoverallsCoveredPercent : MetricValue, ISchedulable, IWebPage
+    public class CoverallsCoveredPercent : Metric, ISchedulable, IWebPage
     {
         private const string Category = "Coveralls";
 

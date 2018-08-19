@@ -7,7 +7,7 @@ namespace AnyStatus
     [DisplayColumn("Metrics")]
     [DisplayName("CPU Usage")]
     [Description("Shows the percentage of CPU usage")]
-    public class CpuUsage : MetricValue, ISchedulable
+    public class CpuUsage : Metric, ISchedulable
     {
         public CpuUsage()
         {
