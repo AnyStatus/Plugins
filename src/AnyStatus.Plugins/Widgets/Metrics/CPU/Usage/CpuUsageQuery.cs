@@ -15,12 +15,11 @@ namespace AnyStatus
             request.DataContext.State = State.Ok;
         }
 
-        private static async Task<float> GetCpuUsageAsync(string machineName)
+        private static async Task<double> GetCpuUsageAsync(string machineName)
         {
             var counter = string.IsNullOrWhiteSpace(machineName)
                 ? new System.Diagnostics.PerformanceCounter("Processor", "% Processor Time", "_Total")
                 : new System.Diagnostics.PerformanceCounter("Processor", "% Processor Time", "_Total", machineName);
-
 
             counter.NextValue();
 
