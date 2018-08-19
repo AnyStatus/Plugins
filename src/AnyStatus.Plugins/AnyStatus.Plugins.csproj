@@ -77,7 +77,8 @@
     <Compile Include="Widgets\DevOps\Coveralls\OpenWebPage.cs" />
     <Compile Include="Widgets\DevOps\AppVeyor\Build\StartAppVeyorBuild.cs" />
     <Compile Include="Widgets\DevOps\GitHub\Issue\v2\GitHubIssue_v2.cs" />
-    <Compile Include="Widgets\DevOps\VSTS\Release\Deploy.cs" />
+    <Compile Include="Widgets\DevOps\VSTS\Release\CreateVstsRelease.cs" />
+    <Compile Include="Widgets\DevOps\VSTS\Release\DeployVstsRelease.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\RestartAppPool.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\StartAppPool.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\StopAppPool.cs" />
@@ -127,7 +128,7 @@
     <Compile Include="Widgets\DevOps\VSTS\Build\StartVSTSBuild.cs" />
     <Compile Include="Widgets\DevOps\VSTS\Build\VSTSBuild_v1.cs" />
     <Compile Include="Widgets\DevOps\VSTS\Release\OpenWebPage.cs" />
-    <Compile Include="Widgets\DevOps\VSTS\Release\VstsReleaseEnvironment.cs" />
+    <Compile Include="Widgets\DevOps\VSTS\Release\VSTSReleaseEnvironment.cs" />
     <Compile Include="Widgets\DevOps\VSTS\Release\VstsReleaseHealthCheck.cs" />
     <Compile Include="Widgets\DevOps\VSTS\Release\VstsRelease_v1.cs" />
     <Compile Include="Widgets\DevOps\VSTS\Client\VstsClient.cs" />
@@ -193,4 +194,7 @@
     </ItemGroup>
     <Copy SourceFiles="@(NuGetPackages)" DestinationFolder="C:\nuget" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy $(TargetPath) "C:\Users\Alon Amsalem\AppData\Roaming\AnyStatus" /y</PostBuildEvent>
+  </PropertyGroup>
 </Project>

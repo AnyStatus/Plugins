@@ -68,7 +68,7 @@ namespace AnyStatus
 
         public async Task<VSTSReleaseDetails> GetReleaseDetailsAsync(long releaseId)
         {
-            var details = await Request<VSTSReleaseDetails>("release/releases/" + releaseId, true).ConfigureAwait(false);
+            var details = await Request<VSTSReleaseDetails>($"release/releases/{releaseId}", true).ConfigureAwait(false);
 
             if (details == null)
                 throw new Exception("VSTS Release release details were not found.");
@@ -143,18 +143,13 @@ namespace AnyStatus
 
                 var json = new JavaScriptSerializer().Serialize(request);
 
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response;
+                var response = patch
+                    ? await PatchAsync(httpClient, sb.ToString(), httpContent, CancellationToken.None).ConfigureAwait(false)
+                    : await httpClient.PostAsync(sb.ToString(), httpContent).ConfigureAwait(false);
 
-                if (patch)
-                {
-                    response = await PatchAsync(httpClient, sb.ToString(), content, CancellationToken.None).ConfigureAwait(false);
-                }
-                else
-                {
-                    response = await httpClient.PostAsync(sb.ToString(), content).ConfigureAwait(false);
-                }
+                //var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                 response.EnsureSuccessStatusCode();
             }

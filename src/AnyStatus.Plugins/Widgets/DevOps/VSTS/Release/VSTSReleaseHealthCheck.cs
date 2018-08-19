@@ -16,7 +16,7 @@ namespace AnyStatus
     {
         public async Task Handle(HealthCheckRequest<VSTSRelease_v1> request, CancellationToken cancellationToken)
         {
-            var widget = request.DataContext; // note, Data Context is auto-validated by the framework.
+            var widget = request.DataContext ?? throw new InvalidOperationException();
 
             var client = new VstsClient();
 
@@ -39,26 +39,26 @@ namespace AnyStatus
                 .GetReleaseDetailsAsync(lastRelease.Id)
                     .ConfigureAwait(false);
 
-            RemoveEnvironments(widget, releaseDetails);
+            RemoveEnvironments(widget, releaseDetails.Environments);
 
             AddEnvironments(widget, releaseDetails);
         }
 
-        private static void RemoveEnvironments(Widget widget, VSTSReleaseDetails release)
+        private static void RemoveEnvironments(Widget widget, ReleaseEnvironment[] environments)
         {
-            var removedEnvironments = widget.Items.Where(k => release.Environments.All(e => e.Name != k.Name)).ToList();
+            var removedEnvironments = widget.Items
+                .Where(k => k is VSTSReleaseEnvironment env && environments.All(e => e.Id != env.EnvironmentId)).ToList();
 
-            removedEnvironments.ForEach(env => Application.Current.Dispatcher.Invoke(() => widget.Remove(env)));
+            var dispatcher = Application.Current?.Dispatcher ?? Dispatcher.CurrentDispatcher;
+
+            removedEnvironments.ForEach(env => dispatcher.Invoke(() => widget.Remove(env)));
         }
 
         private static void AddEnvironments(VSTSRelease_v1 widget, VSTSReleaseDetails release)
         {
-            if (widget?.Items == null)
-                throw new InvalidOperationException();
-
             foreach (var env in release.Environments)
             {
-                var environment = widget.Items.FirstOrDefault(i => i.Name == env.Name) ?? AddEnvironment(widget, env);
+                var environment = widget.Items.FirstOrDefault(i => i is VSTSReleaseEnvironment e && e.EnvironmentId == env.Id) ?? AddEnvironment(widget, env);
 
                 environment.State = env.State;
             }
