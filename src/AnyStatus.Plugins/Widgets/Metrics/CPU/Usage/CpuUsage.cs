@@ -14,6 +14,7 @@ namespace AnyStatus
             Symbol = "%";
             Interval = 1;
             Name = "CPU Usage";
+            MaxValue = 100;
         }
 
         [Category("CPU Usage")]
