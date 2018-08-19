@@ -12,7 +12,8 @@ namespace AnyStatus
         public CpuUsage()
         {
             Symbol = "%";
-            Interval = 1;
+            Interval = 10;
+            Units = IntervalUnits.Seconds;
             Name = "CPU Usage";
             MaxValue = 100;
         }
