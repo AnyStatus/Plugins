@@ -195,6 +195,6 @@
     <Copy SourceFiles="@(NuGetPackages)" DestinationFolder="C:\nuget" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(TargetPath) "C:\Users\Alon Amsalem\AppData\Roaming\AnyStatus" /y</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Debug XCOPY $(TargetPath) "%25appdata%25\Roaming\AnyStatus\" /y</PostBuildEvent>
   </PropertyGroup>
 </Project>
