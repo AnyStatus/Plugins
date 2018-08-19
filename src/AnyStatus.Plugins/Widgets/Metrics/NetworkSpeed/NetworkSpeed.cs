@@ -7,7 +7,7 @@ namespace AnyStatus
 {
     public abstract class NetworkSpeed : Metric, IHealthCheck, ISchedulable
     {
-        public NetworkSpeed()
+        protected NetworkSpeed()
         {
             Interval = 1;
         }

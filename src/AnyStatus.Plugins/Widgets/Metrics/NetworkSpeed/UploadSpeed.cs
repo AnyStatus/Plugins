@@ -8,5 +8,9 @@ namespace AnyStatus
     [Description("Monitor network upload speed.")]
     public class UploadSpeed : NetworkSpeed
     {
+        public UploadSpeed()
+        {
+            Name = "Upload Speed";
+        }
     }
 }

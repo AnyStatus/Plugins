@@ -27,9 +27,9 @@ namespace AnyStatus
         }
 
         [DebuggerStepThrough]
-        private async Task Handle(NetworkSpeed item, Direction direction)
+        private static async Task Handle(NetworkSpeed item, Direction direction)
         {
-            if (NetworkInterface.GetIsNetworkAvailable() == false)
+            if (!NetworkInterface.GetIsNetworkAvailable())
                 throw new Exception("There are no available network connections.");
 
             var networkInterface = GetNetworkInterfaceById(item.NetworkInterfaceId);
@@ -41,17 +41,22 @@ namespace AnyStatus
             var endValue = networkInterface.GetIPv4Statistics();
             var endTime = DateTime.Now;
 
-            long totalBytes;
-
-            totalBytes = direction == Direction.Upload ?
+            var totalBytes = direction == Direction.Upload ?
                 endValue.BytesSent - startValue.BytesSent :
                 endValue.BytesReceived - startValue.BytesReceived;
 
             var bitsPerSecond = (totalBytes * 8) / (endTime - starTime).TotalSeconds;
 
-            item.Value = bitsPerSecond > 1000000 ?
-                            Math.Round(bitsPerSecond / 1000000, 1) + " Mbps" :
-                            Math.Round(bitsPerSecond / 1000, 1) + " Kbps";
+            if (bitsPerSecond > 1000000)
+            {
+                item.Value = Math.Round(bitsPerSecond / 1000000, 1);
+                item.Symbol = " Mbps";
+            }
+            else
+            {
+                item.Value = Math.Round(bitsPerSecond / 1000, 1);
+                item.Symbol = " Kbps";
+            }
 
             item.State = State.Ok;
         }

@@ -11,6 +11,7 @@ namespace AnyStatus
     {
         public CpuUsage()
         {
+            Symbol = "%";
             Interval = 1;
             Name = "CPU Usage";
         }

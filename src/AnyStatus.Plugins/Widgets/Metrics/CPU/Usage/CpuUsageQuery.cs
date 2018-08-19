@@ -15,7 +15,7 @@ namespace AnyStatus
             request.DataContext.State = State.Ok;
         }
 
-        private static async Task<double> GetCpuUsageAsync(string machineName)
+        private static async Task<int> GetCpuUsageAsync(string machineName)
         {
             var counter = string.IsNullOrWhiteSpace(machineName)
                 ? new System.Diagnostics.PerformanceCounter("Processor", "% Processor Time", "_Total")
@@ -25,7 +25,7 @@ namespace AnyStatus
 
             await Task.Delay(1000).ConfigureAwait(false);
 
-            return counter.NextValue();
+            return (int)counter.NextValue();
         }
     }
 }
