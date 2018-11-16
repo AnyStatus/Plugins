@@ -15,9 +15,9 @@ namespace AnyStatus
             {
                 var command = new SqlCommand(request.DataContext.SqlQuery, connection);
 
-                await connection.OpenAsync().ConfigureAwait(false);
+                await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
 
-                request.DataContext.Value = await command.ExecuteScalarAsync().ConfigureAwait(false);
+                request.DataContext.Value = await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false);
 
                 request.DataContext.State = State.Ok;
             }

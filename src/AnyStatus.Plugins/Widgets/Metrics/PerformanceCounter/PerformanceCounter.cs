@@ -7,7 +7,7 @@ namespace AnyStatus
     [DisplayColumn("Metrics")]
     [DisplayName("Performance Counter")]
     [Description("Shows the value of a performance counter.")]
-    public class PerformanceCounter : Metric, ISchedulable
+    public class PerformanceCounter : Sparkline, ISchedulable
     {
         private const string Category = "Performance Counter";
 
