@@ -27,7 +27,7 @@ namespace AnyStatus.Plugins.Widgets.DevOps.VSTS.Release
 
             _logger.Info($"Starting deployment to \"{request.DataContext.Name}\"...");
 
-            var client = new VstsClient();
+            var client = new AnyStatus.VSTS();
 
             if (request.DataContext.Parent is VSTSRelease_v1 release)
             {

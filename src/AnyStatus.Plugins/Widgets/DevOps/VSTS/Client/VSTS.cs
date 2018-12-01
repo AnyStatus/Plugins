@@ -10,8 +10,10 @@ using System.Web.Script.Serialization;
 
 namespace AnyStatus
 {
-    public class VstsClient
+    public class VSTS
     {
+        #region Properties
+
         public string Account { get; set; }
 
         public string Project { get; set; }
@@ -20,35 +22,27 @@ namespace AnyStatus
 
         public string Password { get; set; }
 
-        #region Builds
+        #endregion
+
+        #region VSTS
 
         public async Task<VSTSBuildDefinition> GetBuildDefinitionAsync(string name)
         {
-            var definitions = await Request<Collection<VSTSBuildDefinition>>("build/definitions?$top=1&name=" + name).ConfigureAwait(false);
+            var definitions = await Request<Collection<VSTSBuildDefinition>>($"build/definitions?$top=1&name={Uri.EscapeDataString(name)}").ConfigureAwait(false);
 
-            if (definitions?.Value == null)
-                throw new Exception("An error occurred while requesting  VSTS build definition.");
-
-            var definition = definitions.Value.Find(k => k.Name.Equals(name));
+            var definition = definitions?.Value?.Find(k => k.Name.Equals(name));
 
             if (definition == null)
-                throw new Exception($"VSTS build definition {name} was not found.");
+                throw new Exception($"VSTS build definition \"{name}\" was not found.");
 
             return definition;
         }
 
-        #endregion Builds
-
-        #region Releases
-
         public async Task<VSTSReleaseDefinition> GetReleaseDefinitionAsync(string name)
         {
-            var definitions = await Request<Collection<VSTSReleaseDefinition>>("release/definitions?searchText=" + name, true).ConfigureAwait(false);
+            var definitions = await Request<Collection<VSTSReleaseDefinition>>($"release/definitions?searchText={Uri.EscapeDataString(name)}", true).ConfigureAwait(false);
 
-            if (definitions?.Value == null)
-                throw new Exception("Invalid release definition query response.");
-
-            var definition = definitions.Value.Find(k => k.Name.Equals(name));
+            var definition = definitions?.Value?.Find(k => k.Name.Equals(name));
 
             if (definition == null)
                 throw new Exception($"Release definition {name} was not found.");
@@ -61,7 +55,7 @@ namespace AnyStatus
             var releases = await Request<Collection<VSTSRelease>>("release/releases?$top=1&definitionId=" + releaseDefinitionId, true).ConfigureAwait(false);
 
             if (releases?.Value == null)
-                throw new Exception($"VSTS last release of release definition id {releaseDefinitionId} was not found.");
+                throw new Exception($"VSTS last release of release definition id \"{releaseDefinitionId}\" was not found.");
 
             return releases.Value.FirstOrDefault();
         }
@@ -71,12 +65,12 @@ namespace AnyStatus
             var details = await Request<VSTSReleaseDetails>($"release/releases/{releaseId}", true).ConfigureAwait(false);
 
             if (details == null)
-                throw new Exception("VSTS Release release details were not found.");
+                throw new Exception("VSTS release details could not be found.");
 
             return details;
         }
 
-        #endregion Releases
+        #endregion
 
         #region Helpers
 
@@ -94,16 +88,9 @@ namespace AnyStatus
                         Convert.ToBase64String(Encoding.ASCII.GetBytes($"{UserName}:{Password}")));
                 }
 
-                var sb = new StringBuilder();
-                sb.Append("https://");
-                sb.Append(Account);
-                if (vsrm) sb.Append(".vsrm");
-                sb.Append(".visualstudio.com/");
-                sb.Append(Project);
-                sb.Append("/_apis/");
-                sb.Append(api);
+                var uri = CreateUri(api, vsrm);
 
-                var response = await httpClient.GetAsync(sb.ToString()).ConfigureAwait(false);
+                var response = await httpClient.GetAsync(uri).ConfigureAwait(false);
 
                 EnsureSuccessStatusCode(response.StatusCode);
 
@@ -116,7 +103,21 @@ namespace AnyStatus
         private static void EnsureSuccessStatusCode(HttpStatusCode statusCode)
         {
             if (statusCode != HttpStatusCode.OK)
-                throw new VstsClientException($"Invalid HTTP response status code: {(int)statusCode} ({statusCode}). Please verify your User Name and Password or Personal Acceess Token.");
+                throw new VstsClientException($"Invalid HTTP response status code: {(int)statusCode} ({statusCode}). Please make sure your User Name, Password or Personal Acceess Token are correct.");
+        }
+
+        private string CreateUri(string api, bool vsrm)
+        {
+            var sb = new StringBuilder();
+            sb.Append("https://");
+            sb.Append(Account);
+            if (vsrm) sb.Append(".vsrm");
+            sb.Append(".visualstudio.com/");
+            sb.Append(Project);
+            sb.Append("/_apis/");
+            sb.Append(api);
+
+            return sb.ToString();
         }
 
         internal async Task Send<T>(string api, T request = default(T), bool vsrm = false, bool patch = false)
@@ -132,24 +133,19 @@ namespace AnyStatus
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{UserName}:{Password}")));
                 }
 
-                var sb = new StringBuilder();
-                sb.Append("https://");
-                sb.Append(Account);
-                if (vsrm) sb.Append(".vsrm");
-                sb.Append(".visualstudio.com/");
-                sb.Append(Project);
-                sb.Append("/_apis/");
-                sb.Append(api);
+                var uri = CreateUri(api, vsrm);
 
                 var json = new JavaScriptSerializer().Serialize(request);
 
                 var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
                 var response = patch
-                    ? await PatchAsync(httpClient, sb.ToString(), httpContent, CancellationToken.None).ConfigureAwait(false)
-                    : await httpClient.PostAsync(sb.ToString(), httpContent).ConfigureAwait(false);
+                    ? await PatchAsync(httpClient, uri, httpContent, CancellationToken.None).ConfigureAwait(false)
+                    : await httpClient.PostAsync(uri, httpContent).ConfigureAwait(false);
 
-                //var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+#if DEBUG
+                var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+#endif
 
                 response.EnsureSuccessStatusCode();
             }
@@ -167,6 +163,6 @@ namespace AnyStatus
             return client.SendAsync(request, cancellationToken);
         }
 
-        #endregion Helpers
+        #endregion
     }
 }

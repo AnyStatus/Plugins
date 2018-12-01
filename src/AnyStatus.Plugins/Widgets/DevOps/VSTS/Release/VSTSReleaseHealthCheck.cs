@@ -18,7 +18,7 @@ namespace AnyStatus
         {
             var widget = request.DataContext ?? throw new InvalidOperationException();
 
-            var client = new VstsClient();
+            var client = new VSTS();
 
             widget.MapTo(client);
 

@@ -27,7 +27,7 @@ namespace AnyStatus.Plugins.Tests
 
             await handler.Handle(request, CancellationToken.None);
 
-            var expected = "https://account.visualstudio.com/project/_build/index?definitionId=1&_a=completed";
+            const string expected = "https://account.visualstudio.com/project/_build/index?definitionId=1&_a=completed";
 
             ps.Received().Start(expected);
         }
@@ -50,7 +50,7 @@ namespace AnyStatus.Plugins.Tests
 
             await handler.Handle(request, CancellationToken.None);
 
-            var expected = "https://account.visualstudio.com/project%20with%20spaces/_build/index?definitionId=1&_a=completed";
+            const string expected = "https://account.visualstudio.com/project%20with%20spaces/_build/index?definitionId=1&_a=completed";
 
             ps.Received().Start(expected);
         }
@@ -59,6 +59,8 @@ namespace AnyStatus.Plugins.Tests
         [ExpectedException(typeof(VstsClientException))]
         public async Task VstsBuildHealthCheckTest()
         {
+            var logger = Substitute.For<ILogger>();
+
             var build = new VSTSBuild_v1
             {
                 Account = "production",
@@ -69,7 +71,7 @@ namespace AnyStatus.Plugins.Tests
                 Password = "personal access token"
             };
 
-            var handler = new VstsBuildHealthCheck();
+            var handler = new VstsBuildHealthCheck(logger);
 
             var request = HealthCheckRequest.Create(build);
 

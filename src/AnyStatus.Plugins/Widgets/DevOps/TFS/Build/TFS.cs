@@ -9,17 +9,18 @@ using System.Web.Script.Serialization;
 
 namespace AnyStatus
 {
-    public abstract class TFSBuildHandler
+    public abstract class TFS
     {
         [DebuggerStepThrough]
-        public virtual void Handle(TfsBuild buildDefinition)
+        public void Handle(TfsBuild buildDefinition)
         {
             HandleAsync(buildDefinition).Wait();
         }
 
-        public virtual async Task HandleAsync(TfsBuild buildDefinition)
+        public async Task HandleAsync(TfsBuild buildDefinition)
         {
-            if (buildDefinition.BuildDefinitionId <= 0)
+            //todo: move to initializer
+            if (buildDefinition.BuildDefinitionId == 0)
                 buildDefinition.BuildDefinitionId = await GetBuildDefinitionIdAsync(buildDefinition).ConfigureAwait(false);
         }
 
@@ -33,13 +34,13 @@ namespace AnyStatus
 
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                if (handler.UseDefaultCredentials == false)
+                if (!handler.UseDefaultCredentials)
                 {
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
                         Convert.ToBase64String(Encoding.ASCII.GetBytes($"{buidDefinition.UserName}:{buidDefinition.Password}")));
                 }
 
-                var url = $"{buidDefinition.Url}/{buidDefinition.Collection}/{buidDefinition.TeamProject}/_apis/build/definitions?api-version=2.0&name={buidDefinition.BuildDefinition}";
+                var url = $"{buidDefinition.Url}/{Uri.EscapeDataString(buidDefinition.Collection)}/{Uri.EscapeDataString(buidDefinition.TeamProject)}/_apis/build/definitions?api-version=2.0&name={Uri.EscapeDataString(buidDefinition.BuildDefinition)}";
 
                 var response = await httpClient.GetAsync(url).ConfigureAwait(false);
 
@@ -49,10 +50,10 @@ namespace AnyStatus
 
                 var buildDefinitionResponse = new JavaScriptSerializer().Deserialize<BuildDefinitionResponse>(content);
 
-                if (buildDefinitionResponse == null || buildDefinitionResponse.Value == null || !buildDefinitionResponse.Value.Any())
-                    throw new Exception("Build definition id was not found.");
+                if (buildDefinitionResponse == null || buildDefinitionResponse.Value?.Any() != true)
+                    throw new Exception($"TFS build definition \"{buidDefinition.BuildDefinition}\" was not found.");
 
-                return buildDefinitionResponse.Value.First().Id;
+                return buildDefinitionResponse.Value[0].Id;
             }
         }
     }

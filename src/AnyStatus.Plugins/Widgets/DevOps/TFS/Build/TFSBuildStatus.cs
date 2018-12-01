@@ -10,7 +10,7 @@ using System.Web.Script.Serialization;
 
 namespace AnyStatus
 {
-    public class TFSBuildStatus : TFSBuildHandler, ICheckHealth<TfsBuild>
+    public class TFSBuildStatus : TFS, ICheckHealth<TfsBuild>
     {
         public async Task Handle(HealthCheckRequest<TfsBuild> request, CancellationToken cancellationToken)
         {
@@ -71,13 +71,13 @@ namespace AnyStatus
                 {
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    if (handler.UseDefaultCredentials == false)
+                    if (!handler.UseDefaultCredentials)
                     {
                         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
                             Convert.ToBase64String(Encoding.ASCII.GetBytes($"{item.UserName}:{item.Password}")));
                     }
 
-                    var url = $"{item.Url}/{item.Collection}/{item.TeamProject}/_apis/build/builds?definitions={item.BuildDefinitionId}&$top=1&api-version=2.0";
+                    var url = $"{item.Url}/{Uri.EscapeDataString(item.Collection)}/{Uri.EscapeDataString(item.TeamProject)}/_apis/build/builds?definitions={item.BuildDefinitionId}&$top=1&api-version=2.0";
 
                     var response = await client.GetAsync(url).ConfigureAwait(false);
 

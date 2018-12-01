@@ -9,7 +9,7 @@ using System.Web.Script.Serialization;
 
 namespace AnyStatus
 {
-    public class StartTFSBuild : TFSBuildHandler, IStart<TfsBuild>
+    public class StartTFSBuild : TFS, IStart<TfsBuild>
     {
         private readonly ILogger _logger;
         private readonly IDialogService _dialogService;

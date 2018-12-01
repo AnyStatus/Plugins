@@ -30,7 +30,7 @@ namespace AnyStatus.Plugins.Widgets.DevOps.VSTS.Release
 
             _logger.Info($"Creating a new release of \"{request.DataContext.Name}\"...");
 
-            var client = new VstsClient();
+            var client = new AnyStatus.VSTS();
 
             request.DataContext.MapTo(client);
 

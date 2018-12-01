@@ -118,7 +118,7 @@
     <Compile Include="Widgets\DevOps\TeamCity\Client\TeamCityConnection.cs" />
     <Compile Include="Widgets\DevOps\TeamCity\Client\TeamCityException.cs" />
     <Compile Include="Widgets\DevOps\TeamCity\Build\StartTeamCityBuild.cs" />
-    <Compile Include="Widgets\DevOps\TFS\Build\TFSBuildHandler.cs" />
+    <Compile Include="Widgets\DevOps\TFS\Build\TFS.cs" />
     <Compile Include="Widgets\DevOps\TFS\Build\OpenWebPage.cs" />
     <Compile Include="Widgets\DevOps\TFS\Build\TFSBuildStatus.cs" />
     <Compile Include="Widgets\DevOps\TFS\Build\StartTFSBuild.cs" />
@@ -131,7 +131,7 @@
     <Compile Include="Widgets\DevOps\VSTS\Release\VSTSReleaseEnvironment.cs" />
     <Compile Include="Widgets\DevOps\VSTS\Release\VstsReleaseHealthCheck.cs" />
     <Compile Include="Widgets\DevOps\VSTS\Release\VstsRelease_v1.cs" />
-    <Compile Include="Widgets\DevOps\VSTS\Client\VstsClient.cs" />
+    <Compile Include="Widgets\DevOps\VSTS\Client\VSTS.cs" />
     <Compile Include="Widgets\DevOps\VSTS\Client\VstsClientException.cs" />
     <Compile Include="Widgets\DevOps\VSTS\Client\VstsContracts.cs" />
     <Compile Include="Widgets\DevOps\VSTS\VstsWidget.cs" />
