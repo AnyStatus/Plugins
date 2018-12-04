@@ -10,6 +10,7 @@ namespace AnyStatus.Plugins.Tests.Jenkins
     [TestClass]
     public class JenkinsViewTests
     {
+        [Ignore]
         [TestMethod]
         public async Task JenkinsView_Should_NOT_DuplicateJobs_When_Refreshing()
         {
