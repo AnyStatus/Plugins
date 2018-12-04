@@ -3,6 +3,7 @@ using AnyStatus.API.Utils;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AnyStatus.Plugins.AzureDevOps;
 
 namespace AnyStatus
 {
@@ -20,7 +21,7 @@ namespace AnyStatus
 
         public async Task Handle(HealthCheckRequest<VSTSBuild_v1> request, CancellationToken cancellationToken)
         {
-            var vsts = new VSTS();
+            var vsts = new AzureDevOps();
 
             request.DataContext.MapTo(vsts);
 

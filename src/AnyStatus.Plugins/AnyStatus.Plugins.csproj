@@ -131,9 +131,9 @@
     <Compile Include="Widgets\DevOps\Azure\Release\VSTSReleaseEnvironment.cs" />
     <Compile Include="Widgets\DevOps\Azure\Release\VstsReleaseHealthCheck.cs" />
     <Compile Include="Widgets\DevOps\Azure\Release\VstsRelease_v1.cs" />
-    <Compile Include="Widgets\DevOps\Azure\Client\VSTS.cs" />
-    <Compile Include="Widgets\DevOps\Azure\Client\VstsClientException.cs" />
-    <Compile Include="Widgets\DevOps\Azure\Client\VstsContracts.cs" />
+    <Compile Include="Widgets\DevOps\Azure\AzureDevOps.cs" />
+    <Compile Include="Widgets\DevOps\Azure\AzureDevOpsException.cs" />
+    <Compile Include="Widgets\DevOps\Azure\Contracts.cs" />
     <Compile Include="Widgets\DevOps\Azure\AzureDevOpsWidget.cs" />
     <Compile Include="Widgets\HealthChecks\WindowsService\WindowsServiceHandler.cs" />
     <Compile Include="Widgets\HealthChecks\WindowsService\RestartWindowsService.cs" />

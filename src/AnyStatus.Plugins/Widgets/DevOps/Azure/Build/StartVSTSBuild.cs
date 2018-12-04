@@ -26,7 +26,7 @@ namespace AnyStatus.Plugins.VSTS.Build
 
             _logger.Info($"Starting \"{request.DataContext.Name}\"...");
 
-            var client = new AnyStatus.VSTS();
+            var client = new AnyStatus.AzureDevOps();
 
             request.DataContext.MapTo(client);
 

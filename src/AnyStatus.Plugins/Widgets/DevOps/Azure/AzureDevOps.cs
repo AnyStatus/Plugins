@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using AnyStatus.Plugins.AzureDevOps;
 
 namespace AnyStatus
 {
-    public class VSTS
+    public class AzureDevOps
     {
         #region Properties
 
@@ -24,7 +25,7 @@ namespace AnyStatus
 
         #endregion
 
-        #region VSTS
+        #region Azure DevOps
 
         public async Task<VSTSBuildDefinition> GetBuildDefinitionAsync(string name)
         {
@@ -103,7 +104,7 @@ namespace AnyStatus
         private static void EnsureSuccessStatusCode(HttpStatusCode statusCode)
         {
             if (statusCode != HttpStatusCode.OK)
-                throw new VstsClientException($"Invalid HTTP response status code: {(int)statusCode} ({statusCode}). Please make sure your User Name, Password or Personal Acceess Token are correct.");
+                throw new AzureDevOpsException($"Invalid HTTP response status code: {(int)statusCode} ({statusCode}). Please make sure your User Name, Password or Personal Acceess Token are correct.");
         }
 
         private string CreateUri(string api, bool vsrm)

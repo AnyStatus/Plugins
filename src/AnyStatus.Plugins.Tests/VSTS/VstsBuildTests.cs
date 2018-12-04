@@ -56,7 +56,7 @@ namespace AnyStatus.Plugins.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(VstsClientException))]
+        [ExpectedException(typeof(AzureDevOpsException))]
         public async Task VstsBuildHealthCheckTest()
         {
             var logger = Substitute.For<ILogger>();
