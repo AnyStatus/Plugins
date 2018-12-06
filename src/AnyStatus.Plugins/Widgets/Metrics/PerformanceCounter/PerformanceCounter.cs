@@ -13,7 +13,8 @@ namespace AnyStatus
 
         public PerformanceCounter()
         {
-            Interval = 1;
+            Interval = 30;
+            Units = IntervalUnits.Seconds;
         }
 
         [DisplayName("Machine Name")]
