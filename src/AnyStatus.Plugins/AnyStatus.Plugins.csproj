@@ -87,9 +87,8 @@
     <Compile Include="Widgets\Code\NET\CodeRunner.cs" />
     <Compile Include="Widgets\Code\PowerShell\PowerShellRunner.cs" />
     <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerHealthCheck.cs" />
-    <Compile Include="Widgets\Metrics\PerformanceCounter\Threads.cs" />
-    <Compile Include="Widgets\Metrics\Threads.cs" />
-    <Compile Include="Widgets\Metrics\PerformanceCounter\Processes.cs" />
+    <Compile Include="Widgets\Metrics\PerformanceCounters\Threads.cs" />
+    <Compile Include="Widgets\Metrics\PerformanceCounters\Processes.cs" />
     <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQueryHandler.cs" />
     <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssueState.cs" />
     <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssueStateCheck.cs" />
@@ -112,7 +111,7 @@
     <Compile Include="Widgets\DevOps\Jenkins\Client\IJenkinsClient.cs" />
     <Compile Include="Widgets\DevOps\Jenkins\Client\IJenkinsPlugin.cs" />
     <Compile Include="Widgets\DevOps\Jenkins\Client\JenkinsClient.cs" />
-    <Compile Include="Widgets\Metrics\PerformanceCounter\PerformanceCounterQuery.cs" />
+    <Compile Include="Widgets\Metrics\PerformanceCounters\PerformanceCounterQuery.cs" />
     <Compile Include="Widgets\HealthChecks\Pingdom\PingdomHealthCheck.cs" />
     <Compile Include="Widgets\DevOps\TeamCity\Build\OpenWebPage.cs" />
     <Compile Include="Widgets\DevOps\TeamCity\Client\TeamCityContracts.cs" />
@@ -166,7 +165,7 @@
     <Compile Include="Widgets\Metrics\CPU\Usage\CpuUsage.cs" />
     <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssue.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\AppPool.cs" />
-    <Compile Include="Widgets\Metrics\PerformanceCounter\PerformanceCounter.cs" />
+    <Compile Include="Widgets\Metrics\PerformanceCounters\PerformanceCounter.cs" />
     <Compile Include="Widgets\HealthChecks\WindowsService\WindowsService.cs" />
     <Compile Include="Widgets\HealthChecks\Pingdom\Pingdom.cs" />
     <Compile Include="Widgets\HealthChecks\UptimeRobot\UptimeRobot.cs" />
