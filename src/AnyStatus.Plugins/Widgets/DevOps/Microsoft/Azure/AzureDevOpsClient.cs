@@ -1,4 +1,5 @@
 ﻿using AnyStatus.Plugins.AzureDevOps;
+using AnyStatus.Plugins.Widgets.DevOps.Microsoft.Azure.Contracts;
 using System;
 using System.Linq;
 using System.Net;
