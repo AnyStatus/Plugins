@@ -14,7 +14,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    [DisplayColumn("Code")]
+    [DisplayColumn("Custom")]
     [DisplayName(".NET Source Code")]
     [Description("Compile and execute C# or VB.NET source code at runtime. The status can be set in the source code. AnyStatus will change the status to Failed if the source code throws an exception.")]
     public class DynamicSourceCode_v1 : Widget, ISchedulable, IHealthCheck

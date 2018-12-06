@@ -5,7 +5,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    [DisplayColumn("Code")]
+    [DisplayColumn("Custom")]
     [DisplayName("Batch Script")]
     [Description("Run a batch script and check the exit code.")]
     public class BatchFile : Widget, IHealthCheck, ISchedulable
