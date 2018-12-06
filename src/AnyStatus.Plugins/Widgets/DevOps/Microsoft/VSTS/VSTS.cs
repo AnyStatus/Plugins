@@ -11,7 +11,7 @@ using AnyStatus.Plugins.AzureDevOps;
 
 namespace AnyStatus
 {
-    public class AzureDevOps
+    public class VSTS
     {
         #region Properties
 
@@ -104,7 +104,7 @@ namespace AnyStatus
         private static void EnsureSuccessStatusCode(HttpStatusCode statusCode)
         {
             if (statusCode != HttpStatusCode.OK)
-                throw new AzureDevOpsException($"Invalid HTTP response status code: {(int)statusCode} ({statusCode}). Please make sure your User Name, Password or Personal Acceess Token are correct.");
+                throw new VstsException($"Invalid HTTP response status code: {(int)statusCode} ({statusCode}). Please make sure your User Name, Password or Personal Acceess Token are correct.");
         }
 
         private string CreateUri(string api, bool vsrm)

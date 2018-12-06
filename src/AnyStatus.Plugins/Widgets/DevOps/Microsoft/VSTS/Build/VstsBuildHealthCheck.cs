@@ -21,7 +21,7 @@ namespace AnyStatus
 
         public async Task Handle(HealthCheckRequest<VSTSBuild_v1> request, CancellationToken cancellationToken)
         {
-            var vsts = new AzureDevOps();
+            var vsts = new VSTS();
 
             request.DataContext.MapTo(vsts);
 

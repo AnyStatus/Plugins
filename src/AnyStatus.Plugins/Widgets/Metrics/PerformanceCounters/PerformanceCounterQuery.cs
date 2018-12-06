@@ -18,8 +18,12 @@ namespace AnyStatus
                 CategoryName = counter.CategoryName,
                 CounterName = counter.CounterName,
                 InstanceName = counter.InstanceName,
-                MachineName = string.IsNullOrWhiteSpace(counter.MachineName) ? null : counter.MachineName,
             };
+
+            if (!string.IsNullOrWhiteSpace(counter.MachineName))
+            {
+                sample.MachineName = counter.MachineName;
+            }
 
             counter.Value = sample.NextValue();
 
