@@ -25,18 +25,18 @@ namespace AnyStatus
         [Required]
         [DisplayName("Category")]
         [Category(Category)]
-        [Description("")]
+        //[Description("")]
         public string CategoryName { get; set; }
 
         [Required]
         [DisplayName("Counter")]
         [Category(Category)]
-        [Description("")]
+        //[Description("")]
         public string CounterName { get; set; }
 
         [DisplayName("Instance")]
         [Category(Category)]
-        [Description("")]
+        //[Description("")]
         public string InstanceName { get; set; }
     }
 }

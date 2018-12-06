@@ -24,7 +24,7 @@ namespace AnyStatus
         [PropertyOrder(20)]
         [Category(Category)]
         [DisplayName("SQL Query")]
-        [Description("")]
+        //[Description("")]
         [Editor(typeof(MultilineTextBoxEditor), typeof(ITypeEditor))]
         public string SqlQuery { get; set; }
     }

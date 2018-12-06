@@ -1,26 +1,31 @@
 ﻿using AnyStatus.API;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AnyStatus
 {
-    public class PerformanceCounterQuery : RequestHandler<MetricQueryRequest<PerformanceCounter>>, IMetricQuery<PerformanceCounter>
+    public class PerformanceCounterQuery : IMetricQuery<PerformanceCounter>
     {
-        protected override void HandleCore(MetricQueryRequest<PerformanceCounter> request)
+        public Task Handle(MetricQueryRequest<PerformanceCounter> request, CancellationToken cancellationToken)
         {
-            var counter = new System.Diagnostics.PerformanceCounter
+            return Handle(request.DataContext);
+        }
+
+        protected static Task Handle(PerformanceCounter counter)
+        {
+            var sample = new System.Diagnostics.PerformanceCounter
             {
-                CategoryName = request.DataContext.CategoryName,
-                CounterName = request.DataContext.CounterName,
-                InstanceName = request.DataContext.InstanceName,
+                CategoryName = counter.CategoryName,
+                CounterName = counter.CounterName,
+                InstanceName = counter.InstanceName,
+                MachineName = string.IsNullOrWhiteSpace(counter.MachineName) ? null : counter.MachineName,
             };
 
-            if (!string.IsNullOrWhiteSpace(request.DataContext.MachineName))
-            {
-                counter.MachineName = request.DataContext.MachineName;
-            }
+            counter.Value = sample.NextValue();
 
-            request.DataContext.Value = counter.NextValue();
+            counter.State = State.Ok;
 
-            request.DataContext.State = State.Ok;
+            return Unit.Task;
         }
     }
 }
