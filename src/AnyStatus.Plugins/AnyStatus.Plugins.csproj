@@ -87,6 +87,8 @@
     <Compile Include="Widgets\Code\NET\CodeRunner.cs" />
     <Compile Include="Widgets\Code\PowerShell\PowerShellRunner.cs" />
     <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerHealthCheck.cs" />
+    <Compile Include="Widgets\Metrics\Threads.cs" />
+    <Compile Include="Widgets\Metrics\Processes.cs" />
     <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQueryHandler.cs" />
     <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssueState.cs" />
     <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssueStateCheck.cs" />
