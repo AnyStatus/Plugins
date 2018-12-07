@@ -13,7 +13,9 @@ namespace AnyStatus.Plugins.Widgets.DevOps.Microsoft.Azure.Queries
         {
             public AzureDevOpsConnection Connection { get; set; }
 
-            public string Id { get; set; }
+            public string ReleaseId { get; set; }
+
+            public int Top { get; set; } = 1;
         }
 
         public class Response
@@ -25,10 +27,10 @@ namespace AnyStatus.Plugins.Widgets.DevOps.Microsoft.Azure.Queries
         {
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
-                var releases = await AzureDevOpsUtils.Request<AzureDevOpsCollection<AzureDevOpsRelease>>(request.Connection, "release/releases?$top=1&definitionId=" + request.Id, true).ConfigureAwait(false);
+                var releases = await AzureDevOpsUtils.Request<AzureDevOpsCollection<AzureDevOpsRelease>>(request.Connection, $"release/releases?$top={request.Top}&definitionId={request.ReleaseId}", true).ConfigureAwait(false);
 
                 if (releases?.Value == null)
-                    throw new Exception($"VSTS last release of release definition id \"{request.Id}\" was not found.");
+                    throw new Exception($"VSTS last release of release definition id \"{request.ReleaseId}\" was not found.");
 
                 var release = releases.Value.FirstOrDefault();
 

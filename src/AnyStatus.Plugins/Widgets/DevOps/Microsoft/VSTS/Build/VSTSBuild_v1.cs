@@ -10,7 +10,7 @@ namespace AnyStatus
     [DisplayName("VSTS Build")]
     [DisplayColumn("DevOps")]
     [Description("Visual Studio Team Services build status and notifications.")]
-    public class VSTSBuild_v1 : AzureDevOpsWidget, IHealthCheck, ISchedulable, IStartable, IWebPage
+    public class VSTSBuild_v1 : VstsWidget, IHealthCheck, ISchedulable, IStartable, IWebPage
     {
         public VSTSBuild_v1() : base(aggregate: false) { }
 

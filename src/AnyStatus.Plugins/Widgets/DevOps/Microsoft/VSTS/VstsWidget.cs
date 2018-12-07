@@ -5,11 +5,11 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    public abstract class AzureDevOpsWidget : Build
+    public abstract class VstsWidget : Build
     {
-        protected const string Category = "Azure DevOps";
+        protected const string Category = "VSTS";
 
-        protected AzureDevOpsWidget(bool aggregate) : base(aggregate) { }
+        protected VstsWidget(bool aggregate) : base(aggregate) { }
 
         [Url]
         [Required]
