@@ -9,7 +9,7 @@ namespace AnyStatus.Plugins.Widgets.DevOps.Microsoft.Azure.Widgets
 {
     public class AzureDevOpsBuildWidget : AzureDevOpsWidget, IInitializable, IHealthCheck, ISchedulable, IStartable, IWebPage
     {
-        public AzureDevOpsBuildWidget() : base(aggregate: false) { }
+        public AzureDevOpsBuildWidget() : base(false) { }
 
         [XmlIgnore]
         [Browsable(false)]

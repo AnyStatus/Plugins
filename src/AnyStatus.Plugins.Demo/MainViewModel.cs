@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API;
+using AnyStatus.Plugins.Widgets.DevOps.Microsoft.Azure.Widgets;
 
 namespace AnyStatus.Plugins.Demo
 {
@@ -6,7 +7,7 @@ namespace AnyStatus.Plugins.Demo
     {
         public MainViewModel()
         {
-            Widget = new TeamCityBuild();
+            Widget = new AzureDevOpsBuildWidget();
         }
 
         public Widget Widget { get; set; }

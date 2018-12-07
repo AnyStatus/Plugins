@@ -28,6 +28,8 @@ namespace AnyStatus.Plugins.Widgets.DevOps.Microsoft.Azure.Widgets
             var response = await _m.Send(buildDefinitionRequest, cancellationToken).ConfigureAwait(false);
 
             request.DataContext.BuildDefinitionId = response.BuildDefinition.Id;
+
+            request.DataContext.IsInitialized = true;
         }
     }
 }
