@@ -1,11 +1,10 @@
-﻿using AnyStatus.API;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AnyStatus.API;
 using AnyStatus.API.Utils;
 using AnyStatus.Plugins.Widgets.DevOps.Microsoft.Azure.Queries;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Widgets.DevOps.Microsoft.Azure.Widgets
+namespace AnyStatus.Plugins.Widgets.DevOps.Microsoft.Azure.Widgets.Build
 {
     public class AzureDevOpsBuildHealthCheck : ICheckHealth<AzureDevOpsBuildWidget>
     {
@@ -22,14 +21,7 @@ namespace AnyStatus.Plugins.Widgets.DevOps.Microsoft.Azure.Widgets
         {
             var connection = new AzureDevOpsConnection();
 
-            request.DataContext.MapTo(connection);
-
-            if (!request.DataContext.IsInitialized)
-            {
-                _logger.Info($"{request.DataContext.Name} was not initialized.");
-
-                return;
-            }
+            request.DataContext.CopyTo(connection);
 
             var getBuildsRequest = new GetBuilds.Request
             {
@@ -40,9 +32,16 @@ namespace AnyStatus.Plugins.Widgets.DevOps.Microsoft.Azure.Widgets
 
             var response = await _m.Send(getBuildsRequest, cancellationToken).ConfigureAwait(false);
 
-            var build = response?.Builds?.FirstOrDefault();
+            if (response?.Builds != null && response.Builds.Length > 0)
+            {
+                request.DataContext.State = response.Builds[0].State;
+            }
+            else
+            {
+                _logger.Error($"{request.DataContext.Name} health could not be checked.");
 
-            request.DataContext.State = build != null ? build.State : State.Unknown;
+                request.DataContext.State = State.Unknown;
+            }
         }
     }
 }
