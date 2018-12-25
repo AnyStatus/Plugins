@@ -13,7 +13,7 @@ namespace AnyStatus
     [DisplayName("VSTS Release")]
     [DisplayColumn("DevOps")]
     [Description("Visual Studio Team Services - Release Status and Notifications")]
-    public class VSTSRelease_v1 : AzureDevOpsWidget, IHealthCheck, ISchedulable, IWebPage, IStartable
+    public class VSTSRelease_v1 : VstsWidget, IHealthCheck, ISchedulable, IWebPage, IStartable
     {
         public VSTSRelease_v1() : base(aggregate: true) { }
 
