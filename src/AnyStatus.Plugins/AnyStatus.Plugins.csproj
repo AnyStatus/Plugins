@@ -200,6 +200,11 @@
     <Copy SourceFiles="@(NuGetPackages)" DestinationFolder="C:\nuget" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug XCOPY $(TargetDir)AnyStatus*.* "%25appdata%25\Roaming\AnyStatus\" /y</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Debug (
+echo copying binaries
+xcopy $(TargetDir)AnyStatus*.* "%25appdata%25\AnyStatus\" /y
+echo binaries copied
+)
+</PostBuildEvent>
   </PropertyGroup>
 </Project>
