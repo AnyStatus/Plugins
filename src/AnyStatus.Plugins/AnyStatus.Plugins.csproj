@@ -38,7 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AnyStatus.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b52fc05e377030a3, processorArchitecture=MSIL">
-      <HintPath>..\packages\AnyStatus.API.2.0.106\lib\net46\AnyStatus.API.dll</HintPath>
+      <HintPath>..\packages\AnyStatus.API.2.0.109\lib\net46\AnyStatus.API.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Administration.7.0.0.0\lib\net20\Microsoft.Web.Administration.dll</HintPath>
@@ -90,6 +90,7 @@
     <Compile Include="Widgets\Custom\NET\CodeRunner.cs" />
     <Compile Include="Widgets\Custom\PowerShell\PowerShellRunner.cs" />
     <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerHealthCheck.cs" />
+    <Compile Include="Widgets\Metrics\PerformanceCounters\BasePerformanceCounterQuery.cs" />
     <Compile Include="Widgets\Metrics\PerformanceCounters\Threads.cs" />
     <Compile Include="Widgets\Metrics\PerformanceCounters\Processes.cs" />
     <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQueryHandler.cs" />
@@ -202,7 +203,7 @@
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Debug (
 echo copying binaries
-xcopy $(TargetDir)AnyStatus*.* "%25appdata%25\AnyStatus\" /y
+xcopy $(TargetDir)AnyStatus*.* "C:\Repos\AnyStatus\App\src\AnyStatus.Desktop\bin\Debug" /y
 echo binaries copied
 )
 </PostBuildEvent>
