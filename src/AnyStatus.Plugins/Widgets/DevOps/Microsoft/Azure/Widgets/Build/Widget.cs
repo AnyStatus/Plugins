@@ -7,7 +7,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus.Plugins.Widgets.DevOps.Microsoft.Azure.Widgets
 {
-    [Browsable(false)]
+    //[Browsable(false)]
     public class AzureDevOpsBuildWidget : AzureDevOpsWidget, IInitializable, IHealthCheck, ISchedulable, IStartable, IWebPage
     {
         public AzureDevOpsBuildWidget() : base(false) { }
@@ -27,6 +27,7 @@ namespace AnyStatus.Plugins.Widgets.DevOps.Microsoft.Azure.Widgets
         [Browsable(false)]
         public string URL => $"https://{Connection.Account}.visualstudio.com/{Uri.EscapeDataString(Connection.Project)}/_build/index?definitionId={BuildDefinitionId}&_a=completed";
 
+        [Browsable(false)]
         public bool IsInitialized { get; set; }
 
         public override object Clone()

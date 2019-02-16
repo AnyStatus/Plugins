@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace AnyStatus
 {
+    [Browsable(false)]
     [DisplayColumn("Metrics")]
     [DisplayName(nameof(Processes))]
     public class Processes : PerformanceCounter
