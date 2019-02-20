@@ -113,7 +113,7 @@ namespace AnyStatus
 
         [XmlIgnore]
         [Browsable(false)]
-        public bool ProgressEnabled
+        public bool ShowProgress
         {
             get
             {

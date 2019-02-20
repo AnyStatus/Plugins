@@ -85,7 +85,7 @@ namespace AnyStatus
 
         [XmlIgnore]
         [Browsable(false)]
-        public bool ProgressEnabled
+        public bool ShowProgress
         {
             get
             {
@@ -231,9 +231,9 @@ namespace AnyStatus
                 return;
             }
 
-            if (item.ProgressEnabled)
+            if (item.ShowProgress)
             {
-                item.ProgressEnabled = false;
+                item.ShowProgress = false;
                 item.Progress = 0;
             }
 
@@ -269,9 +269,9 @@ namespace AnyStatus
             item.State = State.Running;
             item.Progress = progress;
 
-            if (item.ProgressEnabled == false)
+            if (item.ShowProgress == false)
             {
-                item.ProgressEnabled = true;
+                item.ShowProgress = true;
             }
         }
 

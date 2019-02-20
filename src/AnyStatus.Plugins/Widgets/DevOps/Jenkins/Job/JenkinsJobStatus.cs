@@ -26,9 +26,9 @@ namespace AnyStatus
                 return;
             }
 
-            if (request.DataContext.ProgressEnabled)
+            if (request.DataContext.ShowProgress)
             {
-                request.DataContext.ProgressEnabled = false;
+                request.DataContext.ShowProgress = false;
                 request.DataContext.Progress = 0;
             }
 
@@ -63,9 +63,9 @@ namespace AnyStatus
 
             plugin.State = State.Running;
 
-            if (plugin.ProgressEnabled == false)
+            if (plugin.ShowProgress == false)
             {
-                plugin.ProgressEnabled = true;
+                plugin.ShowProgress = true;
             }
         }
     }
