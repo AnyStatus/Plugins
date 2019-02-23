@@ -269,7 +269,7 @@ namespace AnyStatus
             item.State = State.Running;
             item.Progress = progress;
 
-            if (item.ShowProgress == false)
+            if (!item.ShowProgress)
             {
                 item.ShowProgress = true;
             }

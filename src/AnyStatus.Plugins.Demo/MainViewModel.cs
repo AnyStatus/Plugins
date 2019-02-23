@@ -1,5 +1,4 @@
 ﻿using AnyStatus.API;
-using AnyStatus.Plugins.Widgets.DevOps.Microsoft.Azure.Widgets;
 
 namespace AnyStatus.Plugins.Demo
 {
@@ -7,7 +6,7 @@ namespace AnyStatus.Plugins.Demo
     {
         public MainViewModel()
         {
-            Widget = new AzureDevOpsBuildWidget();
+            Widget = new CpuUsage();
         }
 
         public Widget Widget { get; set; }

@@ -63,7 +63,7 @@ namespace AnyStatus
 
             plugin.State = State.Running;
 
-            if (plugin.ShowProgress == false)
+            if (!plugin.ShowProgress)
             {
                 plugin.ShowProgress = true;
             }
