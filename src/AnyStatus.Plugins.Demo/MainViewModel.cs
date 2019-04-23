@@ -6,7 +6,7 @@ namespace AnyStatus.Plugins.Demo
     {
         public MainViewModel()
         {
-            Widget = new CpuUsage();
+            Widget = new WindowsService();
         }
 
         public Widget Widget { get; set; }

@@ -38,8 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AnyStatus.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b52fc05e377030a3, processorArchitecture=MSIL">
-      <HintPath>..\packages\AnyStatus.API.2.0.115\lib\net46\AnyStatus.API.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AnyStatus.API.2.0.120\lib\net46\AnyStatus.API.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Administration.7.0.0.0\lib\net20\Microsoft.Web.Administration.dll</HintPath>
@@ -59,6 +58,7 @@
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
@@ -87,6 +87,9 @@
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\RestartAppPool.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\StartAppPool.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\StopAppPool.cs" />
+    <Compile Include="Widgets\HealthChecks\WindowsService\WindowsServiceNameEditor.cs" />
+    <Compile Include="Widgets\Metrics\Battery\Battery.cs" />
+    <Compile Include="Widgets\Metrics\Battery\BatteryStatusQuery.cs" />
     <Compile Include="Widgets\Metrics\CPU\Usage\CpuUsageQuery.cs" />
     <Compile Include="Widgets\Custom\BatchFile\BatchFileRunner.cs" />
     <Compile Include="Widgets\Custom\NET\CodeRunner.cs" />
@@ -213,5 +216,9 @@ xcopy $(TargetDir)AnyStatus*.* "C:\Repos\AnyStatus\App\src\AnyStatus.Desktop\bin
 echo binaries copied
 )
 </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>

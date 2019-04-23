@@ -7,9 +7,8 @@ namespace AnyStatus
 {
     [DisplayColumn("Health Checks")]
     [DisplayName("Windows Service")]
-    [Description("Control and view the status of a local or remote windows service (requires administrative privileges).")]
-    public class WindowsService : Widget,
-        IHealthCheck, ISchedulable, IStartable, IStoppable, IRestartable
+    [Description("Control and view the status of a local or remote windows service. Requires administrative privileges.")]
+    public class WindowsService : Widget, IHealthCheck, ISchedulable, IStartable, IStoppable, IRestartable
     {
         private const string Category = "Windows Service";
 
@@ -22,6 +21,7 @@ namespace AnyStatus
         [Category(Category)]
         [DisplayName("Service Name")]
         [Description("Required. The windows service name.")]
+        [Editor(typeof(WindowsServiceNameEditor), typeof(WindowsServiceNameEditor))]
         public string ServiceName { get; set; }
 
         [Category(Category)]
@@ -30,7 +30,7 @@ namespace AnyStatus
         public string MachineName { get; set; }
 
         [Category(Category)]
-        [Description("Required. The windows service expected status.")]
+        [Description("Required. The expected windows service status.")]
         public ServiceControllerStatus Status { get; set; }
     }
 }

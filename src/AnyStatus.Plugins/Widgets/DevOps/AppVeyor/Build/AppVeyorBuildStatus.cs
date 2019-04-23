@@ -17,7 +17,7 @@ namespace AnyStatus
 
             request.DataContext.State = GetState(build.Status);
 
-            request.DataContext.StateText = "Version: " + build.Version;
+            request.DataContext.Message = "Version: " + build.Version;
         }
 
         private State GetState(string status)

@@ -102,7 +102,7 @@ namespace AnyStatus
         {
             if (State == State.Failed)
             {
-                return new Notification($"{Name} failed. {StateText}", NotificationIcon.Error);
+                return new Notification($"{Name} failed. {Message}", NotificationIcon.Error);
             }
 
             return base.CreateNotification();

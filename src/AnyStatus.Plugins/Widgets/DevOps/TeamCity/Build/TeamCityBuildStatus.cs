@@ -11,13 +11,12 @@ namespace AnyStatus
         {
             var client = new TeamCityClient(new TeamCityConnection());
 
-            request.DataContext.MapTo(client.Connection);
+            request.DataContext.CopyTo(client.Connection);
 
-            var build = await client.GetBuildDetailsAsync(request.DataContext)
-                .ConfigureAwait(false);
+            var build = await client.GetBuildDetailsAsync(request.DataContext).ConfigureAwait(false);
 
             request.DataContext.State = build.State;
-            request.DataContext.StateText = build.StatusText;
+            request.DataContext.Message = build.StatusText;
         }
     }
 }
