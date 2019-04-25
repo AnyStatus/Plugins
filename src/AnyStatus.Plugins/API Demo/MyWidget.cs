@@ -39,7 +39,7 @@ namespace AnyStatus.Plugins.API_Demo
         {
             get
             {
-                return "https://anystat.us";
+                return "https://www.anystat.us";
             }
         }
     }
