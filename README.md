@@ -1,8 +1,6 @@
 # AnyStatus Plugins
 
-<img align="right" src="http://www.anystat.us/assets/images/anystatus-visual-studio-extension.png"/>
-
-A repository of community-contributed plugins and other extensions for AnyStatus.
+A repository of community contributed plugins and extensions for [AnyStatus](https://www.anystat.us).
 
 [![Build status](https://ci.appveyor.com/api/projects/status/dvn1rwrauwyq5yx6?svg=true)](https://ci.appveyor.com/project/AnyStatus/plugins)
 [![NuGet](https://img.shields.io/nuget/v/AnyStatus.Plugins.svg)]()
