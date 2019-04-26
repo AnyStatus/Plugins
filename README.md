@@ -6,15 +6,13 @@ A repository of community contributed plugins and extensions for [AnyStatus](htt
 [![NuGet](https://img.shields.io/nuget/v/AnyStatus.Plugins.svg)]()
 [![Join the chat at https://gitter.im/AnyStatus](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/AnyStatus?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[AnyStatus](http://www.anystat.us) is a Visual Studio extension for monitoring continuous integration builds, deployments, servers and services on the back end of your development workflow - so you can focus on your code.
-
-To learn more about developing plugins for AnyStatus, visit [AnyStatus API](https://github.com/AnyStatus/API) repository.
-
-<br/>
+[AnyStatus](http://www.anystat.us) is a Visual Studio extension for monitoring continuous integration builds, deployments, servers and services on the back end of your development workflow.
 
 ![AnyStatus Components](https://github.com/AnyStatus/anystatus.github.io/blob/master/assets/images/AnyStatusComponents.png)
 
-## Plugins
+To learn more about AnyStatus API, read the [documentation](https://www.anystat.us/docs/api).
+
+Here are some of the plugins. For the updated list of plugins, please [visit our website](https://www.anystat.us/docs/plugins).
 
 ### Continuous Integration and Delivery
 
@@ -70,4 +68,4 @@ To learn more about developing plugins for AnyStatus, visit [AnyStatus API](http
 
 ## Contribute
 
-Read our [contribution guidelines](CONTRIBUTING.md) for information about contributing to the plugins library, API or website.
+Contributions are most welcome. Please help us maintain a library of updated tools that we all can use in our day to day tasks.
