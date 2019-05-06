@@ -1,22 +1,19 @@
 # AnyStatus Plugins
 
-<img align="right" src="http://www.anystat.us/assets/images/anystatus-visual-studio-extension.png"/>
-
-A repository of community-contributed plugins and other extensions for AnyStatus.
+A repository of community contributed plugins and extensions for [AnyStatus](https://www.anystat.us).
 
 [![Build status](https://ci.appveyor.com/api/projects/status/dvn1rwrauwyq5yx6?svg=true)](https://ci.appveyor.com/project/AnyStatus/plugins)
 [![NuGet](https://img.shields.io/nuget/v/AnyStatus.Plugins.svg)]()
 [![Join the chat at https://gitter.im/AnyStatus](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/AnyStatus?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[AnyStatus](http://www.anystat.us) is a Visual Studio extension for monitoring continuous integration builds, deployments, servers and services on the back end of your development workflow - so you can focus on your code.
+As developers used to pushing many small commits daily, we rely on monitors to notify us when builds go green.
+AnyStatus is a lightweight Windows desktop app that rolls up metrics and events from various sources into one place.
+Examples include build results and releases, health checks for different services and OS metrics.
+Think of it as CCTray on steroids. It's also available as a Visual Studio plugin.
 
-To learn more about developing plugins for AnyStatus, visit [AnyStatus API](https://github.com/AnyStatus/API) repository.
+To learn more about AnyStatus API, please read the [documentation](https://www.anystat.us/docs/api).
 
-<br/>
-
-![AnyStatus Components](https://github.com/AnyStatus/anystatus.github.io/blob/master/assets/images/AnyStatusComponents.png)
-
-## Plugins
+Here are some of the plugins. For the updated list of plugins, please [visit our website](https://www.anystat.us/docs/plugins).
 
 ### Continuous Integration and Delivery
 
@@ -25,15 +22,15 @@ To learn more about developing plugins for AnyStatus, visit [AnyStatus API](http
 - [x] VSTS Release
 - [x] Jenkins Job
 - [x] Jenkins View
-- [x] TeamCity
-- [x] AppVeyor
-- [x] Coveralls
+- [x] TeamCity Build
+- [x] AppVeyor Build
+- [x] Coveralls Code Coverage
 
 ### Custom 
 
-- [x] Dynamic Source Code - Compile and run custom monitors written in C# or VB.NET
-- [x] PowerShell - Test PowerShell script exit code
-- [x] Batch File - Test batch file script exit code
+- [x] C#/VB.NET File - Compile and run custom monitors at run-time.
+- [x] PowerShell
+- [x] Batch Script
 
 ### Metrics
 
@@ -64,12 +61,6 @@ To learn more about developing plugins for AnyStatus, visit [AnyStatus API](http
 - [x] IIS Application Pool - Monitor a remote or local IIS application pool state
 - [x] GitHub Issue
 
-## Wish List
-
-- [ ] Monitors
-  - [ ] TFS build progress
-  - [ ] AppVeyor Deployment Status
-
 ## Contribute
 
-Read our [contribution guidelines](CONTRIBUTING.md) for information about contributing to the plugins library, API or website.
+Contributions are most welcome. Please join us in maintaining a library of updated tools that we all can use in our day to day tasks.
