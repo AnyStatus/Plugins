@@ -5,8 +5,8 @@ using System.Xml.Serialization;
 
 namespace AnyStatus
 {
-    [DisplayColumn("Metrics")]
     [DisplayName("Battery")]
+    [DisplayColumn("Metrics")]
     [XmlType(TypeName = "Battery_v1")]
     [Description("Display the battery status information.")]
     public class Battery : Metric, ISchedulable, IReportProgress
