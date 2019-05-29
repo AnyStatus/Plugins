@@ -7,6 +7,10 @@ namespace AnyStatus
 {
     public class CpuUsageQuery : IMetricQuery<CpuUsage>
     {
+        private const string CategoryName = "Processor";
+        private const string CounterName = "% Processor Time";
+        private const string InstanceName = "_Total";
+
         [DebuggerStepThrough]
         public async Task Handle(MetricQueryRequest<CpuUsage> request, CancellationToken cancellationToken)
         {
@@ -17,15 +21,16 @@ namespace AnyStatus
 
         private static async Task<int> GetCpuUsageAsync(string machineName)
         {
-            var counter = string.IsNullOrWhiteSpace(machineName)
-                ? new System.Diagnostics.PerformanceCounter("Processor", "% Processor Time", "_Total")
-                : new System.Diagnostics.PerformanceCounter("Processor", "% Processor Time", "_Total", machineName);
+            using (var counter = string.IsNullOrWhiteSpace(machineName)
+                ? new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, InstanceName)
+                : new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, InstanceName, machineName))
+            {
+                counter.NextValue();
 
-            counter.NextValue();
+                await Task.Delay(1000).ConfigureAwait(false);
 
-            await Task.Delay(1000).ConfigureAwait(false);
-
-            return (int)counter.NextValue();
+                return (int)counter.NextValue();
+            }
         }
     }
 }
