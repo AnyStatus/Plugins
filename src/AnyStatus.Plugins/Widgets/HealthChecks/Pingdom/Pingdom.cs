@@ -7,7 +7,7 @@ namespace AnyStatus
 {
     [DisplayName("Pingdom")]
     [DisplayColumn("Health Checks")]
-    [Description("Single or multiple Pingdon health checks.")]
+    [Description("Single or multiple Pingdom health checks.")]
     public class Pingdom : Widget, IHealthCheck, ISchedulable
     {
         private const string Category = "Pingdom";
