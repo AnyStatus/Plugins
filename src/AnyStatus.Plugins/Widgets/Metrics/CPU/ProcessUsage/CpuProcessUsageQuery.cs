@@ -18,12 +18,6 @@ namespace AnyStatus
             request.DataContext.State = State.Ok;
         }
 
-        /// <exception cref="System.InvalidOperationException">Ignore.</exception>
-        /// <exception cref="System.ComponentModel.Win32Exception">Ignore.</exception>
-        /// <exception cref="System.UnauthorizedAccessException">Ignore.</exception>
-        /// <exception cref="System.InvalidOperationException">Ignore.</exception>
-        /// <exception cref="System.ComponentModel.Win32Exception">Ignore.</exception>
-        /// <exception cref="System.UnauthorizedAccessException">Ignore.</exception>
         private static async Task<int> GetCpuUsageAsync(string machineName, string processName)
         {
             using (var counter = string.IsNullOrWhiteSpace(machineName)
