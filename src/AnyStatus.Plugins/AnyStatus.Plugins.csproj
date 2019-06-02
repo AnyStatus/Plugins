@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -90,6 +90,8 @@
     <Compile Include="Widgets\HealthChecks\WindowsService\WindowsServiceNameEditor.cs" />
     <Compile Include="Widgets\Metrics\Battery\Battery.cs" />
     <Compile Include="Widgets\Metrics\Battery\BatteryStatusQuery.cs" />
+    <Compile Include="Widgets\Metrics\CPU\ProcessUsage\CpuProcessUsage.cs" />
+    <Compile Include="Widgets\Metrics\CPU\ProcessUsage\CpuProcessUsageQuery.cs" />
     <Compile Include="Widgets\Metrics\CPU\Usage\CpuUsageQuery.cs" />
     <Compile Include="Widgets\Custom\BatchFile\BatchFileRunner.cs" />
     <Compile Include="Widgets\Custom\NET\CodeRunner.cs" />
