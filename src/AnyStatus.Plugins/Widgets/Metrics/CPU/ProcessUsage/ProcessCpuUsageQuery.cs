@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace AnyStatus
 {
-    public class CpuProcessUsageQuery : IMetricQuery<CpuProcessUsage>
+    public class ProcessCpuUsageQuery : IMetricQuery<ProcessCpuUsage>
     {
         private const string CategoryName = "Process";
         private const string CounterName = "% Processor Time";
 
         [DebuggerStepThrough]
-        public async Task Handle(MetricQueryRequest<CpuProcessUsage> request, CancellationToken cancellationToken)
+        public async Task Handle(MetricQueryRequest<ProcessCpuUsage> request, CancellationToken cancellationToken)
         {
             request.DataContext.Value = await GetCpuUsageAsync(request.DataContext.MachineName, request.DataContext.ProcessName).ConfigureAwait(false);
 

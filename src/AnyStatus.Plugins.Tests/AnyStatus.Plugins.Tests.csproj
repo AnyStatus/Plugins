@@ -79,21 +79,23 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AppVeyor\AppVeyorTests.cs" />
-    <Compile Include="Jenkins\JenkinsJobTests.cs" />
-    <Compile Include="Jenkins\JenkinsViewTests.cs" />
-    <Compile Include="MonitoringTests.cs" />
+    <Compile Include="Widgets\DevOps\AppVeyorTests.cs" />
+    <Compile Include="Widgets\DevOps\Jenkins\JenkinsJobTests.cs" />
+    <Compile Include="Widgets\DevOps\Jenkins\JenkinsViewTests.cs" />
+    <Compile Include="Widgets\MonitoringTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BatchScriptTests.cs" />
-    <Compile Include="PowerShellScriptTests.cs" />
-    <Compile Include="SqlScalarQueryTests.cs" />
-    <Compile Include="TeamCity\TeamCityTests.cs" />
-    <Compile Include="TfsBuildTests.cs" />
+    <Compile Include="Widgets\BatchScriptTests.cs" />
+    <Compile Include="Widgets\PowerShellScriptTests.cs" />
+    <Compile Include="Widgets\SqlScalarQueryTests.cs" />
+    <Compile Include="Widgets\DevOps\TeamCityTests.cs" />
+    <Compile Include="Widgets\DevOps\TfsBuildTests.cs" />
     <Compile Include="OpenInBrowserTests.cs" />
-    <Compile Include="PerformanceCounterTests.cs" />
-    <Compile Include="CurrentWeatherTests.cs" />
-    <Compile Include="VSTS\VstsReleaseTests.cs" />
-    <Compile Include="VSTS\VstsBuildTests.cs" />
+    <Compile Include="Widgets\PerformanceCounterTests.cs" />
+    <Compile Include="Widgets\CurrentWeatherTests.cs" />
+    <Compile Include="Widgets\DevOps\VSTS\VstsReleaseTests.cs" />
+    <Compile Include="Widgets\DevOps\VSTS\VstsBuildTests.cs" />
+    <Compile Include="Widgets\ProcessCpuUsageTests.cs" />
+    <Compile Include="Widgets\CpuUsageTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AnyStatus.Plugins\AnyStatus.Plugins.csproj">
@@ -113,6 +115,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

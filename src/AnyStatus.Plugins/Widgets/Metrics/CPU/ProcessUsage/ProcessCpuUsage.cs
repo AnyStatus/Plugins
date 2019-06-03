@@ -7,9 +7,9 @@ namespace AnyStatus
     [DisplayColumn("Metrics")]
     [DisplayName("Process CPU Usage")]
     [Description("Shows the percentage of CPU usage for a single process")]
-    public class CpuProcessUsage : Sparkline, ISchedulable
+    public class ProcessCpuUsage : Sparkline, ISchedulable
     {
-        public CpuProcessUsage()
+        public ProcessCpuUsage()
         {
             Symbol = "%";
             Interval = 10;

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using AnyStatus.API;
+﻿using AnyStatus.API;
 using AnyStatus.API.Triggers;
+using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,17 +18,20 @@ namespace AnyStatus
 
             var args = request.Arguments;
 
-            if (string.IsNullOrEmpty(args)) goto StartProcess;
-
-            var tokens = new Dictionary<string, string> {
+            if (!string.IsNullOrEmpty(args))
+            {
+                var tokens = new Dictionary<string, string> {
                     { "{transitionFrom}", request.OldState.ToString() },
                     { "{transitionTo}", request.NewState.ToString() },
                 };
 
-            foreach (var kv in tokens)
-                args = args.Replace(kv.Key, kv.Value);
+                foreach (var kv in tokens)
+                {
+                    args = args.Replace(kv.Key, kv.Value);
+                }
+            }
 
-            StartProcess: return StartProcess(request.FileName, args, request.WorkingDirectory);
+            return StartProcess(request.FileName, args, request.WorkingDirectory);
         }
     }
 }
