@@ -18,7 +18,7 @@ namespace AnyStatus
             request.DataContext.State = State.Ok;
         }
 
-        private static async Task<int> GetCpuUsageAsync(string machineName, string processName)
+        private async Task<int> GetCpuUsageAsync(string machineName, string processName)
         {
             using (var counter = string.IsNullOrWhiteSpace(machineName)
                 ? new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, processName)
