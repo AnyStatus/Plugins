@@ -100,6 +100,9 @@
     <Compile Include="Widgets\Metrics\PerformanceCounters\BasePerformanceCounterQuery.cs" />
     <Compile Include="Widgets\Metrics\PerformanceCounters\Threads.cs" />
     <Compile Include="Widgets\Metrics\PerformanceCounters\Processes.cs" />
+    <Compile Include="Widgets\Metrics\RAM\Usage\RamInformation.cs" />
+    <Compile Include="Widgets\Metrics\RAM\Usage\RamUsage.cs" />
+    <Compile Include="Widgets\Metrics\RAM\Usage\RamUsageQuery.cs" />
     <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQueryHandler.cs" />
     <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssueState.cs" />
     <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssueStateCheck.cs" />
