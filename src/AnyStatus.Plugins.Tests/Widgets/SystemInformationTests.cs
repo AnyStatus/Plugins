@@ -1,5 +1,6 @@
 ﻿using AnyStatus.API;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -35,8 +36,22 @@ namespace AnyStatus.Plugins.Tests.Widgets
             var handler = new ProcessCpuUsageQuery();
 
             await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
+        }
 
-            Assert.IsNotNull(widget.Value);
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public async Task ProcessCpuUsage_ProcessNotFound_Test()
+        {
+            var widget = new ProcessCpuUsage()
+            {
+                ProcessName = "DoesNotExist",
+            };
+
+            var request = MetricQueryRequest.Create(widget);
+
+            var handler = new ProcessCpuUsageQuery();
+
+            await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
         }
 
         [TestMethod]
