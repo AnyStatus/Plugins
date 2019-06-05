@@ -102,6 +102,9 @@
     <Compile Include="Widgets\Metrics\PerformanceCounters\Processes.cs" />
     <Compile Include="Widgets\Metrics\ProcessCount\ProcessCount.cs" />
     <Compile Include="Widgets\Metrics\ProcessCount\ProcessCountQuery.cs" />
+    <Compile Include="Widgets\Metrics\RAM\Usage\RamInformation.cs" />
+    <Compile Include="Widgets\Metrics\RAM\Usage\RamUsage.cs" />
+    <Compile Include="Widgets\Metrics\RAM\Usage\RamUsageQuery.cs" />
     <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQueryHandler.cs" />
     <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssueState.cs" />
     <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssueStateCheck.cs" />
@@ -155,6 +158,8 @@
     <Compile Include="Widgets\HealthChecks\WindowsService\StartWindowsService.cs" />
     <Compile Include="Widgets\HealthChecks\WindowsService\StopWindowsService.cs" />
     <Compile Include="Widgets\HealthChecks\WindowsService\WindowsServiceHealthCheck.cs" />
+    <Compile Include="Widgets\Metrics\ThreadCount\ThreadCount.cs" />
+    <Compile Include="Widgets\Metrics\ThreadCount\ThreadCountQuery.cs" />
     <Compile Include="Widgets\Metrics\Weather\CurrentWeather.cs" />
     <Compile Include="Widgets\Metrics\Weather\CurrentWeatherMetricQuery.cs" />
     <Compile Include="Widgets\Metrics\Weather\CurrentWeatherWidget.cs" />
