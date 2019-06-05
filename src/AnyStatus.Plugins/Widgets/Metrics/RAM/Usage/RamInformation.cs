@@ -17,7 +17,7 @@ namespace AnyStatus
         {
             if (!GetPerformanceInfo(out PerformanceInformation pi, piSize))
             {
-                return -1;
+                throw new Exception("An error occurred while getting performance information.");
             }
 
             long pageSize = pi.PageSize.ToInt64();
