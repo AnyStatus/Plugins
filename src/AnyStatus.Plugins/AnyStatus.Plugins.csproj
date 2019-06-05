@@ -100,6 +100,8 @@
     <Compile Include="Widgets\Metrics\PerformanceCounters\BasePerformanceCounterQuery.cs" />
     <Compile Include="Widgets\Metrics\PerformanceCounters\Threads.cs" />
     <Compile Include="Widgets\Metrics\PerformanceCounters\Processes.cs" />
+    <Compile Include="Widgets\Metrics\ProcessCount\ProcessCount.cs" />
+    <Compile Include="Widgets\Metrics\ProcessCount\ProcessCountQuery.cs" />
     <Compile Include="Widgets\Metrics\RAM\Usage\RamInformation.cs" />
     <Compile Include="Widgets\Metrics\RAM\Usage\RamUsage.cs" />
     <Compile Include="Widgets\Metrics\RAM\Usage\RamUsageQuery.cs" />
