@@ -12,7 +12,7 @@ namespace AnyStatus
         {
             request.DataContext.Value = (int)RamInformation.GetPercentageOfMemoryInUseMiB();
 
-            request.DataContext.State = request.DataContext.Value == -1 ? State.Error : State.Ok;
+            request.DataContext.State = State.Ok;
             
             return Task.CompletedTask;
         }
