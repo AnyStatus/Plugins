@@ -94,8 +94,7 @@
     <Compile Include="Widgets\CurrentWeatherTests.cs" />
     <Compile Include="Widgets\DevOps\VSTS\VstsReleaseTests.cs" />
     <Compile Include="Widgets\DevOps\VSTS\VstsBuildTests.cs" />
-    <Compile Include="Widgets\ProcessCpuUsageTests.cs" />
-    <Compile Include="Widgets\CpuUsageTests.cs" />
+    <Compile Include="Widgets\SystemInformationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AnyStatus.Plugins\AnyStatus.Plugins.csproj">
