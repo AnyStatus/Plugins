@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AnyStatus
 {
-    [DisplayColumn("Metrics")]
     [DisplayName("RAM Usage")]
+    [DisplayColumn("System Information")]
     [Description("Shows the percentage of RAM usage for the local machine")]
     public class RamUsage : Sparkline, ISchedulable
     {

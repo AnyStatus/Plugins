@@ -4,21 +4,21 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AnyStatus
 {
-    [DisplayColumn("Metrics")]
-    [DisplayName("CPU Usage")]
-    [Description("Shows the percentage of CPU usage")]
-    public class CpuUsage : Sparkline, ISchedulable
+    [DisplayName("Process Count")]
+    [DisplayColumn("System Information")]
+    [Description("Shows the number of running CPU processes")]
+    public class ProcessCount : Sparkline, ISchedulable
     {
-        public CpuUsage()
+        public ProcessCount()
         {
-            Symbol = "%";
+            Symbol = "";
             Interval = 10;
             Units = IntervalUnits.Seconds;
-            Name = "CPU Usage";
+            Name = "Process Count";
             MaxValue = 100;
         }
 
-        [Category("CPU Usage")]
+        [Category("Process Count")]
         [DisplayName("Machine Name")]
         [Description("Optional. Leave blank for local computer.")]
         public string MachineName { get; set; }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace AnyStatus
 {
     [DisplayName("Upload Speed")]
-    [DisplayColumn("Metrics")]
+    [DisplayColumn("System Information")]
     [Description("Monitor network upload speed.")]
     public class UploadSpeed : NetworkSpeed
     {

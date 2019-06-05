@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AnyStatus
 {
-    [DisplayColumn("Metrics")]
     [DisplayName("Performance Counter")]
+    [DisplayColumn("System Information")]
     [Description("Shows the value of a performance counter.")]
     public class PerformanceCounter : Sparkline, ISchedulable
     {

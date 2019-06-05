@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -88,23 +88,21 @@
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\StartAppPool.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\StopAppPool.cs" />
     <Compile Include="Widgets\HealthChecks\WindowsService\WindowsServiceNameEditor.cs" />
-    <Compile Include="Widgets\Metrics\Battery\Battery.cs" />
-    <Compile Include="Widgets\Metrics\Battery\BatteryStatusQuery.cs" />
-    <Compile Include="Widgets\Metrics\CPU\ProcessUsage\ProcessCpuUsage.cs" />
-    <Compile Include="Widgets\Metrics\CPU\ProcessUsage\ProcessCpuUsageQuery.cs" />
-    <Compile Include="Widgets\Metrics\CPU\Usage\CpuUsageQuery.cs" />
+    <Compile Include="Widgets\SystemInformation\Battery\Battery.cs" />
+    <Compile Include="Widgets\SystemInformation\Battery\BatteryStatusQuery.cs" />
+    <Compile Include="Widgets\SystemInformation\CPU\ProcessUsage\ProcessCpuUsage.cs" />
+    <Compile Include="Widgets\SystemInformation\CPU\ProcessUsage\ProcessCpuUsageQuery.cs" />
+    <Compile Include="Widgets\SystemInformation\CPU\Usage\CpuUsageQuery.cs" />
     <Compile Include="Widgets\Custom\BatchFile\BatchFileRunner.cs" />
     <Compile Include="Widgets\Custom\NET\CodeRunner.cs" />
     <Compile Include="Widgets\Custom\PowerShell\PowerShellRunner.cs" />
     <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerHealthCheck.cs" />
-    <Compile Include="Widgets\Metrics\PerformanceCounters\BasePerformanceCounterQuery.cs" />
-    <Compile Include="Widgets\Metrics\PerformanceCounters\Threads.cs" />
-    <Compile Include="Widgets\Metrics\PerformanceCounters\Processes.cs" />
-    <Compile Include="Widgets\Metrics\ProcessCount\ProcessCount.cs" />
-    <Compile Include="Widgets\Metrics\ProcessCount\ProcessCountQuery.cs" />
-    <Compile Include="Widgets\Metrics\RAM\Usage\RamInformation.cs" />
-    <Compile Include="Widgets\Metrics\RAM\Usage\RamUsage.cs" />
-    <Compile Include="Widgets\Metrics\RAM\Usage\RamUsageQuery.cs" />
+    <Compile Include="Widgets\SystemInformation\PerformanceCounters\BasePerformanceCounterQuery.cs" />
+    <Compile Include="Widgets\SystemInformation\ProcessCount\ProcessCount.cs" />
+    <Compile Include="Widgets\SystemInformation\ProcessCount\ProcessCountQuery.cs" />
+    <Compile Include="Widgets\SystemInformation\RAM\Usage\RamInformation.cs" />
+    <Compile Include="Widgets\SystemInformation\RAM\Usage\RamUsage.cs" />
+    <Compile Include="Widgets\SystemInformation\RAM\Usage\RamUsageQuery.cs" />
     <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQueryHandler.cs" />
     <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssueState.cs" />
     <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssueStateCheck.cs" />
@@ -116,10 +114,10 @@
     <Compile Include="Widgets\HealthChecks\PortCheck\NetworkProtocol.cs" />
     <Compile Include="Widgets\HealthChecks\PortCheck\SocketConnection.cs" />
     <Compile Include="Widgets\HealthChecks\PortCheck\SocketConnectionHealthCheck.cs" />
-    <Compile Include="Widgets\Metrics\NetworkSpeed\DownloadSpeed.cs" />
-    <Compile Include="Widgets\Metrics\NetworkSpeed\NetworkInterfaceItemsSource.cs" />
-    <Compile Include="Widgets\Metrics\NetworkSpeed\NetworkSpeedQuery.cs" />
-    <Compile Include="Widgets\Metrics\NetworkSpeed\UploadSpeed.cs" />
+    <Compile Include="Widgets\SystemInformation\NetworkSpeed\DownloadSpeed.cs" />
+    <Compile Include="Widgets\SystemInformation\NetworkSpeed\NetworkInterfaceItemsSource.cs" />
+    <Compile Include="Widgets\SystemInformation\NetworkSpeed\NetworkSpeedQuery.cs" />
+    <Compile Include="Widgets\SystemInformation\NetworkSpeed\UploadSpeed.cs" />
     <Compile Include="Widgets\Metrics\NuGet\PackageVersion\NuGetPackageVersionQuery.cs" />
     <Compile Include="Widgets\Metrics\NuGet\PackageVersion\PackageVersion.cs" />
     <Compile Include="Widgets\DevOps\Jenkins\Client\Contracts\JenkinsCrumb.cs" />
@@ -127,7 +125,7 @@
     <Compile Include="Widgets\DevOps\Jenkins\Client\IJenkinsClient.cs" />
     <Compile Include="Widgets\DevOps\Jenkins\Client\IJenkinsPlugin.cs" />
     <Compile Include="Widgets\DevOps\Jenkins\Client\JenkinsClient.cs" />
-    <Compile Include="Widgets\Metrics\PerformanceCounters\PerformanceCounterQuery.cs" />
+    <Compile Include="Widgets\SystemInformation\PerformanceCounters\PerformanceCounterQuery.cs" />
     <Compile Include="Widgets\HealthChecks\Pingdom\PingdomHealthCheck.cs" />
     <Compile Include="Widgets\DevOps\TeamCity\Build\OpenWebPage.cs" />
     <Compile Include="Widgets\DevOps\TeamCity\Client\TeamCityContracts.cs" />
@@ -158,8 +156,8 @@
     <Compile Include="Widgets\HealthChecks\WindowsService\StartWindowsService.cs" />
     <Compile Include="Widgets\HealthChecks\WindowsService\StopWindowsService.cs" />
     <Compile Include="Widgets\HealthChecks\WindowsService\WindowsServiceHealthCheck.cs" />
-    <Compile Include="Widgets\Metrics\ThreadCount\ThreadCount.cs" />
-    <Compile Include="Widgets\Metrics\ThreadCount\ThreadCountQuery.cs" />
+    <Compile Include="Widgets\SystemInformation\ThreadCount\ThreadCount.cs" />
+    <Compile Include="Widgets\SystemInformation\ThreadCount\ThreadCountQuery.cs" />
     <Compile Include="Widgets\Metrics\Weather\CurrentWeather.cs" />
     <Compile Include="Widgets\Metrics\Weather\CurrentWeatherMetricQuery.cs" />
     <Compile Include="Widgets\Metrics\Weather\CurrentWeatherWidget.cs" />
@@ -184,16 +182,16 @@
     <Compile Include="Widgets\Custom\PowerShell\PowerShell.cs" />
     <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQuery.cs" />
     <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerConnection.cs" />
-    <Compile Include="Widgets\Metrics\CPU\Usage\CpuUsage.cs" />
+    <Compile Include="Widgets\SystemInformation\CPU\Usage\CpuUsage.cs" />
     <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssue.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\AppPool.cs" />
-    <Compile Include="Widgets\Metrics\PerformanceCounters\PerformanceCounter.cs" />
+    <Compile Include="Widgets\SystemInformation\PerformanceCounters\PerformanceCounter.cs" />
     <Compile Include="Widgets\HealthChecks\WindowsService\WindowsService.cs" />
     <Compile Include="Widgets\HealthChecks\Pingdom\Pingdom.cs" />
     <Compile Include="Widgets\HealthChecks\UptimeRobot\UptimeRobot.cs" />
     <Compile Include="Widgets\HealthChecks\HTTP\HTTP.cs" />
     <Compile Include="Widgets\HealthChecks\Ping\Ping.cs" />
-    <Compile Include="Widgets\Metrics\NetworkSpeed\NetworkSpeed.cs" />
+    <Compile Include="Widgets\SystemInformation\NetworkSpeed\NetworkSpeed.cs" />
     <Compile Include="_deprecated\TCP.cs" />
     <Compile Include="_deprecated\UDP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

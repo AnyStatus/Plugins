@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AnyStatus
 {
-    [DisplayColumn("Metrics")]
     [DisplayName("Process CPU Usage")]
+    [DisplayColumn("System Information")]
     [Description("Shows the percentage of CPU usage for a single process")]
     public class ProcessCpuUsage : Sparkline, ISchedulable
     {

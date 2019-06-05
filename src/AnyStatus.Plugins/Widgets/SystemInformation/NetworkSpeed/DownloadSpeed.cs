@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AnyStatus
 {
-    [DisplayColumn("Metrics")]
     [DisplayName("Download Speed")]
+    [DisplayColumn("System Information")]
     [Description("Monitor network download speed.")]
     public class DownloadSpeed : NetworkSpeed
     {

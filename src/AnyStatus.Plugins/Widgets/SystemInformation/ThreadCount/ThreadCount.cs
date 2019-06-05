@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AnyStatus
 {
-    [DisplayColumn("Metrics")]
     [DisplayName("Thread Count")]
+    [DisplayColumn("System Information")]
     [Description("Shows the number of running CPU threads")]
     public class ThreadCount : Sparkline, ISchedulable
     {
