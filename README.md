@@ -63,4 +63,4 @@ Here are some of the plugins. For the updated list of plugins, please [visit our
 
 ## Contribute
 
-Contributions are most welcome. Please join us in maintaining a library of updated tools that we all can use in our day to day tasks.
+Contributions are most welcome. Please join us in maintaining a library of updated tools that we can all use in our day to day tasks.
