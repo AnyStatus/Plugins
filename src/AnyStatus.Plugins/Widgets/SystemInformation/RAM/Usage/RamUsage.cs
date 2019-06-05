@@ -11,11 +11,10 @@ namespace AnyStatus
     {
         public RamUsage()
         {
+            Name = "RAM Usage";
             Symbol = "%";
             Interval = 10;
             Units = IntervalUnits.Seconds;
-            Name = "RAM Usage";
-            MaxValue = 100;
         }
     }
 }

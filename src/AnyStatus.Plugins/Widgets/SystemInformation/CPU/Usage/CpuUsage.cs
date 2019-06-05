@@ -11,11 +11,11 @@ namespace AnyStatus
     {
         public CpuUsage()
         {
+            Name = "CPU Usage";
             Symbol = "%";
+            MaxValue = 100;
             Interval = 10;
             Units = IntervalUnits.Seconds;
-            Name = "CPU Usage";
-            MaxValue = 100;
         }
 
         [Category("CPU Usage")]

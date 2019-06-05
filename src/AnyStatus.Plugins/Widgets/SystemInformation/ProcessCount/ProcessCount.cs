@@ -11,11 +11,9 @@ namespace AnyStatus
     {
         public ProcessCount()
         {
-            Symbol = "";
+            Name = "Process Count";
             Interval = 10;
             Units = IntervalUnits.Seconds;
-            Name = "Process Count";
-            MaxValue = 100;
         }
 
         [Category("Process Count")]

@@ -11,10 +11,9 @@ namespace AnyStatus
     {
         public ThreadCount()
         {
-            Symbol = "";
+            Name = "Thread Count";
             Interval = 10;
             Units = IntervalUnits.Seconds;
-            Name = "Thread Count";
         }
 
         [Category("Thread Count")]
