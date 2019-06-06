@@ -90,7 +90,6 @@
     <Compile Include="Widgets\DevOps\TeamCityTests.cs" />
     <Compile Include="Widgets\DevOps\TfsBuildTests.cs" />
     <Compile Include="OpenInBrowserTests.cs" />
-    <Compile Include="Widgets\PerformanceCounterTests.cs" />
     <Compile Include="Widgets\CurrentWeatherTests.cs" />
     <Compile Include="Widgets\DevOps\VSTS\VstsReleaseTests.cs" />
     <Compile Include="Widgets\DevOps\VSTS\VstsBuildTests.cs" />

@@ -20,13 +20,13 @@ namespace AnyStatus.Plugins.Tests.Widgets
 
             await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
 
-            Assert.IsNotNull(widget.Value);
+            Assert.AreEqual(State.Ok, widget.State);
         }
 
         [TestMethod]
         public async Task ProcessCpuUsageTest()
         {
-            var widget = new ProcessCpuUsage()
+            var widget = new ProcessCpuUsage
             {
                 ProcessName = "System",
             };
@@ -36,15 +36,17 @@ namespace AnyStatus.Plugins.Tests.Widgets
             var handler = new ProcessCpuUsageQuery();
 
             await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
+
+            Assert.AreEqual(State.Ok, widget.State);
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public async Task ProcessCpuUsage_ProcessNotFound_Test()
         {
-            var widget = new ProcessCpuUsage()
+            var widget = new ProcessCpuUsage
             {
-                ProcessName = "DoesNotExist",
+                ProcessName = "DoesNotExist"
             };
 
             var request = MetricQueryRequest.Create(widget);
@@ -65,6 +67,8 @@ namespace AnyStatus.Plugins.Tests.Widgets
 
             await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
 
+            Assert.AreEqual(State.Ok, widget.State);
+
             Assert.IsTrue(widget.Value > 0);
         }
 
@@ -79,6 +83,8 @@ namespace AnyStatus.Plugins.Tests.Widgets
 
             await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
 
+            Assert.AreEqual(State.Ok, widget.State);
+
             Assert.IsTrue(widget.Value > 0);
         }
 
@@ -92,6 +98,28 @@ namespace AnyStatus.Plugins.Tests.Widgets
             var handler = new ThreadCountQuery();
 
             await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
+
+            Assert.AreEqual(State.Ok, widget.State);
+
+            Assert.IsTrue(widget.Value > 0);
+        }
+
+        [TestMethod]
+        public async Task PerformanceCounterTest()
+        {
+            var widget = new PerformanceCounter
+            {
+                CategoryName = "Memory",
+                CounterName = "Available MBytes",
+            };
+
+            var request = MetricQueryRequest.Create(widget);
+
+            var handler = new PerformanceCounterQuery();
+
+            await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
+
+            Assert.AreEqual(State.Ok, widget.State);
 
             Assert.IsTrue(widget.Value > 0);
         }

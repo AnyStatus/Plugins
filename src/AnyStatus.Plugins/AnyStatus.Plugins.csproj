@@ -97,7 +97,8 @@
     <Compile Include="Widgets\Custom\NET\CodeRunner.cs" />
     <Compile Include="Widgets\Custom\PowerShell\PowerShellRunner.cs" />
     <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerHealthCheck.cs" />
-    <Compile Include="Widgets\SystemInformation\PerformanceCounters\BasePerformanceCounterQuery.cs" />
+    <Compile Include="Widgets\SystemInformation\PageFile\PageFileUsage.cs" />
+    <Compile Include="Widgets\SystemInformation\PageFile\PageFileUsageQuery.cs" />
     <Compile Include="Widgets\SystemInformation\ProcessCount\ProcessCount.cs" />
     <Compile Include="Widgets\SystemInformation\ProcessCount\ProcessCountQuery.cs" />
     <Compile Include="Widgets\SystemInformation\RAM\Usage\RamInformation.cs" />

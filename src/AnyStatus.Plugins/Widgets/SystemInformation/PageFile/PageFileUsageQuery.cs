@@ -2,13 +2,13 @@
 
 namespace AnyStatus
 {
-    public class ProcessCountQuery : RequestHandler<MetricQueryRequest<ProcessCount>>
+    public class PageFileUsageQuery : RequestHandler<MetricQueryRequest<PageFileUsage>>
     {
-        private const string CategoryName = "System";
-        private const string CounterName = "Processes";
-        private const string InstanceName = "";
+        private const string CategoryName = "Paging File";
+        private const string CounterName = "% Usage";
+        private const string InstanceName = "_Total";
 
-        protected override void HandleCore(MetricQueryRequest<ProcessCount> request)
+        protected override void HandleCore(MetricQueryRequest<PageFileUsage> request)
         {
             using (var counter = string.IsNullOrWhiteSpace(request.DataContext.MachineName)
                 ? new System.Diagnostics.PerformanceCounter(CategoryName, CounterName)
