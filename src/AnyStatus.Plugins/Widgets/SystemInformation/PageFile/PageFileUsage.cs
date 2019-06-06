@@ -12,6 +12,8 @@ namespace AnyStatus
         public PageFileUsage()
         {
             Name = "Page File Usage";
+            Symbol = "%";
+            MaxValue = 100;
             Interval = 10;
             Units = IntervalUnits.Seconds;
         }
