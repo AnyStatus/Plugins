@@ -12,12 +12,13 @@ namespace AnyStatus.Plugins.Widgets.DevOps.GitHub.v2
     /// </summary>
     [DisplayColumn("DevOps")]
     [DisplayName("GitHub Issues")]
+    [Description("GitHub repository issues list.")]
     public class GitHubIssuesWidget : Metric, IWebPage, ISchedulable
     {
         [Required]
         [PropertyOrder(1)]
         [Category("GitHub")]
-        [Description("Required. The GitHub repository owner name.")]
+        [Description("Required. The GitHub repository owner user name.")]
         public string Owner { get; set; }
 
         [Required]
