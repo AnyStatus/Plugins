@@ -13,6 +13,7 @@ namespace AnyStatus
         {
             Name = "RAM Usage";
             Symbol = "%";
+            MaxValue = 100;
             Interval = 10;
             Units = IntervalUnits.Seconds;
         }
