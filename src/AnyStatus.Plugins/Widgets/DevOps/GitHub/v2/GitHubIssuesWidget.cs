@@ -5,15 +5,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
-namespace AnyStatus.Plugins.Widgets.DevOps.GitHub.v2
+namespace AnyStatus.Plugins.Widgets.DevOps.GitHub
 {
     /// <summary>
     /// GitHub Issues List Widget.
     /// </summary>
     [DisplayColumn("DevOps")]
-    [DisplayName("GitHub Issues")]
+    [DisplayName("GitHub Issues (Preview)")]
     [Description("GitHub repository issues list.")]
-    public class GitHubIssuesWidget : Metric, IWebPage, ISchedulable
+    public class GitHubIssuesWidget : Metric, IWebPage, ISchedulable, IInitializable
     {
         [Required]
         [PropertyOrder(1)]
@@ -30,5 +30,9 @@ namespace AnyStatus.Plugins.Widgets.DevOps.GitHub.v2
         [XmlIgnore]
         [Browsable(false)]
         public string URL => $"https://github.com/{Uri.EscapeDataString(Owner)}/{Uri.EscapeDataString(Repository)}/issues";
+
+        [XmlIgnore]
+        [Browsable(false)]
+        public bool IsInitialized { get; set; }
     }
 }

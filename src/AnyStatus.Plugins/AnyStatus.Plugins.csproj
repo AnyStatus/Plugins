@@ -81,12 +81,13 @@
     <Compile Include="Widgets\DevOps\Coveralls\CoveredPercentQuery.cs" />
     <Compile Include="Widgets\DevOps\Coveralls\OpenWebPage.cs" />
     <Compile Include="Widgets\DevOps\AppVeyor\Build\StartAppVeyorBuild.cs" />
-    <Compile Include="Widgets\DevOps\GitHub\v2\CollectionSynchronizer.cs" />
     <Compile Include="Widgets\DevOps\GitHub\v2\GitHubApi.cs" />
     <Compile Include="Widgets\DevOps\GitHub\v2\GitHubIssue.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\v2\_GitHubIssueQuery.cs" />
     <Compile Include="Widgets\DevOps\GitHub\v2\GitHubIssuesWidget.cs" />
     <Compile Include="Widgets\DevOps\GitHub\v2\GitHubIssuesQuery.cs" />
     <Compile Include="Widgets\DevOps\GitHub\v2\GitHubIssueWidget.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\v2\InitializeGitHubIssuesWidget.cs" />
     <Compile Include="Widgets\DevOps\GitHub\v2\OpenGitHubIssuesWebPage.cs" />
     <Compile Include="Widgets\DevOps\Microsoft\VSTS\Release\CreateVstsRelease.cs" />
     <Compile Include="Widgets\DevOps\Microsoft\VSTS\Release\DeployVstsRelease.cs" />

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Plugins.Widgets.DevOps.GitHub.v2
+namespace AnyStatus.Plugins.Widgets.DevOps.GitHub
 {
     public class GitHubIssuesQuery : IMetricQuery<GitHubIssuesWidget>
     {
@@ -19,11 +19,24 @@ namespace AnyStatus.Plugins.Widgets.DevOps.GitHub.v2
         {
             var issues = await new GitHubApi().GetIssuesAsync(request.DataContext.Owner, request.DataContext.Repository).ConfigureAwait(false);
 
-            request.DataContext.Value = issues.Count();
+            var list = issues.ToList();
 
-            var synchronizer = new CollectionSynchronizer<GitHubIssue, Item>
+            request.DataContext.Value = list.Count;
+
+            var synchronizer = GetSynchronizer(request);
+
+            _uiAction.Invoke(() => synchronizer.Synchronize(list, request.DataContext.Items));
+
+            request.DataContext.State = State.Ok;
+        }
+
+        private static CollectionSynchronizer<GitHubIssue, Item> GetSynchronizer(MetricQueryRequest<GitHubIssuesWidget> request)
+        {
+            return new CollectionSynchronizer<GitHubIssue, Item>
             {
                 Compare = (issue, item) => item is GitHubIssueWidget issueWidget && issue.Number == issueWidget.Issue,
+                Remove = item => request.DataContext.Remove(item),
+                Update = (issue, item) => item.Name = issue.Title,
                 Add = issue => request.DataContext.Add(new GitHubIssueWidget
                 {
                     Name = issue.Title,
@@ -31,15 +44,10 @@ namespace AnyStatus.Plugins.Widgets.DevOps.GitHub.v2
                     Owner = request.DataContext.Owner,
                     Repository = request.DataContext.Repository,
                     Issue = issue.Number,
-                    State = State.Ok
-                }),
-                Update = (issue, item) => item.Name = issue.Title,
-                Remove = item => request.DataContext.Remove(item)
+                    State = State.Ok,
+                    Interval = 0 //bypass scheduler
+                })
             };
-
-            _uiAction.Invoke(() => synchronizer.Synchronize(issues.ToList(), request.DataContext.Items));
-
-            request.DataContext.State = State.Ok;
         }
     }
 }
