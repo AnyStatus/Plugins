@@ -8,10 +8,10 @@ using System.Web.Script.Serialization;
 
 namespace AnyStatus
 {
-    public class GitHubIssueStateCheck : ICheckHealth<GitHubIssue>
+    public class GitHubIssueStateCheck : ICheckHealth<GitHubIssueV1>
     {
         [DebuggerStepThrough]
-        public async Task Handle(HealthCheckRequest<GitHubIssue> request, CancellationToken cancellationToken)
+        public async Task Handle(HealthCheckRequest<GitHubIssueV1> request, CancellationToken cancellationToken)
         {
             var state = await GetGitHubIssueStateAsync(request.DataContext).ConfigureAwait(false);
 
@@ -31,12 +31,11 @@ namespace AnyStatus
             }
         }
 
-        private async Task<GitHubIssueState> GetGitHubIssueStateAsync(GitHubIssue issue)
+        private async Task<GitHubIssueState> GetGitHubIssueStateAsync(GitHubIssueV1 issue)
         {
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("ANYSTATUS", "1.0"));
-
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 var response = await client.GetAsync(issue.URL).ConfigureAwait(false);

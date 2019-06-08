@@ -38,7 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AnyStatus.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b52fc05e377030a3, processorArchitecture=MSIL">
-      <HintPath>..\packages\AnyStatus.API.2.0.122\lib\net462\AnyStatus.API.dll</HintPath>
+      <HintPath>..\packages\AnyStatus.API.2.0.125\lib\net462\AnyStatus.API.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Administration.7.0.0.0\lib\net20\Microsoft.Web.Administration.dll</HintPath>
@@ -81,7 +81,13 @@
     <Compile Include="Widgets\DevOps\Coveralls\CoveredPercentQuery.cs" />
     <Compile Include="Widgets\DevOps\Coveralls\OpenWebPage.cs" />
     <Compile Include="Widgets\DevOps\AppVeyor\Build\StartAppVeyorBuild.cs" />
-    <Compile Include="Widgets\DevOps\GitHub\Issue\v2\GitHubIssue_v2.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\v2\CollectionSynchronizer.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\v2\GitHubApi.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\v2\GitHubIssue.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\v2\GitHubIssuesWidget.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\v2\GitHubIssuesQuery.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\v2\GitHubIssueWidget.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\v2\OpenGitHubIssuesWebPage.cs" />
     <Compile Include="Widgets\DevOps\Microsoft\VSTS\Release\CreateVstsRelease.cs" />
     <Compile Include="Widgets\DevOps\Microsoft\VSTS\Release\DeployVstsRelease.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\RestartAppPool.cs" />
@@ -105,9 +111,9 @@
     <Compile Include="Widgets\SystemInformation\RAM\Usage\RamUsage.cs" />
     <Compile Include="Widgets\SystemInformation\RAM\Usage\RamUsageQuery.cs" />
     <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQueryHandler.cs" />
-    <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssueState.cs" />
-    <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssueStateCheck.cs" />
-    <Compile Include="Widgets\DevOps\GitHub\Issue\v1\OpenWebPage.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\v1\GitHubIssueState.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\v1\GitHubIssueStateCheck.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\v1\OpenWebPage.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\AppPoolHealthCheck.cs" />
     <Compile Include="Widgets\HealthChecks\HTTP\HTTPHealthCheck.cs" />
     <Compile Include="Widgets\HealthChecks\HTTP\OpenWebPage.cs" />
@@ -184,7 +190,7 @@
     <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQuery.cs" />
     <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerConnection.cs" />
     <Compile Include="Widgets\SystemInformation\CPU\Usage\CpuUsage.cs" />
-    <Compile Include="Widgets\DevOps\GitHub\Issue\v1\GitHubIssue.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\v1\GitHubIssue.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\AppPool.cs" />
     <Compile Include="Widgets\SystemInformation\PerformanceCounters\PerformanceCounter.cs" />
     <Compile Include="Widgets\HealthChecks\WindowsService\WindowsService.cs" />
@@ -219,7 +225,7 @@
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Debug (
 echo copying binaries
-xcopy $(TargetDir)AnyStatus*.* "C:\Repos\AnyStatus\App\src\AnyStatus.Desktop\bin\Debug" /y
+xcopy $(TargetDir)AnyStatus.Plugins.dll "C:\Repos\AnyStatus\App\src\AnyStatus.Desktop\bin\Debug" /y
 echo binaries copied
 )
 </PostBuildEvent>

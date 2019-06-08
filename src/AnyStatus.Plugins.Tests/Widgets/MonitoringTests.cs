@@ -69,7 +69,7 @@ namespace AnyStatus.Plugins.Tests
         [TestMethod]
         public async Task GitHubIssueHandler()
         {
-            var issue = new GitHubIssue
+            var issue = new GitHubIssueV1
             {
                 IssueNumber = 1,
                 Repository = "AnyStatus",

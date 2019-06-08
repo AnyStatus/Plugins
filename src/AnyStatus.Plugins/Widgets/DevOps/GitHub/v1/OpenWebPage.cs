@@ -2,7 +2,7 @@
 
 namespace AnyStatus
 {
-    public class OpenGitHubIssueWebPage : OpenWebPage<GitHubIssue>
+    public class OpenGitHubIssueWebPage : OpenWebPage<GitHubIssueV1>
     {
         public OpenGitHubIssueWebPage(IProcessStarter ps) : base(ps)
         {

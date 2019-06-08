@@ -6,7 +6,7 @@ namespace AnyStatus.Plugins.Demo
     {
         public MainViewModel()
         {
-            Widget = new WindowsService();
+            Widget = new GitHubIssueV1();
         }
 
         public Widget Widget { get; set; }

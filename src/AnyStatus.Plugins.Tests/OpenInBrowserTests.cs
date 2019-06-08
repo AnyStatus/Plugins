@@ -12,7 +12,7 @@ namespace AnyStatus.Plugins.Tests
         [TestMethod]
         public async Task OpenGitHubIssueInBrowser()
         {
-            var gitHubIssue = new GitHubIssue
+            var gitHubIssue = new GitHubIssueV1
             {
                 IssueNumber = 1,
                 Name = "name",

@@ -3,28 +3,31 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
     [DisplayColumn("DevOps")]
     [DisplayName("GitHub Issue")]
-    [Description("GitHub issue status.")]
-    public class GitHubIssue : Widget, IHealthCheck, ISchedulable, IWebPage
+    [XmlType(TypeName = "GitHubIssue")]
+    public class GitHubIssueV1 : Widget, IHealthCheck, ISchedulable, IWebPage
     {
         [Required]
+        [PropertyOrder(1)]
         [Category("GitHub")]
-        [Description("GitHub repository owner (user name).")]
+        [Description("Required. The GitHub repository owner name.")]
         public string Owner { get; set; }
 
         [Required]
+        [PropertyOrder(2)]
         [Category("GitHub")]
-        [Description("GitHub repository name.")]
+        [Description("Required. The GitHub repository name.")]
         public string Repository { get; set; }
 
-        [Required]
+        [PropertyOrder(3)]
         [Category("GitHub")]
-        [DisplayName("Issue Number")]
-        [Description("GitHub issue number.")]
+        [DisplayName("Issue")]
+        [Description("Optional. The GitHub issue id.")]
         public int IssueNumber { get; set; }
 
         [XmlIgnore]
