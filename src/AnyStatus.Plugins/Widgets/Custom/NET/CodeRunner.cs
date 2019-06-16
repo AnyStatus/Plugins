@@ -41,13 +41,13 @@ namespace AnyStatus
         }
 
         [DebuggerStepThrough]
-        private void Compile(DynamicSourceCode_v1 item, FileInfo sourceFile)
+        private void Compile(DynamicSourceCode_v1 widget, FileInfo sourceFile)
         {
             var compiler = _compilerFactory();
 
-            item.CompiledAssembly = compiler.Compile(sourceFile, item.References, item.TreatWarningsAsErrors);
+            widget.CompiledAssembly = compiler.Compile(sourceFile, widget.References, widget.TreatWarningsAsErrors);
 
-            item.LastWriteTime = sourceFile.LastWriteTime;
+            widget.LastWriteTime = sourceFile.LastWriteTime;
 
             _logger.Info($"{sourceFile.FullName} compiled successfully.");
         }

@@ -1,6 +1,7 @@
 ﻿using AnyStatus.API;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -122,6 +123,36 @@ namespace AnyStatus.Plugins.Tests.Widgets
             Assert.AreEqual(State.Ok, widget.State);
 
             Assert.IsTrue(widget.Value > 0);
+        }
+
+        [TestMethod]
+        public void FileExistsTest()
+        {
+            var widget = new FileExists
+            {
+                Path = Assembly.GetExecutingAssembly().Location,
+            };
+
+            var request = HealthCheckRequest.Create(widget);
+
+            _ = new FileExistsCheck().Handle(request, CancellationToken.None).ConfigureAwait(false);
+
+            Assert.AreEqual(State.Ok, widget.State);
+        }
+
+        [TestMethod]
+        public void FileNotExistsTest()
+        {
+            var widget = new FileExists
+            {
+                Path = "",
+            };
+
+            var request = HealthCheckRequest.Create(widget);
+
+            _ = new FileExistsCheck().Handle(request, CancellationToken.None).ConfigureAwait(false);
+
+            Assert.AreEqual(State.Failed, widget.State);
         }
     }
 }

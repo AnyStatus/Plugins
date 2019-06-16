@@ -104,6 +104,8 @@
     <Compile Include="Widgets\Custom\NET\CodeRunner.cs" />
     <Compile Include="Widgets\Custom\PowerShell\PowerShellRunner.cs" />
     <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerHealthCheck.cs" />
+    <Compile Include="Widgets\SystemInformation\FileSystem\FolderExists.cs" />
+    <Compile Include="Widgets\SystemInformation\FileSystem\FileExists.cs" />
     <Compile Include="Widgets\SystemInformation\PageFile\PageFileUsage.cs" />
     <Compile Include="Widgets\SystemInformation\PageFile\PageFileUsageQuery.cs" />
     <Compile Include="Widgets\SystemInformation\ProcessCount\ProcessCount.cs" />
