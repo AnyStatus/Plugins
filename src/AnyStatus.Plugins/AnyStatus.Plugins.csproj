@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -106,6 +106,10 @@
     <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerHealthCheck.cs" />
     <Compile Include="Widgets\SystemInformation\FileSystem\FolderExists.cs" />
     <Compile Include="Widgets\SystemInformation\FileSystem\FileExists.cs" />
+    <Compile Include="Widgets\SystemInformation\Logical Drives\Usage\DriveInformation.cs" />
+    <Compile Include="Widgets\SystemInformation\Logical Drives\Usage\LogicalDriveUsage.cs" />
+    <Compile Include="Widgets\SystemInformation\Logical Drives\Usage\LogicalDriveUsageQuery.cs" />
+    <Compile Include="Widgets\SystemInformation\Logical Drives\Usage\PercentageType.cs" />
     <Compile Include="Widgets\SystemInformation\PageFile\PageFileUsage.cs" />
     <Compile Include="Widgets\SystemInformation\PageFile\PageFileUsageQuery.cs" />
     <Compile Include="Widgets\SystemInformation\ProcessCount\ProcessCount.cs" />
