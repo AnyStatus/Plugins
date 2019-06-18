@@ -17,7 +17,7 @@ namespace AnyStatus
 
             request.DataContext.Progress = GetDrivePercentage(driveInformation, request.DataContext.PercentageType);
             request.DataContext.Message = GetDriveMessage(driveInformation, request.DataContext.PercentageType);
-            request.DataContext.State = State.Ok;
+            request.DataContext.State = GetDriveState(driveInformation, request.DataContext.PercentageType, request.DataContext.ErrorPercentage);
 
             await Task.CompletedTask.ConfigureAwait(false);
         }
@@ -45,6 +45,19 @@ namespace AnyStatus
                 case PercentageType.PercentageRemaining:
                     return $"{driveInformation.Drive} - {driveInformation.AvailablePercentage}%{NL}" +
                            $"{driveInformation.TotalNumberOfFreeGigabytes}GB available out of {driveInformation.TotalNumberOfGigabytes}GB";
+                default:
+                    throw new NotImplementedException($"Not implemented the percentage type of [{percentageType}]");
+            }
+        }
+
+        private State GetDriveState(DriveInformation driveInformation, PercentageType percentageType, int errorPercentage)
+        {
+            switch (percentageType)
+            {
+                case PercentageType.PercentageUsed:
+                    return driveInformation.UsedPercentage >= errorPercentage ? State.Error : State.Ok;
+                case PercentageType.PercentageRemaining:
+                    return driveInformation.AvailablePercentage <= errorPercentage ? State.Error : State.Ok;
                 default:
                     throw new NotImplementedException($"Not implemented the percentage type of [{percentageType}]");
             }

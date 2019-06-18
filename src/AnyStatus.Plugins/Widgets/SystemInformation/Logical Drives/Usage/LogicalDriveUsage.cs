@@ -19,21 +19,26 @@ namespace AnyStatus
         }
 
         [Required]
-        [Category("Process CPU Usage")]
+        [Category("Logical Drive Usage")]
         [DisplayName("Drive")]
         [Description("The logical drive")]
         [Editor(typeof(LogicalDriveNameEditor), typeof(LogicalDriveNameEditor))]
         public string Drive { get; set; }
 
         [Required]
-        [Category("Process CPU Usage")]
+        [Category("Logical Drive Usage")]
         [DisplayName("Percentage Type")]
         public PercentageType PercentageType { get; set; }
 
-        [Category("Process CPU Usage")]
+        [Category("Logical Drive Usage")]
         [DisplayName("Show progress bar")]
         [Description("Should the status show a bar displaying how full the drive is?")]
         public bool ShowProgress { get; set; } = true;
+
+        [Category("Logical Drive Usage")]
+        [DisplayName("Error percentage")]
+        [Description("At what percentage should this drive error?")]
+        public int ErrorPercentage { get; set; }
 
         [XmlIgnore]
         [Browsable(false)]
