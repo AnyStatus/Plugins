@@ -10,9 +10,9 @@ namespace AnyStatus
         [DllImport(Kernel32, SetLastError = true, CharSet = CharSet.Auto)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool GetDiskFreeSpaceEx([In] string directoryName,
-                                                 [Out] out ulong freeBytesAvailable,
-                                                 [Out] out ulong totalNumberOfBytes,
-                                                 [Out] out ulong totalNumberOfFreeBytes);
+                                                      [Out] out ulong freeBytesAvailable,
+                                                      [Out] out ulong totalNumberOfBytes,
+                                                      [Out] out ulong totalNumberOfFreeBytes);
 
         public static int GetDriveAvailablePercentage(string drive)
         {
@@ -32,7 +32,7 @@ namespace AnyStatus
             ulong totalNumberOfFreeBytes;
             ulong totalNumberOfBytes;
 
-            if (!GetDiskFreeSpaceEx(drive, out ulong _, out totalNumberOfBytes, out totalNumberOfFreeBytes))
+            if (!GetDiskFreeSpaceEx(drive, out _, out totalNumberOfBytes, out totalNumberOfFreeBytes))
             {
                 return -1;
             }

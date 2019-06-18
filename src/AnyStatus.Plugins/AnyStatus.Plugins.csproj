@@ -110,6 +110,7 @@
     <Compile Include="Widgets\SystemInformation\Logical Drives\Usage\LogicalDriveUsage.cs" />
     <Compile Include="Widgets\SystemInformation\Logical Drives\Usage\LogicalDriveUsageQuery.cs" />
     <Compile Include="Widgets\SystemInformation\Logical Drives\Usage\PercentageType.cs" />
+    <Compile Include="Widgets\SystemInformation\Logical Drives\LogicalDriveNameEditor.cs" />
     <Compile Include="Widgets\SystemInformation\PageFile\PageFileUsage.cs" />
     <Compile Include="Widgets\SystemInformation\PageFile\PageFileUsageQuery.cs" />
     <Compile Include="Widgets\SystemInformation\ProcessCount\ProcessCount.cs" />

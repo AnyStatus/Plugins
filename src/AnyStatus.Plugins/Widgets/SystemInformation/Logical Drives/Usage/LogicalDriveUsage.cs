@@ -18,9 +18,11 @@ namespace AnyStatus
             Units = IntervalUnits.Seconds;
         }
 
+        [Required]
         [Category("Process CPU Usage")]
         [DisplayName("Drive")]
         [Description("The logical drive")]
+        [Editor(typeof(LogicalDriveNameEditor), typeof(LogicalDriveNameEditor))]
         public string Drive { get; set; }
 
         [Required]
