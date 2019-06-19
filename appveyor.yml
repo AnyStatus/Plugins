@@ -29,3 +29,5 @@ build:
 deploy:
   provider: Environment
   name: AnyStatus
+  on:
+    branch: master
