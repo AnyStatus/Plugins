@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace AnyStatus
@@ -8,8 +9,14 @@ namespace AnyStatus
         private const string Kernel32 = "kernel32.dll";
         private const int GigabyteFactor = 1024 * 1024 * 1024;
 
+        private DriveInformation()
+        {
+        }
+
         public string Drive { get; private set; }
+
         public ulong TotalNumberOfFreeBytes { get; private set; }
+
         public ulong TotalNumberOfBytes { get; private set; }
 
         public int TotalNumberOfGigabytes
@@ -37,11 +44,6 @@ namespace AnyStatus
             get => (int)Math.Round(((TotalNumberOfBytes - TotalNumberOfFreeBytes) / (double)TotalNumberOfBytes) * 100);
         }
 
-        private DriveInformation()
-        {
-
-        }
-
         [DllImport(Kernel32, SetLastError = true, CharSet = CharSet.Auto)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool GetDiskFreeSpaceEx([In] string directoryName,
@@ -53,10 +55,10 @@ namespace AnyStatus
         {
             if (!GetDiskFreeSpaceEx(drive, out _, out ulong totalNumberOfBytes, out ulong totalNumberOfFreeBytes))
             {
-                return null;
+                throw new DriveNotFoundException($"An error occurred while getting drive information. No drive can be found with the specified name: {drive}.");
             }
 
-            return new DriveInformation()
+            return new DriveInformation
             {
                 Drive = drive,
                 TotalNumberOfBytes = totalNumberOfBytes,

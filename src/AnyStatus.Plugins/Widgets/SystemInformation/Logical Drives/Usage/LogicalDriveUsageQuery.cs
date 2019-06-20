@@ -51,10 +51,10 @@ namespace AnyStatus
             switch (percentageType)
             {
                 case PercentageType.PercentageUsed:
-                    return driveInformation.UsedPercentage >= errorPercentage ? State.Error : State.Ok;
+                    return driveInformation.UsedPercentage >= errorPercentage ? State.Failed : State.Ok;
 
                 case PercentageType.PercentageRemaining:
-                    return driveInformation.AvailablePercentage <= errorPercentage ? State.Error : State.Ok;
+                    return driveInformation.AvailablePercentage <= errorPercentage ? State.Failed : State.Ok;
 
                 default:
                     throw new NotImplementedException($"Percentage type \"{percentageType}\" is not supported.");
