@@ -111,6 +111,7 @@
     <Compile Include="Widgets\SystemInformation\Logical Drives\Usage\LogicalDriveUsageQuery.cs" />
     <Compile Include="Widgets\SystemInformation\Logical Drives\Usage\PercentageType.cs" />
     <Compile Include="Widgets\SystemInformation\Logical Drives\LogicalDriveNameEditor.cs" />
+    <Compile Include="Widgets\SystemInformation\Network\ActiveTcpConnections.cs" />
     <Compile Include="Widgets\SystemInformation\PageFile\PageFileUsage.cs" />
     <Compile Include="Widgets\SystemInformation\PageFile\PageFileUsageQuery.cs" />
     <Compile Include="Widgets\SystemInformation\ProcessCount\ProcessCount.cs" />
@@ -231,7 +232,7 @@
     <Copy SourceFiles="@(NuGetPackages)" DestinationFolder="C:\nuget" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Local (
+    <PostBuildEvent>if $(ConfigurationName) == Debug (
 echo copying binaries
 xcopy $(TargetDir)AnyStatus.Plugins.dll "C:\Repos\AnyStatus\App\src\AnyStatus.Desktop\bin\Debug" /y
 echo binaries copied
