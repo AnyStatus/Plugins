@@ -1,6 +1,8 @@
 ﻿using AnyStatus.API;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -126,7 +128,7 @@ namespace AnyStatus.Plugins.Tests.Widgets
         }
 
         [TestMethod]
-        public void FileExistsTest()
+        public async Task FileExistsTest()
         {
             var widget = new FileExists
             {
@@ -135,13 +137,13 @@ namespace AnyStatus.Plugins.Tests.Widgets
 
             var request = HealthCheckRequest.Create(widget);
 
-            _ = new FileExistsCheck().Handle(request, CancellationToken.None).ConfigureAwait(false);
+            await new FileExistsCheck().Handle(request, CancellationToken.None).ConfigureAwait(false);
 
             Assert.AreEqual(State.Ok, widget.State);
         }
 
         [TestMethod]
-        public void FileNotExistsTest()
+        public async Task FileNotExistsTest()
         {
             var widget = new FileExists
             {
@@ -150,7 +152,83 @@ namespace AnyStatus.Plugins.Tests.Widgets
 
             var request = HealthCheckRequest.Create(widget);
 
-            _ = new FileExistsCheck().Handle(request, CancellationToken.None).ConfigureAwait(false);
+            await new FileExistsCheck().Handle(request, CancellationToken.None).ConfigureAwait(false);
+
+            Assert.AreEqual(State.Failed, widget.State);
+        }
+
+        [TestMethod]
+        public async Task LogicalDriveUsage_PercentageUsed_Test()
+        {
+            var drive = DriveInfo.GetDrives().First();
+
+            var widget = new LogicalDriveUsage
+            {
+                Drive = drive.Name,
+                ErrorPercentage = 90,
+                PercentageType = PercentageType.PercentageUsed,
+            };
+
+            var request = MetricQueryRequest.Create(widget);
+
+            await new LogicalDriveUsageQuery().Handle(request, CancellationToken.None).ConfigureAwait(false);
+
+            Assert.AreEqual(State.Ok, widget.State);
+        }
+
+        [TestMethod]
+        public async Task LogicalDriveUsage_PercentageUsed_Failed_Test()
+        {
+            var drive = DriveInfo.GetDrives().First();
+
+            var widget = new LogicalDriveUsage
+            {
+                Drive = drive.Name,
+                ErrorPercentage = 0,
+                PercentageType = PercentageType.PercentageUsed,
+            };
+
+            var request = MetricQueryRequest.Create(widget);
+
+            await new LogicalDriveUsageQuery().Handle(request, CancellationToken.None).ConfigureAwait(false);
+
+            Assert.AreEqual(State.Failed, widget.State);
+        }
+
+        [TestMethod]
+        public async Task LogicalDriveUsage_PercentageRemaining_Test()
+        {
+            var drive = DriveInfo.GetDrives().First();
+
+            var widget = new LogicalDriveUsage
+            {
+                Drive = drive.Name,
+                ErrorPercentage = 0,
+                PercentageType = PercentageType.PercentageRemaining,
+            };
+
+            var request = MetricQueryRequest.Create(widget);
+
+            await new LogicalDriveUsageQuery().Handle(request, CancellationToken.None).ConfigureAwait(false);
+
+            Assert.AreEqual(State.Ok, widget.State);
+        }
+
+        [TestMethod]
+        public async Task LogicalDriveUsage_PercentageRemaining_Failed_Test()
+        {
+            var drive = DriveInfo.GetDrives().First();
+
+            var widget = new LogicalDriveUsage
+            {
+                Drive = drive.Name,
+                ErrorPercentage = 100,
+                PercentageType = PercentageType.PercentageRemaining,
+            };
+
+            var request = MetricQueryRequest.Create(widget);
+
+            await new LogicalDriveUsageQuery().Handle(request, CancellationToken.None).ConfigureAwait(false);
 
             Assert.AreEqual(State.Failed, widget.State);
         }
