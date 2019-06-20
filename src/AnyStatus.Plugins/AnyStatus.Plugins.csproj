@@ -129,10 +129,10 @@
     <Compile Include="Widgets\HealthChecks\PortCheck\NetworkProtocol.cs" />
     <Compile Include="Widgets\HealthChecks\PortCheck\SocketConnection.cs" />
     <Compile Include="Widgets\HealthChecks\PortCheck\SocketConnectionHealthCheck.cs" />
-    <Compile Include="Widgets\SystemInformation\NetworkSpeed\DownloadSpeed.cs" />
-    <Compile Include="Widgets\SystemInformation\NetworkSpeed\NetworkInterfaceItemsSource.cs" />
-    <Compile Include="Widgets\SystemInformation\NetworkSpeed\NetworkSpeedQuery.cs" />
-    <Compile Include="Widgets\SystemInformation\NetworkSpeed\UploadSpeed.cs" />
+    <Compile Include="Widgets\SystemInformation\Network\DownloadSpeed.cs" />
+    <Compile Include="Widgets\SystemInformation\Network\NetworkInterfaceItemsSource.cs" />
+    <Compile Include="Widgets\SystemInformation\Network\NetworkSpeedQuery.cs" />
+    <Compile Include="Widgets\SystemInformation\Network\UploadSpeed.cs" />
     <Compile Include="Widgets\Metrics\NuGet\PackageVersion\NuGetPackageVersionQuery.cs" />
     <Compile Include="Widgets\Metrics\NuGet\PackageVersion\PackageVersion.cs" />
     <Compile Include="Widgets\DevOps\Jenkins\Client\Contracts\JenkinsCrumb.cs" />
@@ -206,7 +206,7 @@
     <Compile Include="Widgets\HealthChecks\UptimeRobot\UptimeRobot.cs" />
     <Compile Include="Widgets\HealthChecks\HTTP\HTTP.cs" />
     <Compile Include="Widgets\HealthChecks\Ping\Ping.cs" />
-    <Compile Include="Widgets\SystemInformation\NetworkSpeed\NetworkSpeed.cs" />
+    <Compile Include="Widgets\SystemInformation\Network\NetworkSpeed.cs" />
     <Compile Include="_deprecated\TCP.cs" />
     <Compile Include="_deprecated\UDP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
