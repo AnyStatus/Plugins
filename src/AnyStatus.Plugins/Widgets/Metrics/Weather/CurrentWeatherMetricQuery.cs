@@ -18,7 +18,7 @@ namespace AnyStatus
 
             var response = await restClient.ExecuteTaskAsync<CurrentWeather>(restRequest, cancellationToken).ConfigureAwait(false);
 
-            if (response.IsSuccessful && double.TryParse(response.Data.Main["temp"], out var temp))
+            if (response.IsSuccessful && double.TryParse(response.Data.Main["temp"], System.Globalization.NumberStyles.Number, new System.Globalization.CultureInfo("en-US"), out var temp))
             {
                 char symbol;
 
