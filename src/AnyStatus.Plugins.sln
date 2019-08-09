@@ -1,18 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyStatus.Plugins", "AnyStatus.Plugins\AnyStatus.Plugins.csproj", "{77E27570-10C3-4605-9FB7-677E493D05EA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyStatus.Plugins.Tests", "AnyStatus.Plugins.Tests\AnyStatus.Plugins.Tests.csproj", "{671AB357-4DA9-4741-AB71-DB00ACA6A4C0}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3600EFF5-3544-4A32-9BAE-F75542A2624B}"
-	ProjectSection(SolutionItems) = preProject
-		..\appveyor.2.x.yml = ..\appveyor.2.x.yml
-		..\appveyor.yml = ..\appveyor.yml
-		..\README.md = ..\README.md
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyStatus.Plugins.Demo", "AnyStatus.Plugins.Demo\AnyStatus.Plugins.Demo.csproj", "{1227978C-4F65-45FE-9C44-10825FE89518}"
 EndProject
