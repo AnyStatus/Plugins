@@ -10,7 +10,7 @@ namespace AnyStatus.Plugins.Widgets.DevOps.GitHub
     /// GitHub Issue Widget.
     /// </summary>
     [Browsable(false)]
-    [DisplayColumn("DevOps")]
+    [DisplayColumn("GitHub")]
     [DisplayName("GitHub Issue")]
     [Description("GitHub repository issue.")]
     public class GitHubIssueWidget : Widget, IWebPage
