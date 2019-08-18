@@ -83,7 +83,7 @@
     <Compile Include="Widgets\DevOps\AppVeyor\Build\StartAppVeyorBuild.cs" />
     <Compile Include="Widgets\DevOps\GitHub\v2\GitHubApi.cs" />
     <Compile Include="Widgets\DevOps\GitHub\v2\GitHubIssue.cs" />
-    <Compile Include="Widgets\DevOps\GitHub\v2\_GitHubIssueQuery.cs" />
+    <Compile Include="Widgets\DevOps\GitHub\v2\OpenGitHubIssueWebPage.cs" />
     <Compile Include="Widgets\DevOps\GitHub\v2\GitHubIssuesWidget.cs" />
     <Compile Include="Widgets\DevOps\GitHub\v2\GitHubIssuesQuery.cs" />
     <Compile Include="Widgets\DevOps\GitHub\v2\GitHubIssueWidget.cs" />

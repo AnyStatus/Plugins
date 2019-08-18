@@ -7,12 +7,11 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 namespace AnyStatus.Plugins.Widgets.DevOps.GitHub
 {
     /// <summary>
-    /// Single GitHub Issue Widget.
+    /// GitHub Issue Widget.
     /// </summary>
-    //[ReadOnly(true)]
     [Browsable(false)]
     [DisplayColumn("DevOps")]
-    [DisplayName("GitHub Issue (Preview)")]
+    [DisplayName("GitHub Issue")]
     [Description("GitHub repository issue.")]
     public class GitHubIssueWidget : Widget, IWebPage
     {
