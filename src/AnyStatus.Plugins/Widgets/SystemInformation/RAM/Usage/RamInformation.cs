@@ -20,11 +20,10 @@ namespace AnyStatus
                 throw new Exception("An error occurred while getting performance information.");
             }
 
-            long pageSize = pi.PageSize.ToInt64();
-
-            long availableMemory = pi.PhysicalAvailable.ToInt64() * pageSize / MegabyteFactor;
-            long totalMemory = pi.PhysicalTotal.ToInt64() * pageSize / MegabyteFactor;
-            long usedMemory = totalMemory - availableMemory;
+            var pageSize = pi.PageSize.ToInt64();
+            var availableMemory = pi.PhysicalAvailable.ToInt64() * pageSize / MegabyteFactor;
+            var totalMemory = pi.PhysicalTotal.ToInt64() * pageSize / MegabyteFactor;
+            var usedMemory = totalMemory - availableMemory;
 
             return (decimal)usedMemory / totalMemory * 100;
         }

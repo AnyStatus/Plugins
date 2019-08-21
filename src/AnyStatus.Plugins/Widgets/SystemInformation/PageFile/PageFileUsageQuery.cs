@@ -10,11 +10,12 @@ namespace AnyStatus
 
         protected override void HandleCore(MetricQueryRequest<PageFileUsage> request)
         {
-            using (var counter = string.IsNullOrWhiteSpace(request.DataContext.MachineName)
-                ? new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, InstanceName)
-                : new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, InstanceName, request.DataContext.MachineName))
+            using (var counter = string.IsNullOrWhiteSpace(request.DataContext.MachineName) ?
+                new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, InstanceName) :
+                new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, InstanceName, request.DataContext.MachineName))
             {
                 request.DataContext.Value = (int)counter.NextValue();
+
                 request.DataContext.State = State.Ok;
             }
         }
