@@ -30,7 +30,7 @@ namespace AnyStatus
         private static async Task Handle(NetworkSpeed item, Direction direction)
         {
             if (!NetworkInterface.GetIsNetworkAvailable())
-                throw new Exception("There are no available network connections.");
+                throw new Exception("There are no available network interfaces.");
 
             var networkInterface = GetNetworkInterfaceById(item.NetworkInterfaceId);
             var startValue = networkInterface.GetIPv4Statistics();
