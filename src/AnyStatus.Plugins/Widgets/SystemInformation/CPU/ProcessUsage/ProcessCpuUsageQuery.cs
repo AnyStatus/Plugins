@@ -20,9 +20,9 @@ namespace AnyStatus
 
         private async Task<int> GetCpuUsageAsync(string machineName, string processName)
         {
-            using (var counter = string.IsNullOrWhiteSpace(machineName)
-                ? new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, processName)
-                : new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, processName, machineName))
+            using (var counter = string.IsNullOrWhiteSpace(machineName) ?
+                new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, processName) :
+                new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, processName, machineName))
             {
                 counter.NextValue();
 

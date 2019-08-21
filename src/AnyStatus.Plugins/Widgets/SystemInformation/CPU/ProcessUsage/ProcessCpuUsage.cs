@@ -12,7 +12,6 @@ namespace AnyStatus
         public ProcessCpuUsage()
         {
             Name = "CPU Process Usage";
-            Symbol = "%";
             MaxValue = 100;
             Interval = 10;
             Units = IntervalUnits.Seconds;
@@ -28,5 +27,10 @@ namespace AnyStatus
         [DisplayName("Process Name")]
         [Description("Usually the file name without extension")]
         public string ProcessName { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Value}%";
+        }
     }
 }
