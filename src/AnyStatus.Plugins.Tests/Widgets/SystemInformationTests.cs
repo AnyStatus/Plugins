@@ -128,6 +128,26 @@ namespace AnyStatus.Plugins.Tests.Widgets
         }
 
         [TestMethod]
+        public async Task BatteryTest()
+        {
+            var widget = new Battery();
+
+            var request = MetricQueryRequest.Create(widget);
+
+            var handler = new BatteryStatusQuery();
+
+            await handler.Handle(request, CancellationToken.None).ConfigureAwait(false);
+
+            Assert.AreEqual(State.Ok, widget.State);
+
+            Assert.IsNotNull(widget.Value);
+
+            Assert.IsNotNull(widget.Message);
+
+            Assert.IsTrue(widget.Progress > 0);
+        }
+
+        [TestMethod]
         public async Task FileExistsTest()
         {
             var widget = new FileExists
@@ -232,5 +252,7 @@ namespace AnyStatus.Plugins.Tests.Widgets
 
             Assert.AreEqual(State.Failed, widget.State);
         }
+
+
     }
 }
