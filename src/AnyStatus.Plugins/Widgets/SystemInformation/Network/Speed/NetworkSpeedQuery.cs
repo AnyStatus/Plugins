@@ -1,6 +1,5 @@
 ﻿using AnyStatus.API;
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading;
@@ -13,7 +12,7 @@ namespace AnyStatus
         private enum Direction
         {
             Download,
-            Upload,
+            Upload
         }
 
         public Task Handle(MetricQueryRequest<DownloadSpeed> request, CancellationToken cancellationToken)
@@ -26,13 +25,12 @@ namespace AnyStatus
             return Handle(request.DataContext, Direction.Download);
         }
 
-        [DebuggerStepThrough]
-        private static async Task Handle(NetworkSpeed item, Direction direction)
+        private static async Task Handle(NetworkSpeed widget, Direction direction)
         {
             if (!NetworkInterface.GetIsNetworkAvailable())
                 throw new Exception("There are no available network interfaces.");
 
-            var networkInterface = GetNetworkInterfaceById(item.NetworkInterfaceId);
+            var networkInterface = GetNetworkInterfaceById(widget.NetworkInterfaceId);
             var startValue = networkInterface.GetIPv4Statistics();
             var starTime = DateTime.Now;
 
@@ -45,20 +43,9 @@ namespace AnyStatus
                 endValue.BytesSent - startValue.BytesSent :
                 endValue.BytesReceived - startValue.BytesReceived;
 
-            var bitsPerSecond = (totalBytes * 8) / (endTime - starTime).TotalSeconds;
-
-            if (bitsPerSecond > 1000000)
-            {
-                item.Value = Math.Round(bitsPerSecond / 1000000, 1);
-                item.Symbol = " Mbps";
-            }
-            else
-            {
-                item.Value = Math.Round(bitsPerSecond / 1000, 1);
-                item.Symbol = " Kbps";
-            }
-
-            item.State = State.Ok;
+            widget.Value = totalBytes / (endTime - starTime).TotalSeconds;
+            
+            widget.State = State.Ok;
         }
 
         private static NetworkInterface GetNetworkInterfaceById(string id)
