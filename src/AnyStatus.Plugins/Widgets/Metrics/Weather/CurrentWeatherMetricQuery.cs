@@ -1,6 +1,7 @@
 ﻿using AnyStatus.API;
 using RestSharp;
 using System;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,36 +19,14 @@ namespace AnyStatus
 
             var response = await restClient.ExecuteTaskAsync<CurrentWeather>(restRequest, cancellationToken).ConfigureAwait(false);
 
-            if (response.IsSuccessful && double.TryParse(response.Data.Main["temp"], System.Globalization.NumberStyles.Number, new System.Globalization.CultureInfo("en-US"), out var temp))
+            if (response.IsSuccessful && double.TryParse(response.Data.Main["temp"], NumberStyles.Number, new CultureInfo("en-US"), out var temperature))
             {
-                char symbol;
-
-                switch (request.DataContext.Scale)
-                {
-                    case TemperatureScale.Celsius:
-                        temp = temp - 273.15;
-                        symbol = 'C';
-                        break;
-                    case TemperatureScale.Fahrenheit:
-                        temp = (temp - 273.15) * 1.8 + 32;
-                        symbol = 'F';
-                        break;
-                    default:
-                        symbol = 'K';
-                        break;
-                }
-
-                request.DataContext.Value = $"{Math.Round(temp)}°{symbol}";
+                request.DataContext.Value = temperature;
                 request.DataContext.State = State.Ok;
             }
             else
             {
-                if (response.ErrorException != null)
-                {
-                    throw response.ErrorException;
-                }
-
-                request.DataContext.State = State.Error;
+                throw new Exception("An error occurred while getting temperature.", response.ErrorException);
             }
         }
     }
