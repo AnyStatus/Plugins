@@ -12,7 +12,6 @@ namespace AnyStatus
         public CpuUsage()
         {
             Name = "CPU Usage";
-            Symbol = "%";
             MaxValue = 100;
             Interval = 10;
             Units = IntervalUnits.Seconds;
@@ -22,5 +21,10 @@ namespace AnyStatus
         [DisplayName("Machine Name")]
         [Description("Optional. Leave blank for local computer.")]
         public string MachineName { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Value}%";
+        }
     }
 }
