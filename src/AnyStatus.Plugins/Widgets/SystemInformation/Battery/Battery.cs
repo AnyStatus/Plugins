@@ -11,8 +11,8 @@ namespace AnyStatus
     [Description("Display the battery status information.")]
     public class Battery : Metric, ISchedulable, IReportProgress
     {
-        private int progress;
-        private bool showProgress = true;
+        private int _progress;
+        private bool _showProgress = true;
 
         public Battery()
         {
@@ -30,10 +30,10 @@ namespace AnyStatus
         [DisplayName("Show Progress")]
         public bool ShowProgress
         {
-            get => showProgress;
+            get => _showProgress;
             set
             {
-                showProgress = value;
+                _showProgress = value;
                 OnPropertyChanged();
             }
         }
@@ -42,10 +42,10 @@ namespace AnyStatus
         [Browsable(false)]
         public int Progress
         {
-            get => progress;
+            get => _progress;
             set
             {
-                progress = value;
+                _progress = value;
                 OnPropertyChanged();
             }
         }
