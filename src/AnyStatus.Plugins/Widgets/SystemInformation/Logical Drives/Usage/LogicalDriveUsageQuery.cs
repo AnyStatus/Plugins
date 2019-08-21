@@ -9,12 +9,14 @@ namespace AnyStatus
         {
             var driveInformation = DriveInformation.ReadDrive(request.DataContext.Drive);
 
-            request.DataContext.Progress = GetDrivePercentage(driveInformation, request.DataContext.PercentageType);
+            var percent = GetDrivePercentage(driveInformation, request.DataContext.PercentageType);
+            request.DataContext.Value = percent;
+            request.DataContext.Progress = percent;
             request.DataContext.Message = GetDriveMessage(driveInformation, request.DataContext.PercentageType);
             request.DataContext.State = GetDriveState(driveInformation, request.DataContext.PercentageType, request.DataContext.ErrorPercentage);
         }
 
-        private int GetDrivePercentage(DriveInformation driveInformation, PercentageType percentageType)
+        private static int GetDrivePercentage(DriveInformation driveInformation, PercentageType percentageType)
         {
             switch (percentageType)
             {
@@ -25,11 +27,11 @@ namespace AnyStatus
                     return driveInformation.AvailablePercentage;
 
                 default:
-                    throw new NotImplementedException($"Percentage type \"{percentageType}\" is not supported");
+                    throw new NotImplementedException($"Percentage type \"{percentageType}\" is not supported.");
             }
         }
 
-        private string GetDriveMessage(DriveInformation driveInformation, PercentageType percentageType)
+        private static string GetDriveMessage(DriveInformation driveInformation, PercentageType percentageType)
         {
             switch (percentageType)
             {
@@ -46,7 +48,7 @@ namespace AnyStatus
             }
         }
 
-        private State GetDriveState(DriveInformation driveInformation, PercentageType percentageType, int errorPercentage)
+        private static State GetDriveState(DriveInformation driveInformation, PercentageType percentageType, int errorPercentage)
         {
             switch (percentageType)
             {

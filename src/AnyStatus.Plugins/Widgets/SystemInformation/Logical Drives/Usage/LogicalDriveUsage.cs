@@ -10,10 +10,11 @@ namespace AnyStatus
     [Description("Shows the percentage of used space in a logical drive")]
     public class LogicalDriveUsage : Metric, ISchedulable, IReportProgress
     {
+        private int _progress;
+
         public LogicalDriveUsage()
         {
             Name = "Logical Drive Usage";
-            Symbol = "%";
             Interval = 10;
             Units = IntervalUnits.Seconds;
         }
@@ -44,13 +45,17 @@ namespace AnyStatus
         [Browsable(false)]
         public int Progress
         {
-            get => (Value is int) ? (int)Value : -1;
+            get => _progress;
             set
             {
-                Value = value;
-
+                _progress = value;
                 OnPropertyChanged();
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{Value}%";
         }
     }
 }
