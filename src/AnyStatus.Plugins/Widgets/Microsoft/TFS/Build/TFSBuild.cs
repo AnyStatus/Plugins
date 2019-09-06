@@ -9,7 +9,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 namespace AnyStatus
 {
     [DisplayName("TFS Build")]
-    [DisplayColumn("DevOps")]
+    [DisplayColumn("Azure DevOps")]
     [Description("Microsoft Team Foundation Server or Visual Studio Team Services build status")]
     public class TfsBuild : Build, IHealthCheck, ISchedulable, IStartable, IWebPage
     {

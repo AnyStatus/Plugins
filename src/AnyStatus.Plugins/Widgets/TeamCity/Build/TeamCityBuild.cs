@@ -11,7 +11,7 @@ namespace AnyStatus
     [CategoryOrder("TeamCity", 10)]
     [DisplayName("TeamCity Build")]
     [Description("TeamCity build status")]
-    [DisplayColumn("DevOps")]
+    [DisplayColumn("TeamCity")]
     public class TeamCityBuild : Build, IHealthCheck, ISchedulable, IStartable, IWebPage
     {
         private const string Category = "TeamCity";

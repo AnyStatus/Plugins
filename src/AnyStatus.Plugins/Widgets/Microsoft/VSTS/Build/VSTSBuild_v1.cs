@@ -7,8 +7,8 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    [DisplayName("VSTS Build")]
-    [DisplayColumn("DevOps")]
+    [DisplayName("VSTS Build [Deprecated]")]
+    [DisplayColumn("Azure DevOps")]
     [Description("Visual Studio Team Services build status and notifications.")]
     public class VSTSBuild_v1 : VstsWidget, IHealthCheck, ISchedulable, IStartable, IWebPage
     {

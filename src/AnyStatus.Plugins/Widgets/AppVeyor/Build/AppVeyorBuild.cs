@@ -8,7 +8,7 @@ namespace AnyStatus
 {
     [DisplayName("AppVeyor Build")]
     [Description("AppVeyor build status.")]
-    [DisplayColumn("DevOps")]
+    [DisplayColumn("AppVeyor")]
     public class AppVeyorBuild : Build, ISchedulable, IWebPage, IStartable, IHealthCheck
     {
         private const string Category = "AppVeyor";

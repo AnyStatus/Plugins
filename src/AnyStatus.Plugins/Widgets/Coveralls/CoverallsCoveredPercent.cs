@@ -6,7 +6,6 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 namespace AnyStatus
 {
     [DisplayName("Coveralls")]
-    [DisplayColumn("DevOps")]
     [Description("Coveralls code coverage (covered percentage).")]
     public class CoverallsCoveredPercent : Metric, ISchedulable, IWebPage
     {
