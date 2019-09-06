@@ -4,19 +4,19 @@ using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
-namespace AnyStatus.Plugins.API_Demo
+namespace AnyStatus.Plugins
 {
     /// <summary>
-    /// Widget properties and attributes example.
+    /// Demo health-check Widget.
     /// </summary>
     [Browsable(false)]
-    public class MyWidget : Widget, ISchedulable, IWebPage
+    public class DemoHealthCheckWidget : HealthCheck, ISchedulable, IWebPage
     {
         [Required]
         [Category("My Widget")] //default is "General".
         [DisplayName("My property name")]
         [Description("My property description.")]
-        [PropertyOrder(1)] //sets the order in which the property will appear in the category. Smaller is higher.
+        [PropertyOrder(1)] //sets the order in which the property will appear in the editor. Smaller is higher.
         public string MyProperty { get; set; }
 
         /// <summary>
@@ -35,12 +35,6 @@ namespace AnyStatus.Plugins.API_Demo
         /// <summary>
         /// "Open in Browser" URL address.
         /// </summary>
-        string IWebPage.URL
-        {
-            get
-            {
-                return "https://www.anystat.us";
-            }
-        }
+        public string URL => "https://www.anystat.us";
     }
 }

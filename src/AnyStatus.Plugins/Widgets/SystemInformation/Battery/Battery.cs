@@ -12,11 +12,12 @@ namespace AnyStatus
     public class Battery : Metric, ISchedulable, IReportProgress
     {
         private int _progress;
-        private bool _showProgress = true;
+        private bool _showProgress;
 
         public Battery()
         {
             Name = "Battery";
+            ShowProgress = true;
         }
 
         [Category("Battery")]

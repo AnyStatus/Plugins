@@ -69,7 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API Demo\MyWidget.cs" />
+    <Compile Include="Widgets\Demos\DemoHealthCheckWidget.cs" />
     <Compile Include="Triggers\StartProcessHandler.cs" />
     <Compile Include="Triggers\BatchScriptTrigger.cs" />
     <Compile Include="Triggers\CommandTrigger.cs" />
