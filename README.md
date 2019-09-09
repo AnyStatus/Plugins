@@ -8,13 +8,12 @@ A repository of community contributed plugins and extensions for [AnyStatus](htt
 AnyStatus is a lightweight desktop application for Windows that brings together metrics and events from various sources.
 Examples include, Azure DevOps, Jenkins, AppVeyor, TeamCity, Health Checks, Operating System Metrics, Elasticsearch, Redis, Kubernetes, and more. Think of it as CCTray on steroids. It's also available as a Visual Studio plugin.
 
-To learn more about developing plugins for AnyStatus, please refer to the [API Documentation](https://www.anystat.us/docs/api).
-
 For a list of widgets and plugins please [visit our website](https://www.anystat.us/docs/plugins).
 
 ## Documentation
 
 You can read the latest documentation at https://anystat.us/docs
+To learn more about developing plugins for AnyStatus, please read the [API Documentation](https://www.anystat.us/docs/api).
 
 ## Install
 
