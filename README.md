@@ -20,6 +20,26 @@ You can read the latest documentation at https://anystat.us/docs
 
 You can download AnyStatus latest version from https://anystat.us/downloads
 
+## Build
+
+To build the solution, download and install [.NET Framework 4.62 Dev Pack](https://dotnet.microsoft.com/download/dotnet-framework/net462).
+
+## Debug
+
+To debug the plugins solution, copy and paste the following script to the post-build-event of AnyStatus.Plugins project.
+This script will copy the binary output to AnyStatus installation folder. Make sure to specify you user folder.
+
+```
+if $(ConfigurationName) == Debug (
+  xcopy $(TargetDir)AnyStatus.Plugins.dll "C:\Users\YOUR-USER-FOLDER\AppData\Roaming\AnyStatus" /y
+)
+```
+
+Then, open AnyStatus.Plugins project properties in Visual Studio and go to Debug section.
+In Start secion, select "Start external program" and enter AnyStatus executable. For example:
+"C:\Users\YOUR-USER-FOLDER\AppData\Roaming\AnyStatus\AnyStatus.Desktop.exe".
+Press F5 in Visual Studio to start AnyStatus in debug mode.
+
 ## Contribute
 
 Contributions are most welcome. Please join us in maintaining a library of tools that we can all use in our day to day tasks.
