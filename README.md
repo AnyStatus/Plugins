@@ -3,63 +3,48 @@
 A repository of community contributed plugins and extensions for [AnyStatus](https://www.anystat.us).
 
 [![Build status](https://ci.appveyor.com/api/projects/status/dvn1rwrauwyq5yx6?svg=true)](https://ci.appveyor.com/project/AnyStatus/plugins)
-[![NuGet](https://img.shields.io/nuget/v/AnyStatus.Plugins.svg)]()
+[![NuGet](https://img.shields.io/nuget/v/AnyStatus.Plugins.svg)](https://www.nuget.org/packages/AnyStatus.Plugins/)
 
-As developers used to pushing many small commits daily, we rely on monitors to notify us when builds go green.
-AnyStatus is a lightweight Windows desktop app that rolls up metrics and events from various sources into one place.
-Examples include build results and releases, health checks for different services and OS metrics.
-Think of it as CCTray on steroids. It's also available as a Visual Studio plugin.
+AnyStatus is a lightweight desktop application for Windows that brings together metrics and events from various sources.
+Examples include, Azure DevOps, Jenkins, AppVeyor, TeamCity, Health Checks, Operating System Metrics, Elasticsearch, Redis, Kubernetes, and more. Think of it as CCTray on steroids. It's also available as a Visual Studio plugin.
 
-To learn more about AnyStatus API, please read the [documentation](https://www.anystat.us/docs/api).
+For a list of widgets and plugins please [visit our website](https://www.anystat.us/docs/plugins).
 
-Here are some of the plugins. For the updated list of plugins, please [visit our website](https://www.anystat.us/docs/plugins).
+## Documentation
 
-### Continuous Integration and Delivery
+You can read the latest documentation at https://anystat.us/docs
+To learn more about developing plugins for AnyStatus, please read the [API Documentation](https://www.anystat.us/docs/api).
 
-- [x] TFS Build
-- [x] VSTS Build
-- [x] VSTS Release
-- [x] Jenkins Job
-- [x] Jenkins View
-- [x] TeamCity Build
-- [x] AppVeyor Build
-- [x] Coveralls Code Coverage
+## Install
 
-### Custom 
+You can download AnyStatus latest version from https://anystat.us/downloads
 
-- [x] C#/VB.NET File - Compile and run custom monitors at run-time.
-- [x] PowerShell
-- [x] Batch Script
+## Build
 
-### Metrics
+Clone the plugins repository
 
-- [x] CPU Usage - Show the local or remote CPU usage
-- [x] Performance Counter - Show the value of a local or remote performance counter
-- [x] Upload Speed - Show network upload speed in Kbps/Mbps
-- [x] Download Speed - Show network download speed in Kbps/Mbps
-- [x] SQL Scalar Query - Show the return value of an SQL query
+`git clone https://github.com/AnyStatus/Plugins.git`
 
-### Database
+Open _AnyStatus.Plugins.sln_ in Visual Studio. The free community edition works fine.
+Make sure to download and install [.NET Framework 4.62 Dev Pack](https://dotnet.microsoft.com/download/dotnet-framework/net462).
 
-- [x] SQL Server - Test SQL Server database connection
+## Debug
 
-### Network
+To debug plugins, copy and paste the following script to the post-build-event of _AnyStatus.Plugins_ project.
+This script will copy the binary output to AnyStatus installation folder. Make sure to specify your user folder.
 
-- [x] HTTP/S - Monitor HTTP server availability and response code
-- [x] Ping - Test network availability of remote servers
-- [x] TCP/UDP - Monitor network connections
+```
+if $(ConfigurationName) == Debug (
+  xcopy $(TargetDir)AnyStatus.Plugins.dll "C:\Users\YOUR-USER-FOLDER\AppData\Roaming\AnyStatus" /y
+)
+```
 
-### Monitors
-
-- [x] Pingdom
-- [x] UptimeRobot
-
-### Other
-
-- [x] Windows Service - Monitor and control a local or remote Windows Service
-- [x] IIS Application Pool - Monitor a remote or local IIS application pool state
-- [x] GitHub Issue
+Open _AnyStatus.Plugins_ project properties in Visual Studio and go to Debug section.
+In "Start secion", select "Start external program" and enter AnyStatus executable path. For example:
+"C:\Users\YOUR-USER-FOLDER\AppData\Roaming\AnyStatus\AnyStatus.Desktop.exe".
+Press F5 in Visual Studio to start AnyStatus in debug mode.
 
 ## Contribute
 
-Contributions are most welcome. Please join us in maintaining a library of updated tools that we can all use in our day to day tasks.
+Contributions are most welcome. Please join us in maintaining a library of tools that we can all use in our day to day tasks.
+We also welcome [issues submitted on GitHub](https://github.com/anystatus/support/issues).

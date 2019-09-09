@@ -94,6 +94,11 @@
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\StartAppPool.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\StopAppPool.cs" />
     <Compile Include="Widgets\HealthChecks\WindowsService\WindowsServiceNameEditor.cs" />
+    <Compile Include="Widgets\NuGet\API\NuGetIndex.cs" />
+    <Compile Include="Widgets\NuGet\API\NuGetMetadata.cs" />
+    <Compile Include="Widgets\NuGet\API\NuGetMetadataCollection.cs" />
+    <Compile Include="Widgets\NuGet\API\NuGetResource.cs" />
+    <Compile Include="Widgets\NuGet\NuGetPackageWidget.cs" />
     <Compile Include="Widgets\SystemInformation\Battery\Battery.cs" />
     <Compile Include="Widgets\SystemInformation\Battery\BatteryStatusQuery.cs" />
     <Compile Include="Widgets\SystemInformation\CPU\ProcessUsage\ProcessCpuUsage.cs" />
@@ -133,8 +138,6 @@
     <Compile Include="Widgets\SystemInformation\Network\NetworkInterfaceItemsSource.cs" />
     <Compile Include="Widgets\SystemInformation\Network\Speed\NetworkSpeedQuery.cs" />
     <Compile Include="Widgets\SystemInformation\Network\Speed\UploadSpeed.cs" />
-    <Compile Include="Widgets\Metrics\NuGet\PackageVersion\NuGetPackageVersionQuery.cs" />
-    <Compile Include="Widgets\Metrics\NuGet\PackageVersion\PackageVersion.cs" />
     <Compile Include="Widgets\SystemInformation\PerformanceCounters\PerformanceCounterQuery.cs" />
     <Compile Include="Widgets\HealthChecks\Pingdom\PingdomHealthCheck.cs" />
     <Compile Include="Widgets\TeamCity\Build\OpenWebPage.cs" />
@@ -217,12 +220,8 @@
     <Copy SourceFiles="@(NuGetPackages)" DestinationFolder="C:\nuget" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug (
-echo copying binaries
-xcopy $(TargetDir)AnyStatus.Plugins.dll "C:\Repos\AnyStatus\App\src\AnyStatus.Desktop\bin\Debug" /y
-echo binaries copied
-)
-</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
