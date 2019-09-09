@@ -10,7 +10,15 @@ Examples include, Azure DevOps, Jenkins, AppVeyor, TeamCity, Health Checks, Oper
 
 To learn more about developing plugins for AnyStatus, please refer to the [API Documentation](https://www.anystat.us/docs/api).
 
-For a list of widgets and plugins, please [visit our website](https://www.anystat.us/docs/plugins).
+For a list of widgets and plugins please [visit our website](https://www.anystat.us/docs/plugins).
+
+## Documentation
+
+You can read the latest documentation at https://anystat.us/docs
+
+## Install
+
+You can download AnyStatus latest version from https://anystat.us/downloads
 
 ## Contribute
 
