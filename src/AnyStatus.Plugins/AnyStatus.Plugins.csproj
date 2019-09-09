@@ -217,11 +217,7 @@
     <Copy SourceFiles="@(NuGetPackages)" DestinationFolder="C:\nuget" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug (
-echo copying binaries
-xcopy $(TargetDir)AnyStatus.Plugins.dll "C:\Repos\AnyStatus\App\src\AnyStatus.Desktop\bin\Debug" /y
-echo binaries copied
-)
+    <PostBuildEvent>
 </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
