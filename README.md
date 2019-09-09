@@ -17,10 +17,8 @@ Here are some of the plugins. For the updated list of plugins, please [visit our
 ### Continuous Integration and Delivery
 
 - [x] TFS Build
-- [x] VSTS Build
-- [x] VSTS Release
-- [x] Jenkins Job
-- [x] Jenkins View
+- [x] VSTS Build (Replaced by [Azure DevOps Plugins](https://github.com/AnyStatus/AzureDevOps))
+- [x] VSTS Release (Replaced by [Azure DevOps Plugins](https://github.com/AnyStatus/AzureDevOps))
 - [x] TeamCity Build
 - [x] AppVeyor Build
 - [x] Coveralls Code Coverage
@@ -62,4 +60,4 @@ Here are some of the plugins. For the updated list of plugins, please [visit our
 
 ## Contribute
 
-Contributions are most welcome. Please join us in maintaining a library of updated tools that we can all use in our day to day tasks.
+Contributions are most welcome. Please join us in maintaining a library of tools that we can all use in our day to day tasks.
