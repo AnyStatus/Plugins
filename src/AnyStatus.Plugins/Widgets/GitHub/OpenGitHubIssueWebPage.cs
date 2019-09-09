@@ -1,6 +1,6 @@
 ﻿using AnyStatus.API;
 
-namespace AnyStatus.Plugins.Widgets.DevOps.GitHub
+namespace AnyStatus.Plugins.Widgets.GitHub
 {
     public class OpenGitHubIssueWebPage : OpenWebPage<GitHubIssueWidget>
     {

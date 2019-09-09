@@ -8,7 +8,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 namespace AnyStatus
 {
     [DisplayColumn("GitHub")]
-    [DisplayName("GitHub Issue")]
+    [DisplayName("GitHub Issue [deprecated]")]
     [XmlType(TypeName = "GitHubIssue")]
     public class GitHubIssueV1 : Widget, IHealthCheck, ISchedulable, IWebPage
     {

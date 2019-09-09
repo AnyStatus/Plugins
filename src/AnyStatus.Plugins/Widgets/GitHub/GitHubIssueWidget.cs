@@ -1,10 +1,10 @@
-﻿using AnyStatus.API;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
+using AnyStatus.API;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
-namespace AnyStatus.Plugins.Widgets.DevOps.GitHub
+namespace AnyStatus.Plugins.Widgets.GitHub
 {
     /// <summary>
     /// GitHub Issue Widget.

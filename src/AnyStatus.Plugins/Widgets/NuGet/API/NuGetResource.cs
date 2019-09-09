@@ -1,9 +1,13 @@
-﻿namespace AnyStatus.Plugins.Widgets.NuGet.API
+﻿using RestSharp.Deserializers;
+
+namespace AnyStatus.Plugins.Widgets.NuGet.API
 {
     public class NuGetResource
     {
-        public string Id { get; set; }
+        [DeserializeAs(Name = "@id")]
+        public string URL { get; set; }
 
-        public string Type { get; set; }
+        [DeserializeAs(Name = "@type")]
+        public string Name { get; set; }
     }
 }

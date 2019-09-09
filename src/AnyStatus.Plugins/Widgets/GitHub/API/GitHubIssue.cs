@@ -1,7 +1,7 @@
 ﻿using AnyStatus.API;
 using RestSharp.Deserializers;
 
-namespace AnyStatus.Plugins.Widgets.DevOps.GitHub
+namespace AnyStatus.Plugins.Widgets.GitHub.API
 {
     public class GitHubIssue
     {

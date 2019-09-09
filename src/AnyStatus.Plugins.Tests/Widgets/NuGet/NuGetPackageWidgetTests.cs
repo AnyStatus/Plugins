@@ -12,17 +12,20 @@ namespace AnyStatus.Plugins.Tests.Widgets.NuGet
         [TestMethod]
         public async Task NuGetPackageWidgetTest()
         {
-            var widget = new NuGetPackageWidget();
+            var widget = new NuGetPackageWidget
+            {
+                PackageId = "AnyStatus.API"
+            };
 
-            var handler = new NuGetTotalDownloadsQuery();
+            var handler = new NuGetPackageQuery();
 
             var request = MetricQueryRequest.Create(widget);
 
             await handler.Handle(request, CancellationToken.None);
 
             Assert.AreEqual(State.Ok, widget.State);
-
             Assert.IsNotNull(widget.Value);
+            Assert.IsNotNull(widget.Message);
         }
     }
 }

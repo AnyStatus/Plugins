@@ -1,10 +1,10 @@
-﻿using RestSharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using RestSharp;
 
-namespace AnyStatus.Plugins.Widgets.DevOps.GitHub
+namespace AnyStatus.Plugins.Widgets.GitHub.API
 {
     public class GitHubApi
     {

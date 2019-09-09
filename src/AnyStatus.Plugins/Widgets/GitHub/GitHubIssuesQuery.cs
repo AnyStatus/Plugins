@@ -1,10 +1,11 @@
-﻿using AnyStatus.API;
-using AnyStatus.API.Common.Services;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AnyStatus.API;
+using AnyStatus.API.Common.Services;
+using AnyStatus.Plugins.Widgets.GitHub.API;
 
-namespace AnyStatus.Plugins.Widgets.DevOps.GitHub
+namespace AnyStatus.Plugins.Widgets.GitHub
 {
     public class GitHubIssuesQuery : IMetricQuery<GitHubIssuesWidget>
     {
