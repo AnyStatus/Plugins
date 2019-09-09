@@ -12,8 +12,6 @@ To learn more about developing plugins for AnyStatus, please refer to the [API D
 
 For a list of widgets and plugins, please [visit our website](https://www.anystat.us/docs/plugins).
 
-## Build
-
 ## Contribute
 
 Contributions are most welcome. Please join us in maintaining a library of tools that we can all use in our day to day tasks.
