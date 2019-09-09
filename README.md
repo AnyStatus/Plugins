@@ -22,7 +22,12 @@ You can download AnyStatus latest version from https://anystat.us/downloads
 
 ## Build
 
-To build the solution, download and install [.NET Framework 4.62 Dev Pack](https://dotnet.microsoft.com/download/dotnet-framework/net462).
+Clone the plugins repository
+
+`git clone https://github.com/AnyStatus/Plugins.git`
+
+Open AnyStatus.Plugins.sln in Visual Studio. The free community edition works fine.
+Make sure to download and install [.NET Framework 4.62 Dev Pack](https://dotnet.microsoft.com/download/dotnet-framework/net462).
 
 ## Debug
 
