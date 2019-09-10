@@ -1,6 +1,7 @@
 ﻿using AnyStatus.API;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Xml.Serialization;
 
 namespace AnyStatus.Plugins.Widgets.NuGet
 {
@@ -18,6 +19,10 @@ namespace AnyStatus.Plugins.Widgets.NuGet
         [DisplayName("Package Source")]
         [Description("The NuGet server feed URL. Official NuGet package source: https://api.nuget.org/v3/index.json")]
         public string PackageSource { get; set; } = "https://api.nuget.org/v3/index.json";
+
+        [XmlIgnore]
+        [Browsable(false)]
+        public string PackageVersion { get; set; }
 
         public string URL => $"https://www.nuget.org/packages/{PackageId}/";
     }
