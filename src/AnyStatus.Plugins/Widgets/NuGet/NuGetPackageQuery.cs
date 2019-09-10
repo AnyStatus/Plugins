@@ -31,15 +31,20 @@ namespace AnyStatus.Plugins.Widgets.NuGet
                 throw new Exception("NuGet package metadata was not found.");
             }
 
-            if (request.DataContext.PackageVersion != null && request.DataContext.PackageVersion != packageMetadata.Version)
-            {
-                _notificationService.TrySend(new Notification($"NuGet package {request.DataContext.PackageId} has been updated.", NotificationIcon.Info));
-            }
+            Notify(request.DataContext, packageMetadata);
 
             request.DataContext.State = State.Ok;
             request.DataContext.Value = packageMetadata.Version;
             request.DataContext.PackageVersion = packageMetadata.Version;
             request.DataContext.Message = $"Total Downloads: {packageMetadata.TotalDownloads}";
+        }
+
+        private void Notify(NuGetPackageWidget widget, NuGetMetadata metadata)
+        {
+            if (widget.ShowNotifications && widget.PackageVersion != null && widget.PackageVersion != metadata.Version)
+            {
+                _notificationService.TrySend(new Notification($"NuGet package {widget.PackageId} has been updated.", NotificationIcon.Info));
+            }
         }
     }
 }
