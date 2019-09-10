@@ -7,7 +7,7 @@ namespace AnyStatus.Plugins.Widgets.NuGet
     [DisplayColumn("NuGet")]
     [DisplayName("NuGet Package")]
     [Description("Get NuGet package information.")]
-    public class NuGetPackageWidget : Metric
+    public class NuGetPackageWidget : Metric, ISchedulable
     {
         [DisplayName("Package Id")]
         [Description("The NuGet package id. For example: AnyStatus.API")]
