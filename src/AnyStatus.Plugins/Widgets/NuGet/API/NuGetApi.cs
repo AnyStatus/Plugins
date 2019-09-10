@@ -63,5 +63,21 @@ namespace AnyStatus.Plugins.Widgets.NuGet.API
 
             return metadataResponse.Data.Data;
         }
+
+        internal async Task<IEnumerable<NuGetMetadata>> GetPackageMetadataAsync(NuGetResource searchQueryService, string packageId, CancellationToken cancellationToken)
+        {
+            var metadataRequest = new RestRequest(searchQueryService.URL);
+
+            metadataRequest.AddParameter("q", "packageid:" + packageId);
+
+            var metadataResponse = await _client.ExecuteTaskAsync<NuGetMetadataCollection>(metadataRequest, cancellationToken).ConfigureAwait(false);
+
+            if (!metadataResponse.IsSuccessful || metadataResponse.Data == null)
+            {
+                throw new Exception("An error occurred while getting NuGet package metadata.");
+            }
+
+            return metadataResponse.Data.Data;
+        }
     }
 }

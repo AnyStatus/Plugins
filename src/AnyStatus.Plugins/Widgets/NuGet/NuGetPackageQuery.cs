@@ -16,7 +16,7 @@ namespace AnyStatus.Plugins.Widgets.NuGet
 
             var resource = await api.GetResourceAsync("SearchQueryService", cancellationToken).ConfigureAwait(false);
 
-            var packagesMetadata = await api.GetPackagesMetadataAsync(resource, request.DataContext.PackageId, cancellationToken).ConfigureAwait(false);
+            var packagesMetadata = await api.GetPackageMetadataAsync(resource, request.DataContext.PackageId, cancellationToken).ConfigureAwait(false);
 
             var packageMetadata = packagesMetadata.FirstOrDefault(m => string.Equals(m.Id, request.DataContext.PackageId, StringComparison.InvariantCultureIgnoreCase));
 
@@ -28,8 +28,6 @@ namespace AnyStatus.Plugins.Widgets.NuGet
             request.DataContext.State = State.Ok;
             request.DataContext.Value = packageMetadata.Version;
             request.DataContext.Message = new StringBuilder()
-                .Append("Package Id: ")
-                .AppendLine(request.DataContext.PackageId)
                 .Append("Total Downloads: ")
                 .AppendLine(packageMetadata.TotalDownloads)
                 .ToString();

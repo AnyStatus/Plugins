@@ -99,6 +99,7 @@
     <Compile Include="Widgets\NuGet\API\NuGetMetadata.cs" />
     <Compile Include="Widgets\NuGet\API\NuGetMetadataCollection.cs" />
     <Compile Include="Widgets\NuGet\API\NuGetResource.cs" />
+    <Compile Include="Widgets\NuGet\NuGetPackageWebPage.cs" />
     <Compile Include="Widgets\NuGet\NuGetPackageWidget.cs" />
     <Compile Include="Widgets\NuGet\NuGetPackageQuery.cs" />
     <Compile Include="Widgets\SystemInformation\Battery\Battery.cs" />
@@ -221,8 +222,9 @@
     <Copy SourceFiles="@(NuGetPackages)" DestinationFolder="C:\nuget" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Debug (
+  xcopy $(TargetDir)AnyStatus.Plugins.dll "C:\Users\Alon\AppData\Roaming\AnyStatus" /y
+)</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
