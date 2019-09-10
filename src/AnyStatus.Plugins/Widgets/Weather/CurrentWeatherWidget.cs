@@ -1,12 +1,10 @@
 ﻿using AnyStatus.API;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Xml.Serialization;
 
 namespace AnyStatus
 {
-    [DisplayColumn("Metrics")]
     [DisplayName("Current Weather (Experimental)")]
     [Description("Experimental. Access current weather data for any location including over 200,000 cities.")]
     public class CurrentWeatherWidgetV1 : Metric, ISchedulable

@@ -5,7 +5,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace AnyStatus
 {
-    [DisplayColumn("Health Checks")]
+    [DisplayColumn("SQL Server")]
     [DisplayName("SQL Server Connection")]
     [Description("Monitor SQL Server database connectivity.")]
     public class SqlServerConnection : Widget, IHealthCheck, ISchedulable

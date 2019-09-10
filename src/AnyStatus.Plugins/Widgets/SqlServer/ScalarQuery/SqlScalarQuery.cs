@@ -6,7 +6,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Editors;
 
 namespace AnyStatus
 {
-    [DisplayColumn("Metrics")]
+    [DisplayColumn("SQL Server")]
     [DisplayName("SQL Scalar Query")]
     [Description("Executes the query, and shows the first column of the first row in the result set returned by the query. Additional columns or rows are ignored.")]
     public class SqlScalarQuery : Metric, ISchedulable

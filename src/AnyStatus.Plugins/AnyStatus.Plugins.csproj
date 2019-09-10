@@ -110,7 +110,7 @@
     <Compile Include="Widgets\Custom\BatchFile\BatchFileRunner.cs" />
     <Compile Include="Widgets\Custom\NET\CodeRunner.cs" />
     <Compile Include="Widgets\Custom\PowerShell\PowerShellRunner.cs" />
-    <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerHealthCheck.cs" />
+    <Compile Include="Widgets\SqlServer\Connection\SqlServerHealthCheck.cs" />
     <Compile Include="Widgets\SystemInformation\FileSystem\FolderExists.cs" />
     <Compile Include="Widgets\SystemInformation\FileSystem\FileExists.cs" />
     <Compile Include="Widgets\SystemInformation\Logical Drives\Usage\DriveInformation.cs" />
@@ -126,7 +126,7 @@
     <Compile Include="Widgets\SystemInformation\RAM\Usage\RamInformation.cs" />
     <Compile Include="Widgets\SystemInformation\RAM\Usage\RamUsage.cs" />
     <Compile Include="Widgets\SystemInformation\RAM\Usage\RamUsageQuery.cs" />
-    <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQueryHandler.cs" />
+    <Compile Include="Widgets\SqlServer\ScalarQuery\SqlScalarQueryHandler.cs" />
     <Compile Include="_deprecated\GitHub\GitHubIssueStateCheck.cs" />
     <Compile Include="_deprecated\GitHub\OpenWebPage.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\AppPoolHealthCheck.cs" />
@@ -173,10 +173,10 @@
     <Compile Include="Widgets\HealthChecks\WindowsService\WindowsServiceHealthCheck.cs" />
     <Compile Include="Widgets\SystemInformation\ThreadCount\ThreadCount.cs" />
     <Compile Include="Widgets\SystemInformation\ThreadCount\ThreadCountQuery.cs" />
-    <Compile Include="Widgets\Metrics\Weather\CurrentWeather.cs" />
-    <Compile Include="Widgets\Metrics\Weather\CurrentWeatherMetricQuery.cs" />
-    <Compile Include="Widgets\Metrics\Weather\CurrentWeatherWidget.cs" />
-    <Compile Include="Widgets\Metrics\Weather\TemperatureScale.cs" />
+    <Compile Include="Widgets\Weather\CurrentWeather.cs" />
+    <Compile Include="Widgets\Weather\CurrentWeatherMetricQuery.cs" />
+    <Compile Include="Widgets\Weather\CurrentWeatherWidget.cs" />
+    <Compile Include="Widgets\Weather\TemperatureScale.cs" />
     <Compile Include="_deprecated\JenkinsBuild.cs" />
     <Compile Include="_deprecated\JenkinsMultiJob.cs" />
     <Compile Include="Widgets\AppVeyor\Build\AppVeyorBuild.cs" />
@@ -186,8 +186,8 @@
     <Compile Include="Widgets\Custom\BatchFile\BatchFile.cs" />
     <Compile Include="Widgets\Custom\NET\Code_v1.cs" />
     <Compile Include="Widgets\Custom\PowerShell\PowerShell.cs" />
-    <Compile Include="Widgets\Metrics\SqlServer\ScalarQuery\SqlScalarQuery.cs" />
-    <Compile Include="Widgets\HealthChecks\SqlServer\Connection\SqlServerConnection.cs" />
+    <Compile Include="Widgets\SqlServer\ScalarQuery\SqlScalarQuery.cs" />
+    <Compile Include="Widgets\SqlServer\Connection\SqlServerConnection.cs" />
     <Compile Include="Widgets\SystemInformation\CPU\Usage\CpuUsage.cs" />
     <Compile Include="_deprecated\GitHub\GitHubIssue.cs" />
     <Compile Include="Widgets\HealthChecks\IIS\AppPool\AppPool.cs" />
@@ -222,9 +222,7 @@
     <Copy SourceFiles="@(NuGetPackages)" DestinationFolder="C:\nuget" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug (
-  xcopy $(TargetDir)AnyStatus.Plugins.dll "C:\Users\Alon\AppData\Roaming\AnyStatus" /y
-)</PostBuildEvent>
+    <PostBuildEvent>rem xcopy $(TargetDir)AnyStatus.Plugins.dll "C:\Users\Alon\AppData\Roaming\AnyStatus" /y</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
