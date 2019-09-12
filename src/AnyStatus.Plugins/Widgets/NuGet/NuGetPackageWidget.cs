@@ -10,6 +10,11 @@ namespace AnyStatus.Plugins.Widgets.NuGet
     [Description("Get NuGet package information.")]
     public class NuGetPackageWidget : Metric, ISchedulable, IWebPage
     {
+        public NuGetPackageWidget()
+        {
+            ShowErrorNotifications = false;
+        }
+
         [Category("NuGet")]
         [DisplayName("Package Id")]
         [Description("The NuGet package id. For example: AnyStatus.API")]
