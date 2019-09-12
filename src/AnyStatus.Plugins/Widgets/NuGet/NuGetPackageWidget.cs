@@ -24,6 +24,8 @@ namespace AnyStatus.Plugins.Widgets.NuGet
         [Browsable(false)]
         public string PackageVersion { get; set; }
 
+        [XmlIgnore]
+        [Browsable(false)]
         public string URL => $"https://www.nuget.org/packages/{PackageId}/";
     }
 }

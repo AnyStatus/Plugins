@@ -9,7 +9,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 namespace AnyStatus
 {
     [CategoryOrder("TeamCity", 10)]
-    [DisplayName("TeamCity Build")]
+    [DisplayName("Build")]
     [Description("TeamCity build status")]
     [DisplayColumn("TeamCity")]
     public class TeamCityBuild : Build, IHealthCheck, ISchedulable, IStartable, IWebPage
