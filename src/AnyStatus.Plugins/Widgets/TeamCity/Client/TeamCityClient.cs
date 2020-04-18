@@ -48,31 +48,20 @@ namespace AnyStatus
                 {
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
 
-                    string authType = string.Empty;
+                    var uri = Connection.GuestUser
+                        ? $"{item.Url}/guestAuth/app/rest/buildQueue"
+                        : $"{item.Url}/app/rest/buildQueue";
 
-                    if (item.GuestUser)
+                    if (!string.IsNullOrEmpty(item.Token))
                     {
-                        authType = "guestAuth";
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Connection.Token);
                     }
-                    else
-                    {
-                        authType = "httpAuth";
-
-                        if (!string.IsNullOrEmpty(item.UserName) && !string.IsNullOrEmpty(item.Password))
-                        {
-                            client.DefaultRequestHeaders.Authorization =
-                                new AuthenticationHeaderValue("Basic",
-                                    Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", item.UserName, item.Password))));
-                        }
-                    }
-
-                    var url = $"{item.Url}/{authType}/app/rest/buildQueue";
 
                     var request = $"<build><buildType id=\"{item.BuildTypeId}\"/></build>";
 
                     var content = new StringContent(request, Encoding.UTF8, "application/xml");
 
-                    var response = await client.PostAsync(url, content).ConfigureAwait(false);
+                    var response = await client.PostAsync(uri, content).ConfigureAwait(false);
 
                     response.EnsureSuccessStatusCode();
                 }
@@ -83,7 +72,6 @@ namespace AnyStatus
 
         private async Task<T> RequestAsync<T>(string api)
         {
-            string authType = Connection.GuestUser ? "guestAuth" : "httpAuth";
 
             using (var handler = new WebRequestHandler())
             {
@@ -98,12 +86,14 @@ namespace AnyStatus
                 {
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    if (!Connection.GuestUser && !string.IsNullOrEmpty(Connection.UserName) && !string.IsNullOrEmpty(Connection.Password))
+                    if (!Connection.GuestUser && !string.IsNullOrEmpty(Connection.Token))
                     {
-                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{Connection.UserName}:{Connection.Password}")));
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Connection.Token);
                     }
 
-                    var uri = $"{Connection.Url}/{authType}/app/rest/{api}";
+                    var uri = Connection.GuestUser
+                        ? $"{Connection.Url}/guestAuth/app/rest/{api}"
+                        : $"{Connection.Url}/app/rest/{api}";
 
                     var response = await client.GetAsync(uri).ConfigureAwait(false);
 

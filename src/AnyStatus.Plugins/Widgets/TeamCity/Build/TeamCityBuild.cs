@@ -78,25 +78,17 @@ namespace AnyStatus
             {
                 _guestUser = value;
 
-                SetPropertyVisibility(nameof(UserName), !_guestUser);
-                SetPropertyVisibility(nameof(Password), !_guestUser);
+                SetPropertyVisibility(nameof(Token), !_guestUser);
             }
         }
 
         [Browsable(true)]
         [PropertyOrder(60)]
         [Category(Category)]
-        [DisplayName("User name")]
-        [Description("Optional.")]
-        public string UserName { get; set; }
-
-        [Browsable(true)]
-        [PropertyOrder(70)]
-        [Category(Category)]
         [PasswordPropertyText(true)]
         [Description("Optional.")]
         [Editor(typeof(PasswordEditor), typeof(PasswordEditor))]
-        public string Password { get; set; }
+        public string Token { get; set; }
 
         public override Notification CreateNotification()
         {
