@@ -22,7 +22,7 @@ namespace AnyStatus.Plugins.Widgets.NuGet
 
             var resource = await api.GetResourceAsync("SearchQueryService", cancellationToken).ConfigureAwait(false);
 
-            var packagesMetadata = await api.GetPackageMetadataAsync(resource, request.DataContext.PackageId, cancellationToken).ConfigureAwait(false);
+            var packagesMetadata = await api.GetPackageMetadataAsync(resource, request.DataContext.PackageId, request.DataContext.PreRelease, cancellationToken).ConfigureAwait(false);
 
             var packageMetadata = packagesMetadata.FirstOrDefault(m => string.Equals(m.Id, request.DataContext.PackageId, StringComparison.InvariantCultureIgnoreCase));
 
