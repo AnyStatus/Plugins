@@ -222,7 +222,7 @@
     <Copy SourceFiles="@(NuGetPackages)" DestinationFolder="C:\nuget" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>rem xcopy $(TargetDir)AnyStatus.Plugins.dll "C:\Users\Alon\AppData\Roaming\AnyStatus" /y</PostBuildEvent>
+    <PostBuildEvent>rem xcopy $(TargetDir)AnyStatus.Plugins.dll "C:\Repos\AnyStatus2\App\src\AnyStatus.Desktop\bin\Debug" /y</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>

@@ -25,10 +25,7 @@ namespace AnyStatus.Plugins.Widgets.NuGet
         [Description("The NuGet server feed URL. Official NuGet package source: https://api.nuget.org/v3/index.json")]
         public string PackageSource { get; set; } = "https://api.nuget.org/v3/index.json";
 
-        [XmlIgnore]
-        [Browsable(false)]
-        public string PackageVersion { get; set; }
-
+        [Category("NuGet")]
         [DisplayName("Pre-Release")]
         [Description("Enable to include pre-release packages.")]
         public bool PreRelease { get; set; }

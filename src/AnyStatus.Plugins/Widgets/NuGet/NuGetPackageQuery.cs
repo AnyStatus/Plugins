@@ -24,27 +24,18 @@ namespace AnyStatus.Plugins.Widgets.NuGet
 
             var packagesMetadata = await api.GetPackageMetadataAsync(resource, request.DataContext.PackageId, request.DataContext.PreRelease, cancellationToken).ConfigureAwait(false);
 
-            var packageMetadata = packagesMetadata.FirstOrDefault(m => string.Equals(m.Id, request.DataContext.PackageId, StringComparison.InvariantCultureIgnoreCase));
+            var packageMetadata = packagesMetadata.FirstOrDefault();
 
-            if (packageMetadata == null)
+            if (packageMetadata is null)
             {
                 throw new Exception("NuGet package metadata was not found.");
             }
 
-            Notify(request.DataContext, packageMetadata);
+            request.DataContext.Value = packageMetadata.Version?.Split('+')[0];
+
+            request.DataContext.Message = $"Total Downloads: {packageMetadata.TotalDownloads}";
 
             request.DataContext.State = State.Ok;
-            request.DataContext.Value = packageMetadata.Version;
-            request.DataContext.PackageVersion = packageMetadata.Version;
-            request.DataContext.Message = $"Total Downloads: {packageMetadata.TotalDownloads}";
-        }
-
-        private void Notify(NuGetPackageWidget widget, NuGetMetadata metadata)
-        {
-            if (widget.ShowNotifications && widget.PackageVersion != null && widget.PackageVersion != metadata.Version)
-            {
-                _notificationService.TrySend(new Notification($"NuGet package {widget.PackageId} has been updated.", NotificationIcon.Info));
-            }
         }
     }
 }
