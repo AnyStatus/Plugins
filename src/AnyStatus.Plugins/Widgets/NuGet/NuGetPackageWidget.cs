@@ -29,6 +29,10 @@ namespace AnyStatus.Plugins.Widgets.NuGet
         [Browsable(false)]
         public string PackageVersion { get; set; }
 
+        [DisplayName("Pre-Release")]
+        [Description("Enable to include pre-release packages.")]
+        public bool PreRelease { get; set; }
+
         [XmlIgnore]
         [Browsable(false)]
         public string URL => $"https://www.nuget.org/packages/{PackageId}/";

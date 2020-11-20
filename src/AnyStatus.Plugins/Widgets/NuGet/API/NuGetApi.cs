@@ -64,11 +64,18 @@ namespace AnyStatus.Plugins.Widgets.NuGet.API
             return metadataResponse.Data.Data;
         }
 
-        internal async Task<IEnumerable<NuGetMetadata>> GetPackageMetadataAsync(NuGetResource searchQueryService, string packageId, CancellationToken cancellationToken)
+        internal async Task<IEnumerable<NuGetMetadata>> GetPackageMetadataAsync(NuGetResource searchQueryService, string packageId, bool prerelease, CancellationToken cancellationToken)
         {
             var metadataRequest = new RestRequest(searchQueryService.URL);
 
-            metadataRequest.AddParameter("q", "packageid:" + packageId);
+            metadataRequest.AddParameter("semVerLevel", "2.0.0");
+
+            if (prerelease)
+            {
+                metadataRequest.AddParameter("prerelease", prerelease);
+            }
+
+            metadataRequest.AddParameter("q", $"packageid:{packageId}");
 
             var metadataResponse = await _client.ExecuteTaskAsync<NuGetMetadataCollection>(metadataRequest, cancellationToken).ConfigureAwait(false);
 
